@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقرير تنفيذي شامل: مشروع منصة حاضنة ومسرعة عذق</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #0E6E41;
+      --primary-dark: #084B2A;
+      --primary-light: #E8F5E9;
+      --primary-subtle: #F0FDF4;
+      --gold: #C59B27;
+      --gold-dark: #9A7513;
+      --gold-light: #FEF9C3;
+      --dark: #0F172A;
+      --text: #1E293B;
+      --muted: #64748B;
+      --border: #CBD5E1;
+      --border-light: #E2E8F0;
+      --card-bg: #FFFFFF;
+      --bg: #F8FAFC;
+      --font-main: 'Cairo', 'Tajawal', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: #1E293B;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Floating Top Toolbar */
+    .top-toolbar {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: 215mm;
+      max-width: calc(100% - 32px);
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      color: #F8FAFC;
+      padding: 12px 24px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .toolbar-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toolbar-title span {
+      color: var(--gold);
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: var(--font-main);
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-print {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .btn-print:hover {
+      background: #15803D;
+      transform: translateY(-1px);
+    }
+
+    .btn-platform {
+      background: #334155;
+      color: #F1F5F9;
+      border: 1px solid #475569;
+    }
+
+    .btn-platform:hover {
+      background: #475569;
+      color: #FFFFFF;
+    }
+
+    /* Report Pages Container */
+    .report-container {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .report-sheet {
+      width: 215mm;
+      min-height: 297mm;
+      background: #FFFFFF;
+      padding: 18mm 20mm;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      border-radius: 6px;
+    }
+
+    /* Report Header */
+    .rep-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .rep-header-titles h1 {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .rep-header-titles p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .rep-badge-pill {
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      border: 1px solid var(--gold);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Section Styling */
+    .sec-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1.5px solid var(--primary-light);
+      padding-bottom: 5px;
+    }
+
+    .sec-title::before {
+      content: '';
+      width: 4px;
+      height: 18px;
+      background: var(--primary);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* Callout Card */
+    .callout-box {
+      background: var(--primary-subtle);
+      border: 1px solid #BBF7D0;
+      border-right: 4px solid var(--primary);
+      padding: 12px 18px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--primary-dark);
+      font-weight: 600;
+      text-align: justify;
+    }
+
+    /* KPI Summary Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .kpi-item {
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .kpi-val {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .kpi-lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    /* Table Styles */
+    .table-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+      text-align: right;
+    }
+
+    .data-table th {
+      background: #F1F5F9;
+      color: var(--dark);
+      font-weight: 800;
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--border-light);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .data-table tr:nth-child(even) td {
+      background: #F8FAFC;
+    }
+
+    .badge-scope {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .step-id {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: #0284C7;
+      background: #E0F2FE;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .feat-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .feat-card h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feat-card p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Executive Pitch Box */
+    .exec-pitch-box {
+      background: linear-gradient(135deg, rgba(14, 110, 65, 0.08) 0%, rgba(197, 155, 39, 0.12) 100%);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 14px;
+      margin-bottom: 16px;
+    }
+
+    .exec-pitch-box h3 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .exec-pitch-box p {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .rep-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-light);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+      }
+      .top-toolbar {
+        display: none !important;
+      }
+      .report-container {
+        gap: 0 !important;
+      }
+      .report-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        page-break-after: always;
+        width: 210mm !important;
+        min-height: 297mm !important;
+        padding: 16mm 18mm !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Screen Toolbar -->
+  <aside class="top-toolbar">
+    <div class="toolbar-title">
+      <span>●</span> التقرير التنفيذي الشامل: حاضنة ومسرعة عذق
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn btn-print" onclick="window.print()">
+        طباعة التقرير (A4 PDF) 🖨️
+      </button>
+      <a href="Athq-Incubator-Platform.html" class="btn btn-platform" target="_blank">
+        فتح المنصة المستقلة ↗
+      </a>
+    </div>
+  </aside>
+
+  <main class="report-container">
+
+    <!-- ==================== الصفحة 1: التعريف الشامل بالمنظومة والإحصائيات المعتمدة ==================== -->
+    <article class="report-sheet" id="sheet-1">
+      <header class="rep-header">
+        <div class="rep-header-titles">
+          <h1>تقرير تنفيذي شامل: التعريف بالمنصة وتوثيق خطوات الإنجاز</h1>
+          <p>مشروع منصة حاضنة ومسرعة عذق | جمعية البر بالمدينة المنورة (ترخيص 22) • تشغيل المُتقن</p>
+        </div>
+        <div>
+          <span class="rep-badge-pill">النسخة المعتمدة v4.0</span>
+        </div>
+      </header>
+
+      <div class="callout-box">
+        <strong>وثيقة تعريفية وتنفيذية موجهة للمشرفين والمسؤولين:</strong> يوثق هذا التقرير المنظومة الرقمية والميدانية المتكاملة التي تم تطويرها بنجاح لمنصة "حاضنة ومسرعة عذق"، التابعة لجمعية البر بالمدينة المنورة، متضمناً تطبيق الرحلات الإجرائية الأربع (BPMN)، ومطابقة المحتوى بنسبة 100% مع الكتيبات الأربعة الرسمية (البرامج، الخدمات، التقارير، والكتيب التعريفي)، وبناء الأنظمة الذكية المستحدثة كرادار الامتثال والحوكمة (NCNP)، ونظام الشهادات الرقمية المعتمدة (QR)، وحزم التشغيل المستقلة.
+      </div>
+
+      <!-- KPI Numbers from official booklets -->
+      <h3 class="sec-title">المؤشرات والإحصائيات الرسمية المعتمدة للمنظومة (كتيب التقارير)</h3>
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <div class="kpi-val">+1,122</div>
+          <div class="kpi-lbl">متطوع مسجل</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">+16,311</div>
+          <div class="kpi-lbl">ساعة تطوعية معتمدة</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">+4,470</div>
+          <div class="kpi-lbl">ساعة عمل بالحاضنة</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">22 كياناً</div>
+          <div class="kpi-lbl">15 محتضنة و 7 متخرجة</div>
+        </div>
+      </div>
+
+      <!-- التعريف بالمنصة والمؤسسين -->
+      <h3 class="sec-title">التعريف المؤسسي والاستراتيجي بالمنصة</h3>
+      <div class="features-grid">
+        <div class="feat-card">
+          <h4>🏛️ الجهة المؤسسة والحاضنة</h4>
+          <p><strong>جمعية البر بالمدينة المنورة:</strong> من أوائل الجمعيات الخيرية بالمملكة، مسجلة برقم (22) وتأسست عام 1379هـ، برئاسة كريمة من صاحب السمو الملكي الأمير <strong>سلمان بن سلطان بن عبدالعزيز</strong> أمير منطقة المدينة المنورة، وكلمة الأمين العام سعادة المهندس <strong>صالح بن عبدالعزيز جبلاوي</strong>.</p>
+        </div>
+        <div class="feat-card">
+          <h4>🚀 الشريك المشغل والمنفذ</h4>
+          <p><strong>شركة المُتقن (ALMUTQEN):</strong> الشريك المعتمد للتنفيذ والتشغيل الاحترافي لمنظومة الحاضنة والمسرعة، وتطبيق معايير الجودة المؤسسية وقياس الأثر ومتابعة الجمعيات.</p>
+        </div>
+        <div class="feat-card">
+          <h4>🤝 الشراكات والتحالفات الاستراتيجية</h4>
+          <p>مذكرة تفاهم رسمية مع <strong>المركز الوطني لتنمية القطاع غير الربحي (NCNP)</strong> لاعتماد وإطلاق الحاضنة، شراكة معرفية مع <strong>منصة أثر (ATHR)</strong>، وتبادل خبرات مع <strong>جمعية جسور (نجران)</strong> و<strong>جمعية تطوير</strong>.</p>
+        </div>
+        <div class="feat-card">
+          <h4>🏢 البنية التحتية والمرافق المتاحة</h4>
+          <p>أكثر من <strong>13 مقراً احتضانياً مجهزاً</strong>، <strong>18 مساحة عمل مشتركة</strong>، <strong>3 قاعات استشارية</strong>، قاعة اجتماعات كبرى ذكية، قاعة تدريب وتطوير، و<strong>4 أركان ضيافة</strong>، وإنترنت فائق السرعة، وعنوان وطني معتمد.</p>
+        </div>
+      </div>
+
+      <footer class="rep-footer">
+        <span>منصة حاضنة ومسرعة عذق - جمعية البر بالمدينة المنورة</span>
+        <span>صفحة 1 من 4</span>
+      </footer>
+    </article>
+
+    <!-- ==================== الصفحة 2: توثيق الخطوات والإجراءات الفنية المنفذة ==================== -->
+    <article class="report-sheet" id="sheet-2">
+      <header class="rep-header">
+        <div class="rep-header-titles">
+          <h1>سجل الخطوات البرمجية والإجراءات الفنية المنفذة</h1>
+          <p>توثيق تفصيلي لمراحل البناء والربط والتطوير لكافة أنظمة المنصة</p>
+        </div>
+        <div>
+          <span class="rep-badge-pill">سجل العمليات التقنية</span>
+        </div>
+      </header>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 10%;">المعرف</th>
+              <th style="width: 22%;">النطاق الإجرائي</th>
+              <th style="width: 44%;">الإجراء الفني المنفذ</th>
+              <th style="width: 24%;">الأثر والمخرج البرمجي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="step-id">ST-01</span></td>
+              <td><span class="badge-scope">الهوية البصرية والمحاكي</span></td>
+              <td>دمج شعاري "عذق" و"جمعية البر" بصيغة Base64 وبناء شريط محاكاة الأدوار الأربعة (Role Switcher).</td>
+              <td>تجربة أدوار المنظومة بنقرة زر واحدة دون الحاجة لحسابات متعددة.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-02</span></td>
+              <td><span class="badge-scope">رحلة الزائر العام (مرحلة 1)</span></td>
+              <td>استحداث قسم الأخبار والفعاليات والشراكات (`#news`) وربطه بالقوائم المنسدلة والشات الذكي.</td>
+              <td>اكتمال مسار الزائر وتوثيق الشراكات والنشر المعرفي والفعاليات.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-03</span></td>
+              <td><span class="badge-scope">رحلة الجمعية (مرحلة 2)</span></td>
+              <td>بناء معالج التقديم المتدرج (Wizard) مع التحقق الصارم من شرط الموظف المتفرغ بدوام كامل.</td>
+              <td>فلترة وتصنيف الجمعيات واستيفاء المتطلبات التنظيمية.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-04</span></td>
+              <td><span class="badge-scope">اختبار انطلاقة الأولى</span></td>
+              <td>تطوير اختبار الجاهزية الرقمي من 100 نقطة واشتراط تحقيق 85 درجة لاجتياز مرحلة المقر.</td>
+              <td>امتثال تام للمخطط الانسيابي الإجرائي (BPMN Workflow).</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-05</span></td>
+              <td><span class="badge-scope">مستودع الشواهد المعتمدة</span></td>
+              <td>إدراج الشواهد الأربعة: عقد الاحتضان، تقرير الاستيفاء، خطاب حسم الأداء، ونموذج الانضمام.</td>
+              <td>توثيق وثائق الامتثال وسياسة الأمان وبصمة الباب الذكية.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-06</span></td>
+              <td><span class="badge-scope">مسار المراحل الأربع</span></td>
+              <td>تصميم شريط التقدم المتدرج: الفكرة ➔ التهيئة ➔ الاحتضان المكاني ➔ مسرعة عذق.</td>
+              <td>متابعة الجمعية لحظياً وترقية مستواها نحو الاستدامة.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-07</span></td>
+              <td><span class="badge-scope">رحلة المستشار (مرحلة 3)</span></td>
+              <td>بناء بوابة المستشار، إضافة أوقات التفرغ، ونظام كتابة تقرير وتوصيات الجلسة المنجزة.</td>
+              <td>تسجيل واحتساب ساعات الاستشارات والتطوع آلياً في الرصيد.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-08</span></td>
+              <td><span class="badge-scope">لوحة الإدارة (مرحلة 4)</span></td>
+              <td>تطبيق القرار الثلاثي المعتمد: (قبول ✓ / طلب تعديل واستيفاء ✏️ / رفض مع إبداء السبب ✕).</td>
+              <td>حوكمة قرارات فرز الجمعيات وإشعارها رسمياً.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-09</span></td>
+              <td><span class="badge-scope">رادار الامتثال الذكي</span></td>
+              <td>بناء رادار تفاعلي يحسب مؤشر الامتثال المؤسسي من 12 معياراً معتمداً من المركز الوطني NCNP.</td>
+              <td>تحديد نقاط القوة وسد فجوات الحوكمة والشفافية والسلامة المالية.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-10</span></td>
+              <td><span class="badge-scope">دليل الكيانات الـ 22</span></td>
+              <td>إدراج وتصفية كافة الجمعيات الـ 15 المحتضنة والـ 7 المتخرجة مع إحصائيات ساعاتها الرسمية.</td>
+              <td>محرك بحث وتصفية فورية بحسب التخصص وحالة الاحتضان.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-11</span></td>
+              <td><span class="badge-scope">الشهادات الرقمية (QR)</span></td>
+              <td>إصدار شهادات احتضان وتخرج رسمية معتمدة برمز QR كودي قابل للتحقق والطباعة.</td>
+              <td>توثيق الإنجاز المؤسسي للجمعيات المحتضنة والمتخرجة.</td>
+            </tr>
+            <tr>
+              <td><span class="step-id">ST-12</span></td>
+              <td><span class="badge-scope">الحزمة المستقلة (Standalone)</span></td>
+              <td>توليد ملف `Athq-Incubator-Platform.html` بحجم 2.09 MB مدمج بالكامل وشامل لملفات التشغيل.</td>
+              <td>تشغيل ذاتي كامل بنقرة زر واحدة دون الحاجة لخادم أو إنترنت.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="rep-footer">
+        <span>منصة حاضنة ومسرعة عذق - جمعية البر بالمدينة المنورة</span>
+        <span>صفحة 2 من 4</span>
+      </footer>
+    </article>
+
+    <!-- ==================== الصفحة 3: شرح واجهات المنصة وبوابات الأدوار ==================== -->
+    <article class="report-sheet" id="sheet-3">
+      <header class="rep-header">
+        <div class="rep-header-titles">
+          <h1>شرح واجهات وبوابات المنصة الميدانية للمشرفين</h1>
+          <p>توضيح وظيفة كل بوابة وشاشة تفاعلية وكيف تخدم أصحاب المصلحة</p>
+        </div>
+        <div>
+          <span class="rep-badge-pill">شاشات وتدفقات العمل</span>
+        </div>
+      </header>
+
+      <div class="features-grid">
+        <div class="feat-card">
+          <h4>1. الواجهة الرئيسية ومحاكي الأدوار (Role Switcher)</h4>
+          <p><strong>الوظيفة:</strong> شاشة ترحيبية جامعة تعكس ركائز "لماذا عذق الست"، أهداف الحاضنة، إحصائيات الأثر المعتمدة، وشريط علوي لمحاكاة بوابات المنظومة بنقرة واحدة، مع نظام بحث ذكي (Ctrl+K) وشات للدعم المباشر.</p>
+        </div>
+        <div class="feat-card">
+          <h4>2. القوائم المنسدلة الذكية (Mega Navigation)</h4>
+          <p><strong>الوظيفة:</strong> هيكل ملاحة متقدم يضم 4 بوابات رئيسية: (عن عذق، البرامج والمرافق، بوابات المنظومة، والمساعدة والتواصل) لتمكين الزائر من استعراض مسارات الدعم ومصفوفة الخدمات الـ 28 كاملة.</p>
+        </div>
+        <div class="feat-card">
+          <h4>3. معالج انضمام المستشارين والخبراء</h4>
+          <p><strong>الوظيفة:</strong> استمارة إلكترونية تفاعلية تسجل بيانات المستشار وتخصصه الدقيق (الحوكمة، الاستراتيجية، الاستدامة المالية) وساعات تفرغه، مع ربط ساعاته بمنصة العمل التطوعي تلقائياً.</p>
+        </div>
+        <div class="feat-card">
+          <h4>4. بوابة الجمعيات وإدارة مسار الاحتضان</h4>
+          <p><strong>الوظيفة:</strong> لوحة تحكم متطورة للجمعيات (نموذج جمعية ديوان الشبابية)، تضم شريط تقدم المراحل الـ 4، مؤشر استيفاء المتطلبات (75%)، ساعات العمل والتطوع، ومستودع الشواهد، وحجز المرافق، ورادار الحوكمة.</p>
+        </div>
+        <div class="feat-card">
+          <h4>5. معالج تقديم طلب احتضان جديد (Wizard)</h4>
+          <p><strong>الوظيفة:</strong> استمارة تسجيل رسمية من 3 مراحل ذكية: البيانات المؤسسية والترخيص، المسار البرامجي ونوع الدعم وتأكيد موظف الدوام الكامل، وإرفاق التراخيص وإصدار كود طلب رسمي فوري للفرز.</p>
+        </div>
+        <div class="feat-card">
+          <h4>6. لوحة الإدارة المركزية (Central Admin)</h4>
+          <p><strong>الوظيفة:</strong> لوحة قيادة متكاملة لفريق التشغيل والإدارة تتضمن فرز واعتماد الطلبات بالقرار الثلاثي، إدارة وترقية مراحل الجمعيات، اعتماد حجوزات القاعات والمقرات، وتصدير التقارير القيادية (Excel / PDF).</p>
+        </div>
+      </div>
+
+      <h3 class="sec-title" style="margin-top: 10px;">مصفوفة الخدمات المتكاملة (28 خدمة معتمدة في الكتيبات)</h3>
+      <div style="background: var(--bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 12px 16px; font-size: 0.78rem; line-height: 1.7;">
+        • <strong>الخدمات التأسيسية الـ 11:</strong> تفعيل الخدمات الإلكترونية، الموارد البشرية، التراخيص، الحسابات البنكية، التوجه الاستراتيجي، إعداد السجلات، اللوائح والأنظمة، التواصل، الشؤون المالية، قنوات الدعم، وإدارة الاجتماعات.<br>
+        • <strong>الخدمات المشتركة الـ 9:</strong> قاعات الاجتماعات، قاعات التدريب، مقرات الاحتضان (13+)، مساحات العمل (18+)، قاعات المستشارين (3)، أركان الضيافة (4)، الإنترنت، العنوان الوطني، والرقم الموحد.<br>
+        • <strong>الخدمات الاستشارية الـ 8:</strong> الخطط الاستراتيجية، خدمات التأسيس، المشاريع والبرامج، التمويل والمنح، الحوكمة المؤسسية، الجوانب المالية، الاستشارات القانونية، وإعداد اللوائح.
+      </div>
+
+      <footer class="rep-footer">
+        <span>منصة حاضنة ومسرعة عذق - جمعية البر بالمدينة المنورة</span>
+        <span>صفحة 3 من 4</span>
+      </footer>
+    </article>
+
+    <!-- ==================== الصفحة 4: الخلاصة التنفيذية وأبرز المميزات للقيادة ==================== -->
+    <article class="report-sheet" id="sheet-4">
+      <header class="rep-header">
+        <div class="rep-header-titles">
+          <h1>الخلاصة التنفيذية للمشروع وأبرز المميزات المستحدثة</h1>
+          <p>وثيقة التقديم الرسمي للقيادات والمشرفين للاطلاع على الأثر التنموي المتحقق</p>
+        </div>
+        <div>
+          <span class="rep-badge-pill">الخلاصة التنفيذية</span>
+        </div>
+      </header>
+
+      <!-- Executive Brief / Pitch for Supervisors -->
+      <div class="exec-pitch-box">
+        <h3>📢 الخلاصة التنفيذية لفكرة المنصة (Executive Brief للمشرفين والمسؤولين)</h3>
+        <p>
+          <strong>ما هي منصة حاضنة ومسرعة عذق؟</strong><br>
+          هي مبادرة استراتيجية رائدة تقودها <strong>جمعية البر بالمدينة المنورة</strong> (تأسست عام 1379هـ، بترخيص رقم 22) برئاسة صاحب السمو الملكي الأمير <strong>سلمان بن سلطان بن عبدالعزيز</strong> أمير منطقة المدينة المنورة، وبتشغيل احترافي من شركة <strong>المُتقن ALMUTQEN</strong>. صُممت المنصة لتكون الحاضنة الرقمية والميدانية الموحدة التي تحتضن وتسرّع الجمعيات والمؤسسات الأهلية الناشئة والمتعثرة في منطقة المدينة المنورة، لنقلها باحترافية من مرحلة الفكرة إلى مرحلة النضج المؤسسي والاستدامة المالية.
+        </p>
+        <p>
+          <strong>ما هي المشكلة التي تعالجها وما القيمة المضافة؟</strong><br>
+          تواجه الجمعيات الناشئة تحديات كبرى في تكاليف التأسيس، استئجار المقرات، غياب اللوائح، وصعوبة جذب التمويل والمانحين. توفر منصة عذق حلاً تنموياً شاملاً يجمع بين: <strong>البنية التحتية المتكاملة</strong> (مكاتب مجهزة، إنترنت، عنوان وطني)، و<strong>برامج الحوكمة والتمكين المؤسسي</strong> (إعداد اللوائح، اللجان، ومصفوفة الصلاحيات)، و<strong>العيادات الاستشارية المتخصصة</strong>، مساهمةً بشكل مباشر في تحقيق مستهدفات <em>رؤية المملكة 2030</em> في رفع كفاءة القطاع غير الربحي ومضاعفة أثره المجتمعي.
+        </p>
+      </div>
+
+      <h3 class="sec-title">أبرز المزايا الاستثنائية التي تميز هذه النسخة</h3>
+      <div class="features-grid">
+        <div class="feat-card">
+          <h4>⚡ استقلالية تشغيلية تامة (Offline Ready)</h4>
+          <p>المنصة مدمجة بالكامل في ملف واحد `Athq-Incubator-Platform.html` يعمل بنقرة واحدة دون الحاجة لتثبيت برامج أو اتصال بالإنترنت أو قواعد بيانات خارجية.</p>
+        </div>
+        <div class="feat-card">
+          <h4>🎯 دقة إجرائية ومطابقة 100%</h4>
+          <p>تم تضمين كافة البيانات الحقيقية من الكتيبات الرسمية: الكيانات الـ 22، الإحصائيات الدقيقة، الشواهد الأربعة المعتمدة، وشروط اجتياز اختبار انطلاقة (85/100).</p>
+        </div>
+        <div class="feat-card">
+          <h4>🛡️ رادار الحوكمة الرقمي الذكي</h4>
+          <p>أداة تقييم تفاعلية تقيس امتثال الجمعية لمعايير المركز الوطني NCNP في السلامة المالية والشفافية وتصدر تقييماً وتوصيات فورية.</p>
+        </div>
+        <div class="feat-card">
+          <h4>📊 تقارير وتصدير بضغطة زر</h4>
+          <p>إمكانية تصدير بيانات المنظومة والطلبات إلى ملف Excel (CSV)، وطباعة الشهادات الرقمية المعتمدة ورمز الاستجابة السريعة QR للجمعيات.</p>
+        </div>
+      </div>
+
+      <footer class="rep-footer">
+        <span>إعداد: فريق التطوير والحلول الرقمية | منصة حاضنة ومسرعة عذق</span>
+        <span>صفحة 4 من 4</span>
+      </footer>
+    </article>
+
+  </main>
+
+</body>
+</html>
