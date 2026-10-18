@@ -8001,25 +8001,11 @@ img, svg {
             <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
           </button>
           <div class="dropdown-panel" role="menu">
-            <a href="javascript:void(0)" onclick="openReadinessCalculator()" class="dropdown-item" role="menuitem">
-              <div class="dropdown-icon-box"><i class="fa-solid fa-calculator"></i></div>
-              <div class="dropdown-text">
-                <span class="dropdown-title">حاسبة الجاهزية والأثر</span>
-                <span class="dropdown-desc">قياس مدى جاهزية جمعيتك للاحتضان فوراً</span>
-              </div>
-            </a>
             <a href="javascript:void(0)" onclick="openContractSigningModal()" class="dropdown-item" role="menuitem">
               <div class="dropdown-icon-box"><i class="fa-solid fa-file-signature"></i></div>
               <div class="dropdown-text">
                 <span class="dropdown-title">عقد الاحتضان والتوقيع الرقمي</span>
                 <span class="dropdown-desc">توليد وتوقيع العقد الرسمي إلكترونياً</span>
-              </div>
-            </a>
-            <a href="javascript:void(0)" onclick="openAiPolicyGenerator()" class="dropdown-item" role="menuitem">
-              <div class="dropdown-icon-box"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-              <div class="dropdown-text">
-                <span class="dropdown-title">مستشار اللوائح الذكي (AI)</span>
-                <span class="dropdown-desc">توليد لوائح الموارد البشرية والمالية فوراً</span>
               </div>
             </a>
             <a href="#faq" class="dropdown-item" role="menuitem">
@@ -8068,9 +8054,6 @@ img, svg {
         <!-- Theme Toggle -->
         <button class="btn-icon" id="themeToggle" title="تبديل المظهر النهاري/الليلي" aria-label="تبديل المظهر">
           <i class="fa-regular fa-moon"></i>
-        </button>
-        <button class="btn btn-outline-primary btn-sm" onclick="openConsultantWizard()" id="btnHeaderConsultant">
-          <i class="fa-solid fa-user-tie"></i> انضم كمستشار
         </button>
         <button class="btn btn-primary btn-sm" onclick="openApplicationWizard()" id="btnHeaderRegister">
           <i class="fa-solid fa-seedling"></i> قدّم طلب احتضان
@@ -8162,9 +8145,6 @@ img, svg {
       <button class="btn btn-primary btn-block" onclick="closeMobileDrawer(); openApplicationWizard();">
         <i class="fa-solid fa-seedling"></i> قدّم طلب احتضان
       </button>
-      <button class="btn btn-outline-primary btn-block" onclick="closeMobileDrawer(); openConsultantWizard();">
-        <i class="fa-solid fa-user-tie"></i> انضم كمستشار
-      </button>
     </div>
   </aside>
 
@@ -8191,17 +8171,8 @@ img, svg {
           </p>
 
           <div class="hero-cta-group">
-            <button class="btn btn-gold btn-lg" onclick="openActionModal('association')" id="heroCtaRegister">
+            <button class="btn btn-gold btn-lg" onclick="openApplicationWizard()" id="heroCtaRegister">
               <i class="fa-solid fa-rocket"></i> قدّم طلب احتضان جمعية
-            </button>
-            <button class="btn btn-outline-primary btn-lg" onclick="openActionModal('consultant')" id="heroCtaConsultant">
-              <i class="fa-solid fa-handshake"></i> انضم كخبير ومستشار
-            </button>
-            <button class="btn btn-outline-gold" onclick="openActionModal('admin')" title="دخول إدارة الحاضنة">
-              <i class="fa-solid fa-shield-halved"></i> لوحة الإدارة
-            </button>
-            <button class="btn btn-outline-primary btn-sm" onclick="openActionModal('calc')" title="اختبر جاهزية جمعيتك للاحتضان">
-              <i class="fa-solid fa-calculator"></i> حاسبة الجاهزية
             </button>
           </div>
 
@@ -8293,8 +8264,8 @@ img, svg {
                 <a href="#orgs" class="btn btn-outline btn-sm" style="font-size: 0.76rem; padding: 4px 10px; border-color: var(--c-border); color: var(--c-text);">
                   <i class="fa-solid fa-users"></i> دليل الجمعيات
                 </a>
-                <button class="btn btn-primary btn-sm" onclick="openActionModal('calc')" style="font-size: 0.76rem; padding: 4px 10px;">
-                  <i class="fa-solid fa-calculator"></i> احسب الجاهزية
+                <button class="btn btn-primary btn-sm" onclick="openApplicationWizard()" style="font-size: 0.76rem; padding: 4px 10px;">
+                  <i class="fa-solid fa-seedling"></i> تقديم طلب احتضان
                 </button>
               </div>
             </div>
@@ -9420,11 +9391,8 @@ img, svg {
           انضموا إلى بيئة عذق المتكاملة واستفيدوا من مقرات العمل، الدعم الاستشاري، وبرامج الحوكمة الشاملة لتنطلق جمعيتكم نحو الاستدامة.
         </p>
         <div class="cta-buttons-wrapper">
-          <button class="btn btn-gold btn-lg" onclick="openActionModal('association')">
+          <button class="btn btn-gold btn-lg" onclick="openApplicationWizard()">
             <i class="fa-solid fa-rocket"></i> تسجيل جمعية محتضنة جديدة
-          </button>
-          <button class="btn btn-outline-primary btn-lg" style="color: #FFFFFF; border-color: #FFFFFF;" onclick="openActionModal('consultant')">
-            <i class="fa-solid fa-user-plus"></i> الانضمام كخبير ومستشار
           </button>
         </div>
       </div>
@@ -9486,13 +9454,7 @@ img, svg {
               </div>
             </div>
 
-            <div class="chat-hint-box" onclick="document.getElementById('chatToggle').click()" title="فتح نافذة المحادثة الفورية">
-              <div class="chat-hint-icon"><i class="fa-solid fa-headset"></i></div>
-              <div class="chat-hint-text">
-                <strong>هل ترغب في استفسار فوري؟</strong>
-                <span>اضغط هنا لفتح نافذة الشات المباشر مع المساعد الذكي للحاضنة</span>
-              </div>
-            </div>
+
           </div>
 
           <!-- Form Column -->
@@ -9608,7 +9570,6 @@ img, svg {
               <li><a href="javascript:void(0)" onclick="switchRole('association')"><i class="fa-solid fa-building-ngo text-gold"></i> بوابة الجمعيات المحتضنة</a></li>
               <li><a href="javascript:void(0)" onclick="switchRole('consultant')"><i class="fa-solid fa-user-tie text-gold"></i> بوابة الخبراء والمستشارين</a></li>
               <li><a href="javascript:void(0)" onclick="switchRole('admin')"><i class="fa-solid fa-shield-halved text-gold"></i> لوحة الإدارة والمشرفين</a></li>
-              <li><a href="javascript:void(0)" onclick="openActionModal('calc')"><i class="fa-solid fa-calculator text-gold"></i> حاسبة الجاهزية والأثر</a></li>
               <li><a href="#booklets"><i class="fa-solid fa-book-open text-gold"></i> مكتبة الكتيبات الأربعة</a></li>
             </ul>
           </div>
@@ -9700,9 +9661,6 @@ img, svg {
           </button>
           <button class="btn btn-outline-primary btn-sm" onclick="openContractSigningModal()" title="توليد وتوقيع عقد الاحتضان الرسمي بالبصمة الرقمية">
             <i class="fa-solid fa-file-signature"></i> عقد الاحتضان والتوقيع
-          </button>
-          <button class="btn btn-outline btn-sm" onclick="openAiPolicyGenerator()" style="border-color: var(--c-gold); color: var(--c-gold-dark);" title="مستشار اللوائح والسياسات بالذكاء الاصطناعي">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> مستشار اللوائح (AI)
           </button>
           <button class="btn btn-primary btn-sm" onclick="openAssocUploadEvidenceModal()" title="رفع شاهد أو وثيقة حوكمة جديدة">
             <i class="fa-solid fa-cloud-arrow-up"></i> رفع شاهد
@@ -10361,7 +10319,7 @@ img, svg {
               <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--c-primary);">لوحة الإدارة والتحكم المركزية | حاضنة ومسرعة عذق</h2>
               <span class="admin-badge-pulse">
                 <span class="live-dot"></span>
-                <span>نظام سحابي متزامن • 2FA ✓</span>
+                <span>نظام سحابي متزامن • وصول مباشر ✓</span>
               </span>
             </div>
             <div style="font-size: 0.82rem; color: var(--c-text-muted);">
@@ -11520,97 +11478,7 @@ img, svg {
     </div>
   </div>
 
-  <!-- 3. Modal: First Launch Exam & Readiness Matrix (اختبار انطلاقة الأولى من 100 درجة) -->
-  <div class="modal-overlay" id="modalReadinessCalculator">
-    <div class="wizard-modal-box" style="max-width: 660px;">
-      <div class="wizard-header">
-        <button class="modal-close-btn" onclick="closeReadinessCalculator()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-          <span style="background: rgba(255,255,255,0.22); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">المرحلة 2: رحلة الاحتضان</span>
-          <span style="color: var(--c-gold-light); font-size: 0.75rem;"><i class="fa-solid fa-award"></i> معيار الاجتياز المعتمد: 85 درجة فما فوق</span>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">اختبار انطلاقة الأولى ومصفوفة الجاهزية (100 درجة)</h3>
-        <p style="font-size: 0.8rem; opacity: 0.88;">الاختبار التأهيلي المعتمد بالمخطط الإجرائي لتوقيع عقد الاحتضان واستلام المقرات والخدمات</p>
-      </div>
-      <div class="wizard-body">
-        <!-- Q1 -->
-        <div class="calc-card">
-          <div class="calc-q-title">
-            <span style="color: var(--c-primary); font-weight: 800;">1.</span> الترخيص والتوثيق الرسمي بالمركز الوطني (NCNP):
-          </div>
-          <div class="calc-options-group">
-            <button class="calc-opt-btn selected" data-q="q1" data-val="20" onclick="selectCalcOption(this, 'q1', 20)">ترخيص رسمي سارٍ + رقم 700 معتمد (20 درجة)</button>
-            <button class="calc-opt-btn" data-q="q1" data-val="10" onclick="selectCalcOption(this, 'q1', 10)">قيد التأسيس أو بانتظار استكمال الوثائق (10 درجات)</button>
-          </div>
-        </div>
 
-        <!-- Q2 -->
-        <div class="calc-card">
-          <div class="calc-q-title">
-            <span style="color: var(--c-primary); font-weight: 800;">2.</span> شرط الموظف المتفرغ (شرط إلزامي بالمخطط الإجرائي):
-          </div>
-          <div class="calc-options-group">
-            <button class="calc-opt-btn selected" data-q="q2" data-val="20" onclick="selectCalcOption(this, 'q2', 20)">يوجد موظف أو أكثر بدوام كامل متفرغ للجمعية (20 درجة)</button>
-            <button class="calc-opt-btn" data-q="q2" data-val="5" onclick="selectCalcOption(this, 'q2', 5)">العمل يعتمد على المتطوعين أو دوام جزئي حالياً (5 درجات)</button>
-          </div>
-        </div>
-
-        <!-- Q3 -->
-        <div class="calc-card">
-          <div class="calc-q-title">
-            <span style="color: var(--c-primary); font-weight: 800;">3.</span> الحوكمة واللوائح الداخلية والرقابة المالية:
-          </div>
-          <div class="calc-options-group">
-            <button class="calc-opt-btn selected" data-q="q3" data-val="20" onclick="selectCalcOption(this, 'q3', 20)">لوائح أساسية معتمدة ومجلس إدارة وحسابات بنكية (20 درجة)</button>
-            <button class="calc-opt-btn" data-q="q3" data-val="10" onclick="selectCalcOption(this, 'q3', 10)">لوائح أولية بحاجة لاستكمال متطلبات الامتثال (10 درجات)</button>
-          </div>
-        </div>
-
-        <!-- Q4 -->
-        <div class="calc-card">
-          <div class="calc-q-title">
-            <span style="color: var(--c-primary); font-weight: 800;">4.</span> التوجه الاستراتيجي والخطة التشغيلية:
-          </div>
-          <div class="calc-options-group">
-            <button class="calc-opt-btn selected" data-q="q4" data-val="20" onclick="selectCalcOption(this, 'q4', 20)">خطة تشغيلية ومشاريع ومؤشرات قياس واضحة (20 درجة)</button>
-            <button class="calc-opt-btn" data-q="q4" data-val="10" onclick="selectCalcOption(this, 'q4', 10)">أفكار ومبادرات عامة لم تُصغ في خطة تنفيذية (10 درجات)</button>
-          </div>
-        </div>
-
-        <!-- Q5 -->
-        <div class="calc-card">
-          <div class="calc-q-title">
-            <span style="color: var(--c-primary); font-weight: 800;">5.</span> الجاهزية الميدانية والاحتياج للمقرات والمرافق:
-          </div>
-          <div class="calc-options-group">
-            <button class="calc-opt-btn selected" data-q="q5" data-val="20" onclick="selectCalcOption(this, 'q5', 20)">حاجة تشغيلية فعلية لمقر مستقل ومساحات عمل وقاعات (20 درجة)</button>
-            <button class="calc-opt-btn" data-q="q5" data-val="15" onclick="selectCalcOption(this, 'q5', 15)">حاجة للدعم الاستشاري والتدريبي ومساحات مشتركة (15 درجة)</button>
-          </div>
-        </div>
-
-        <!-- Result Box -->
-        <div class="calc-result-box" id="calc-result-box" style="display: block; transition: all 0.3s ease;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-size: 0.88rem; font-weight: 800; color: var(--c-primary);">نتيجة اختبار انطلاقة الأولى:</span>
-            <span style="font-size: 0.75rem; color: var(--c-text-muted);">الدرجة الكلية: 100 | حد الاجتياز: 85</span>
-          </div>
-          <div class="calc-result-score" id="calc-score-display">100 / 100</div>
-          <div style="font-size: 1.05rem; font-weight: 800; color: #072e20; margin: 6px 0;" id="calc-track-recommendation">اجتياز اختبار انطلاقة الأولى بنجاح (100 درجة)</div>
-          <p style="font-size: 0.84rem; color: var(--c-text-body); line-height: 1.7; margin-bottom: 16px;" id="calc-desc-recommendation">
-            حققت الجمعية درجة أعلى من حد الاجتياز المعتمد في المخطط (85 درجة). أنتم مؤهلون رسمياً للانتقال إلى توقيع عقد الاحتضان ورفع الشواهد واستلام المقر المجهز.
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-sm" id="calc-action-btn" onclick="closeReadinessCalculator(); openApplicationWizard();">
-              <i class="fa-solid fa-file-signature"></i> الانتقال لتوقيع العقد ورفع الشواهد
-            </button>
-            <button class="btn btn-outline btn-sm" onclick="calculateReadinessScore()" style="border-color: var(--c-border);">
-              <i class="fa-solid fa-arrows-rotate"></i> تحديث التقييم
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- 4. Modal: Facility Specifications & Booking (معرض ومواصفات المرافق) -->
   <div class="modal-overlay" id="modalFacilityDetails">
@@ -11692,10 +11560,6 @@ img, svg {
         <li class="palette-item" onclick="openConsultantWizard(); closeCommandPalette();">
           <div class="palette-item-icon"><i class="fa-solid fa-user-tie"></i> الانضمام كخبير ومستشار معتمد</div>
           <span class="palette-badge">انضمام</span>
-        </li>
-        <li class="palette-item" onclick="openReadinessCalculator(); closeCommandPalette();">
-          <div class="palette-item-icon"><i class="fa-solid fa-calculator"></i> حاسبة الجاهزية والأثر المؤسسي</div>
-          <span class="palette-badge">أداة</span>
         </li>
         <li class="palette-item" onclick="openDigitalCertificateModal('assoc'); closeCommandPalette();">
           <div class="palette-item-icon"><i class="fa-solid fa-award"></i> الشهادات الرقمية والأوسمة المعتمدة (QR)</div>
@@ -11886,89 +11750,7 @@ img, svg {
     </div>
   </div>
 
-  <!-- ==========================================================================
-       FEATURE 5: Modal: AI Policy & Governance Generator (مستشار اللوائح الذكي)
-       ========================================================================== -->
-  <div class="modal-overlay" id="modalAiPolicyGenerator">
-    <div class="policy-modal-box">
-      <div class="wizard-header">
-        <button class="modal-close-btn" onclick="closeAiPolicyGenerator()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-          <span style="background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">أداة الذكاء الاصطناعي والحوكمة</span>
-          <span style="color: var(--c-gold-light); font-size: 0.75rem;"><i class="fa-solid fa-scale-balanced"></i> متوافقة مع معايير المركز الوطني NCNP</span>
-        </div>
-        <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">مستشار توليد اللوائح والسياسات الداخلية الذكي</h3>
-        <p style="font-size: 0.8rem; opacity: 0.88;">توليد وصياغة لوائح تنظيمية متكاملة لجمعيتك متوافقة مع الأنظمة السعودية خلال ثوانٍ</p>
-      </div>
 
-      <div class="wizard-body">
-        <div style="margin-bottom: 14px;">
-          <label style="font-size: 0.82rem; font-weight: 800; color: var(--c-primary); display: block; margin-bottom: 8px;">
-            1. اختر اللائحة أو السياسة المراد توليدها:
-          </label>
-          <div class="policy-type-grid">
-            <button type="button" class="policy-type-btn active" data-policy="hr" onclick="selectPolicyType(this, 'hr')">
-              <i class="fa-solid fa-users-gear" style="font-size: 1.1rem;"></i>
-              <span>لائحة الموارد البشرية</span>
-            </button>
-            <button type="button" class="policy-type-btn" data-policy="finance" onclick="selectPolicyType(this, 'finance')">
-              <i class="fa-solid fa-coins" style="font-size: 1.1rem;"></i>
-              <span>اللائحة المالية والمشتريات</span>
-            </button>
-            <button type="button" class="policy-type-btn" data-policy="volunteers" onclick="selectPolicyType(this, 'volunteers')">
-              <i class="fa-solid fa-hand-holding-heart" style="font-size: 1.1rem;"></i>
-              <span>سياسة إدارة المتطوعين</span>
-            </button>
-            <button type="button" class="policy-type-btn" data-policy="compliance" onclick="selectPolicyType(this, 'compliance')">
-              <i class="fa-solid fa-shield-halved" style="font-size: 1.1rem;"></i>
-              <span>مكافحة غسل الأموال</span>
-            </button>
-            <button type="button" class="policy-type-btn" data-policy="governance" onclick="selectPolicyType(this, 'governance')">
-              <i class="fa-solid fa-sitemap" style="font-size: 1.1rem;"></i>
-              <span>مصفوفة الصلاحيات</span>
-            </button>
-            <button type="button" class="policy-type-btn" data-policy="disclosure" onclick="selectPolicyType(this, 'disclosure')">
-              <i class="fa-solid fa-eye" style="font-size: 1.1rem;"></i>
-              <span>الإفصاح وتعارض المصالح</span>
-            </button>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
-          <div>
-            <label style="font-size: 0.78rem; font-weight: 700; color: var(--c-text-muted);">اسم الجمعية الأهلية:</label>
-            <input type="text" id="aiPolicyAssocName" class="form-control" value="جمعية ديوان الشبابية" style="font-size: 0.85rem; padding: 6px 12px;">
-          </div>
-          <div>
-            <label style="font-size: 0.78rem; font-weight: 700; color: var(--c-text-muted);">رقم الترخيص الرسمي:</label>
-            <input type="text" id="aiPolicyAssocLic" class="form-control" value="1842" style="font-size: 0.85rem; padding: 6px 12px;">
-          </div>
-        </div>
-
-        <button class="btn btn-primary" id="btnGenerateAiPolicy" onclick="generateAiPolicy()" style="width: 100%; justify-content: center; padding: 10px;">
-          <i class="fa-solid fa-wand-magic-sparkles"></i> توليد مسودة اللائحة النظامية الآن
-        </button>
-
-        <!-- Output Box -->
-        <div id="aiPolicyOutputContainer" style="margin-top: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <strong id="aiPolicyOutputTitle" style="font-size: 0.95rem; color: var(--c-primary);">مسودة اللائحة النظامية المعتمدة:</strong>
-            <div style="display: flex; gap: 8px;">
-              <button class="btn btn-outline btn-sm" onclick="copyAiPolicyText()" style="padding: 4px 10px; font-size: 0.75rem;">
-                <i class="fa-regular fa-copy"></i> نسخ النص
-              </button>
-              <button class="btn btn-outline-primary btn-sm" onclick="printAiPolicyText()" style="padding: 4px 10px; font-size: 0.75rem;">
-                <i class="fa-solid fa-print"></i> طباعة
-              </button>
-            </div>
-          </div>
-          <div class="policy-output-card" id="aiPolicyOutputContent">
-            <!-- Populated via landing.js -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ==========================================================================
        FEATURE 10: Modal: Interactive Digital Booklet Reader (عارض الكتيبات)
@@ -12574,61 +12356,7 @@ img, svg {
     </div>
   </div>
 
-  <!-- Modal 6: المصادقة الثنائية الآمنة للإدارة (2FA - OTP Verification) -->
-  <div class="modal-overlay" id="modalAdmin2FA">
-    <div class="wizard-modal-box" style="max-width: 480px; text-align: center;">
-      <div class="wizard-header" style="background: linear-gradient(135deg, #09472A 0%, #0E6E41 70%, #C59B27 100%);">
-        <button class="modal-close-btn" onclick="closeAdmin2FAModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px;">
-          <span style="background: rgba(255,255,255,0.22); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">الأمان السيبراني المتقدم</span>
-          <span style="color: var(--c-gold-light); font-size: 0.75rem;"><i class="fa-solid fa-shield-halved"></i> 2FA OTP</span>
-        </div>
-        <h3 style="font-size: 1.3rem; font-weight: 800; color: #FFFFFF; margin-bottom: 2px;">المصادقة الثنائية للإدارة (2FA)</h3>
-        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.9); margin: 0;">لوحة تحكم المشرف العام • حاضنة ومسرعة عذق</p>
-      </div>
 
-      <div class="wizard-body" style="padding: 24px 28px;">
-        <div style="width: 64px; height: 64px; background: rgba(14,110,65,0.12); color: var(--c-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px;">
-          <i class="fa-solid fa-user-shield"></i>
-        </div>
-        <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin-bottom: 6px;">
-          أدخل رمز التحقق المؤقت (OTP)
-        </h4>
-        <p style="font-size: 0.82rem; color: var(--c-text-muted); margin-bottom: 14px;">
-          تم إرسال رمز التحقق المكون من 4 أرقام إلى جوال المشرف المعتمد: <strong>050****842</strong>
-        </p>
-
-        <!-- 4 Digit OTP Inputs -->
-        <div class="admin-otp-inputs-grid">
-          <input type="text" maxlength="1" class="otp-box-digit" id="otp-1" value="2" onkeyup="handleOtpKey(this, 'otp-2')">
-          <input type="text" maxlength="1" class="otp-box-digit" id="otp-2" value="0" onkeyup="handleOtpKey(this, 'otp-3')">
-          <input type="text" maxlength="1" class="otp-box-digit" id="otp-3" value="3" onkeyup="handleOtpKey(this, 'otp-4')">
-          <input type="text" maxlength="1" class="otp-box-digit" id="otp-4" value="0" onkeyup="handleOtpKey(this, null)">
-        </div>
-
-        <div class="admin-security-banner">
-          <i class="fa-solid fa-circle-info" style="color: var(--c-primary); font-size: 1.2rem;"></i>
-          <div style="font-size: 0.78rem; text-align: right; color: var(--c-text); flex: 1;">
-            رمز التحقق التجريبي المعتمد هو <strong>(2030)</strong>. يمكنك الضغط مباشرة على زر "تأكيد الدخول".
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--c-text-muted);">
-          <span>الصلاحية: <strong id="otpTimerDisplay" style="color: var(--c-gold-dark);">02:45 دقيقة</strong></span>
-          <a href="javascript:void(0)" onclick="resendAdminOtp()" style="color: var(--c-primary); text-decoration: none; font-weight: 700;">
-            <i class="fa-solid fa-rotate-right"></i> إعادة إرسال الرمز
-          </a>
-        </div>
-      </div>
-
-      <div class="wizard-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--c-bg); border-top: 1px solid var(--c-border);">
-        <button class="btn btn-outline btn-sm" onclick="closeAdmin2FAModal()">إلغاء</button>
-        <button class="btn btn-primary btn-sm" onclick="verifyAdminOtpAndLogin()">
-          <i class="fa-solid fa-lock-open"></i> تأكيد الرمز ودخول اللوحة
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Modal 7: إسناد وتوزيع طلب استشارة على المستشارين حسب التفرغ -->
   <div class="modal-overlay" id="modalAdminAssignConsult">
@@ -13536,30 +13264,7 @@ img, svg {
     </div>
   </div>
 
-  <!-- Floating Live Support Widget (شات الحاضنة التفاعلي) -->
-  <button class="floating-support-btn" id="chatToggle" title="محادثة الدعم المباشر">
-    <i class="fa-solid fa-headset"></i>
-    <span>محادثة الدعم المباشر</span>
-  </button>
 
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-header">
-      <div>
-        <h4>الدعم المباشر - حاضنة عذق</h4>
-        <span>متصل الآن لخدمتكم</span>
-      </div>
-      <button id="chatClose" style="background: none; border: none; color: #FFFFFF; font-size: 1.2rem; cursor: pointer;">&times;</button>
-    </div>
-    <div class="chat-body" id="chatBody">
-      <div class="chat-msg bot">
-        أهلاً بك في منصة حاضنة ومسرعة عذق بالمدينة المنورة! كيف يمكننا مساعدتك اليوم؟ يمكنك الاستفسار عن الشروط، المرافق، أو طريقة التسجيل.
-      </div>
-    </div>
-    <div class="chat-footer">
-      <input type="text" class="chat-input" id="chatInput" placeholder="اكتب استفسارك هنا...">
-      <button class="btn btn-primary btn-sm" id="chatSend" style="padding: 6px 12px;"><i class="fa-solid fa-paper-plane"></i></button>
-    </div>
-  </div>
 
   <!-- Scripts -->
   <script>
@@ -13854,7 +13559,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimatedCounters();
   initServicesTabs();
   initFaqAccordion();
-  initChatWidget();
   initDropdownMenus();
   initMobileDrawer();
   initKeyboardShortcuts();
@@ -13910,15 +13614,7 @@ function initRoleSimulator() {
   });
 }
 
-let adminIsAuthenticated2FA = false;
-
-window.switchRole = function(role, bypassAuth = false) {
-  // If attempting to open Admin without 2FA authentication, trigger 2FA modal
-  if (role === 'admin' && !adminIsAuthenticated2FA && !bypassAuth) {
-    openAdmin2FAModal();
-    return;
-  }
-
+window.switchRole = function(role) {
   currentActiveRole = role;
 
   // Update simulator buttons active state
@@ -14018,55 +13714,16 @@ function initFaqAccordion() {
   });
 }
 
-// 7. Live Support AI Assistant
-function initChatWidget() {
-  const chatToggle = document.getElementById('chatToggle');
-  const chatWindow = document.getElementById('chatWindow');
-  const chatClose = document.getElementById('chatClose');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
-  const chatBody = document.getElementById('chatBody');
-
-  chatToggle?.addEventListener('click', () => {
-    chatWindow?.classList.toggle('active');
-    if (chatWindow?.classList.contains('active')) chatInput?.focus();
-  });
-
-  chatClose?.addEventListener('click', () => chatWindow?.classList.remove('active'));
-
-  const sendMessage = () => {
-    const text = chatInput?.value.trim();
-    if (!text || !chatBody) return;
-
-    const userMsg = document.createElement('div');
-    userMsg.className = 'chat-msg user';
-    userMsg.textContent = text;
-    chatBody.appendChild(userMsg);
-    chatInput.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight;
-
-    setTimeout(() => {
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-msg bot';
-      let reply = 'شكراً لتواصلك مع حاضنة ومسرعة عذق. يمكنك التقديم لاحتضان جمعيتك عبر زر "قدّم طلب احتضان" في أعلى الصفحة.';
-      if (text.includes('مرافق') || text.includes('قاعة') || text.includes('مقر')) {
-        reply = 'توفر الحاضنة أكثر من 13 مقراً مجهزاً و18 مساحة عمل وقاعة اجتماعات ذكية و3 قاعات للمستشارين.';
-      } else if (text.includes('شروط') || text.includes('قبول') || text.includes('تسجيل')) {
-        reply = 'شروط القبول: أن تكون الجمعية أهلية بالمدينة المنورة، وتوفير موظف متفرغ، والالتزام بمسار التقييم والحوكمة.';
-      } else if (text.includes('عنوان') || text.includes('موقع') || text.includes('أين')) {
-        reply = 'مقر الحاضنة: المدينة المنورة، حي الأصيفرين، شارع عمرو بن أبي القيس / أحمد بن جعفر الأشعري.';
-      }
-      botMsg.textContent = reply;
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }, 500);
-  };
-
-  chatSend?.addEventListener('click', sendMessage);
-  chatInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendMessage();
-  });
-}
+// Safe Action Modal Dispatcher
+window.openActionModal = function(type) {
+  if (type === 'association') {
+    openApplicationWizard();
+  } else if (type === 'consultant') {
+    openConsultantWizard();
+  } else if (type === 'admin') {
+    switchRole('admin');
+  }
+};
 
 // 7.1 Direct Contact Form Handler (نموذج التواصل المباشر)
 function handleDirectContactSubmit(e) {
@@ -14860,73 +14517,7 @@ window.submitFacilityBooking = function() {
 window.openBookingModal = window.openFacilityBookingModal;
 window.openConsultantRequestModal = window.openBookConsultantModal;
 
-// ========================== First Launch Exam & Readiness Calculator ==========================
-let calcAnswers = { q1: 20, q2: 20, q3: 20, q4: 20, q5: 20 };
 
-window.openReadinessCalculator = function() {
-  document.getElementById('modalReadinessCalculator')?.classList.add('active');
-  calculateReadinessScore();
-};
-
-window.closeReadinessCalculator = function() {
-  document.getElementById('modalReadinessCalculator')?.classList.remove('active');
-};
-
-window.selectCalcOption = function(btn, qKey, value) {
-  calcAnswers[qKey] = parseInt(value, 10);
-  btn.closest('.calc-options-group').querySelectorAll('.calc-opt-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  calculateReadinessScore();
-};
-
-function calculateReadinessScore() {
-  const q1 = calcAnswers.q1 || 0;
-  const q2 = calcAnswers.q2 || 0;
-  const q3 = calcAnswers.q3 || 0;
-  const q4 = calcAnswers.q4 || 0;
-  const q5 = calcAnswers.q5 || 0;
-  const total = q1 + q2 + q3 + q4 + q5;
-
-  const scoreDisplay = document.getElementById('calc-score-display');
-  const trackDisplay = document.getElementById('calc-track-recommendation');
-  const descDisplay = document.getElementById('calc-desc-recommendation');
-  const resultBox = document.getElementById('calc-result-box');
-  const actionBtn = document.getElementById('calc-action-btn');
-
-  if (scoreDisplay) scoreDisplay.textContent = `${total} / 100`;
-
-  if (total >= 85) {
-    if (resultBox) {
-      resultBox.style.borderColor = 'var(--c-primary)';
-      resultBox.style.background = 'rgba(14, 110, 65, 0.08)';
-    }
-    if (trackDisplay) {
-      trackDisplay.innerHTML = `<span style="color: var(--c-primary);"><i class="fa-solid fa-circle-check"></i> اجتياز اختبار انطلاقة الأولى بنجاح (${total} درجة)</span>`;
-    }
-    if (descDisplay) {
-      descDisplay.textContent = 'حققت الجمعية درجة أعلى من حد الاجتياز المعتمد في المخطط (85 درجة). أنتم مؤهلون رسمياً للانتقال إلى توقيع عقد الاحتضان ورفع الشواهد واستلام المقر المجهز.';
-    }
-    if (actionBtn) {
-      actionBtn.innerHTML = '<i class="fa-solid fa-file-signature"></i> الانتقال لتوقيع العقد ورفع الشواهد';
-      actionBtn.className = 'btn btn-primary btn-sm';
-    }
-  } else {
-    if (resultBox) {
-      resultBox.style.borderColor = '#DC3545';
-      resultBox.style.background = 'rgba(220, 53, 69, 0.08)';
-    }
-    if (trackDisplay) {
-      trackDisplay.innerHTML = `<span style="color: #DC3545;"><i class="fa-solid fa-triangle-exclamation"></i> دون حد الاجتياز المطلوب (${total} من 100 - الحد الأدنى 85)</span>`;
-    }
-    if (descDisplay) {
-      descDisplay.textContent = 'الدرجة المحققة أقل من معيار الاجتياز المعتمد (85 درجة). وفق المخطط الإجرائي، يُتاح للجمعية خطة تصحيحية وجلسة استشارة متخصصة مع إمكانية إعادة الاختبار فور اكتمال المتطلبات.';
-    }
-    if (actionBtn) {
-      actionBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> إعادة الاختبار وتحديد فرصة إضافية';
-      actionBtn.className = 'btn btn-outline-primary btn-sm';
-    }
-  }
-}
 
 // ========================== Facility Details Modal ==========================
 const FACILITIES_DATA = {
@@ -18901,89 +18492,21 @@ window.resetPlatformToDefault = function() {
   }
 };
 
-// ========================== Prompt 5: Admin 2FA & Security Operations ==========================
-let adminOtpTimerInterval = null;
-let adminOtpSecondsLeft = 165; // 02:45
-
+// ========================== Admin Direct Access & Security Operations ==========================
 window.openAdmin2FAModal = function() {
-  const modal = document.getElementById('modalAdmin2FA');
-  if (!modal) {
-    adminIsAuthenticated2FA = true;
-    switchRole('admin', true);
-    return;
-  }
-
-  // Reset inputs
-  document.getElementById('otp-1').value = '2';
-  document.getElementById('otp-2').value = '0';
-  document.getElementById('otp-3').value = '3';
-  document.getElementById('otp-4').value = '0';
-
-  adminOtpSecondsLeft = 165;
-  if (adminOtpTimerInterval) clearInterval(adminOtpTimerInterval);
-  adminOtpTimerInterval = setInterval(() => {
-    adminOtpSecondsLeft--;
-    if (adminOtpSecondsLeft <= 0) {
-      clearInterval(adminOtpTimerInterval);
-      adminOtpSecondsLeft = 0;
-    }
-    const m = String(Math.floor(adminOtpSecondsLeft / 60)).padStart(2, '0');
-    const s = String(adminOtpSecondsLeft % 60).padStart(2, '0');
-    const timerEl = document.getElementById('otpTimerDisplay');
-    if (timerEl) timerEl.textContent = `${m}:${s} دقيقة`;
-  }, 1000);
-
-  modal.classList.add('active');
-  setTimeout(() => document.getElementById('otp-1')?.focus(), 200);
+  switchRole('admin');
 };
 
 window.closeAdmin2FAModal = function() {
-  if (adminOtpTimerInterval) clearInterval(adminOtpTimerInterval);
   document.getElementById('modalAdmin2FA')?.classList.remove('active');
-};
-
-window.handleOtpKey = function(currInput, nextInputId) {
-  if (currInput.value.length === 1 && nextInputId) {
-    document.getElementById(nextInputId)?.focus();
-  }
-};
-
-window.resendAdminOtp = function() {
-  adminOtpSecondsLeft = 180;
-  showToast('تم إعادة إرسال رمز التحقق (OTP) بنجاح: الرمز هو (2030)', 'info');
-};
-
-window.verifyAdminOtpAndLogin = function() {
-  const d1 = document.getElementById('otp-1')?.value || '';
-  const d2 = document.getElementById('otp-2')?.value || '';
-  const d3 = document.getElementById('otp-3')?.value || '';
-  const d4 = document.getElementById('otp-4')?.value || '';
-  const enteredOtp = `${d1}${d2}${d3}${d4}`;
-
-  if (enteredOtp.length !== 4) {
-    showToast('يرجى إدخال رمز التحقق المكون من 4 أرقام كاملاً.', 'error');
-    return;
-  }
-
-  if (enteredOtp !== '2030' && enteredOtp !== '1234') {
-    showToast('رمز التحقق غير صحيح. الرمز التجريبي المعتمد هو 2030.', 'error');
-    return;
-  }
-
-  adminIsAuthenticated2FA = true;
-  closeAdmin2FAModal();
-  switchRole('admin', true);
-  showToast('تم التحقق بنجاح عبر المصادقة الثنائية (2FA) ✓ مرحباً بك في لوحة الإدارة المركزية.', 'success');
-  addAdminAuditLog('تسجيل دخول المشرف العام', 'تمت المصادقة الثنائية 2FA بنجاح عبر الجوال المعتمد', 'fa-shield-halved', '#0E6E41');
 };
 
 // Admin Secure Logout
 window.adminSecureLogout = function() {
-  if (confirm('هل ترغب في تسجيل الخروج الآمن من لوحة الإدارة وإغلاق الجلسة؟')) {
-    adminIsAuthenticated2FA = false;
+  if (confirm('هل ترغب في تسجيل الخروج من لوحة الإدارة والعودة إلى الواجهة الرئيسية؟')) {
     switchRole('visitor');
-    showToast('تم تسجيل الخروج الآمن وقفل لوحة الإدارة بنجاح. لحماية بيانات المنظومة 🔒', 'info');
-    addAdminAuditLog('تسجيل خروج المشرف', 'تم إنهاء الجلسة الآمنة وقفل لوحة التحكم', 'fa-lock', '#C59B27');
+    showToast('تم تسجيل الخروج من لوحة الإدارة بنجاح.', 'info');
+    addAdminAuditLog('تسجيل خروج المشرف', 'تم إنهاء الجلسة والعودة للواجهة الرئيسية', 'fa-lock', '#C59B27');
   }
 };
 
@@ -19457,201 +18980,7 @@ window.saveDigitalSignature = function() {
   showAppNotification('توقيع العقد الرقمي', 'تم اعتماد وتثبيت التوقيع الرقمي بنجاح في عقد الاحتضان المعتمد.');
 };
 
-/* ==========================================================================
-   FEATURE 5: AI Policy & Governance Generator (مستشار اللوائح الذكي)
-   ========================================================================== */
-let selectedPolicyTypeKey = 'hr';
 
-const AI_POLICY_TEMPLATES = {
-  hr: {
-    title: "لائحة الموارد البشرية والتوظيف الموحدة",
-    badge: "نظام الموارد البشرية واللوائح التنفيذية",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: التعريف والهدف</strong>
-        تهدف هذه اللائحة إلى تنظيم شؤون العاملين بـ (${name}) المسجلة بترخيص رقم (${lic})، وضمان العدالة والشفافية وتحديد الحقوق والواجبات التعاقدية وفقاً لنظام العمل السعودي ولائحة المركز الوطني لتنمية القطاع غير الربحي.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: التوظيف وبناء فريق العمل</strong>
-        يتم التوظيف بناءً على معايير الكفاءة والاستحقاق عبر إعلان وظائف رسمي معتمد، ويشترط في وظائف الإدارة التنفيذية والمالية التفرغ التام واجتياز المقابلة المعتمدة من مجلس الإدارة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: ساعات العمل والإجازات</strong>
-        تحدد ساعات العمل الرسمية بـ 8 ساعات يومياً (48 ساعة أسبوعياً كحد أقصى)، ويستحق الموظف إجازة سنوية مدفوعة الأجر لا تقل عن 30 يوماً بعد إكمال عام من الخدمة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 4: تقييم الأداء والتطوير المهني</strong>
-        تلتزم إدارة الجمعية بإجراء تقييم أداء سنوي لكل موظف وفق مؤشرات قياس أداء (KPIs) واضحة مرتبطة بالأهداف الاستراتيجية، وتوفير برامج التدريب والتأهيل التخصصية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 5: السرية والمحافظة على الأصول</strong>
-        يلتزم جميع العاملين بالمحافظة على سرية بيانات المستفيدين والداعمين ووثائق الجمعية، والتقيد بسياسات الأمن السيبراني والأمان المكتبي بحاضنة عذق.
-      </div>
-    `
-  },
-  finance: {
-    title: "اللائحة المالية والمشتريات وضبط الصرف",
-    badge: "دليل الحسابات الموحد للقطاع غير الربحي",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: النظام المحاسبي والموازنة التقديرية</strong>
-        تعتمد (${name}) دليل الحسابات الموحد للقطاع غير الربحي، وتعد الإدارة التنفيذية موازنة تقديرية سنوية تعتمد من مجلس الإدارة قبل بدء السنة المالية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: سياسة الصرف والصلاحيات المالية</strong>
-        لا يجوز صرف أي مبلغ مالي إلا بموجب سند صرف معتمد وتوقيع مخولين اثنين من أصحاب التوقيع المعتمدين بنكياً، وضمن بنود الموازنة المعتمدة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: سياسة المشتريات والمنافسات</strong>
-        تخضع المشتريات التي تتجاوز 10,000 ريال لطلب 3 عروض أسعار مقارنة على الأقل لاختيار العرض الأنسب جودة وسعراً، وتخضع للمراجعة المالية المستقلة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 4: التدقيق والمراجعة الدورية</strong>
-        تلتزم الجمعية بتعيين مراجع حسابات خارجي مرخص لمراجعة القوائم المالية ربع السنوية والسنوية ورفعها لمنصة إفصاح والمركز الوطني لتنمية القطاع غير الربحي.
-      </div>
-    `
-  },
-  volunteers: {
-    title: "سياسة إدارة وتنظيم العمل التطوعي",
-    badge: "المعيار الوطني للعمل التطوعي (إدامة)",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: مفهوم ورسالة التطوع</strong>
-        تؤمن (${name}) بأهمية إشراك المجتمع في تحقيق أهدافها التنموية، وتلتزم بتوفير بيئة تطوعية آمنة ومحفزة تحقق مستهدفات رؤية 2030.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: استقطاب وتوثيق المتطوعين</strong>
-        يتم استقطاب المتطوعين عبر البوابة الوطنية للعمل التطوعي، ويبرم مع كل متطوع ميثاق عمل تطوعي يوضح المهام والحقوق وساعات الإنجاز.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: التوثيق واحتساب الساعات</strong>
-        توثق الساعات التطوعية رسمياً في المنصة الوطنية ويصدر للمتطوع شهادة تطوع معتمدة برمز QR بعد إكمال المهام المطلوبة وتقييم الأداء.
-      </div>
-    `
-  },
-  compliance: {
-    title: "سياسة مكافحة غسل الأموال وجرائم الإرهاب",
-    badge: "متطلب إلزامي لدى المركز الوطني NCNP",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الالتزام والامتثال</strong>
-        تلتزم (${name}) بالامتثال التام لنظام مكافحة غسل الأموال ولائحته التنفيذية وتعميمات المركز الوطني والبنك المركزي السعودي.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: حظر التبرعات النقدية المجهولة</strong>
-        يحظر على الجمعية قبول أي تبرعات نقدية يدوية (كاش) مجهولة المصدر، وتقتصر التبرعات على الحسابات البنكية الرسمية وبوابات التبرع الإلكترونية المرخصة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: تعيين مسؤول الالتزام</strong>
-        يعين مجلس الإدارة مسؤول التزام مستقلاً لمتابعة العمليات المالية وتدريب منسوبي الجمعية والإبلاغ الفوري عن أي عمليات مالية مشبوهة.
-      </div>
-    `
-  },
-  governance: {
-    title: "مصفوفة الصلاحيات والحوكمة المؤسسية",
-    badge: "معايير السلامة المالية والشفافية",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الفصل بين السلطات</strong>
-        تعتمد (${name}) مبدأ الفصل الواضح بين اختصاصات الجمعية العمومية، ومجلس الإدارة، والإدارة التنفيذية، لضمان النزاهة والمحاسبية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: تشكيل اللجان المنبثقة</strong>
-        يشكل مجلس الإدارة لجاناً متخصصة: (لجنة المراجعة والتدقيق الداخلي، لجنة المكافآت والترشيحات، لجنة الاستثمار وتنمية الموارد).
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: الإفصاح والشفافية</strong>
-        نشر اللائحة الأساسية، وأسماء أعضاء مجلس الإدارة، والتقارير المالية والسنوية على الموقع الإلكتروني للجمعية لتعزيز ثقة المجتمع والمانحين.
-      </div>
-    `
-  },
-  disclosure: {
-    title: "سياسة الإفصاح وتعارض المصالح",
-    badge: "حوكمة العمل غير الربحي والنزاهة",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الإفصاح السنوي</strong>
-        يلتزم أعضاء مجلس الإدارة والقيادات التنفيذية بتقديم إقرار سنوي خطي بالإفصاح عن أي علاقات أو مصالح تجارية أو عائلية قد تتعارض مع مصلحة الجمعية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: الامتناع عن التصويت</strong>
-        يمتنع أي عضو عن حضور النقاش أو التصويت على أي قرار يكون له فيه مصلحة مباشرة أو غير مباشرة، ويثبت ذلك في محضر الاجتماع الرسمي.
-      </div>
-    `
-  }
-};
-
-window.openAiPolicyGenerator = function() {
-  const modal = document.getElementById('modalAiPolicyGenerator');
-  if (!modal) return;
-
-  const currentAssoc = getActiveAssociation() || (APP_STATE.applications && APP_STATE.applications[0]) || {
-    associationName: "جمعية ديوان الشبابية",
-    licenseNumber: "1842"
-  };
-
-  const nameInput = document.getElementById('aiPolicyAssocName');
-  const licInput = document.getElementById('aiPolicyAssocLic');
-  if (nameInput) nameInput.value = currentAssoc.associationName;
-  if (licInput) licInput.value = currentAssoc.licenseNumber || "1842";
-
-  generateAiPolicy();
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeAiPolicyGenerator = function() {
-  const modal = document.getElementById('modalAiPolicyGenerator');
-  if (modal) modal.classList.remove('active');
-  document.body.style.overflow = '';
-};
-
-window.selectPolicyType = function(btn, type) {
-  selectedPolicyTypeKey = type;
-  document.querySelectorAll('.policy-type-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  generateAiPolicy();
-};
-
-window.generateAiPolicy = function() {
-  const assocName = document.getElementById('aiPolicyAssocName')?.value || "الجمعية الأهلية";
-  const assocLic = document.getElementById('aiPolicyAssocLic')?.value || "0000";
-  const outputContainer = document.getElementById('aiPolicyOutputContent');
-  const titleEl = document.getElementById('aiPolicyOutputTitle');
-  const template = AI_POLICY_TEMPLATES[selectedPolicyTypeKey] || AI_POLICY_TEMPLATES.hr;
-
-  if (titleEl) {
-    titleEl.textContent = `${template.title} - ${assocName} (ترخيص ${assocLic})`;
-  }
-
-  if (outputContainer) {
-    outputContainer.innerHTML = `
-      <div style="border-bottom: 2px solid #E2E8F0; padding-bottom: 12px; margin-bottom: 16px;">
-        <span style="background: #E8F5E9; color: #0E6E41; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 800;">
-          ${template.badge}
-        </span>
-        <h4 style="font-size: 1.15rem; font-weight: 900; color: #0E6E41; margin: 6px 0 2px;">${template.title}</h4>
-        <small style="color: #64748B;">صادرة بقرار مجلس الإدارة لـ (${assocName}) • متوافقة مع معايير المركز الوطني لتنمية القطاع غير الربحي 1446هـ</small>
-      </div>
-      ${template.generate(assocName, assocLic)}
-    `;
-  }
-};
-
-window.copyAiPolicyText = function() {
-  const content = document.getElementById('aiPolicyOutputContent');
-  if (!content) return;
-  const text = content.innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    showAppNotification('تم نسخ اللائحة', 'تم نسخ نص اللائحة النظامية بنجاح إلى الحافظة.');
-  }).catch(() => {
-    alert('تم نسخ اللائحة بنجاح.');
-  });
-};
-
-window.printAiPolicyText = function() {
-  window.print();
-};
 
 /* ==========================================================================
    FEATURE 10: Official Booklets Library & Viewer (المكتبة والكتيبات)

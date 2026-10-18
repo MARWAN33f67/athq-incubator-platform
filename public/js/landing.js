@@ -289,7 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimatedCounters();
   initServicesTabs();
   initFaqAccordion();
-  initChatWidget();
   initDropdownMenus();
   initMobileDrawer();
   initKeyboardShortcuts();
@@ -345,15 +344,7 @@ function initRoleSimulator() {
   });
 }
 
-let adminIsAuthenticated2FA = false;
-
-window.switchRole = function(role, bypassAuth = false) {
-  // If attempting to open Admin without 2FA authentication, trigger 2FA modal
-  if (role === 'admin' && !adminIsAuthenticated2FA && !bypassAuth) {
-    openAdmin2FAModal();
-    return;
-  }
-
+window.switchRole = function(role) {
   currentActiveRole = role;
 
   // Update simulator buttons active state
@@ -453,55 +444,16 @@ function initFaqAccordion() {
   });
 }
 
-// 7. Live Support AI Assistant
-function initChatWidget() {
-  const chatToggle = document.getElementById('chatToggle');
-  const chatWindow = document.getElementById('chatWindow');
-  const chatClose = document.getElementById('chatClose');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
-  const chatBody = document.getElementById('chatBody');
-
-  chatToggle?.addEventListener('click', () => {
-    chatWindow?.classList.toggle('active');
-    if (chatWindow?.classList.contains('active')) chatInput?.focus();
-  });
-
-  chatClose?.addEventListener('click', () => chatWindow?.classList.remove('active'));
-
-  const sendMessage = () => {
-    const text = chatInput?.value.trim();
-    if (!text || !chatBody) return;
-
-    const userMsg = document.createElement('div');
-    userMsg.className = 'chat-msg user';
-    userMsg.textContent = text;
-    chatBody.appendChild(userMsg);
-    chatInput.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight;
-
-    setTimeout(() => {
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-msg bot';
-      let reply = 'شكراً لتواصلك مع حاضنة ومسرعة عذق. يمكنك التقديم لاحتضان جمعيتك عبر زر "قدّم طلب احتضان" في أعلى الصفحة.';
-      if (text.includes('مرافق') || text.includes('قاعة') || text.includes('مقر')) {
-        reply = 'توفر الحاضنة أكثر من 13 مقراً مجهزاً و18 مساحة عمل وقاعة اجتماعات ذكية و3 قاعات للمستشارين.';
-      } else if (text.includes('شروط') || text.includes('قبول') || text.includes('تسجيل')) {
-        reply = 'شروط القبول: أن تكون الجمعية أهلية بالمدينة المنورة، وتوفير موظف متفرغ، والالتزام بمسار التقييم والحوكمة.';
-      } else if (text.includes('عنوان') || text.includes('موقع') || text.includes('أين')) {
-        reply = 'مقر الحاضنة: المدينة المنورة، حي الأصيفرين، شارع عمرو بن أبي القيس / أحمد بن جعفر الأشعري.';
-      }
-      botMsg.textContent = reply;
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }, 500);
-  };
-
-  chatSend?.addEventListener('click', sendMessage);
-  chatInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendMessage();
-  });
-}
+// Safe Action Modal Dispatcher
+window.openActionModal = function(type) {
+  if (type === 'association') {
+    openApplicationWizard();
+  } else if (type === 'consultant') {
+    openConsultantWizard();
+  } else if (type === 'admin') {
+    switchRole('admin');
+  }
+};
 
 // 7.1 Direct Contact Form Handler (نموذج التواصل المباشر)
 function handleDirectContactSubmit(e) {
@@ -1295,73 +1247,7 @@ window.submitFacilityBooking = function() {
 window.openBookingModal = window.openFacilityBookingModal;
 window.openConsultantRequestModal = window.openBookConsultantModal;
 
-// ========================== First Launch Exam & Readiness Calculator ==========================
-let calcAnswers = { q1: 20, q2: 20, q3: 20, q4: 20, q5: 20 };
 
-window.openReadinessCalculator = function() {
-  document.getElementById('modalReadinessCalculator')?.classList.add('active');
-  calculateReadinessScore();
-};
-
-window.closeReadinessCalculator = function() {
-  document.getElementById('modalReadinessCalculator')?.classList.remove('active');
-};
-
-window.selectCalcOption = function(btn, qKey, value) {
-  calcAnswers[qKey] = parseInt(value, 10);
-  btn.closest('.calc-options-group').querySelectorAll('.calc-opt-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  calculateReadinessScore();
-};
-
-function calculateReadinessScore() {
-  const q1 = calcAnswers.q1 || 0;
-  const q2 = calcAnswers.q2 || 0;
-  const q3 = calcAnswers.q3 || 0;
-  const q4 = calcAnswers.q4 || 0;
-  const q5 = calcAnswers.q5 || 0;
-  const total = q1 + q2 + q3 + q4 + q5;
-
-  const scoreDisplay = document.getElementById('calc-score-display');
-  const trackDisplay = document.getElementById('calc-track-recommendation');
-  const descDisplay = document.getElementById('calc-desc-recommendation');
-  const resultBox = document.getElementById('calc-result-box');
-  const actionBtn = document.getElementById('calc-action-btn');
-
-  if (scoreDisplay) scoreDisplay.textContent = `${total} / 100`;
-
-  if (total >= 85) {
-    if (resultBox) {
-      resultBox.style.borderColor = 'var(--c-primary)';
-      resultBox.style.background = 'rgba(14, 110, 65, 0.08)';
-    }
-    if (trackDisplay) {
-      trackDisplay.innerHTML = `<span style="color: var(--c-primary);"><i class="fa-solid fa-circle-check"></i> اجتياز اختبار انطلاقة الأولى بنجاح (${total} درجة)</span>`;
-    }
-    if (descDisplay) {
-      descDisplay.textContent = 'حققت الجمعية درجة أعلى من حد الاجتياز المعتمد في المخطط (85 درجة). أنتم مؤهلون رسمياً للانتقال إلى توقيع عقد الاحتضان ورفع الشواهد واستلام المقر المجهز.';
-    }
-    if (actionBtn) {
-      actionBtn.innerHTML = '<i class="fa-solid fa-file-signature"></i> الانتقال لتوقيع العقد ورفع الشواهد';
-      actionBtn.className = 'btn btn-primary btn-sm';
-    }
-  } else {
-    if (resultBox) {
-      resultBox.style.borderColor = '#DC3545';
-      resultBox.style.background = 'rgba(220, 53, 69, 0.08)';
-    }
-    if (trackDisplay) {
-      trackDisplay.innerHTML = `<span style="color: #DC3545;"><i class="fa-solid fa-triangle-exclamation"></i> دون حد الاجتياز المطلوب (${total} من 100 - الحد الأدنى 85)</span>`;
-    }
-    if (descDisplay) {
-      descDisplay.textContent = 'الدرجة المحققة أقل من معيار الاجتياز المعتمد (85 درجة). وفق المخطط الإجرائي، يُتاح للجمعية خطة تصحيحية وجلسة استشارة متخصصة مع إمكانية إعادة الاختبار فور اكتمال المتطلبات.';
-    }
-    if (actionBtn) {
-      actionBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> إعادة الاختبار وتحديد فرصة إضافية';
-      actionBtn.className = 'btn btn-outline-primary btn-sm';
-    }
-  }
-}
 
 // ========================== Facility Details Modal ==========================
 const FACILITIES_DATA = {
@@ -5336,89 +5222,21 @@ window.resetPlatformToDefault = function() {
   }
 };
 
-// ========================== Prompt 5: Admin 2FA & Security Operations ==========================
-let adminOtpTimerInterval = null;
-let adminOtpSecondsLeft = 165; // 02:45
-
+// ========================== Admin Direct Access & Security Operations ==========================
 window.openAdmin2FAModal = function() {
-  const modal = document.getElementById('modalAdmin2FA');
-  if (!modal) {
-    adminIsAuthenticated2FA = true;
-    switchRole('admin', true);
-    return;
-  }
-
-  // Reset inputs
-  document.getElementById('otp-1').value = '2';
-  document.getElementById('otp-2').value = '0';
-  document.getElementById('otp-3').value = '3';
-  document.getElementById('otp-4').value = '0';
-
-  adminOtpSecondsLeft = 165;
-  if (adminOtpTimerInterval) clearInterval(adminOtpTimerInterval);
-  adminOtpTimerInterval = setInterval(() => {
-    adminOtpSecondsLeft--;
-    if (adminOtpSecondsLeft <= 0) {
-      clearInterval(adminOtpTimerInterval);
-      adminOtpSecondsLeft = 0;
-    }
-    const m = String(Math.floor(adminOtpSecondsLeft / 60)).padStart(2, '0');
-    const s = String(adminOtpSecondsLeft % 60).padStart(2, '0');
-    const timerEl = document.getElementById('otpTimerDisplay');
-    if (timerEl) timerEl.textContent = `${m}:${s} دقيقة`;
-  }, 1000);
-
-  modal.classList.add('active');
-  setTimeout(() => document.getElementById('otp-1')?.focus(), 200);
+  switchRole('admin');
 };
 
 window.closeAdmin2FAModal = function() {
-  if (adminOtpTimerInterval) clearInterval(adminOtpTimerInterval);
   document.getElementById('modalAdmin2FA')?.classList.remove('active');
-};
-
-window.handleOtpKey = function(currInput, nextInputId) {
-  if (currInput.value.length === 1 && nextInputId) {
-    document.getElementById(nextInputId)?.focus();
-  }
-};
-
-window.resendAdminOtp = function() {
-  adminOtpSecondsLeft = 180;
-  showToast('تم إعادة إرسال رمز التحقق (OTP) بنجاح: الرمز هو (2030)', 'info');
-};
-
-window.verifyAdminOtpAndLogin = function() {
-  const d1 = document.getElementById('otp-1')?.value || '';
-  const d2 = document.getElementById('otp-2')?.value || '';
-  const d3 = document.getElementById('otp-3')?.value || '';
-  const d4 = document.getElementById('otp-4')?.value || '';
-  const enteredOtp = `${d1}${d2}${d3}${d4}`;
-
-  if (enteredOtp.length !== 4) {
-    showToast('يرجى إدخال رمز التحقق المكون من 4 أرقام كاملاً.', 'error');
-    return;
-  }
-
-  if (enteredOtp !== '2030' && enteredOtp !== '1234') {
-    showToast('رمز التحقق غير صحيح. الرمز التجريبي المعتمد هو 2030.', 'error');
-    return;
-  }
-
-  adminIsAuthenticated2FA = true;
-  closeAdmin2FAModal();
-  switchRole('admin', true);
-  showToast('تم التحقق بنجاح عبر المصادقة الثنائية (2FA) ✓ مرحباً بك في لوحة الإدارة المركزية.', 'success');
-  addAdminAuditLog('تسجيل دخول المشرف العام', 'تمت المصادقة الثنائية 2FA بنجاح عبر الجوال المعتمد', 'fa-shield-halved', '#0E6E41');
 };
 
 // Admin Secure Logout
 window.adminSecureLogout = function() {
-  if (confirm('هل ترغب في تسجيل الخروج الآمن من لوحة الإدارة وإغلاق الجلسة؟')) {
-    adminIsAuthenticated2FA = false;
+  if (confirm('هل ترغب في تسجيل الخروج من لوحة الإدارة والعودة إلى الواجهة الرئيسية؟')) {
     switchRole('visitor');
-    showToast('تم تسجيل الخروج الآمن وقفل لوحة الإدارة بنجاح. لحماية بيانات المنظومة 🔒', 'info');
-    addAdminAuditLog('تسجيل خروج المشرف', 'تم إنهاء الجلسة الآمنة وقفل لوحة التحكم', 'fa-lock', '#C59B27');
+    showToast('تم تسجيل الخروج من لوحة الإدارة بنجاح.', 'info');
+    addAdminAuditLog('تسجيل خروج المشرف', 'تم إنهاء الجلسة والعودة للواجهة الرئيسية', 'fa-lock', '#C59B27');
   }
 };
 
@@ -5892,201 +5710,7 @@ window.saveDigitalSignature = function() {
   showAppNotification('توقيع العقد الرقمي', 'تم اعتماد وتثبيت التوقيع الرقمي بنجاح في عقد الاحتضان المعتمد.');
 };
 
-/* ==========================================================================
-   FEATURE 5: AI Policy & Governance Generator (مستشار اللوائح الذكي)
-   ========================================================================== */
-let selectedPolicyTypeKey = 'hr';
 
-const AI_POLICY_TEMPLATES = {
-  hr: {
-    title: "لائحة الموارد البشرية والتوظيف الموحدة",
-    badge: "نظام الموارد البشرية واللوائح التنفيذية",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: التعريف والهدف</strong>
-        تهدف هذه اللائحة إلى تنظيم شؤون العاملين بـ (${name}) المسجلة بترخيص رقم (${lic})، وضمان العدالة والشفافية وتحديد الحقوق والواجبات التعاقدية وفقاً لنظام العمل السعودي ولائحة المركز الوطني لتنمية القطاع غير الربحي.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: التوظيف وبناء فريق العمل</strong>
-        يتم التوظيف بناءً على معايير الكفاءة والاستحقاق عبر إعلان وظائف رسمي معتمد، ويشترط في وظائف الإدارة التنفيذية والمالية التفرغ التام واجتياز المقابلة المعتمدة من مجلس الإدارة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: ساعات العمل والإجازات</strong>
-        تحدد ساعات العمل الرسمية بـ 8 ساعات يومياً (48 ساعة أسبوعياً كحد أقصى)، ويستحق الموظف إجازة سنوية مدفوعة الأجر لا تقل عن 30 يوماً بعد إكمال عام من الخدمة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 4: تقييم الأداء والتطوير المهني</strong>
-        تلتزم إدارة الجمعية بإجراء تقييم أداء سنوي لكل موظف وفق مؤشرات قياس أداء (KPIs) واضحة مرتبطة بالأهداف الاستراتيجية، وتوفير برامج التدريب والتأهيل التخصصية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 5: السرية والمحافظة على الأصول</strong>
-        يلتزم جميع العاملين بالمحافظة على سرية بيانات المستفيدين والداعمين ووثائق الجمعية، والتقيد بسياسات الأمن السيبراني والأمان المكتبي بحاضنة عذق.
-      </div>
-    `
-  },
-  finance: {
-    title: "اللائحة المالية والمشتريات وضبط الصرف",
-    badge: "دليل الحسابات الموحد للقطاع غير الربحي",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: النظام المحاسبي والموازنة التقديرية</strong>
-        تعتمد (${name}) دليل الحسابات الموحد للقطاع غير الربحي، وتعد الإدارة التنفيذية موازنة تقديرية سنوية تعتمد من مجلس الإدارة قبل بدء السنة المالية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: سياسة الصرف والصلاحيات المالية</strong>
-        لا يجوز صرف أي مبلغ مالي إلا بموجب سند صرف معتمد وتوقيع مخولين اثنين من أصحاب التوقيع المعتمدين بنكياً، وضمن بنود الموازنة المعتمدة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: سياسة المشتريات والمنافسات</strong>
-        تخضع المشتريات التي تتجاوز 10,000 ريال لطلب 3 عروض أسعار مقارنة على الأقل لاختيار العرض الأنسب جودة وسعراً، وتخضع للمراجعة المالية المستقلة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 4: التدقيق والمراجعة الدورية</strong>
-        تلتزم الجمعية بتعيين مراجع حسابات خارجي مرخص لمراجعة القوائم المالية ربع السنوية والسنوية ورفعها لمنصة إفصاح والمركز الوطني لتنمية القطاع غير الربحي.
-      </div>
-    `
-  },
-  volunteers: {
-    title: "سياسة إدارة وتنظيم العمل التطوعي",
-    badge: "المعيار الوطني للعمل التطوعي (إدامة)",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: مفهوم ورسالة التطوع</strong>
-        تؤمن (${name}) بأهمية إشراك المجتمع في تحقيق أهدافها التنموية، وتلتزم بتوفير بيئة تطوعية آمنة ومحفزة تحقق مستهدفات رؤية 2030.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: استقطاب وتوثيق المتطوعين</strong>
-        يتم استقطاب المتطوعين عبر البوابة الوطنية للعمل التطوعي، ويبرم مع كل متطوع ميثاق عمل تطوعي يوضح المهام والحقوق وساعات الإنجاز.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: التوثيق واحتساب الساعات</strong>
-        توثق الساعات التطوعية رسمياً في المنصة الوطنية ويصدر للمتطوع شهادة تطوع معتمدة برمز QR بعد إكمال المهام المطلوبة وتقييم الأداء.
-      </div>
-    `
-  },
-  compliance: {
-    title: "سياسة مكافحة غسل الأموال وجرائم الإرهاب",
-    badge: "متطلب إلزامي لدى المركز الوطني NCNP",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الالتزام والامتثال</strong>
-        تلتزم (${name}) بالامتثال التام لنظام مكافحة غسل الأموال ولائحته التنفيذية وتعميمات المركز الوطني والبنك المركزي السعودي.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: حظر التبرعات النقدية المجهولة</strong>
-        يحظر على الجمعية قبول أي تبرعات نقدية يدوية (كاش) مجهولة المصدر، وتقتصر التبرعات على الحسابات البنكية الرسمية وبوابات التبرع الإلكترونية المرخصة.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: تعيين مسؤول الالتزام</strong>
-        يعين مجلس الإدارة مسؤول التزام مستقلاً لمتابعة العمليات المالية وتدريب منسوبي الجمعية والإبلاغ الفوري عن أي عمليات مالية مشبوهة.
-      </div>
-    `
-  },
-  governance: {
-    title: "مصفوفة الصلاحيات والحوكمة المؤسسية",
-    badge: "معايير السلامة المالية والشفافية",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الفصل بين السلطات</strong>
-        تعتمد (${name}) مبدأ الفصل الواضح بين اختصاصات الجمعية العمومية، ومجلس الإدارة، والإدارة التنفيذية، لضمان النزاهة والمحاسبية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: تشكيل اللجان المنبثقة</strong>
-        يشكل مجلس الإدارة لجاناً متخصصة: (لجنة المراجعة والتدقيق الداخلي، لجنة المكافآت والترشيحات، لجنة الاستثمار وتنمية الموارد).
-      </div>
-      <div class="policy-article">
-        <strong>المادة 3: الإفصاح والشفافية</strong>
-        نشر اللائحة الأساسية، وأسماء أعضاء مجلس الإدارة، والتقارير المالية والسنوية على الموقع الإلكتروني للجمعية لتعزيز ثقة المجتمع والمانحين.
-      </div>
-    `
-  },
-  disclosure: {
-    title: "سياسة الإفصاح وتعارض المصالح",
-    badge: "حوكمة العمل غير الربحي والنزاهة",
-    generate: (name, lic) => `
-      <div class="policy-article">
-        <strong>المادة 1: الإفصاح السنوي</strong>
-        يلتزم أعضاء مجلس الإدارة والقيادات التنفيذية بتقديم إقرار سنوي خطي بالإفصاح عن أي علاقات أو مصالح تجارية أو عائلية قد تتعارض مع مصلحة الجمعية.
-      </div>
-      <div class="policy-article">
-        <strong>المادة 2: الامتناع عن التصويت</strong>
-        يمتنع أي عضو عن حضور النقاش أو التصويت على أي قرار يكون له فيه مصلحة مباشرة أو غير مباشرة، ويثبت ذلك في محضر الاجتماع الرسمي.
-      </div>
-    `
-  }
-};
-
-window.openAiPolicyGenerator = function() {
-  const modal = document.getElementById('modalAiPolicyGenerator');
-  if (!modal) return;
-
-  const currentAssoc = getActiveAssociation() || (APP_STATE.applications && APP_STATE.applications[0]) || {
-    associationName: "جمعية ديوان الشبابية",
-    licenseNumber: "1842"
-  };
-
-  const nameInput = document.getElementById('aiPolicyAssocName');
-  const licInput = document.getElementById('aiPolicyAssocLic');
-  if (nameInput) nameInput.value = currentAssoc.associationName;
-  if (licInput) licInput.value = currentAssoc.licenseNumber || "1842";
-
-  generateAiPolicy();
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeAiPolicyGenerator = function() {
-  const modal = document.getElementById('modalAiPolicyGenerator');
-  if (modal) modal.classList.remove('active');
-  document.body.style.overflow = '';
-};
-
-window.selectPolicyType = function(btn, type) {
-  selectedPolicyTypeKey = type;
-  document.querySelectorAll('.policy-type-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  generateAiPolicy();
-};
-
-window.generateAiPolicy = function() {
-  const assocName = document.getElementById('aiPolicyAssocName')?.value || "الجمعية الأهلية";
-  const assocLic = document.getElementById('aiPolicyAssocLic')?.value || "0000";
-  const outputContainer = document.getElementById('aiPolicyOutputContent');
-  const titleEl = document.getElementById('aiPolicyOutputTitle');
-  const template = AI_POLICY_TEMPLATES[selectedPolicyTypeKey] || AI_POLICY_TEMPLATES.hr;
-
-  if (titleEl) {
-    titleEl.textContent = `${template.title} - ${assocName} (ترخيص ${assocLic})`;
-  }
-
-  if (outputContainer) {
-    outputContainer.innerHTML = `
-      <div style="border-bottom: 2px solid #E2E8F0; padding-bottom: 12px; margin-bottom: 16px;">
-        <span style="background: #E8F5E9; color: #0E6E41; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 800;">
-          ${template.badge}
-        </span>
-        <h4 style="font-size: 1.15rem; font-weight: 900; color: #0E6E41; margin: 6px 0 2px;">${template.title}</h4>
-        <small style="color: #64748B;">صادرة بقرار مجلس الإدارة لـ (${assocName}) • متوافقة مع معايير المركز الوطني لتنمية القطاع غير الربحي 1446هـ</small>
-      </div>
-      ${template.generate(assocName, assocLic)}
-    `;
-  }
-};
-
-window.copyAiPolicyText = function() {
-  const content = document.getElementById('aiPolicyOutputContent');
-  if (!content) return;
-  const text = content.innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    showAppNotification('تم نسخ اللائحة', 'تم نسخ نص اللائحة النظامية بنجاح إلى الحافظة.');
-  }).catch(() => {
-    alert('تم نسخ اللائحة بنجاح.');
-  });
-};
-
-window.printAiPolicyText = function() {
-  window.print();
-};
 
 /* ==========================================================================
    FEATURE 10: Official Booklets Library & Viewer (المكتبة والكتيبات)
