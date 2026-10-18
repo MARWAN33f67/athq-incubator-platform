@@ -115,6 +115,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   direction: rtl;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -123,6 +125,10 @@ body {
   color: var(--c-text-primary);
   line-height: 1.7;
   overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
 }
@@ -496,39 +502,46 @@ img, svg {
 .mobile-drawer-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 1050;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .mobile-drawer-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer {
   position: fixed;
   top: 0;
-  right: -340px;
-  width: 320px;
+  right: 0;
+  width: 310px;
   max-width: 85vw;
   height: 100vh;
   height: 100dvh;
   background: var(--c-surface);
   z-index: 1060;
-  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.18);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(105%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
   overflow-y: auto;
 }
 
 .mobile-drawer.active {
-  right: 0;
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-drawer-header {
@@ -3159,17 +3172,61 @@ img, svg {
 }
 
 @media (max-width: 768px) {
+  .header-container {
+    padding-inline: 12px;
+    gap: 8px;
+  }
+  .brand-logos {
+    gap: 8px;
+  }
   .brand-logo-link img,
   .header-logo {
-    height: 52px !important;
-    min-height: 52px !important;
-    max-height: 52px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    width: auto !important;
   }
   .brand-divider {
-    height: 34px !important;
+    height: 28px !important;
+  }
+  #btnHeaderRegister {
+    display: none !important;
+  }
+  .top-notice-bar {
+    font-size: 0.74rem;
+    padding: 6px 8px;
+  }
+  .top-notice-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .top-notice-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .role-bar-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .role-buttons-group {
+    justify-content: center;
+    width: 100%;
+  }
+  .role-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    flex: 1 1 calc(50% - 8px);
+    min-width: 120px;
+    justify-content: center;
   }
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .leadership-grid,
   .leader-featured-box,
@@ -3188,6 +3245,26 @@ img, svg {
   .chat-window {
     width: calc(100vw - 32px);
     left: 16px;
+    right: 16px;
+    max-width: calc(100vw - 32px);
+  }
+  .admin-table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.65rem;
+  }
+  .header-actions {
+    gap: 4px;
+  }
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
   }
 }
 
@@ -7457,15 +7534,18 @@ img, svg {
 .pyramid-drawer-panel {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
+  left: auto;
   width: 520px;
   max-width: 90vw;
   height: 100vh;
   height: 100dvh;
   background: var(--c-surface);
-  box-shadow: 12px 0 35px rgba(0, 0, 0, 0.25);
-  transform: translateX(-100%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -12px 0 35px rgba(0, 0, 0, 0.25);
+  transform: translateX(105%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
   display: flex;
   flex-direction: column;
   z-index: 2010;
@@ -7473,6 +7553,8 @@ img, svg {
 }
 .pyramid-drawer-overlay.active .pyramid-drawer-panel {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .pyramid-drawer-header {
