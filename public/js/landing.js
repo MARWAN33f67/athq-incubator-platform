@@ -1881,7 +1881,7 @@ function renderAssociationStateMachine(assoc) {
         <p class="state-machine-desc">
           تم تأكيد توفر موظف يداوم يومياً بالجمعية. الخطوة التأهيلية الأخيرة لمسار الاحتضان المكتبي هي اجتياز <strong>اختبار الانطلاقة الأولى (من 100 درجة)</strong>.
           <br>
-          <span style="font-weight: 800; color: var(--c-primary);">شرط التأهل: الحصول على أكثر من 65 من 100 درجة للتأهل لتوثيق العقود ورحلة الاحتضان.</span>
+          <span style="font-weight: 800; color: var(--c-primary);">شرط التأهل: الحصول على أكثر من 85 من 100 درجة للتأهل لتوثيق العقود ورحلة الاحتضان.</span>
         </p>
 
         <div style="background: #FFFFFF; border: 2px solid var(--c-gold); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 18px rgba(197, 155, 39, 0.12);">
@@ -1889,7 +1889,7 @@ function renderAssociationStateMachine(assoc) {
             <div style="font-size: 0.85rem; color: var(--c-text-muted); font-weight: 700;">الاختبار التأهيلي المعتمد:</div>
             <div style="font-size: 1.25rem; font-weight: 900; color: var(--c-primary);">اختبار الانطلاقة الأولى (10 معايير = 100 درجة)</div>
             <div style="font-size: 0.8rem; color: var(--c-gold-dark); font-weight: 700; margin-top: 4px;">
-              درجة النجاح: > 65 من 100 • 65 أو أقل يتوقف مسار الاحتضان المكتبي
+              درجة النجاح: > 85 من 100 • 85 أو أقل يتوقف مسار الاحتضان المكتبي
             </div>
           </div>
           <button class="btn btn-gold btn-lg" onclick="openFoundationExamModal()" style="font-weight: 900; padding: 12px 28px;">
@@ -1899,11 +1899,11 @@ function renderAssociationStateMachine(assoc) {
 
         <div class="choice-btns-row" style="margin-top: 10px;">
           <span style="font-size: 0.8rem; font-weight: 700; color: var(--c-text-muted);">محاكاة سريعة للنتيجة:</span>
-          <button class="btn btn-outline btn-sm" style="border-color: #EF4444; color: #EF4444;" onclick="simulateExamScoreDirect(60)">
-            محاكاة رسوب (60%) شرط 65
+          <button class="btn btn-outline btn-sm" style="border-color: #EF4444; color: #EF4444;" onclick="simulateExamScoreDirect(70)">
+            محاكاة رسوب (70%) شرط 85
           </button>
-          <button class="btn btn-outline btn-sm" style="border-color: #10B981; color: #047857;" onclick="simulateExamScoreDirect(90)">
-            محاكاة اجتياز (90%) تأهل فوري
+          <button class="btn btn-outline btn-sm" style="border-color: #10B981; color: #047857;" onclick="simulateExamScoreDirect(92)">
+            محاكاة اجتياز (92%) تأهل فوري
           </button>
         </div>
 
@@ -1911,17 +1911,17 @@ function renderAssociationStateMachine(assoc) {
       </div>
     `;
   }
-  // STATE 4B: Failed Exam (Score <= 65) -> Office Incubation Halts
+  // STATE 4B: Failed Exam (Score <= 85) -> Office Incubation Halts
   else if (state === 'state4_failed') {
-    const score = assoc.examScore || 60;
+    const score = assoc.examScore || 70;
     contentHtml = `
       <div class="assoc-state-machine-panel" style="border-right: 5px solid #EF4444; background: linear-gradient(180deg, #FFFFFF 0%, #FEF2F2 100%);">
         <span class="state-badge-pill state-exam-fail">
-          <i class="fa-solid fa-ban"></i> الحالة 4: نتيجة الاختبار (65 درجة أو أقل)
+          <i class="fa-solid fa-ban"></i> الحالة 4: نتيجة الاختبار (85 درجة أو أقل)
         </span>
         <h3 class="state-machine-header-title" style="color: #991B1B;">
           <i class="fa-solid fa-circle-exclamation" style="color: #DC2626;"></i>
-          يتوقف مسار الاحتضان المكتبي - لم يتم تجاوز شرط درجة الاجتياز
+          يتوقف مسار الاحتضان المكتبي - لم يتم تجاوز شرط درجة الاجتياز (أعلى من 85)
         </h3>
 
         <div style="background: #FFFFFF; border: 2px solid #FCA5A5; border-radius: 16px; padding: 18px 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);">
@@ -1935,12 +1935,12 @@ function renderAssociationStateMachine(assoc) {
             </div>
           </div>
           <span class="badge" style="background: #FEE2E2; color: #991B1B; font-size: 0.85rem; padding: 6px 14px; font-weight: 800;">
-            شرط التأهل: أكثر من 65 من 100
+            شرط التأهل: أكثر من 85 من 100
           </span>
         </div>
 
         <p class="state-machine-desc" style="color: #991B1B;">
-          حصلت الجمعية على ${score} درجة من 100 (65 درجة أو أقل). وفقاً لضوابط الحاضنة، <strong>يتوقف مسار الاحتضان المكتبي حالياً</strong>.
+          حصلت الجمعية على ${score} درجة من 100 (85 درجة أو أقل). وفقاً لمخطط الحاضنة، <strong>يتوقف مسار الاحتضان المكتبي حالياً</strong>.
           تم تحويل مساركم للاستفادة من الجلسات الاستشارية لتأهيل اللوائح وتطوير مؤشرات الحوكمة لإعادة تقديم الاختبار لاحقاً.
         </p>
 
@@ -6258,16 +6258,16 @@ window.calculateQuizScore = function() {
 
   if (scoreEl) scoreEl.textContent = totalScore;
 
-  const isPassed = totalScore > 65;
+  const isPassed = totalScore > 85;
 
   if (badgeEl) {
     if (isPassed) {
-      badgeEl.textContent = '✓ محقق لشرط الاجتياز (> 65)';
+      badgeEl.textContent = '✓ محقق لشرط الاجتياز (> 85)';
       badgeEl.style.background = '#DCFCE7';
       badgeEl.style.color = '#166534';
       badgeEl.style.border = '1px solid #86EFAC';
     } else {
-      badgeEl.textContent = '⚠️ لم يحقق شرط الاجتياز (> 65)';
+      badgeEl.textContent = '⚠️ لم يحقق شرط الاجتياز (> 85)';
       badgeEl.style.background = '#FEE2E2';
       badgeEl.style.color = '#991B1B';
       badgeEl.style.border = '1px solid #FCA5A5';
@@ -6280,7 +6280,7 @@ window.calculateQuizScore = function() {
       noticeEl.style.borderColor = '#22C55E';
       noticeEl.innerHTML = `
         <h4 style="font-size: 1.05rem; font-weight: 800; color: #166534; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-          <i class="fa-solid fa-circle-check"></i> تم استيفاء شرط الاجتياز (> 65) بنجاح!
+          <i class="fa-solid fa-circle-check"></i> تم استيفاء شرط الاجتياز (> 85) بنجاح!
         </h4>
         <p style="font-size: 0.85rem; color: #166534; margin: 0; line-height: 1.6;">
           حققت الجمعية درجة <strong>${totalScore} من 100</strong>. يمكنكم الآن الانتقال مباشرة إلى مرحلة توقيع عقد الاحتضان واستلام المقر المجهز وتفعيل الخدمات التأسيسية.
@@ -6291,10 +6291,10 @@ window.calculateQuizScore = function() {
       noticeEl.style.borderColor = '#EF4444';
       noticeEl.innerHTML = `
         <h4 style="font-size: 1.05rem; font-weight: 800; color: #991B1B; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-          <i class="fa-solid fa-triangle-exclamation"></i> الدرجة الحالية (${totalScore} / 100) أقل من شرط الاجتياز (> 65)!
+          <i class="fa-solid fa-triangle-exclamation"></i> الدرجة الحالية (${totalScore} / 100) أقل من شرط الاجتياز (> 85)!
         </h4>
         <p style="font-size: 0.85rem; color: #991B1B; margin: 0; line-height: 1.6;">
-          يشترط المخطط الإجرائي لعذق الحصول على درجة أعلى من 65 لتوقيع العقد. يُرجى استكمال تسجيل الموظف المتفرغ وتفعيل منصات الحوكمة ثم إعادة التقييم.
+          يشترط المخطط الإجرائي لعذق الحصول على درجة أعلى من 85 لتوقيع العقد. يُرجى استكمال تسجيل الموظف المتفرغ وتفعيل منصات الحوكمة ثم إعادة التقييم.
         </p>
       `;
     }
@@ -6311,8 +6311,8 @@ window.calculateQuizScore = function() {
 
 window.submitFirstLaunchQuiz = function() {
   const score = calculateQuizScore();
-  if (score <= 65) {
-    showToast('⚠️ لا يمكن اعتماد النتيجة: الدرجة أقل من شرط الاجتياز المشروط (> 65 درجة).', 'warning');
+  if (score <= 85) {
+    showToast('⚠️ لا يمكن اعتماد النتيجة: الدرجة أقل من شرط الاجتياز المشروط (> 85 درجة).', 'warning');
     return;
   }
 

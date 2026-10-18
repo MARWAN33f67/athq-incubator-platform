@@ -44,29 +44,23 @@
 
 ---
 
-### 💻 ثالثاً: معمارية النظام البرمجية (Full-Stack Architecture)
+### 💻 ثالثاً: معمارية النظام البرمجية (System Architecture)
 
-- **Frontend**:
-  - `public/index.html`: هيكل دلالي متوافق مع معايير الويب الحديثة، ثنائي النمط (داكن/فاتح)، يدعم العربية من اليمين لليسار (RTL).
-  - `public/css/style.css`: نظام تصميم أنيق بألوان الهوية الرسمية (الأخضر العذقي الملكي والذهبي)، وتأثيرات زجاجية راقية (Glassmorphism).
-  - `public/js/app.js`: منطق التفاعل، إدارة حالة النظام، والاتصال بالـ API.
-  - `public/js/data.js`: البيانات الأولية المطابقة للكتيبات.
-- **Backend**:
-  - `server.ps1`: خادم REST API أصلي سريع لا يحتاج لتثبيت أي برامج خارجية ويعمل مباشرة عبر PowerShell.
-  - `data/db.json`: قاعدة بيانات محلية JSON تحفظ التعديلات والحجوزات والطلبات وتسترجعها باستمرار.
-- **Launchers**:
-  - `start-server.bat`: ملف تشغيل بنقرة واحدة يقوم ببدء السيرفر وفتح المتصفح تلقائياً على `http://localhost:8088/`.
+- **Root & Routing**:
+  - `index.html`: صفحة البداية التي تقوم بالتوجيه التلقائي المباشر إلى `public/index.html` لدعم استضافة GitHub Pages بسلاسة.
+  - `build_single_file.ps1`: أداة برمجية اختيارية لتجميع كامل المنصة مع أصولها في ملف HTML واحد مستقل عند الحاجة.
+- **Frontend Core (`public/`)**:
+  - `public/index.html`: هيكل دلالي متكامل يدعم العربية (RTL)، ويحتوي على واجهات الأدوار الأربعة ومحاكي مسارات العمل.
+  - `public/css/style.css`: نظام التصميم المتكامل بألوان الهوية الرسمية (الأخضر العذقي الملكي والذهبي)، بتأثيرات زجاجية راقية (Glassmorphism).
+  - `public/js/landing.js`: المحرك التفاعلي الشامل، إدارة الحالة (State Management)، آلة الحالات (BPMN State Machine)، محاكي الأدوار، وحفظ البيانات محلياً (LocalStorage).
+  - `public/assets/images/`: الهوية البصرية، الشعارات الرسمية المتجهة (SVG) والنقطية (PNG).
 
 ---
 
-### 🚀 رابعاً: طريقة التشغيل السريع
+### 🚀 رابعاً: طريقة التشغيل والاستعراض
 
-يمكنك تشغيل المنصة فوراً عبر أحد الخيارين:
-1. **النقر المزدوج** على الملف:
-   `C:\Users\Marwan\.gemini\antigravity-ide\scratch\athq-incubator-platform\start-server.bat`
-2. أو من خلال الطرفية (PowerShell):
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File "C:\Users\Marwan\.gemini\antigravity-ide\scratch\athq-incubator-platform\server.ps1" -Port 8088
-   ```
-ثم فتح الرابط في المتصفح:
-`http://localhost:8088/`
+1. **الاستعراض عبر الويب (GitHub Pages)**:
+   - بمجرد الدخول على رابط المستودع في GitHub Pages، يتم توجيه الزائر تلقائياً لواجهة المنصة التفاعلية.
+2. **التشغيل المحلي**:
+   - فتح ملف `index.html` أو `public/index.html` مباشرة في أي متصفح ويب حديث دون الحاجة لتثبيت أي برامج أو خوادم خارجية.
+
