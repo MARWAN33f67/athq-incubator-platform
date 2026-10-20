@@ -366,8 +366,11 @@ window.switchRole = function(role) {
         admin: 'لوحة القيادة والرقابة'
       };
       if (typeof showToast === 'function') {
-        showToast(`⛔ غير مصرح: حسابك الحالي (${curUser.name} - ${curUser.title}) مخصص لبوابة ${roleNames[curUser.role] || curUser.role} فقط.`, 'error');
+        showToast(`حسابك الحالي مخصص لبوابة ${roleNames[curUser.role] || curUser.role}. جاري فتح نافذة الدخول لاختيار دور ${roleNames[role]}...`, 'info');
       }
+      setTimeout(() => {
+        AthqAuth.openLoginModal(role);
+      }, 500);
       return;
     }
   }

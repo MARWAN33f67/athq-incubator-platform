@@ -8176,8 +8176,8 @@ img, svg {
         <span>مبادرة نوعية بإشراف <strong>جمعية البر بالمدينة المنورة</strong> (تأسست 1379هـ • ترخيص رقم 22)</span>
       </div>
       <div class="top-notice-links" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-        <button class="btn btn-gold btn-sm" onclick="openExecutivePresentation()" style="font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 12px rgba(217,155,38,0.3);" title="فتح العرض التنفيذي الخاص بمجلس الإدارة وأصحاب السمو">
-          <i class="fa-solid fa-chalkboard-user"></i> العرض التنفيذي للمجلس
+        <button class="btn btn-gold btn-sm" onclick="AthqAuth.openLoginModal()" style="font-weight: 800; font-size: 0.78rem; padding: 4px 14px; border-radius: 20px; box-shadow: 0 4px 12px rgba(217,155,38,0.25);" title="تسجيل الدخول وبوابات الأدوار الرسمية">
+          <i class="fa-solid fa-id-card-clip"></i> دخول البوابات الرسمية / حسابات الأدوار
         </button>
         <a href="mailto:ethq@biralmadinah.org.sa"><i class="fa-solid fa-envelope"></i> ethq@biralmadinah.org.sa</a>
         <a href="#contact"><i class="fa-solid fa-location-dot"></i> المدينة المنورة - حي الأصيفرين</a>
@@ -15305,153 +15305,333 @@ class AthqAuthEngine {
     }
   }
 
-  // فتح نافذة تسجيل الدخول الرسمية مع تخصيص الدور المطلوب
+  // تسجيل الدخول التجريبي الفوري بنقرة واحدة لأي دور مطلع
+  quickLoginAs(role) {
+    if (role === 'applicant') {
+      this.closeLoginModal();
+      if (typeof openApplicationWizard === 'function') {
+        openApplicationWizard();
+      }
+      if (typeof showToast === 'function') {
+        showToast('مرحباً بك! تم فتح نموذج تقديم طلب احتضان جديد مع فحص الجاهزية واختبار الانطلاقة ✓', 'success');
+      }
+      return;
+    }
+
+    const acc = this.officialAccounts.find(a => a.role === role) || this.officialAccounts[0];
+    this.saveSession(acc);
+    this.closeLoginModal();
+
+    // تسجيل العملية في سجل الرقابة بقاعدة البيانات
+    if (window.AthqDB && typeof window.AthqDB.recordAuditLog === 'function') {
+      window.AthqDB.recordAuditLog('AUTH_DEMO_LOGIN', `تسجيل دخول فوري بنقرة واحدة لدور: ${acc.title}`, acc.id);
+    }
+
+    const roleTitles = {
+      admin: 'لوحة القيادة والرقابة المركزية (Admin)',
+      association: 'بوابة الجمعيات والمنظمات الأهلية المحتضنة',
+      consultant: 'بوابة الخبراء والمستشارين المعتمدين'
+    };
+
+    if (typeof showToast === 'function') {
+      showToast(`تم توثيق الدخول الفوري بنجاح! مرحباً: ${acc.name} (${roleTitles[acc.role]}) ✓`, 'success');
+    }
+
+    if (typeof switchRole === 'function') {
+      switchRole(acc.role);
+    }
+  }
+
+  // فتح نافذة تسجيل الدخول الرسمية المطورة والفخمة (100x Better Luxury Login Portal)
   openLoginModal(targetRole = 'admin') {
     const modal = document.getElementById('modalAuthPortal');
     if (!modal) return;
 
-    const roleInfo = {
-      admin: { title: 'لوحة الإدارة والرقابة المركزية', subtitle: 'إدارة مسارات عذق وجمعية البر', icon: 'fa-shield-halved', color: '#0D6E46' },
-      association: { title: 'بوابة الجمعيات والمنظمات المحتضنة', subtitle: 'متابعة مراحل الاحتضان ورفع الوثائق وحجز القاعات', icon: 'fa-building-ngo', color: '#0D9488' },
-      consultant: { title: 'بوابة الخبراء والمستشارين المعتمدين', subtitle: 'إدارة الجلسات الاستشارية واعتماد التوصيات وساعات التطوع', icon: 'fa-user-tie', color: '#D99B26' }
-    };
-
-    const currentRoleInfo = roleInfo[targetRole] || roleInfo.admin;
-
     modal.innerHTML = `
-      <div class="wizard-modal-box" style="max-width: 500px;">
-        <div class="wizard-header" style="background: linear-gradient(135deg, #07472C 0%, ${currentRoleInfo.color} 100%);">
-          <button class="modal-close-btn" onclick="AthqAuth.closeLoginModal()" style="color: #FFF; font-size: 1.4rem;">&times;</button>
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <span style="background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 800;">نظام النفاذ الموحد الموثوق</span>
-            <span style="color: var(--c-gold-light); font-size: 0.75rem;"><i class="fa-solid fa-shield-check"></i> متوافق مع ضوابط الأمن السيبراني</span>
-          </div>
-          <h3 style="font-size: 1.3rem; font-weight: 800; margin: 0 0 4px 0; display: flex; align-items: center; gap: 10px;">
-            <i class="fa-solid ${currentRoleInfo.icon}"></i> ${currentRoleInfo.title}
-          </h3>
-          <p style="font-size: 0.82rem; opacity: 0.9; margin: 0;">${currentRoleInfo.subtitle}</p>
-        </div>
-
-        <div class="wizard-body" style="padding: 24px;">
-          <!-- Auth Method Switcher Tabs -->
-          <div style="display: flex; background: var(--c-bg-alt); padding: 4px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--c-border); gap: 4px;">
-            <button class="btn btn-sm" id="auth-tab-btn-nafath" onclick="AthqAuth.switchAuthMethod('nafath')" style="flex: 1.2; border-radius: 8px; font-weight: 800; background: #0D6E46; color: #FFFFFF; box-shadow: var(--shadow-xs);">
-              <i class="fa-solid fa-fingerprint"></i> نفاذ الموحد
-            </button>
-            <button class="btn btn-sm" id="auth-tab-btn-pwd" onclick="AthqAuth.switchAuthMethod('password')" style="flex: 1; border-radius: 8px; font-weight: 800; color: var(--c-text-muted);">
-              <i class="fa-solid fa-key"></i> كلمة المرور
-            </button>
-            <button class="btn btn-sm" id="auth-tab-btn-otp" onclick="AthqAuth.switchAuthMethod('otp')" style="flex: 1; border-radius: 8px; font-weight: 800; color: var(--c-text-muted);">
-              <i class="fa-solid fa-mobile-screen-button"></i> رمز الجوال
-            </button>
-          </div>
-
-          <!-- Method 0: Nafath SSO Form -->
-          <div id="auth-form-nafath">
-            <div id="nafath-step-input">
-              <div style="text-align: center; margin-bottom: 14px;">
-                <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: rgba(13,110,70,0.12); color: #0D6E46; border-radius: 16px; font-size: 1.8rem; margin-bottom: 8px;">
-                  <i class="fa-solid fa-id-card"></i>
-                </div>
-                <div style="font-weight: 800; font-size: 0.95rem; color: var(--c-primary);">بوابة النفاذ الوطني الموحد (نفاذ)</div>
-                <div style="font-size: 0.75rem; color: var(--c-text-muted);">تسجيل دخول آمن وموثق بالهوية الوطنية للمفوضين والمستشارين</div>
-              </div>
-
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label class="form-label">رقم الهوية الوطنية أو الإقامة للمفوض *</label>
-                <input type="text" id="auth-input-national-id" class="form-control" placeholder="10xxxxxxxx أو 20xxxxxxxx" maxlength="10" style="direction: ltr; text-align: center; font-size: 1.15rem; font-weight: 800; letter-spacing: 2px;">
-              </div>
-
-              <button class="btn btn-primary" onclick="AthqAuth.handleNafathRequest('${targetRole}')" style="width: 100%; padding: 12px; font-weight: 800; font-size: 0.95rem; justify-content: center; background: #0D6E46; border: none; margin-bottom: 10px;">
-                <i class="fa-solid fa-fingerprint"></i> طلب الدخول عبر تطبيق نفاذ
-              </button>
+      <div class="wizard-modal-box" style="max-width: 980px; width: 95%; max-height: 94vh; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 90px rgba(0,0,0,0.5); border: 1.5px solid rgba(217,155,38,0.3); animation: modalZoomIn 0.25s ease;">
+        
+        <!-- Header Bar: Royal Deep Emerald with Gold Shimmer -->
+        <div style="background: linear-gradient(135deg, #052417 0%, #07472C 55%, #0B6B40 100%); color: #FFFFFF; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid #D99B26; direction: rtl;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="background: rgba(217,155,38,0.22); color: #FCD34D; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border: 1px solid rgba(253,211,77,0.4); flex-shrink: 0;">
+              <i class="fa-solid fa-id-card-clip"></i>
             </div>
-
-            <div id="nafath-step-confirm" style="display: none; text-align: center; padding: 10px 0;">
-              <div style="background: linear-gradient(135deg, #07472C 0%, #0D6E46 100%); color: #FFFFFF; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(13,110,70,0.3);">
-                <div style="font-size: 0.8rem; color: #A7F3D0; margin-bottom: 6px;">افتح تطبيق نفاذ على هاتفك الذكي واختر الرقم:</div>
-                <div id="nafath-display-number" style="font-size: 3.5rem; font-weight: 900; color: #FCD34D; letter-spacing: 4px; line-height: 1; margin: 10px 0;">
-                  48
-                </div>
-                <div style="font-size: 0.75rem; color: #D1FAE5; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                  <span class="live-dot" style="background: #34D399;"></span> بانتظار التأكيد من تطبيق نفاذ...
-                </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
+                <span style="background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; color: #FFFFFF;">
+                  نظام النفاذ وإدارة الهوية المعتمدة (IAM Portal)
+                </span>
+                <span style="color: #FCD34D; font-size: 0.75rem; font-weight: 700;">
+                  <i class="fa-solid fa-shield-halved"></i> ترخيص وطني رقم (22)
+                </span>
               </div>
-
-              <button class="btn btn-gold" onclick="AthqAuth.simulateNafathApprove('${targetRole}')" style="width: 100%; padding: 10px; font-weight: 800; font-size: 0.88rem; justify-content: center;">
-                <i class="fa-solid fa-check-double"></i> محاكاة تأكيد الهوية من تطبيق نفاذ
-              </button>
-            </div>
-          </div>
-
-          <!-- Method 1: Password Form -->
-          <div id="auth-form-password" style="display: none;">
-            <div class="form-group" style="margin-bottom: 14px;">
-              <label class="form-label">البريد الإلكتروني أو رقم الترخيص أو الهاتف *</label>
-              <input type="text" id="auth-input-identifier" class="form-control" placeholder="admin@athq.biralmadinah.org.sa أو رقم الترخيص" style="direction: ltr; text-align: right;">
-            </div>
-            <div class="form-group" style="margin-bottom: 18px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <label class="form-label" style="margin: 0;">كلمة المرور المشفرة *</label>
-                <a href="javascript:void(0)" onclick="alert('لإعادة ضبط كلمة المرور، يرجى التواصل مع الدعم الفني: ethq@biralmadinah.org.sa')" style="font-size: 0.75rem; color: var(--c-primary); font-weight: 700;">نسيت كلمة المرور؟</a>
-              </div>
-              <input type="password" id="auth-input-password" class="form-control" placeholder="••••••••" style="direction: ltr;">
-            </div>
-
-            <button class="btn btn-primary" onclick="AthqAuth.handlePasswordLogin('${targetRole}')" style="width: 100%; padding: 12px; font-weight: 800; font-size: 0.95rem; justify-content: center; margin-bottom: 14px;">
-              <i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول الرسمي
-            </button>
-          </div>
-
-          <!-- Method 2: OTP Form -->
-          <div id="auth-form-otp" style="display: none;">
-            <div id="otp-step-phone">
-              <div class="form-group" style="margin-bottom: 16px;">
-                <label class="form-label">رقم الجوال المسجل بالمنصة (سعودي) *</label>
-                <div style="position: relative;">
-                  <span style="position: absolute; left: 12px; top: 12px; font-weight: 800; color: var(--c-text-muted); direction: ltr;">+966</span>
-                  <input type="tel" id="auth-input-phone" class="form-control" placeholder="0551234567" style="padding-left: 55px; direction: ltr; text-align: left;">
-                </div>
-              </div>
-              <button class="btn btn-primary" onclick="AthqAuth.handleSendOtp('${targetRole}')" style="width: 100%; padding: 12px; font-weight: 800; justify-content: center;">
-                <i class="fa-solid fa-paper-plane"></i> إرسال رمز التحقق فوراً
-              </button>
-            </div>
-
-            <div id="otp-step-verify" style="display: none;">
-              <p style="font-size: 0.82rem; color: var(--c-text-muted); margin-bottom: 12px;">
-                تم إرسال رمز التحقق إلى جوالك. أدخل الرمز المكون من 4 أرقام:
+              <h3 style="font-size: 1.25rem; font-weight: 900; margin: 0; line-height: 1.2; color: #FFFFFF;">
+                بوابة الدخول الموحد لمنظومة حاضنة ومسرعة عذق
+              </h3>
+              <p style="font-size: 0.76rem; color: #A7F3D0; margin: 3px 0 0 0;">
+                جمعية البر بالمدينة المنورة • المركز الوطني لتنمية القطاع غير الربحي (NCNP)
               </p>
-              <div class="form-group" style="margin-bottom: 16px;">
-                <input type="text" id="auth-input-otp-code" class="form-control" placeholder="• • • •" maxlength="6" style="letter-spacing: 8px; text-align: center; font-size: 1.4rem; font-weight: 800;">
-              </div>
-              <button class="btn btn-gold" onclick="AthqAuth.handleVerifyOtp('${targetRole}')" style="width: 100%; padding: 12px; font-weight: 800; justify-content: center; margin-bottom: 10px;">
-                <i class="fa-solid fa-check-circle"></i> التحقق وتأكيد الدخول
-              </button>
-              <button class="btn btn-link btn-sm" onclick="AthqAuth.handleSendOtp('${targetRole}')" style="width: 100%; font-size: 0.78rem; color: var(--c-text-muted);">
-                إعادة إرسال الرمز
-              </button>
             </div>
           </div>
 
-          <!-- Quick Test Demo Buttons -->
-          <div style="background: rgba(217,155,38,0.08); border: 1.5px dashed var(--c-gold); border-radius: 10px; padding: 12px 14px; margin-top: 14px;">
-            <div style="font-size: 0.78rem; font-weight: 800; color: var(--c-gold-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-              <i class="fa-solid fa-flask"></i> الحسابات الرسمية المعدّة للتجربة السريعة:
+          <button onclick="AthqAuth.closeLoginModal()" style="background: rgba(255,255,255,0.15); border: none; color: #FFFFFF; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.6)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+            &times;
+          </button>
+        </div>
+
+        <!-- Body: Two-Column Responsive Layout -->
+        <div style="padding: 24px; max-height: 76vh; overflow-y: auto; background: #F8FAFC; direction: rtl;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; align-items: start;">
+            
+            <!-- RIGHT COLUMN: 1-Click Interactive Role Demo Showcase (مخصص للجان وأصحاب القرار) -->
+            <div style="background: #FFFFFF; border: 1.5px solid #E2E8F0; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+              
+              <!-- Banner Callout -->
+              <div style="background: linear-gradient(135deg, rgba(217,155,38,0.12) 0%, rgba(13,110,70,0.08) 100%); border: 1.5px solid #D99B26; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <span style="font-size: 1.1rem; color: #D99B26;">⭐</span>
+                  <strong style="font-size: 0.88rem; color: #92400E;">حسابات التجربة والاطلاع المباشر (1-Click VIP Access):</strong>
+                </div>
+                <p style="font-size: 0.78rem; color: #475569; margin: 0; line-height: 1.6;">
+                  مخصصة للمشرفين واللجان والزوار للاطلاع المباشر على كامل المنصة؛ <strong>انقر على أي دور أدناه للدخول الفوري وتجربة صلاحياته الحية بنقرة واحدة:</strong>
+                </p>
+              </div>
+
+              <!-- Roles Cards Stack -->
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+
+                <!-- 1. Admin Role Card -->
+                <div style="border: 1.5px solid #0D6E46; border-radius: 12px; padding: 12px 14px; background: #F0FDF4; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(13,110,70,0.15)'" onmouseout="this.style.boxShadow='none'">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 1.3rem;">🛡️</span>
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.88rem; color: #07472C;">لوحة القيادة والرقابة المركزية (Admin)</div>
+                        <div style="font-size: 0.72rem; color: #64748B;">المهندس / مدير النظام المركزي • <code>admin@athq.biralmadinah.org.sa</code></div>
+                      </div>
+                    </div>
+                    <span style="background: #DCFCE7; color: #166534; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 8px; border: 1px solid #86EFAC;">إشراف كامل ✓</span>
+                  </div>
+                  <div style="font-size: 0.75rem; color: #334155; line-height: 1.5; margin-bottom: 10px;">
+                    ✓ مؤشرات الأداء الحية (+16,311 ساعة) • إدارة 15 جمعية • اعتماد العقود والتقارير التنفيذية A4.
+                  </div>
+                  <button class="btn btn-sm" onclick="AthqAuth.quickLoginAs('admin')" style="width: 100%; background: #0D6E46; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 8px 12px; justify-content: center; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-bolt" style="color: #FCD34D;"></i> تجربة دور الإدارة بنقرة واحدة (دخول فوري)
+                  </button>
+                </div>
+
+                <!-- 2. Association Role Card -->
+                <div style="border: 1.5px solid #0D9488; border-radius: 12px; padding: 12px 14px; background: #F0FDFA; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(13,148,136,0.15)'" onmouseout="this.style.boxShadow='none'">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 1.3rem;">🏢</span>
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.88rem; color: #115E59;">بوابة الجمعيات والمنظمات المحتضنة</div>
+                        <div style="font-size: 0.72rem; color: #64748B;">م. عبدالله الحربي (جمعية ديوان الشبابية - ترخيص 1842)</div>
+                      </div>
+                    </div>
+                    <span style="background: #CCFBF1; color: #0F766E; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 8px; border: 1px solid #99F6E4;">محتضنة نشطة ✓</span>
+                  </div>
+                  <div style="font-size: 0.75rem; color: #334155; line-height: 1.5; margin-bottom: 10px;">
+                    ✓ مسارات الاحتضان الخمسة • حجز المقرات والقاعات الذكية • رفع الشواهد وطباعة شهادة التخرج الرسمية.
+                  </div>
+                  <button class="btn btn-sm" onclick="AthqAuth.quickLoginAs('association')" style="width: 100%; background: #0D9488; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 8px 12px; justify-content: center; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-bolt" style="color: #FCD34D;"></i> تجربة دور الجمعية بنقرة واحدة (دخول فوري)
+                  </button>
+                </div>
+
+                <!-- 3. Consultant Role Card -->
+                <div style="border: 1.5px solid #D99B26; border-radius: 12px; padding: 12px 14px; background: #FFFDF5; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(217,155,38,0.2)'" onmouseout="this.style.boxShadow='none'">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 1.3rem;">👨‍🏫</span>
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.88rem; color: #92400E;">بوابة الخبراء والمستشارين المعتمدين</div>
+                        <div style="font-size: 0.72rem; color: #64748B;">د. سليمان بن إبراهيم الحربي (خبير الحوكمة المؤسسية)</div>
+                      </div>
+                    </div>
+                    <span style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 8px; border: 1px solid #FDE68A;">معتمد 4.9 ★</span>
+                  </div>
+                  <div style="font-size: 0.75rem; color: #334155; line-height: 1.5; margin-bottom: 10px;">
+                    ✓ جدول التفرغ والمواعيد • صياغة تقارير التوصيات • أتمتة الساعات في المنصة الوطنية للعمل التطوعي.
+                  </div>
+                  <button class="btn btn-sm" onclick="AthqAuth.quickLoginAs('consultant')" style="width: 100%; background: #D99B26; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 8px 12px; justify-content: center; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-bolt" style="color: #FFF;"></i> تجربة دور المستشار بنقرة واحدة (دخول فوري)
+                  </button>
+                </div>
+
+                <!-- 4. Applicant / Registration Role Card -->
+                <div style="border: 1.5px solid #6366F1; border-radius: 12px; padding: 12px 14px; background: #EEF2FF; transition: all 0.2s;" onmouseover="this.style.boxShadow='0 4px 12px rgba(99,102,241,0.15)'" onmouseout="this.style.boxShadow='none'">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <span style="font-size: 1.3rem;">🌱</span>
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.88rem; color: #3730A3;">بوابة تقديم طلب احتضان جديد</div>
+                        <div style="font-size: 0.72rem; color: #64748B;">أ. أحمد النعيمي (مبادرة التمكين الرقمي - قيد التأسيس)</div>
+                      </div>
+                    </div>
+                    <span style="background: #E0E7FF; color: #3730A3; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 8px; border: 1px solid #C7D2FE;">تسجيل جديد ✓</span>
+                  </div>
+                  <div style="font-size: 0.75rem; color: #334155; line-height: 1.5; margin-bottom: 10px;">
+                    ✓ نموذج التقديم الذكي • مؤشر الجاهزية • خوض اختبار الانطلاقة (> 65%) وطباعة سند الاستلام المعتمد.
+                  </div>
+                  <button class="btn btn-sm" onclick="AthqAuth.quickLoginAs('applicant')" style="width: 100%; background: #4F46E5; color: #FFFFFF; font-weight: 800; font-size: 0.82rem; padding: 8px 12px; justify-content: center; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-arrow-left"></i> تجربة تقديم طلب جديد (معالج الاحتضان)
+                  </button>
+                </div>
+
+              </div>
             </div>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-              <button class="badge" onclick="AthqAuth.fillDemoAccount('admin')" style="background: var(--c-primary); color: #FFF; border: none; padding: 4px 10px; cursor: pointer; font-size: 0.74rem;">
-                دخول تجريبي كمدير نظام
-              </button>
-              <button class="badge" onclick="AthqAuth.fillDemoAccount('association')" style="background: #0D9488; color: #FFF; border: none; padding: 4px 10px; cursor: pointer; font-size: 0.74rem;">
-                دخول تجريبي كممثل جمعية
-              </button>
-              <button class="badge" onclick="AthqAuth.fillDemoAccount('consultant')" style="background: var(--c-gold-dark); color: #FFF; border: none; padding: 4px 10px; cursor: pointer; font-size: 0.74rem;">
-                دخول تجريبي كمستشار
-              </button>
+
+            <!-- LEFT COLUMN: Official IAM Login Engine (نفاذ، كلمة مرور، رمز OTP) -->
+            <div style="background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 16px; padding: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
+              
+              <div style="margin-bottom: 18px; border-bottom: 1px solid #E2E8F0; padding-bottom: 12px;">
+                <h4 style="font-size: 1.05rem; font-weight: 900; color: #07472C; margin: 0 0 4px 0;">
+                  تسجيل الدخول الرسمي بالهوية المعتمدة
+                </h4>
+                <p style="font-size: 0.78rem; color: #64748B; margin: 0;">
+                  اختر وسيلة التوثيق المفضلة أو استخدم تعبئة البيانات التلقائية:
+                </p>
+              </div>
+
+              <!-- Auth Method Switcher Tabs -->
+              <div style="display: flex; background: #F1F5F9; padding: 4px; border-radius: 10px; margin-bottom: 18px; border: 1px solid #E2E8F0; gap: 4px;">
+                <button class="btn btn-sm" id="auth-tab-btn-nafath" onclick="AthqAuth.switchAuthMethod('nafath')" style="flex: 1.2; border-radius: 8px; font-weight: 800; background: #0D6E46; color: #FFFFFF; font-size: 0.78rem;">
+                  <i class="fa-solid fa-fingerprint"></i> نفاذ الموحد
+                </button>
+                <button class="btn btn-sm" id="auth-tab-btn-pwd" onclick="AthqAuth.switchAuthMethod('password')" style="flex: 1; border-radius: 8px; font-weight: 800; color: #64748B; font-size: 0.78rem;">
+                  <i class="fa-solid fa-key"></i> كلمة المرور
+                </button>
+                <button class="btn btn-sm" id="auth-tab-btn-otp" onclick="AthqAuth.switchAuthMethod('otp')" style="flex: 1; border-radius: 8px; font-weight: 800; color: #64748B; font-size: 0.78rem;">
+                  <i class="fa-solid fa-mobile-screen-button"></i> رمز الجوال OTP
+                </button>
+              </div>
+
+              <!-- Method 1: Nafath SSO Form -->
+              <div id="auth-form-nafath">
+                <div id="nafath-step-input">
+                  <div style="text-align: center; margin-bottom: 14px; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 14px;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #0D6E46; color: #FFFFFF; border-radius: 12px; font-size: 1.4rem; margin-bottom: 6px;">
+                      <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.92rem; color: #07472C;">بوابة النفاذ الوطني الموحد (نفاذ)</div>
+                    <div style="font-size: 0.74rem; color: #166534;">تسجيل دخول آمن وموثق بالهوية الوطنية أو الإقامة النظامية</div>
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 16px;">
+                    <label class="form-label" style="font-size: 0.82rem; font-weight: 800; color: #1E293B;">رقم الهوية الوطنية أو الإقامة للمفوض *</label>
+                    <input type="text" id="auth-input-national-id" class="form-control" placeholder="10xxxxxxxx أو 20xxxxxxxx" value="1098234112" maxlength="10" style="direction: ltr; text-align: center; font-size: 1.15rem; font-weight: 900; letter-spacing: 2px;">
+                  </div>
+
+                  <button class="btn btn-primary" onclick="AthqAuth.handleNafathRequest('${targetRole}')" style="width: 100%; padding: 11px; font-weight: 800; font-size: 0.9rem; justify-content: center; background: #0D6E46; border: none; margin-bottom: 8px;">
+                    <i class="fa-solid fa-fingerprint"></i> طلب التحقق عبر تطبيق نفاذ
+                  </button>
+                </div>
+
+                <div id="nafath-step-confirm" style="display: none; text-align: center; padding: 6px 0;">
+                  <div style="background: linear-gradient(135deg, #07472C 0%, #0D6E46 100%); color: #FFFFFF; border-radius: 14px; padding: 18px; margin-bottom: 14px; box-shadow: 0 10px 25px rgba(13,110,70,0.25);">
+                    <div style="font-size: 0.78rem; color: #A7F3D0; margin-bottom: 4px;">افتح تطبيق نفاذ على جوالك واختر الرقم التالي:</div>
+                    <div id="nafath-display-number" style="font-size: 3.2rem; font-weight: 900; color: #FCD34D; letter-spacing: 4px; line-height: 1; margin: 8px 0;">
+                      48
+                    </div>
+                    <div style="font-size: 0.72rem; color: #D1FAE5; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                      <span class="live-pulse" style="background: #34D399;"></span> بانتظار إشعار التأكيد الحي من تطبيق نفاذ...
+                    </div>
+                  </div>
+
+                  <button class="btn btn-gold" onclick="AthqAuth.simulateNafathApprove('${targetRole}')" style="width: 100%; padding: 10px; font-weight: 800; font-size: 0.85rem; justify-content: center;">
+                    <i class="fa-solid fa-check-double"></i> محاكاة تأكيد الهوية الفوري في نفاذ
+                  </button>
+                </div>
+              </div>
+
+              <!-- Method 2: Password Form -->
+              <div id="auth-form-password" style="display: none;">
+                <div class="form-group" style="margin-bottom: 14px;">
+                  <label class="form-label" style="font-size: 0.82rem; font-weight: 800; color: #1E293B;">اسم المستخدم أو البريد الإلكتروني أو الترخيص *</label>
+                  <input type="text" id="auth-input-identifier" class="form-control" placeholder="admin@athq.biralmadinah.org.sa" value="admin@athq.biralmadinah.org.sa" style="direction: ltr; text-align: right; font-weight: 700;">
+                </div>
+                <div class="form-group" style="margin-bottom: 16px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <label class="form-label" style="margin: 0; font-size: 0.82rem; font-weight: 800; color: #1E293B;">كلمة المرور المشفرة *</label>
+                    <span style="font-size: 0.72rem; color: #0D6E46; font-weight: 700;">مشفرة بـ AES-256</span>
+                  </div>
+                  <input type="password" id="auth-input-password" class="form-control" placeholder="••••••••" value="Admin@2025" style="direction: ltr; font-weight: 800; letter-spacing: 2px;">
+                </div>
+
+                <button class="btn btn-primary" onclick="AthqAuth.handlePasswordLogin('${targetRole}')" style="width: 100%; padding: 11px; font-weight: 800; font-size: 0.9rem; justify-content: center; margin-bottom: 12px; background: #0D6E46; border: none;">
+                  <i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول الرسمي
+                </button>
+              </div>
+
+              <!-- Method 3: OTP Form -->
+              <div id="auth-form-otp" style="display: none;">
+                <div id="otp-step-phone">
+                  <div class="form-group" style="margin-bottom: 14px;">
+                    <label class="form-label" style="font-size: 0.82rem; font-weight: 800; color: #1E293B;">رقم الجوال المسجل بالمنصة (سعودي) *</label>
+                    <div style="position: relative;">
+                      <span style="position: absolute; left: 12px; top: 10px; font-weight: 800; color: #64748B; direction: ltr;">🇸🇦 +966</span>
+                      <input type="tel" id="auth-input-phone" class="form-control" placeholder="0551234567" value="0500000001" style="padding-left: 75px; direction: ltr; text-align: left; font-weight: 800;">
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" onclick="AthqAuth.handleSendOtp('${targetRole}')" style="width: 100%; padding: 11px; font-weight: 800; justify-content: center; background: #0D6E46; border: none;">
+                    <i class="fa-solid fa-paper-plane"></i> إرسال رمز التحقق SMS فوراً
+                  </button>
+                </div>
+
+                <div id="otp-step-verify" style="display: none;">
+                  <p style="font-size: 0.78rem; color: #64748B; margin-bottom: 10px;">
+                    تم إرسال رمز التحقق إلى جوالك. أدخل الرمز المكون من 4 أرقام:
+                  </p>
+                  <div class="form-group" style="margin-bottom: 14px;">
+                    <input type="text" id="auth-input-otp-code" class="form-control" placeholder="• • • •" maxlength="6" style="letter-spacing: 8px; text-align: center; font-size: 1.3rem; font-weight: 900;">
+                  </div>
+                  <button class="btn btn-gold" onclick="AthqAuth.handleVerifyOtp('${targetRole}')" style="width: 100%; padding: 11px; font-weight: 800; justify-content: center; margin-bottom: 8px;">
+                    <i class="fa-solid fa-check-circle"></i> التحقق وتأكيد الدخول
+                  </button>
+                  <button class="btn btn-link btn-sm" onclick="AthqAuth.handleSendOtp('${targetRole}')" style="width: 100%; font-size: 0.75rem; color: #64748B;">
+                    إعادة إرسال الرمز
+                  </button>
+                </div>
+              </div>
+
+              <!-- Quick Autofill Trigger for Form Viewers -->
+              <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #E2E8F0;">
+                <div style="font-size: 0.74rem; font-weight: 800; color: #64748B; margin-bottom: 6px;">
+                  أو تعبئة بيانات النماذج تلقائياً:
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" onclick="AthqAuth.fillDemoAccount('admin')" style="background: #F1F5F9; border: 1px solid #CBD5E1; color: #1E293B; padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; cursor: pointer; font-weight: 700;">
+                    تعبئة الإدارة
+                  </button>
+                  <button type="button" onclick="AthqAuth.fillDemoAccount('association')" style="background: #F1F5F9; border: 1px solid #CBD5E1; color: #1E293B; padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; cursor: pointer; font-weight: 700;">
+                    تعبئة الجمعية
+                  </button>
+                  <button type="button" onclick="AthqAuth.fillDemoAccount('consultant')" style="background: #F1F5F9; border: 1px solid #CBD5E1; color: #1E293B; padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; cursor: pointer; font-weight: 700;">
+                    تعبئة المستشار
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Security Bar -->
+          <div style="margin-top: 20px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.72rem; color: #64748B;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span><i class="fa-solid fa-shield-halved" style="color: #0D6E46;"></i> ضوابط الأمن السيبراني NCA</span>
+              <span><i class="fa-solid fa-lock" style="color: #D99B26;"></i> تشفير SSL/TLS 1.3</span>
+              <span><i class="fa-solid fa-database" style="color: #0284C7;"></i> قاعدة بيانات SQL موحدة</span>
+            </div>
+            <div>
+              حاضنة ومسرعة عذق • جمعية البر بالمدينة المنورة • 1446هـ / 2025م
             </div>
           </div>
+
         </div>
+
       </div>
     `;
 
@@ -16977,8 +17157,11 @@ window.switchRole = function(role) {
         admin: 'لوحة القيادة والرقابة'
       };
       if (typeof showToast === 'function') {
-        showToast(`⛔ غير مصرح: حسابك الحالي (${curUser.name} - ${curUser.title}) مخصص لبوابة ${roleNames[curUser.role] || curUser.role} فقط.`, 'error');
+        showToast(`حسابك الحالي مخصص لبوابة ${roleNames[curUser.role] || curUser.role}. جاري فتح نافذة الدخول لاختيار دور ${roleNames[role]}...`, 'info');
       }
+      setTimeout(() => {
+        AthqAuth.openLoginModal(role);
+      }, 500);
       return;
     }
   }
