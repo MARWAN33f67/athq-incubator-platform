@@ -19,7 +19,10 @@
         <span class="top-notice-tag">رسمي</span>
         <span>مبادرة نوعية بإشراف <strong>جمعية البر بالمدينة المنورة</strong> (تأسست 1379هـ • ترخيص رقم 22)</span>
       </div>
-      <div class="top-notice-links" style="display: flex; align-items: center; gap: 14px;">
+      <div class="top-notice-links" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <button class="btn btn-gold btn-sm" onclick="openExecutivePresentation()" style="font-weight: 800; font-size: 0.76rem; padding: 4px 12px; border-radius: 20px; box-shadow: 0 4px 12px rgba(217,155,38,0.3);" title="فتح العرض التنفيذي الخاص بمجلس الإدارة وأصحاب السمو">
+          <i class="fa-solid fa-chalkboard-user"></i> العرض التنفيذي للمجلس
+        </button>
         <a href="mailto:ethq@biralmadinah.org.sa"><i class="fa-solid fa-envelope"></i> ethq@biralmadinah.org.sa</a>
         <a href="#contact"><i class="fa-solid fa-location-dot"></i> المدينة المنورة - حي الأصيفرين</a>
         <div id="header-auth-badge-box"></div>
@@ -27,30 +30,30 @@
     </div>
   </aside>
 
-  <!-- Top Role Simulator Switcher -->
+  <!-- Official Portals Switcher Bar -->
   <div class="role-simulator-bar">
     <div class="container role-bar-container">
       <div class="simulator-label">
-        <span class="live-pulse"></span>
-        <strong>محاكي المنظومة التفاعلي:</strong>
-        <span class="simulator-sub">استعراض بوابات الأدوار الأربعة (BPMN Workflows)</span>
+        <span class="live-pulse" style="background: #22C55E;"></span>
+        <strong>بوابات المنظومة الرسمية:</strong>
+        <span class="simulator-sub">البوابة الإلكترونية المعتمدة لحاضنة ومسرعة عذق • إشراف جمعية البر</span>
       </div>
       <div class="role-buttons-group">
-        <button class="role-btn active" data-role="visitor" id="roleBtnVisitor" title="استعراض واجهة الزائر والجمهور">
-          <i class="fa-solid fa-eye"></i>
-          <span>الزائر العام</span>
+        <button class="role-btn active" data-role="visitor" id="roleBtnVisitor" title="الواجهة العامة للمنصة">
+          <i class="fa-solid fa-globe"></i>
+          <span>الواجهة العامة</span>
         </button>
-        <button class="role-btn" data-role="association" id="roleBtnAssoc" title="بوابة الجمعيات المحتضنة">
+        <button class="role-btn" data-role="association" id="roleBtnAssoc" title="بوابة الجمعيات والمنظمات المحتضنة الرسمية">
           <i class="fa-solid fa-building-ngo"></i>
-          <span>بوابة الجمعيات</span>
+          <span>بوابة الجمعيات الأهلية</span>
         </button>
-        <button class="role-btn" data-role="consultant" id="roleBtnConsultant" title="بوابة الخبراء والمستشارين">
+        <button class="role-btn" data-role="consultant" id="roleBtnConsultant" title="بوابة الخبراء والمستشارين المعتمدين">
           <i class="fa-solid fa-user-tie"></i>
           <span>بوابة المستشارين</span>
         </button>
-        <button class="role-btn" data-role="admin" id="roleBtnAdmin" title="لوحة القيادة والإدارة المركزية">
+        <button class="role-btn" data-role="admin" id="roleBtnAdmin" title="لوحة القيادة والرقابة المركزية">
           <i class="fa-solid fa-shield-halved"></i>
-          <span>لوحة الإدارة</span>
+          <span>لوحة القيادة والرقابة</span>
         </button>
       </div>
     </div>
@@ -5603,6 +5606,7 @@
   <script src="js/db.js"></script>
   <script src="js/cloud-db.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/presentation.js"></script>
   <script src="js/landing.js"></script>
 </body>
 </html>

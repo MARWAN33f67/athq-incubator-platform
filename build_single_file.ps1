@@ -21,6 +21,8 @@ $cloudJsPath = Join-Path $baseDir "public\js\cloud-db.js"
 $rawCloudJs = if (Test-Path $cloudJsPath) { [System.IO.File]::ReadAllText($cloudJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 $authJsPath = Join-Path $baseDir "public\js\auth.js"
 $rawAuthJs = if (Test-Path $authJsPath) { [System.IO.File]::ReadAllText($authJsPath, [System.Text.Encoding]::UTF8) } else { "" }
+$presentationJsPath = Join-Path $baseDir "public\js\presentation.js"
+$rawPresentationJs = if (Test-Path $presentationJsPath) { [System.IO.File]::ReadAllText($presentationJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 $rawJs = if (Test-Path $landingJsPath) { [System.IO.File]::ReadAllText($landingJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 
 $out = $rawHtml
@@ -73,6 +75,7 @@ $out = $out.Replace('<link rel="stylesheet" href="css/style.css">', $cssBlock)
 $out = $out.Replace('<script src="js/db.js"></script>', "<script>`r`n" + $rawDbJs + "`r`n</script>")
 $out = $out.Replace('<script src="js/cloud-db.js"></script>', "<script>`r`n" + $rawCloudJs + "`r`n</script>")
 $out = $out.Replace('<script src="js/auth.js"></script>', "<script>`r`n" + $rawAuthJs + "`r`n</script>")
+$out = $out.Replace('<script src="js/presentation.js"></script>', "<script>`r`n" + $rawPresentationJs + "`r`n</script>")
 $jsBlock = "<script>`r`n" + $rawJs + "`r`n</script>`r`n</body>"
 $regex = New-Object System.Text.RegularExpressions.Regex('(?s)<script\s+src=["'']js/landing\.js["'']>\s*</script>\s*</body>')
 if ($regex.IsMatch($out)) {

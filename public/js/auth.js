@@ -338,17 +338,58 @@ class AthqAuthEngine {
 
         <div class="wizard-body" style="padding: 24px;">
           <!-- Auth Method Switcher Tabs -->
-          <div style="display: flex; background: var(--c-bg-alt); padding: 4px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--c-border);">
-            <button class="btn btn-sm" id="auth-tab-btn-pwd" onclick="AthqAuth.switchAuthMethod('password')" style="flex: 1; border-radius: 8px; font-weight: 800; background: var(--c-surface); box-shadow: var(--shadow-xs);">
+          <div style="display: flex; background: var(--c-bg-alt); padding: 4px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--c-border); gap: 4px;">
+            <button class="btn btn-sm" id="auth-tab-btn-nafath" onclick="AthqAuth.switchAuthMethod('nafath')" style="flex: 1.2; border-radius: 8px; font-weight: 800; background: #0D6E46; color: #FFFFFF; box-shadow: var(--shadow-xs);">
+              <i class="fa-solid fa-fingerprint"></i> نفاذ الموحد
+            </button>
+            <button class="btn btn-sm" id="auth-tab-btn-pwd" onclick="AthqAuth.switchAuthMethod('password')" style="flex: 1; border-radius: 8px; font-weight: 800; color: var(--c-text-muted);">
               <i class="fa-solid fa-key"></i> كلمة المرور
             </button>
             <button class="btn btn-sm" id="auth-tab-btn-otp" onclick="AthqAuth.switchAuthMethod('otp')" style="flex: 1; border-radius: 8px; font-weight: 800; color: var(--c-text-muted);">
-              <i class="fa-solid fa-mobile-screen-button"></i> رمز الجوال (SMS OTP)
+              <i class="fa-solid fa-mobile-screen-button"></i> رمز الجوال
             </button>
           </div>
 
+          <!-- Method 0: Nafath SSO Form -->
+          <div id="auth-form-nafath">
+            <div id="nafath-step-input">
+              <div style="text-align: center; margin-bottom: 14px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: rgba(13,110,70,0.12); color: #0D6E46; border-radius: 16px; font-size: 1.8rem; margin-bottom: 8px;">
+                  <i class="fa-solid fa-id-card"></i>
+                </div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--c-primary);">بوابة النفاذ الوطني الموحد (نفاذ)</div>
+                <div style="font-size: 0.75rem; color: var(--c-text-muted);">تسجيل دخول آمن وموثق بالهوية الوطنية للمفوضين والمستشارين</div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label class="form-label">رقم الهوية الوطنية أو الإقامة للمفوض *</label>
+                <input type="text" id="auth-input-national-id" class="form-control" placeholder="10xxxxxxxx أو 20xxxxxxxx" maxlength="10" style="direction: ltr; text-align: center; font-size: 1.15rem; font-weight: 800; letter-spacing: 2px;">
+              </div>
+
+              <button class="btn btn-primary" onclick="AthqAuth.handleNafathRequest('${targetRole}')" style="width: 100%; padding: 12px; font-weight: 800; font-size: 0.95rem; justify-content: center; background: #0D6E46; border: none; margin-bottom: 10px;">
+                <i class="fa-solid fa-fingerprint"></i> طلب الدخول عبر تطبيق نفاذ
+              </button>
+            </div>
+
+            <div id="nafath-step-confirm" style="display: none; text-align: center; padding: 10px 0;">
+              <div style="background: linear-gradient(135deg, #07472C 0%, #0D6E46 100%); color: #FFFFFF; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 10px 25px rgba(13,110,70,0.3);">
+                <div style="font-size: 0.8rem; color: #A7F3D0; margin-bottom: 6px;">افتح تطبيق نفاذ على هاتفك الذكي واختر الرقم:</div>
+                <div id="nafath-display-number" style="font-size: 3.5rem; font-weight: 900; color: #FCD34D; letter-spacing: 4px; line-height: 1; margin: 10px 0;">
+                  48
+                </div>
+                <div style="font-size: 0.75rem; color: #D1FAE5; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                  <span class="live-dot" style="background: #34D399;"></span> بانتظار التأكيد من تطبيق نفاذ...
+                </div>
+              </div>
+
+              <button class="btn btn-gold" onclick="AthqAuth.simulateNafathApprove('${targetRole}')" style="width: 100%; padding: 10px; font-weight: 800; font-size: 0.88rem; justify-content: center;">
+                <i class="fa-solid fa-check-double"></i> محاكاة تأكيد الهوية من تطبيق نفاذ
+              </button>
+            </div>
+          </div>
+
           <!-- Method 1: Password Form -->
-          <div id="auth-form-password">
+          <div id="auth-form-password" style="display: none;">
             <div class="form-group" style="margin-bottom: 14px;">
               <label class="form-label">البريد الإلكتروني أو رقم الترخيص أو الهاتف *</label>
               <input type="text" id="auth-input-identifier" class="form-control" placeholder="admin@athq.biralmadinah.org.sa أو رقم الترخيص" style="direction: ltr; text-align: right;">
@@ -427,25 +468,92 @@ class AthqAuthEngine {
   }
 
   switchAuthMethod(method) {
+    const formNafath = document.getElementById('auth-form-nafath');
     const formPwd = document.getElementById('auth-form-password');
     const formOtp = document.getElementById('auth-form-otp');
+    const btnNafath = document.getElementById('auth-tab-btn-nafath');
     const btnPwd = document.getElementById('auth-tab-btn-pwd');
     const btnOtp = document.getElementById('auth-tab-btn-otp');
 
-    if (method === 'password') {
-      formPwd.style.display = 'block';
-      formOtp.style.display = 'none';
-      btnPwd.style.background = 'var(--c-surface)';
-      btnPwd.style.color = 'inherit';
-      btnOtp.style.background = 'transparent';
-      btnOtp.style.color = 'var(--c-text-muted)';
+    const resetButtons = () => {
+      [btnNafath, btnPwd, btnOtp].forEach(b => {
+        if (b) {
+          b.style.background = 'transparent';
+          b.style.color = 'var(--c-text-muted)';
+        }
+      });
+      [formNafath, formPwd, formOtp].forEach(f => {
+        if (f) f.style.display = 'none';
+      });
+    };
+
+    resetButtons();
+
+    if (method === 'nafath') {
+      if (formNafath) formNafath.style.display = 'block';
+      if (btnNafath) {
+        btnNafath.style.background = '#0D6E46';
+        btnNafath.style.color = '#FFFFFF';
+      }
+    } else if (method === 'password') {
+      if (formPwd) formPwd.style.display = 'block';
+      if (btnPwd) {
+        btnPwd.style.background = 'var(--c-surface)';
+        btnPwd.style.color = 'inherit';
+      }
     } else {
-      formPwd.style.display = 'none';
-      formOtp.style.display = 'block';
-      btnOtp.style.background = 'var(--c-surface)';
-      btnOtp.style.color = 'inherit';
-      btnPwd.style.background = 'transparent';
-      btnPwd.style.color = 'var(--c-text-muted)';
+      if (formOtp) formOtp.style.display = 'block';
+      if (btnOtp) {
+        btnOtp.style.background = 'var(--c-surface)';
+        btnOtp.style.color = 'inherit';
+      }
+    }
+  }
+
+  handleNafathRequest(targetRole) {
+    const nationalId = document.getElementById('auth-input-national-id')?.value.trim();
+    if (!nationalId || nationalId.length < 10) {
+      alert('يرجى إدخال رقم هوية وطنية أو إقامة نظامي مكوّن من 10 أرقام.');
+      return;
+    }
+
+    const randomNum = Math.floor(10 + Math.random() * 89);
+    const dispEl = document.getElementById('nafath-display-number');
+    if (dispEl) dispEl.textContent = randomNum;
+
+    document.getElementById('nafath-step-input').style.display = 'none';
+    document.getElementById('nafath-step-confirm').style.display = 'block';
+
+    if (typeof showToast === 'function') {
+      showToast(`تم إرسال الطلب إلى تطبيق نفاذ! الرقم المعتمد: ${randomNum} ✓`);
+    }
+
+    // تأكيد تلقائي بعد 4 ثوانٍ لتسهيل التجربة أمام اللجان
+    setTimeout(() => {
+      const confirmBox = document.getElementById('nafath-step-confirm');
+      if (confirmBox && confirmBox.style.display !== 'none') {
+        this.simulateNafathApprove(targetRole);
+      }
+    }, 4500);
+  }
+
+  simulateNafathApprove(targetRole) {
+    const roleMapping = {
+      admin: this.officialAccounts[0],
+      association: this.officialAccounts[1],
+      consultant: this.officialAccounts[3]
+    };
+
+    const user = roleMapping[targetRole] || this.officialAccounts[0];
+    this.saveSession(user);
+    this.closeLoginModal();
+
+    if (typeof showToast === 'function') {
+      showToast(`تم توثيق الهوية عبر نفاذ بنجاح! مرحباً: ${user.name} ✓`);
+    }
+
+    if (typeof switchRole === 'function') {
+      switchRole(user.role);
     }
   }
 
