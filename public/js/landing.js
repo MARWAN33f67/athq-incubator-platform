@@ -345,6 +345,14 @@ function initRoleSimulator() {
 }
 
 window.switchRole = function(role) {
+  // RBAC & Official Authentication Guard
+  if (role !== 'visitor' && typeof AthqAuth !== 'undefined') {
+    if (!AthqAuth.isLoggedIn() || !AthqAuth.hasRole(role)) {
+      AthqAuth.openLoginModal(role);
+      return;
+    }
+  }
+
   currentActiveRole = role;
 
   // Update simulator buttons active state
@@ -5238,10 +5246,13 @@ window.closeAdmin2FAModal = function() {
 
 // Admin Secure Logout
 window.adminSecureLogout = function() {
-  if (confirm('هل ترغب في تسجيل الخروج من لوحة الإدارة والعودة إلى الواجهة الرئيسية؟')) {
-    switchRole('visitor');
-    showToast('تم تسجيل الخروج من لوحة الإدارة بنجاح.', 'info');
-    addAdminAuditLog('تسجيل خروج المشرف', 'تم إنهاء الجلسة والعودة للواجهة الرئيسية', 'fa-lock', '#C59B27');
+  if (confirm('هل ترغب في تسجيل الخروج من لوحة الإدارة وإنهاء الجلسة الآمنة؟')) {
+    if (typeof AthqAuth !== 'undefined') {
+      AthqAuth.logout();
+    } else {
+      switchRole('visitor');
+      showToast('تم تسجيل الخروج بنجاح.', 'info');
+    }
   }
 };
 

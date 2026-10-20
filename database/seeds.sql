@@ -83,3 +83,13 @@ INSERT INTO athq_notifications (id, title, text, time_label, icon, unread) VALUE
 ('NTF-1', 'اعتماد لائحة الحوكمة والأنظمة', 'تم اعتماد اللائحة الأساسية وتحديث مصفوفة الصلاحيات لجمعية ديوان بنجاح.', 'منذ 10 دقائق', 'fa-shield-halved', TRUE),
 ('NTF-2', 'جلسة استشارية جديدة مجدولة', 'تم تأكيد حجز جلسة استشارية متخصصة مع د. سليمان الحربي.', 'منذ 45 دقيقة', 'fa-calendar-check', TRUE),
 ('NTF-3', 'تحديث مؤشرات الأداء والأثر', 'تم توثيق +16,311 ساعة تطوعية و+4,470 ساعة عمل معتمدة بالحاضنة.', 'منذ ساعتين', 'fa-chart-pie', FALSE);
+
+-- 11. إدخال الحسابات الرسمية المعتمدة لتسجيل الدخول وإدارة الهوية
+INSERT INTO athq_users (id, name, email, phone, role, entity_id, password_hash, is_active) VALUES
+('USR-ADMIN', 'المهندس / مدير النظام المركزي', 'admin@athq.biralmadinah.org.sa', '0500000001', 'admin', 'ATHQ-HQ', 'Admin@2025', TRUE),
+('USR-ASSOC-1', 'م. عبدالله الحربي (ممثل جمعية ديوان الشبابية)', 'rep.diwan@athq.org.sa', '0551234567', 'association', 'ORG-02', 'Diwan@1842', TRUE),
+('USR-ASSOC-2', 'أ. إبراهيم السلمي (ممثل وقف العمل الصالح)', 'rep.waqf@athq.org.sa', '0543219876', 'association', 'ORG-01', 'Waqf@1530', TRUE),
+('USR-CONS-1', 'د. سليمان الحربي (خبير الحوكمة المعتمد)', 'dr.sulaiman@athq.org.sa', '0559871111', 'consultant', 'CONS-01', 'Harbi@2025', TRUE),
+('USR-CONS-2', 'أ. فهد الجهني (مستشار التخطيط الاستراتيجي)', 'fahad.j@athq.org.sa', '0559872222', 'consultant', 'CONS-02', 'Juhani@2025', TRUE)
+ON CONFLICT (email) DO NOTHING;
+

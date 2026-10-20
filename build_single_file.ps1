@@ -17,6 +17,10 @@ if (-not (Test-Path $htmlPath)) {
 $rawHtml = [System.IO.File]::ReadAllText($htmlPath, [System.Text.Encoding]::UTF8)
 $rawCss = if (Test-Path $cssPath) { [System.IO.File]::ReadAllText($cssPath, [System.Text.Encoding]::UTF8) } else { "" }
 $rawDbJs = if (Test-Path $dbJsPath) { [System.IO.File]::ReadAllText($dbJsPath, [System.Text.Encoding]::UTF8) } else { "" }
+$cloudJsPath = Join-Path $baseDir "public\js\cloud-db.js"
+$rawCloudJs = if (Test-Path $cloudJsPath) { [System.IO.File]::ReadAllText($cloudJsPath, [System.Text.Encoding]::UTF8) } else { "" }
+$authJsPath = Join-Path $baseDir "public\js\auth.js"
+$rawAuthJs = if (Test-Path $authJsPath) { [System.IO.File]::ReadAllText($authJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 $rawJs = if (Test-Path $landingJsPath) { [System.IO.File]::ReadAllText($landingJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 
 $out = $rawHtml
@@ -65,8 +69,10 @@ if (Test-Path $partnersSvg) {
 $cssBlock = "<style>`r`n" + $rawCss + "`r`n</style>"
 $out = $out.Replace('<link rel="stylesheet" href="css/style.css">', $cssBlock)
 
-# Inline JS (db.js and landing.js)
+# Inline JS (db.js, cloud-db.js, auth.js, landing.js)
 $out = $out.Replace('<script src="js/db.js"></script>', "<script>`r`n" + $rawDbJs + "`r`n</script>")
+$out = $out.Replace('<script src="js/cloud-db.js"></script>', "<script>`r`n" + $rawCloudJs + "`r`n</script>")
+$out = $out.Replace('<script src="js/auth.js"></script>', "<script>`r`n" + $rawAuthJs + "`r`n</script>")
 $jsBlock = "<script>`r`n" + $rawJs + "`r`n</script>`r`n</body>"
 $regex = New-Object System.Text.RegularExpressions.Regex('(?s)<script\s+src=["'']js/landing\.js["'']>\s*</script>\s*</body>')
 if ($regex.IsMatch($out)) {
