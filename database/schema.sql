@@ -163,6 +163,21 @@ CREATE TABLE IF NOT EXISTS athq_audit_logs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 12. جدول المستخدمين وإدارة الهوية والصلاحيات (Users & Identity Access Management)
+CREATE TABLE IF NOT EXISTS athq_users (
+    id VARCHAR(32) PRIMARY KEY,
+    name VARCHAR(128) NOT NULL,
+    email VARCHAR(128) UNIQUE NOT NULL,
+    phone VARCHAR(32) UNIQUE,
+    role VARCHAR(32) NOT NULL DEFAULT 'visitor', -- admin, association, consultant, visitor
+    entity_id VARCHAR(32),                      -- يربط بالمؤسسة ORG أو المستشار CONS
+    password_hash VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    last_login TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- إنشاء الفهارس لتحسين سرعة الاستعلامات والبحث
 CREATE INDEX IF NOT EXISTS idx_org_status ON athq_organizations(status);
 CREATE INDEX IF NOT EXISTS idx_org_track ON athq_organizations(track);
@@ -170,3 +185,6 @@ CREATE INDEX IF NOT EXISTS idx_app_status ON athq_applications(status);
 CREATE INDEX IF NOT EXISTS idx_app_stage ON athq_applications(stage);
 CREATE INDEX IF NOT EXISTS idx_booking_date ON athq_facility_bookings(booking_date);
 CREATE INDEX IF NOT EXISTS idx_consult_date ON athq_consultations(session_date);
+CREATE INDEX IF NOT EXISTS idx_user_email ON athq_users(email);
+CREATE INDEX IF NOT EXISTS idx_user_role ON athq_users(role);
+
