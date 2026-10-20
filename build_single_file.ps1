@@ -7,6 +7,7 @@ Write-Host "Building standalone Athq Incubator Platform single file bundle..." -
 $htmlPath = Join-Path $baseDir "public\index.html"
 $cssPath = Join-Path $baseDir "public\css\style.css"
 $landingJsPath = Join-Path $baseDir "public\js\landing.js"
+$dbJsPath = Join-Path $baseDir "public\js\db.js"
 
 if (-not (Test-Path $htmlPath)) {
     Write-Error "public\index.html not found at $htmlPath"
@@ -15,6 +16,7 @@ if (-not (Test-Path $htmlPath)) {
 
 $rawHtml = [System.IO.File]::ReadAllText($htmlPath, [System.Text.Encoding]::UTF8)
 $rawCss = if (Test-Path $cssPath) { [System.IO.File]::ReadAllText($cssPath, [System.Text.Encoding]::UTF8) } else { "" }
+$rawDbJs = if (Test-Path $dbJsPath) { [System.IO.File]::ReadAllText($dbJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 $rawJs = if (Test-Path $landingJsPath) { [System.IO.File]::ReadAllText($landingJsPath, [System.Text.Encoding]::UTF8) } else { "" }
 
 $out = $rawHtml
@@ -63,7 +65,8 @@ if (Test-Path $partnersSvg) {
 $cssBlock = "<style>`r`n" + $rawCss + "`r`n</style>"
 $out = $out.Replace('<link rel="stylesheet" href="css/style.css">', $cssBlock)
 
-# Inline JS
+# Inline JS (db.js and landing.js)
+$out = $out.Replace('<script src="js/db.js"></script>', "<script>`r`n" + $rawDbJs + "`r`n</script>")
 $jsBlock = "<script>`r`n" + $rawJs + "`r`n</script>`r`n</body>"
 $regex = New-Object System.Text.RegularExpressions.Regex('(?s)<script\s+src=["'']js/landing\.js["'']>\s*</script>\s*</body>')
 if ($regex.IsMatch($out)) {

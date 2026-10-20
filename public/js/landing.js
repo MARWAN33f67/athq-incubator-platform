@@ -4289,7 +4289,8 @@ window.switchAdminTab = function(btn, paneId) {
       'admin-tab-stages': 'admin-tab-nav-stages',
       'admin-tab-bookings': 'admin-tab-nav-bookings',
       'admin-tab-consultations': 'admin-tab-nav-consults',
-      'admin-tab-analytics': 'admin-tab-nav-analytics'
+      'admin-tab-analytics': 'admin-tab-nav-analytics',
+      'admin-tab-database': 'admin-tab-nav-database'
     };
     const navBtn = document.getElementById(tabMap[paneId]);
     if (navBtn) navBtn.classList.add('active');
@@ -4297,6 +4298,10 @@ window.switchAdminTab = function(btn, paneId) {
 
   const pane = document.getElementById(paneId);
   if (pane) pane.classList.add('active');
+
+  if (paneId === 'admin-tab-database' && typeof initDatabaseStudio === 'function') {
+    initDatabaseStudio();
+  }
 };
 
 // 2. Status Filters

@@ -2521,6 +2521,9 @@
         </div>
 
         <div class="portal-actions-group">
+          <button class="btn btn-primary btn-sm" onclick="switchAdminTab(document.getElementById('admin-tab-nav-database'), 'admin-tab-database')" style="background: linear-gradient(135deg, #0D6E46 0%, #D99B26 100%); border: none; font-weight: 800;" title="فتح مستكشف واستوديو قاعدة البيانات المركزية">
+            <i class="fa-solid fa-database"></i> استوديو قاعدة البيانات
+          </button>
           <button class="btn btn-outline btn-sm" onclick="openAdminDocGeneratorModal()" style="border-color: var(--c-gold); color: var(--c-gold-dark); font-weight: 800;" title="توليد الوثائق التلقائي (عقد الاحتضان، تقرير المحافظة، تقييم الأداء) وقائمة مهام تجهيز المقر">
             <i class="fa-solid fa-file-contract"></i> توليد الوثائق وتجهيز المقر
           </button>
@@ -2639,6 +2642,10 @@
         </button>
         <button class="portal-tab-btn" id="admin-tab-nav-analytics" onclick="switchAdminTab(this, 'admin-tab-analytics')">
           <i class="fa-solid fa-chart-pie"></i> مؤشرات الأثر وسجل النشاط
+        </button>
+        <button class="portal-tab-btn" id="admin-tab-nav-database" onclick="switchAdminTab(this, 'admin-tab-database')">
+          <i class="fa-solid fa-database"></i> قاعدة البيانات المركزية
+          <span class="tab-badge" style="background: var(--c-gold); color: #000;" id="admin-db-records-badge">Live</span>
         </button>
       </div>
 
@@ -2906,6 +2913,139 @@
           </div>
           <div class="admin-audit-list" id="admin-audit-logs-list">
             <!-- Dynamically populated logs -->
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           Tab 6: قاعدة البيانات المركزية ومستكشف الجداول (Athq Central Database Studio)
+           ===================================================================== -->
+      <div id="admin-tab-database" class="portal-tab-pane">
+        <!-- DB Studio Header Card -->
+        <div class="db-studio-header">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+                <i class="fa-solid fa-database"></i> استوديو ومستكشف قاعدة البيانات المركزية
+              </h3>
+              <span class="db-engine-badge pulse">
+                <span class="db-dot"></span>
+                <span id="db-engine-status-text">IndexedDB v2.0 (Active & Synced)</span>
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">
+              قاعدة بيانات علائقية متكاملة لبيانات الحاضنة والمسرعة • دعم كامل لعمليات CRUD والتصدير إلى SQL / JSON
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" onclick="AthqDB.exportFullSQL()" title="تحميل ملف SQL كامل مع DDL و INSERTS لتشغيله على أي خادم">
+              <i class="fa-solid fa-file-code"></i> تحميل قاعدة البيانات (SQL)
+            </button>
+            <button class="btn btn-gold btn-sm" onclick="AthqDB.exportFullJSON()" title="تصدير نسخة احتياطية كاملة بصيغة JSON">
+              <i class="fa-solid fa-download"></i> نسخة احتياطية (JSON)
+            </button>
+            <label class="btn btn-outline-primary btn-sm" style="cursor: pointer; margin: 0;" title="استعادة نسخة احتياطية سابقة">
+              <i class="fa-solid fa-upload"></i> استيراد نسخة
+              <input type="file" id="db-json-import-input" accept=".json" style="display: none;" onchange="handleDbJsonImport(event)">
+            </label>
+            <button class="btn btn-outline btn-sm" onclick="AthqDB.resetToDefault()" style="border-color: #EF4444; color: #DC2626;" title="إعادة تهيئة وضبط قاعدة البيانات للحالة المصنعية">
+              <i class="fa-solid fa-rotate-left"></i> إعادة ضبط المصنع
+            </button>
+          </div>
+        </div>
+
+        <!-- Database Metrics Summary Bar -->
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;" id="db-metrics-summary-bar">
+          <!-- Dynamically populated stats -->
+        </div>
+
+        <!-- Table Selector Navigator -->
+        <div class="db-tables-nav" id="db-tables-nav-bar">
+          <button class="db-table-btn active" data-table="organizations" onclick="switchDbTable('organizations')">
+            <i class="fa-solid fa-building-ngo"></i> المنظمات والجمعيات (athq_organizations)
+            <span class="db-badge" id="db-cnt-organizations">0</span>
+          </button>
+          <button class="db-table-btn" data-table="applications" onclick="switchDbTable('applications')">
+            <i class="fa-solid fa-inbox"></i> طلبات الاحتضان (athq_applications)
+            <span class="db-badge" id="db-cnt-applications">0</span>
+          </button>
+          <button class="db-table-btn" data-table="bookings" onclick="switchDbTable('bookings')">
+            <i class="fa-solid fa-calendar-check"></i> حجوزات المرافق (athq_bookings)
+            <span class="db-badge" id="db-cnt-bookings">0</span>
+          </button>
+          <button class="db-table-btn" data-table="consultants" onclick="switchDbTable('consultants')">
+            <i class="fa-solid fa-user-tie"></i> المستشارون (athq_consultants)
+            <span class="db-badge" id="db-cnt-consultants">0</span>
+          </button>
+          <button class="db-table-btn" data-table="consultations" onclick="switchDbTable('consultations')">
+            <i class="fa-solid fa-handshake"></i> الجلسات الاستشارية (athq_consultations)
+            <span class="db-badge" id="db-cnt-consultations">0</span>
+          </button>
+          <button class="db-table-btn" data-table="contact_messages" onclick="switchDbTable('contact_messages')">
+            <i class="fa-solid fa-envelope"></i> رسائل التواصل (athq_contact_messages)
+            <span class="db-badge" id="db-cnt-contact_messages">0</span>
+          </button>
+          <button class="db-table-btn" data-table="notifications" onclick="switchDbTable('notifications')">
+            <i class="fa-solid fa-bell"></i> الإشعارات (athq_notifications)
+            <span class="db-badge" id="db-cnt-notifications">0</span>
+          </button>
+          <button class="db-table-btn" data-table="audit_logs" onclick="switchDbTable('audit_logs')">
+            <i class="fa-solid fa-shield-halved"></i> سجل التدقيق (athq_audit_logs)
+            <span class="db-badge" id="db-cnt-audit_logs">0</span>
+          </button>
+        </div>
+
+        <!-- Table Controls & Search Filter Toolbar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 10px; flex: 1; max-width: 480px; position: relative;">
+            <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; color: var(--c-text-muted);"></i>
+            <input type="text" id="db-table-search-input" class="form-control" style="padding-right: 40px; border-radius: 20px; font-size: 0.85rem;" placeholder="بحث فوري في حقول الجدول المحدد..." oninput="filterActiveDbTable()">
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline-primary btn-sm" onclick="openDbAddRecordModal()">
+              <i class="fa-solid fa-plus"></i> إضافة سجل جديد في الجدول
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="refreshActiveDbTable()" title="تحديث بيانات الجدول">
+              <i class="fa-solid fa-arrows-rotate"></i> تحديث
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Data Grid Container -->
+        <div class="db-data-table-container">
+          <div id="db-table-view-wrapper">
+            <!-- Dynamic Table Renders Here -->
+          </div>
+        </div>
+
+        <!-- Cloud Database Integration Panel (Supabase / REST Connector) -->
+        <div class="db-cloud-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="background: var(--c-gold); color: #000; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 0.98rem; font-weight: 800; color: var(--c-primary); margin: 0;">الربط السحابي مع Supabase / PostgreSQL (Cloud Sync Ready)</h4>
+                <p style="font-size: 0.78rem; color: var(--c-text-muted); margin: 0;">يمكنك إدخال مفاتيح مشروعك على Supabase لمزامنة كافة العمليات مركزياً على السحابة</p>
+              </div>
+            </div>
+            <button class="btn btn-gold btn-sm" onclick="saveCloudDbConfig()">
+              <i class="fa-solid fa-floppy-disk"></i> حفظ إعدادات السحابة
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size: 0.78rem;">Supabase Project URL</label>
+              <input type="text" id="cfg-supabase-url" class="form-control" placeholder="https://your-project.supabase.co" style="font-size: 0.82rem; direction: ltr;">
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size: 0.78rem;">Supabase Anon Public API Key</label>
+              <input type="password" id="cfg-supabase-key" class="form-control" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." style="font-size: 0.82rem; direction: ltr;">
+            </div>
           </div>
         </div>
       </div>
@@ -5459,6 +5599,7 @@
 
 
   <!-- Scripts -->
+  <script src="js/db.js"></script>
   <script src="js/landing.js"></script>
 </body>
 </html>

@@ -49,10 +49,15 @@
 - **Root & Routing**:
   - `index.html`: صفحة البداية التي تقوم بالتوجيه التلقائي المباشر إلى `public/index.html` لدعم استضافة GitHub Pages بسلاسة.
   - `build_single_file.ps1`: أداة برمجية اختيارية لتجميع كامل المنصة مع أصولها في ملف HTML واحد مستقل عند الحاجة.
+- **Database & Storage Core (`database/` & `public/js/db.js`)**:
+  - `database/schema.sql`: مخطط قاعدة البيانات العلائقية الكاملة (DDL) المتوافق مع PostgreSQL و MySQL و Supabase (10 جداول مفهرسة).
+  - `database/seeds.sql`: بيانات التغذية الأولية الرسمية المعتمدة المستخلصة من كتيبات الحاضنة.
+  - `database/README.md`: قاموس البيانات ودليل الربط والتكامل الشامل.
+  - `public/js/db.js`: محرك قاعدة البيانات المركزية المعاملاتي (IndexedDB Engine) واستوديو إدارة البيانات والتصدير المباشر لـ SQL/JSON.
 - **Frontend Core (`public/`)**:
-  - `public/index.html`: هيكل دلالي متكامل يدعم العربية (RTL)، ويحتوي على واجهات الأدوار الأربعة ومحاكي مسارات العمل.
+  - `public/index.html`: هيكل دلالي متكامل يدعم العربية (RTL)، ويحتوي على واجهات الأدوار الأربعة ومحاكي مسارات العمل واستوديو قاعدة البيانات.
   - `public/css/style.css`: نظام التصميم المتكامل بألوان الهوية الرسمية (الأخضر العذقي الملكي والذهبي)، بتأثيرات زجاجية راقية (Glassmorphism).
-  - `public/js/landing.js`: المحرك التفاعلي الشامل، إدارة الحالة (State Management)، آلة الحالات (BPMN State Machine)، محاكي الأدوار، وحفظ البيانات محلياً (LocalStorage).
+  - `public/js/landing.js`: المحرك التفاعلي الشامل، إدارة الحالة (State Management)، آلة الحالات (BPMN State Machine)، ومحاكي الأدوار.
   - `public/assets/images/`: الهوية البصرية، الشعارات الرسمية المتجهة (SVG) والنقطية (PNG).
 
 ---

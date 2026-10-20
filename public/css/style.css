@@ -7886,3 +7886,138 @@ img, svg {
 .dir-card-item:hover::after {
   opacity: 1;
 }
+
+/* ==========================================================================
+   Central Database Studio & Management Engine (Athq Central DB)
+   ========================================================================== */
+.db-studio-header {
+  background: linear-gradient(135deg, rgba(13, 110, 70, 0.08) 0%, rgba(217, 155, 38, 0.08) 100%);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.db-engine-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #DCFCE7;
+  color: #166534;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  border: 1px solid #BBF7D0;
+}
+.db-engine-badge.pulse .db-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 10px #22C55E;
+  animation: pulseDot 1.5s infinite;
+}
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+.db-stat-pill {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.db-tables-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--c-border);
+  padding-bottom: 12px;
+}
+.db-table-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-secondary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.db-table-btn:hover {
+  background: var(--c-primary-subtle);
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+.db-table-btn.active {
+  background: var(--c-primary);
+  color: #FFFFFF;
+  border-color: var(--c-primary-dark);
+  box-shadow: 0 4px 12px var(--c-primary-glow);
+}
+.db-table-btn .db-badge {
+  background: rgba(0,0,0,0.12);
+  color: inherit;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+}
+.db-table-btn.active .db-badge {
+  background: rgba(255,255,255,0.25);
+  color: #FFFFFF;
+}
+.db-data-table-container {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+.db-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+  font-size: 0.85rem;
+}
+.db-data-table th {
+  background: var(--c-bg-alt);
+  color: var(--c-text-primary);
+  padding: 12px 14px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--c-border);
+  white-space: nowrap;
+}
+.db-data-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--c-border);
+  color: var(--c-text-secondary);
+  vertical-align: middle;
+}
+.db-data-table tr:hover td {
+  background: rgba(13, 110, 70, 0.03);
+}
+.db-cloud-card {
+  background: linear-gradient(135deg, rgba(217, 155, 38, 0.06) 0%, rgba(13, 110, 70, 0.05) 100%);
+  border: 1.5px dashed var(--c-gold);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-top: 20px;
+}
+
