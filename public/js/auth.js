@@ -76,6 +76,10 @@ class AthqAuthEngine {
     document.addEventListener('DOMContentLoaded', () => {
       this.initAuthUI();
       this.updateHeaderAuthStatus();
+      this.enforceRolePermissions();
+      if (this.currentUser && typeof switchRole === 'function') {
+        setTimeout(() => switchRole(this.currentUser.role), 120);
+      }
     });
   }
 
@@ -108,12 +112,113 @@ class AthqAuthEngine {
       console.warn('Could not save auth session:', e);
     }
     this.updateHeaderAuthStatus();
+    this.enforceRolePermissions();
+
+    // الانتقال التلقائي الفوري إلى الصفحة الخاصة بالدور
+    if (typeof switchRole === 'function' && user.role) {
+      setTimeout(() => {
+        switchRole(user.role);
+        const roleTitles = {
+          admin: 'لوحة القيادة والرقابة المركزية',
+          association: 'بوابة الجمعيات والمنظمات الأهلية المحتضنة',
+          consultant: 'بوابة الخبراء والمستشارين المعتمدين'
+        };
+        if (typeof showToast === 'function') {
+          showToast(`تم توثيق هويتك بنجاح! تم التوجيه تلقائياً إلى: ${roleTitles[user.role] || user.role} ✓`);
+        }
+      }, 150);
+    }
   }
 
   clearSession() {
     this.currentUser = null;
     localStorage.removeItem(this.sessionKey);
     this.updateHeaderAuthStatus();
+    this.enforceRolePermissions();
+    if (typeof switchRole === 'function') {
+      switchRole('visitor');
+    }
+  }
+
+  // فرض الصلاحيات المسموحة فقط لكل دور (Role-Based Permissions Guard)
+  enforceRolePermissions() {
+    const btnVisitor = document.getElementById('roleBtnVisitor');
+    const btnAssoc = document.getElementById('roleBtnAssoc');
+    const btnCons = document.getElementById('roleBtnConsultant');
+    const btnAdmin = document.getElementById('roleBtnAdmin');
+
+    const resetButtons = () => {
+      [btnVisitor, btnAssoc, btnCons, btnAdmin].forEach(btn => {
+        if (!btn) return;
+        btn.classList.remove('role-locked');
+        btn.style.opacity = '1';
+        btn.style.filter = 'none';
+        btn.removeAttribute('data-restricted');
+      });
+
+      if (btnVisitor) btnVisitor.innerHTML = `<i class="fa-solid fa-globe"></i> <span>الواجهة العامة</span>`;
+      if (btnAssoc) btnAssoc.innerHTML = `<i class="fa-solid fa-building-ngo"></i> <span>بوابة الجمعيات الأهلية</span>`;
+      if (btnCons) btnCons.innerHTML = `<i class="fa-solid fa-user-tie"></i> <span>بوابة المستشارين</span>`;
+      if (btnAdmin) btnAdmin.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <span>لوحة القيادة والرقابة</span>`;
+    };
+
+    resetButtons();
+
+    if (!this.currentUser) {
+      // الزائر العام غير مسجل الدخول
+      return;
+    }
+
+    const role = this.currentUser.role;
+
+    if (role === 'association') {
+      // دور ممثل الجمعية: مصرح له بوابته والواجهة العامة فقط
+      if (btnAssoc) {
+        btnAssoc.innerHTML = `<i class="fa-solid fa-building-ngo"></i> <span>بوابتي الرسمية</span> <span class="badge" style="background:#22C55E; color:#FFF; font-size:0.62rem; padding:1px 6px; border-radius:10px;">نشط ✓</span>`;
+      }
+      if (btnCons) {
+        btnCons.classList.add('role-locked');
+        btnCons.setAttribute('data-restricted', 'true');
+        btnCons.style.opacity = '0.4';
+        btnCons.style.filter = 'grayscale(1)';
+        btnCons.title = 'غير مصرح - خاص بالخبراء والمستشارين';
+        btnCons.innerHTML = `<i class="fa-solid fa-lock" style="color:#EF4444;"></i> <span>بوابة المستشارين</span>`;
+      }
+      if (btnAdmin) {
+        btnAdmin.classList.add('role-locked');
+        btnAdmin.setAttribute('data-restricted', 'true');
+        btnAdmin.style.opacity = '0.4';
+        btnAdmin.style.filter = 'grayscale(1)';
+        btnAdmin.title = 'غير مصرح - خاص بالإدارة والرقابة المركزية';
+        btnAdmin.innerHTML = `<i class="fa-solid fa-lock" style="color:#EF4444;"></i> <span>لوحة القيادة</span>`;
+      }
+    } else if (role === 'consultant') {
+      // دور المستشار: مصرح له بوابته والواجهة العامة فقط
+      if (btnCons) {
+        btnCons.innerHTML = `<i class="fa-solid fa-user-tie"></i> <span>بوابتي الرسمية</span> <span class="badge" style="background:#D99B26; color:#FFF; font-size:0.62rem; padding:1px 6px; border-radius:10px;">نشط ✓</span>`;
+      }
+      if (btnAssoc) {
+        btnAssoc.classList.add('role-locked');
+        btnAssoc.setAttribute('data-restricted', 'true');
+        btnAssoc.style.opacity = '0.4';
+        btnAssoc.style.filter = 'grayscale(1)';
+        btnAssoc.title = 'غير مصرح - خاص بالجمعيات الأهلية المحتضنة';
+        btnAssoc.innerHTML = `<i class="fa-solid fa-lock" style="color:#EF4444;"></i> <span>بوابة الجمعيات</span>`;
+      }
+      if (btnAdmin) {
+        btnAdmin.classList.add('role-locked');
+        btnAdmin.setAttribute('data-restricted', 'true');
+        btnAdmin.style.opacity = '0.4';
+        btnAdmin.style.filter = 'grayscale(1)';
+        btnAdmin.title = 'غير مصرح - خاص بالإدارة والرقابة المركزية';
+        btnAdmin.innerHTML = `<i class="fa-solid fa-lock" style="color:#EF4444;"></i> <span>لوحة القيادة</span>`;
+      }
+    } else if (role === 'admin') {
+      // دور الإدارة والرقابة: إشراف مركزي كامل
+      if (btnAdmin) {
+        btnAdmin.innerHTML = `<i class="fa-solid fa-shield-halved"></i> <span>لوحة القيادة المركزية</span> <span class="badge" style="background:#0D6E46; color:#FFF; font-size:0.62rem; padding:1px 6px; border-radius:10px;">إشراف كامل ✓</span>`;
+      }
+    }
   }
 
   isLoggedIn() {

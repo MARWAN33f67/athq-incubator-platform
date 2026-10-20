@@ -333,11 +333,17 @@ function initHeaderScroll() {
   });
 }
 
-// 3. Role Simulator Controller
+// 3. Official Portals Controller
 function initRoleSimulator() {
   const roleButtons = document.querySelectorAll('.role-btn');
   roleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.getAttribute('data-restricted') === 'true') {
+        const curUser = typeof AthqAuth !== 'undefined' ? AthqAuth.getCurrentUser() : null;
+        const msg = curUser ? `⛔ صلاحية مقيدة: حسابك الحالي (${curUser.title}) غير مصرح له بالدخول لهذه البوابة.` : 'يرجى تسجيل الدخول بحساب مصرح أولاً.';
+        if (typeof showToast === 'function') showToast(msg, 'error');
+        return;
+      }
       const role = btn.getAttribute('data-role');
       if (role) switchRole(role);
     });
@@ -347,8 +353,21 @@ function initRoleSimulator() {
 window.switchRole = function(role) {
   // RBAC & Official Authentication Guard
   if (role !== 'visitor' && typeof AthqAuth !== 'undefined') {
-    if (!AthqAuth.isLoggedIn() || !AthqAuth.hasRole(role)) {
+    if (!AthqAuth.isLoggedIn()) {
       AthqAuth.openLoginModal(role);
+      return;
+    }
+    if (!AthqAuth.hasRole(role)) {
+      const curUser = AthqAuth.getCurrentUser();
+      const roleNames = {
+        visitor: 'الواجهة العامة',
+        association: 'بوابة الجمعيات الأهلية',
+        consultant: 'بوابة المستشارين',
+        admin: 'لوحة القيادة والرقابة'
+      };
+      if (typeof showToast === 'function') {
+        showToast(`⛔ غير مصرح: حسابك الحالي (${curUser.name} - ${curUser.title}) مخصص لبوابة ${roleNames[curUser.role] || curUser.role} فقط.`, 'error');
+      }
       return;
     }
   }
