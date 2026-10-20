@@ -3030,8 +3030,13 @@ window.submitGrantReferralAction = function() {
 };
 
 window.downloadGraduationReport = function() {
-  showToast('جاري استخراج وتحميل شهادة التخرج وتقرير الأثر المؤسسي الشامل المعتمد (PDF) ✓', 'info');
-  window.print();
+  const assoc = (window.APP_STATE && window.APP_STATE.userAssoc && window.APP_STATE.userAssoc.name) ? window.APP_STATE.userAssoc.name : 'جمعية ديوان الشبابية';
+  const lic = (window.APP_STATE && window.APP_STATE.userAssoc && window.APP_STATE.userAssoc.license) ? window.APP_STATE.userAssoc.license : '1842';
+  if (window.AthqPrint) {
+    window.AthqPrint.printGraduationCertificate(assoc, lic);
+  } else {
+    window.print();
+  }
 };
 
 function renderStateSimulatorQuickbar(activeState) {
@@ -5479,10 +5484,11 @@ window.exportAdminExcelCsv = function() {
 };
 
 window.exportAdminPdfReport = function() {
-  showToast('جاري تحضير وفتح واجهة طباعة وحفظ التقرير التنفيذي الشامل (PDF)...', 'success');
-  setTimeout(() => {
+  if (window.AthqPrint) {
+    window.AthqPrint.printExecutiveReport();
+  } else {
     window.print();
-  }, 400);
+  }
 };
 
 // ========================== 5. Live Notification Center ==========================
@@ -5867,7 +5873,11 @@ window.downloadBooklet = function(key) {
 };
 
 window.downloadCurrentBooklet = function() {
-  window.print();
+  if (window.AthqPrint) {
+    window.AthqPrint.autoHandlePrint();
+  } else {
+    window.print();
+  }
 };
 
 /* ==========================================================================

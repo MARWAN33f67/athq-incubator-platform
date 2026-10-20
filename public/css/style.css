@@ -8021,3 +8021,134 @@ img, svg {
   margin-top: 20px;
 }
 
+/* ==========================================================================
+   OFFICIAL ATHQ PRINT & PDF ENGINE STYLES (معايير الطباعة وتصدير PDF المعتمدة)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 10mm 10mm;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* إخفاء كافة عناصر الموقع غير المرتبطة بالطباعة */
+  header,
+  nav,
+  footer,
+  aside,
+  .site-header,
+  .site-footer,
+  .site-nav,
+  .app-sidebar,
+  .hero-section,
+  .portal-tab-bar,
+  .btn,
+  button,
+  .modal-close-btn,
+  .toast-container,
+  .notif-dropdown,
+  .presentation-hud,
+  .state-simulator-quickbar,
+  .fab,
+  .no-print,
+  #modalPrintPreview .wizard-header,
+  #modalPrintPreview > div > div:first-child {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* إخفاء شجرة الـ DOM بالكامل عدا حاوية الوثيقة الرسمية */
+  body > *:not(#modalPrintPreview):not(#athq-printable-document) {
+    display: none !important;
+  }
+
+  /* تفريغ وإظهار الحاوية المطبوعة فقط بأبعاد A4 قياسية */
+  #modalPrintPreview {
+    position: static !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  #modalPrintPreview > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+  }
+
+  #modalPrintPreview > div > div:nth-child(2) {
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  #athq-printable-document {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+    border: none !important;
+    direction: rtl !important;
+    page-break-after: avoid !important;
+    page-break-inside: auto !important;
+  }
+
+  /* تنسيق الجداول والشهادات عند الطباعة */
+  table {
+    page-break-inside: avoid !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  tr, td, th {
+    page-break-inside: avoid !important;
+  }
+
+  .print-official-header {
+    page-break-inside: avoid !important;
+    margin-bottom: 15px !important;
+  }
+
+  .print-signatures-box {
+    page-break-inside: avoid !important;
+    margin-top: 25px !important;
+  }
+
+  .certificate-paper,
+  .contract-paper,
+  .report-paper,
+  .consultation-paper,
+  .booking-paper {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+}
+
+

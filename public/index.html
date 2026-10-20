@@ -3334,7 +3334,7 @@
             </div>
 
             <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" onclick="window.print()">
+              <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()">
                 <i class="fa-solid fa-print"></i> طباعة إشعار التقديم
               </button>
               <button class="btn btn-outline-primary btn-sm" onclick="switchRole('association'); closeApplicationWizard();">
@@ -3702,7 +3702,7 @@
             </div>
 
             <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" onclick="window.print()">
+              <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()">
                 <i class="fa-solid fa-print"></i> طباعة تذكرة الموعد
               </button>
               <button class="btn btn-outline-primary btn-sm" onclick="closeBookConsultantModal(); switchRole('association');">
@@ -3955,7 +3955,7 @@
         </div>
 
         <div style="margin-top: 24px; display: flex; justify-content: center; gap: 12px;" class="no-print">
-          <button class="btn btn-primary btn-sm" onclick="window.print()">
+          <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()">
             <i class="fa-solid fa-print"></i> طباعة الشهادة الرسمية
           </button>
           <button class="btn btn-outline-primary btn-sm" onclick="closeDigitalCertificateModal()">
@@ -4075,7 +4075,7 @@
 
         <!-- Bottom Action Buttons -->
         <div style="display: flex; justify-content: center; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid #E2E8F0;" class="no-print">
-          <button class="btn btn-primary btn-sm" onclick="window.print()">
+          <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()">
             <i class="fa-solid fa-print"></i> طباعة / تصدير العقد كـ PDF
           </button>
           <button class="btn btn-outline-primary btn-sm" onclick="closeContractSigningModal()">
@@ -4230,7 +4230,7 @@
         <button class="btn btn-outline-primary btn-sm" onclick="closeAssocEvidencePreviewModal()">إغلاق</button>
         <div style="display: flex; gap: 8px;">
           <button class="btn btn-outline-primary btn-sm" onclick="downloadCurrentEvidence()"><i class="fa-solid fa-download"></i> تنزيل الوثيقة</button>
-          <button class="btn btn-primary btn-sm" onclick="window.print()"><i class="fa-solid fa-print"></i> طباعة الوثيقة</button>
+          <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()"><i class="fa-solid fa-print"></i> طباعة الوثيقة</button>
         </div>
       </div>
     </div>
@@ -4362,7 +4362,7 @@
 
       <div class="wizard-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--c-bg); border-top: 1px solid var(--c-border);">
         <button class="btn btn-outline-primary btn-sm" onclick="closeConsSessionReportModal()">إغلاق</button>
-        <button class="btn btn-primary btn-sm" onclick="window.print()">
+        <button class="btn btn-primary btn-sm" onclick="AthqPrint.autoHandlePrint()">
           <i class="fa-solid fa-print"></i> طباعة التقرير (PDF)
         </button>
       </div>
@@ -5158,7 +5158,7 @@
       <div class="wizard-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--c-bg); border-top: 1px solid var(--c-border); flex-wrap: wrap; gap: 10px;">
         <button class="btn btn-outline-primary btn-sm" onclick="closeOrgImpactModal()">إغلاق</button>
         <div style="display: flex; gap: 8px;">
-          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="window.print()">
+          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="AthqPrint.autoHandlePrint()">
             <i class="fa-solid fa-print"></i> طباعة بطاقة الأثر (PDF)
           </button>
           <button class="btn btn-primary btn-sm" onclick="closeOrgImpactModal(); switchRole('association');">
@@ -5464,7 +5464,7 @@
       <div class="wizard-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--c-bg); border-top: 1px solid var(--c-border); flex-wrap: wrap; gap: 10px;">
         <button class="btn btn-outline-primary btn-sm" onclick="closeAdminDocGeneratorModal()">إغلاق</button>
         <div style="display: flex; gap: 8px;">
-          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="window.print()">
+          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="AthqPrint.autoHandlePrint()">
             <i class="fa-solid fa-print"></i> طباعة / حفظ PDF
           </button>
           <button class="btn btn-primary btn-sm" onclick="saveAndStampAdminDoc()">
@@ -5512,7 +5512,7 @@
       <div class="wizard-footer" style="padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; background: var(--c-bg); border-top: 1px solid var(--c-border); flex-wrap: wrap; gap: 10px;">
         <button class="btn btn-outline-primary btn-sm" onclick="closeAdminDocPreviewModal()">إغلاق</button>
         <div style="display: flex; gap: 8px;">
-          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="window.print()">
+          <button class="btn btn-outline btn-sm" style="border-color: var(--c-gold); color: var(--c-gold-dark);" onclick="AthqPrint.autoHandlePrint()">
             <i class="fa-solid fa-print"></i> طباعة / تحميل PDF
           </button>
           <button class="btn btn-primary btn-sm" id="btn-sign-from-preview" onclick="signCurrentPreviewDoc()">
@@ -5607,6 +5607,7 @@
   <script src="js/cloud-db.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/presentation.js"></script>
+  <script src="js/print-engine.js"></script>
   <script src="js/landing.js"></script>
 </body>
 </html>
