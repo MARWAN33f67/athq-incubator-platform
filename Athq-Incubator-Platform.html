@@ -62,6 +62,7 @@
   --c-border: #E2E8F0;
   --c-border-subtle: #EDF2F7;
 
+  --c-text: #2B2E34;
   --c-text-primary: #2B2E34;
   --c-text-secondary: #5A6065;
   --c-text-muted: #718096;
@@ -96,19 +97,26 @@
 }
 
 [data-theme="dark"] {
-  --c-bg: #091510;
-  --c-bg-alt: #0F1E18;
-  --c-surface: #12241D;
-  --c-surface-card: rgba(18, 36, 29, 0.92);
-  --c-border: #1B352B;
+  --c-bg: #0A140F;
+  --c-bg-alt: #0F1E17;
+  --c-surface: #142820;
+  --c-surface-card: #142820;
+  --c-border: #1E3A2F;
   --c-border-subtle: #172D24;
 
-  --c-text-primary: #F2F8F5;
-  --c-text-secondary: #ADC3B7;
-  --c-text-muted: #728D80;
+  --c-text: #F1F5F9;
+  --c-text-primary: #F8FAFC;
+  --c-text-secondary: #CBD5E1;
+  --c-text-muted: #94A3B8;
+  --c-text-inverse: #0A140F;
 
-  --c-primary-subtle: #132E22;
-  --c-gold-subtle: #2C2310;
+  --c-primary: #15803D;
+  --c-primary-dark: #0D6E46;
+  --c-primary-light: #22C55E;
+  --c-primary-subtle: #0E3524;
+  --c-gold: #F59E0B;
+  --c-gold-dark: #D97706;
+  --c-gold-subtle: #2A210D;
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -8030,6 +8038,285 @@ img, svg {
   padding: 20px;
   margin-top: 20px;
 }
+
+/* ==========================================================================
+   COMPREHENSIVE OFFICIAL DARK THEME SYSTEM (تحسينات ومعالجة الوضع الليلي الشاملة)
+   ========================================================================== */
+[data-theme="dark"] body {
+  background-color: var(--c-bg);
+  color: var(--c-text-primary);
+}
+
+/* Headers & Bars */
+[data-theme="dark"] .top-notice-bar {
+  background: #05120B !important;
+  border-bottom: 1px solid #162B21 !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .top-notice-bar a {
+  color: #A7F3D0 !important;
+}
+
+[data-theme="dark"] .role-simulator-bar {
+  background: #091911 !important;
+  border-bottom: 1px solid #1A3528 !important;
+}
+
+[data-theme="dark"] .role-btn {
+  background: #11261D !important;
+  border-color: #1E3F30 !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .role-btn.active {
+  background: #15803D !important;
+  color: #FFFFFF !important;
+  border-color: #22C55E !important;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25) !important;
+}
+
+[data-theme="dark"] .main-header {
+  background: rgba(10, 20, 15, 0.92) !important;
+  border-bottom: 1px solid #19382B !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .nav-link:hover,
+[data-theme="dark"] .nav-link.active {
+  color: #4ADE80 !important;
+  background: rgba(34, 197, 94, 0.12) !important;
+}
+
+[data-theme="dark"] .dropdown-panel {
+  background: #0F2218 !important;
+  border: 1px solid #1D4332 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background: #163325 !important;
+}
+
+[data-theme="dark"] .dropdown-title {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .dropdown-desc {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .btn-icon {
+  background: #11261D !important;
+  border-color: #1E3F30 !important;
+  color: #FCD34D !important;
+}
+
+/* All Cards, Panels & Containers */
+[data-theme="dark"] .track-card,
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .facility-card,
+[data-theme="dark"] .kpi-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .portal-card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .benefit-card,
+[data-theme="dark"] .booklet-card,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .handover-card,
+[data-theme="dark"] .admin-kpi-card,
+[data-theme="dark"] .admin-kanban-card,
+[data-theme="dark"] .cons-kpi-card,
+[data-theme="dark"] .assoc-kpi-card,
+[data-theme="dark"] .tab-content,
+[data-theme="dark"] .db-studio-box,
+[data-theme="dark"] .pyramid-card,
+[data-theme="dark"] .stage-step-card {
+  background: #11261D !important;
+  border-color: #1C3F2F !important;
+  color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] .faq-question {
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .faq-answer {
+  color: #CBD5E1 !important;
+}
+
+/* Modals & Dialogs */
+[data-theme="dark"] .wizard-modal-box,
+[data-theme="dark"] .modal-box,
+[data-theme="dark"] .pyramid-drawer-panel {
+  background: #0E2017 !important;
+  border-color: #1F4533 !important;
+  color: #F1F5F9 !important;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="dark"] .wizard-body {
+  background: #0E2017 !important;
+  color: #F1F5F9 !important;
+}
+
+[data-theme="dark"] .wizard-footer {
+  background: #091710 !important;
+  border-top-color: #1B3B2C !important;
+}
+
+/* Specific elements inside modals */
+[data-theme="dark"] .receipt-card,
+[data-theme="dark"] .booking-ticket-box,
+[data-theme="dark"] .cert-qr-box,
+[data-theme="dark"] .sig-pad-wrapper {
+  background: #132B20 !important;
+  border-color: #1E4433 !important;
+  color: #F1F5F9 !important;
+}
+
+/* Form Controls (Inputs, Selects, Textareas) */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #132A1F !important;
+  color: #F8FAFC !important;
+  border: 1.5px solid #204634 !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: #F59E0B !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2) !important;
+  background: #163023 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #6B8A7A !important;
+}
+
+[data-theme="dark"] .form-label,
+[data-theme="dark"] label {
+  color: #E2E8F0 !important;
+}
+
+/* Tables across all portals */
+[data-theme="dark"] table {
+  background: #11261D !important;
+  border-color: #1E3F30 !important;
+}
+
+[data-theme="dark"] table th {
+  background: #0C1E16 !important;
+  color: #FCD34D !important;
+  border-color: #1E3F30 !important;
+}
+
+[data-theme="dark"] table td {
+  background: transparent !important;
+  color: #CBD5E1 !important;
+  border-color: #1A372A !important;
+}
+
+[data-theme="dark"] table tr:hover td {
+  background: rgba(34, 197, 94, 0.08) !important;
+}
+
+/* Database Studio Drawer */
+[data-theme="dark"] #athq-db-studio-drawer {
+  background: #0B1912 !important;
+  color: #F1F5F9 !important;
+  border-left: 2px solid #1E3F30 !important;
+}
+
+[data-theme="dark"] .db-table-nav-btn {
+  background: #12281E !important;
+  border-color: #1D3E2F !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .db-table-nav-btn.active {
+  background: #15803D !important;
+  color: #FFFFFF !important;
+  border-color: #22C55E !important;
+}
+
+/* Text overrides in dark mode */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.badge):not(.tag) {
+  color: inherit;
+}
+
+/* State simulator bar */
+[data-theme="dark"] .state-simulator-quickbar {
+  background: #0C1B14 !important;
+  border: 1px solid #1B3A2C !important;
+}
+
+[data-theme="dark"] .btn-state-sim {
+  background: #132A1F !important;
+  border-color: #1E3F30 !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .btn-state-sim.active {
+  background: #D97706 !important;
+  color: #FFFFFF !important;
+}
+
+/* Notification & Command Palette Dropdowns */
+[data-theme="dark"] .notif-dropdown-panel,
+[data-theme="dark"] .cmd-palette-box {
+  background: #0E2017 !important;
+  border: 1px solid #1F4533 !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="dark"] .notif-panel-header {
+  border-bottom-color: #1A382A !important;
+}
+
+[data-theme="dark"] .notif-item {
+  border-bottom-color: #173225 !important;
+}
+
+[data-theme="dark"] .notif-item:hover {
+  background: #132B20 !important;
+}
+
+[data-theme="dark"] .cmd-palette-input {
+  background: #142E22 !important;
+  color: #FFFFFF !important;
+  border-color: #204634 !important;
+}
+
+/* Footer */
+[data-theme="dark"] .site-footer {
+  background: #050E09 !important;
+  border-top: 1px solid #162C21 !important;
+}
+
 
 /* ==========================================================================
    OFFICIAL ATHQ PRINT & PDF ENGINE STYLES (معايير الطباعة وتصدير PDF المعتمدة)
@@ -17104,11 +17391,28 @@ function initThemeEngine() {
   const saved = localStorage.getItem('athq_theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
 
+  const updateToggleIcon = (theme) => {
+    if (!themeToggle) return;
+    if (theme === 'dark') {
+      themeToggle.innerHTML = '<i class="fa-solid fa-sun" style="color: #FCD34D;"></i>';
+      themeToggle.title = 'التبديل إلى الوضع النهاري';
+    } else {
+      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+      themeToggle.title = 'التبديل إلى الوضع الليلي';
+    }
+  };
+
+  updateToggleIcon(saved);
+
   themeToggle?.addEventListener('click', () => {
     const cur = document.documentElement.getAttribute('data-theme') || 'light';
     const next = cur === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('athq_theme', next);
+    updateToggleIcon(next);
+    if (typeof showToast === 'function') {
+      showToast(next === 'dark' ? 'تم تفعيل الوضع الليلي الفاخر 🌙' : 'تم تفعيل الوضع النهاري المشرق ☀️');
+    }
   });
 }
 

@@ -313,11 +313,28 @@ function initThemeEngine() {
   const saved = localStorage.getItem('athq_theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
 
+  const updateToggleIcon = (theme) => {
+    if (!themeToggle) return;
+    if (theme === 'dark') {
+      themeToggle.innerHTML = '<i class="fa-solid fa-sun" style="color: #FCD34D;"></i>';
+      themeToggle.title = 'التبديل إلى الوضع النهاري';
+    } else {
+      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+      themeToggle.title = 'التبديل إلى الوضع الليلي';
+    }
+  };
+
+  updateToggleIcon(saved);
+
   themeToggle?.addEventListener('click', () => {
     const cur = document.documentElement.getAttribute('data-theme') || 'light';
     const next = cur === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('athq_theme', next);
+    updateToggleIcon(next);
+    if (typeof showToast === 'function') {
+      showToast(next === 'dark' ? 'تم تفعيل الوضع الليلي الفاخر 🌙' : 'تم تفعيل الوضع النهاري المشرق ☀️');
+    }
   });
 }
 
