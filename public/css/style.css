@@ -3487,6 +3487,12 @@ img, svg {
   margin-bottom: 24px;
   overflow-x: auto;
   padding-bottom: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.portal-tabs-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .portal-tab-btn {

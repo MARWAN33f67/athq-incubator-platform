@@ -2696,46 +2696,51 @@
         </div>
 
         <!-- Search and Multi-Filter Toolbar -->
-        <div class="admin-filter-bar">
-          <div class="admin-search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="adminAppSearch" class="admin-search-input" placeholder="ابحث باسم الجمعية، رقم الترخيص، الممثل، أو الهاتف..." oninput="filterAdminApplications()">
+        <div class="admin-filter-bar" style="display: flex; flex-direction: column; gap: 12px; align-items: stretch;">
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <div class="admin-search-wrapper" style="flex: 1; min-width: 260px;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="adminAppSearch" class="admin-search-input" placeholder="ابحث باسم الجمعية، رقم الترخيص، الممثل، أو الهاتف..." oninput="filterAdminApplications()">
+            </div>
+            <div style="width: 220px;">
+              <select id="adminModeFilter" class="form-control" style="font-size: 0.82rem; padding: 8px 12px;" onchange="filterAdminApplications()">
+                <option value="all">جميع أنواع الاحتضان</option>
+                <option value="idea">💡 احتضان فكرة (تأسيس)</option>
+                <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+                <option value="accelerator">🚀 مسرعة أعمال (نمو)</option>
+              </select>
+            </div>
+            <div style="width: 220px;">
+              <select id="adminTrackFilter" class="form-control" style="font-size: 0.82rem; padding: 8px 12px;" onchange="filterAdminApplications()">
+                <option value="all">جميع المسارات التنموية</option>
+                <option value="مسار الحوكمة">مسار الحوكمة والتمكين</option>
+                <option value="مسار البناء">مسار البناء المؤسسي</option>
+                <option value="مسار التأهيل">مسار التأهيل والتدريب</option>
+              </select>
+            </div>
           </div>
 
-          <div class="admin-filter-pills">
-            <button class="admin-filter-pill active" data-status="all" onclick="setAdminStatusFilter(this, 'all')">
-              الكل <span class="pill-count" id="admin-cnt-all">0</span>
-            </button>
-            <button class="admin-filter-pill" data-status="تحت المراجعة" onclick="setAdminStatusFilter(this, 'تحت المراجعة')">
-              <i class="fa-solid fa-clock" style="color: #D97706;"></i> تحت المراجعة <span class="pill-count" id="admin-cnt-review">0</span>
-            </button>
-            <button class="admin-filter-pill" data-status="مطلوب تعديل" onclick="setAdminStatusFilter(this, 'مطلوب تعديل')">
-              <i class="fa-solid fa-pen" style="color: var(--c-gold-dark);"></i> مطلوب تعديل <span class="pill-count" id="admin-cnt-revision">0</span>
-            </button>
-            <button class="admin-filter-pill" data-status="مقبول" onclick="setAdminStatusFilter(this, 'مقبول')">
-              <i class="fa-solid fa-check" style="color: #0E6E41;"></i> مقبول <span class="pill-count" id="admin-cnt-approved">0</span>
-            </button>
-            <button class="admin-filter-pill" data-status="مرفوض" onclick="setAdminStatusFilter(this, 'مرفوض')">
-              <i class="fa-solid fa-xmark" style="color: #EF4444;"></i> مرفوض <span class="pill-count" id="admin-cnt-rejected">0</span>
-            </button>
-          </div>
-
-          <div style="min-width: 170px;">
-            <select id="adminModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="filterAdminApplications()">
-              <option value="all">جميع أنواع الاحتضان</option>
-              <option value="idea">💡 احتضان فكرة (تأسيس)</option>
-              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
-              <option value="accelerator">🚀 مسرعة أعمال (نمو)</option>
-            </select>
-          </div>
-
-          <div style="min-width: 170px;">
-            <select id="adminTrackFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="filterAdminApplications()">
-              <option value="all">جميع المسارات</option>
-              <option value="مسار الحوكمة">مسار الحوكمة والتمكين</option>
-              <option value="مسار البناء">مسار البناء المؤسسي</option>
-              <option value="مسار التأهيل">مسار التأهيل والتدريب</option>
-            </select>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--c-border); padding-top: 10px; flex-wrap: wrap; gap: 10px;">
+            <div class="admin-filter-pills" style="margin: 0;">
+              <button class="admin-filter-pill active" data-status="all" onclick="setAdminStatusFilter(this, 'all')">
+                الكل <span class="pill-count" id="admin-cnt-all">0</span>
+              </button>
+              <button class="admin-filter-pill" data-status="تحت المراجعة" onclick="setAdminStatusFilter(this, 'تحت المراجعة')">
+                <i class="fa-solid fa-clock" style="color: #D97706;"></i> تحت المراجعة <span class="pill-count" id="admin-cnt-review">0</span>
+              </button>
+              <button class="admin-filter-pill" data-status="مطلوب تعديل" onclick="setAdminStatusFilter(this, 'مطلوب تعديل')">
+                <i class="fa-solid fa-pen" style="color: var(--c-gold-dark);"></i> مطلوب تعديل <span class="pill-count" id="admin-cnt-revision">0</span>
+              </button>
+              <button class="admin-filter-pill" data-status="مقبول" onclick="setAdminStatusFilter(this, 'مقبول')">
+                <i class="fa-solid fa-check" style="color: #0E6E41;"></i> مقبول <span class="pill-count" id="admin-cnt-approved">0</span>
+              </button>
+              <button class="admin-filter-pill" data-status="مرفوض" onclick="setAdminStatusFilter(this, 'مرفوض')">
+                <i class="fa-solid fa-xmark" style="color: #EF4444;"></i> مرفوض <span class="pill-count" id="admin-cnt-rejected">0</span>
+              </button>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--c-text-muted);">
+              <i class="fa-solid fa-sliders"></i> فرز متعدد حي وفوري
+            </span>
           </div>
         </div>
 
