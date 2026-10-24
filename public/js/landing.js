@@ -200,7 +200,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "تشغيل العيادات المتنقلة والتوعية الصحية الميدانية",
       volunteersCount: 100,
       hoursCount: 6000,
-      economicImpact: "300,000 ر.س",
+      mode: "ميداني بالفعاليات",
       platformRef: "NVG-1446-9921",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "صحي وميداني"
@@ -211,7 +211,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "تنظيم دوري الأحياء المجتمعي وتأهيل اليافعين",
       volunteersCount: 56,
       hoursCount: 1240,
-      economicImpact: "62,000 ر.س",
+      mode: "ميداني بالفعاليات",
       platformRef: "NVG-1446-8812",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "شبابي ورياضي"
@@ -222,7 +222,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "برنامج إرشاد القيادات الشابة وتصميم المبادرات",
       volunteersCount: 36,
       hoursCount: 197,
-      economicImpact: "19,700 ر.س",
+      mode: "حضوري بمقر الحاضنة",
       platformRef: "NVG-1446-7734",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "حوكمة وتمكين"
@@ -233,7 +233,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "ملتقى بلورة الأفكار والمبادرات التأسيسية لليافعين",
       volunteersCount: 8,
       hoursCount: 30,
-      economicImpact: "3,000 ر.س",
+      mode: "حضوري بمقر الحاضنة",
       platformRef: "NVG-1446-6621",
       status: "قيد المراجعة بالمنصة",
       category: "تأسيس ومبادرات"
@@ -244,7 +244,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "توثيق الأوقاف وتنمية المنح والوصايا التنموية",
       volunteersCount: 16,
       hoursCount: 70,
-      economicImpact: "7,000 ر.س",
+      mode: "هجين (حضوري وعن بُعد)",
       platformRef: "NVG-1446-5542",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "استدامة مالية"
@@ -255,7 +255,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "تنظيم ليالي رصد الأهلة والمعارض الفلكية للزوار",
       volunteersCount: 12,
       hoursCount: 95,
-      economicImpact: "9,500 ر.س",
+      mode: "ميداني بالفعاليات",
       platformRef: "NVG-1446-4431",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "ثقافي وعلمي"
@@ -266,7 +266,7 @@ const DEFAULT_SEED_DATA = {
       opportunityTitle: "سفراء العمل التطوعي وخدمة ضيوف الرحمن وزوار المدينة",
       volunteersCount: 45,
       hoursCount: 320,
-      economicImpact: "32,000 ر.س",
+      mode: "ميداني بالفعاليات",
       platformRef: "NVG-1446-3319",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       category: "خدمة مجتمعية"
@@ -283,7 +283,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0554129988",
       specialization: "إدارة مشاريع تنموية وحوكمة",
       hours: 45,
-      economicValue: "2,250 ر.س",
       joinDate: "2025-09-10",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-7734"
@@ -298,7 +297,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0569871234",
       specialization: "تخطيط استراتيجي وابتكار مجتمعي",
       hours: 32,
-      economicValue: "1,600 ر.س",
       joinDate: "2025-09-18",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-7734"
@@ -313,7 +311,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0543329988",
       specialization: "تقنية معلومات وتحول رقمي",
       hours: 28,
-      economicValue: "1,400 ر.س",
       joinDate: "2025-09-25",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-7734"
@@ -328,7 +325,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0503348821",
       specialization: "طب أسرة ومجتمع وإسعافات",
       hours: 60,
-      economicValue: "3,000 ر.س",
       joinDate: "2025-08-25",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-9921"
@@ -343,7 +339,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0541128790",
       specialization: "إدارة وتنظيم فعاليات رياضية",
       hours: 40,
-      economicValue: "2,000 ر.س",
       joinDate: "2025-09-02",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-8812"
@@ -358,7 +353,6 @@ const DEFAULT_SEED_DATA = {
       phone: "0559981122",
       specialization: "توثيق قانوني وصياغة حجج وقفية",
       hours: 32,
-      economicValue: "1,600 ر.س",
       joinDate: "2025-10-01",
       status: "معتمد وموثق بالمنصة الوطنية ✓",
       nvgRef: "NVG-1446-5542"
@@ -527,7 +521,7 @@ const DEFAULT_SEED_DATA = {
       datesArabic: "الأسبوع الرابع من الشهر",
       status: "upcoming",
       statusLabel: "مجدول وقادم",
-      headline: "تصميم الفرص التطوعية الاحترافية، حساب القيمة الاقتصادية، وهندسة المبادرات المجتمعية الملموسة",
+      headline: "تصميم الفرص التطوعية الاحترافية، توثيق ساعات العطاء بالمنصة الوطنية، وهندسة المبادرات المجتمعية الملموسة",
       targetAudience: "مسؤولو إدارة التطوع والبرامج والأنشطة المجتمعية",
       totalSlots: 16,
       bookedSlots: 6,
@@ -799,7 +793,7 @@ const DEFAULT_SERVICES_CATALOG = [
     color: "#059669",
     bg: "rgba(5, 150, 105, 0.1)",
     desc: "نشر الفرص التطوعية التخصصية بالمنصة الوطنية • فرز المتقدمين • توثيق الساعات وإصدار الشهادات الرسمية",
-    deliverables: "ساعات تطوعية موثقة رسمياً ورفع القيمة الاقتصادية"
+    deliverables: "ساعات تطوعية موثقة رسمياً وشهادات معتمدة للمتطوعين"
   },
   {
     key: "operational_plan",
@@ -6187,25 +6181,24 @@ window.renderAssocVolunteeringTab = function() {
     (v.assocName && currentAssoc.associationName && (currentAssoc.associationName.includes(v.assocName) || v.assocName.includes(currentAssoc.associationName)))
   );
 
-  // Dynamic KPI calculations (Saudi standard: 50 SAR per volunteer hour)
+  // Dynamic KPI calculations
   const totalHours = assocVols.reduce((s, v) => s + (parseInt(v.hours, 10) || 0), 0) || 
                      assocOpps.reduce((s, o) => s + (parseInt(o.hoursCount, 10) || 0), 0) || 
                      (currentAssoc.volunteerHours || 197);
   const totalVolunteers = assocVols.length > 0 ? assocVols.length : 
                           (assocOpps.reduce((s, o) => s + (parseInt(o.volunteersCount, 10) || 0), 0) || (currentAssoc.volunteersCount || 36));
-  const totalImpact = totalHours * 50;
 
   // Update KPI displays in Association Portal
   const kpiHoursEl = document.getElementById('assoc-vol-kpi-hours');
   const kpiVolsEl = document.getElementById('assoc-vol-kpi-volunteers');
-  const kpiImpactEl = document.getElementById('assoc-vol-kpi-impact');
+  const kpiOppsEl = document.getElementById('assoc-vol-kpi-opps-total');
   const navBadgeEl = document.getElementById('assoc-vol-nav-badge');
   const oppsCountEl = document.getElementById('assoc-vol-opps-count');
   const rosterCountEl = document.getElementById('assoc-vol-roster-count');
 
   if (kpiHoursEl) kpiHoursEl.textContent = `${totalHours.toLocaleString()} ساعة`;
   if (kpiVolsEl) kpiVolsEl.textContent = `${totalVolunteers} متطوعاً`;
-  if (kpiImpactEl) kpiImpactEl.textContent = `${totalImpact.toLocaleString()} ر.س`;
+  if (kpiOppsEl) kpiOppsEl.textContent = `${assocOpps.length} فرصة`;
   if (navBadgeEl) navBadgeEl.textContent = `${totalVolunteers} متطوعاً`;
   if (oppsCountEl) oppsCountEl.textContent = assocOpps.length;
   if (rosterCountEl) rosterCountEl.textContent = assocVols.length;
@@ -6260,15 +6253,15 @@ window.renderAssocVolunteeringTab = function() {
               </div>
             </div>
 
-            <!-- Meta Grid (Hours & Impact) -->
+            <!-- Meta Grid (Hours & Mode) -->
             <div class="vol-meta-grid">
               <div class="vol-meta-item">
                 <span class="vol-meta-label">الساعات المستهدفة:</span>
                 <span class="vol-meta-val" style="color: #166534;">+${opp.hoursCount} ساعة</span>
               </div>
               <div class="vol-meta-item">
-                <span class="vol-meta-label">العائد الاقتصادي التقديري:</span>
-                <span class="vol-meta-val" style="color: #92400E;">${opp.economicImpact || (opp.hoursCount * 50).toLocaleString() + ' ر.س'}</span>
+                <span class="vol-meta-label">نمط ومكان التنفيذ:</span>
+                <span class="vol-meta-val" style="color: #1E3A8A;">${opp.mode || 'حضوري بمقر الحاضنة'}</span>
               </div>
             </div>
 
@@ -6308,7 +6301,6 @@ window.renderAssocVolunteeringTab = function() {
       rosterTbody.innerHTML = assocVols.map(vol => {
         const initials = (vol.name || 'متطوع').split(' ').slice(0, 2).map(w => w[0]).join('');
         const maskedId = vol.nationalId ? `${vol.nationalId.slice(0, 4)}***${vol.nationalId.slice(-3)}` : '1098***615';
-        const econVal = vol.economicValue || `${((parseInt(vol.hours, 10) || 25) * 50).toLocaleString()} ر.س`;
 
         return `
           <tr>
@@ -6332,8 +6324,8 @@ window.renderAssocVolunteeringTab = function() {
             <td style="text-align: center;">
               <strong style="color: #166534; font-size: 0.95rem;">+${vol.hours} س</strong>
             </td>
-            <td style="text-align: center; font-weight: 800; color: #92400E; font-size: 0.88rem;">
-              ${econVal}
+            <td style="text-align: center; color: var(--c-text-muted); font-size: 0.82rem;">
+              ${vol.joinDate || '2025-09-15'}
             </td>
             <td style="text-align: center;">
               <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
@@ -6366,17 +6358,16 @@ window.renderAdminVolunteeringTable = function() {
   const totalHours = volsList.reduce((sum, v) => sum + (parseInt(v.hours, 10) || 0), 0) + 
                      oppsList.reduce((sum, o) => sum + (parseInt(o.hoursCount, 10) || 0), 0);
   const totalVols = volsList.length + oppsList.reduce((sum, o) => sum + (parseInt(o.volunteersCount, 10) || 0), 0);
-  const totalImpact = totalHours * 50;
 
   const kpiHoursEl = document.getElementById('admin-vol-kpi-hours');
   const kpiVolsEl = document.getElementById('admin-vol-kpi-volunteers');
-  const kpiImpactEl = document.getElementById('admin-vol-kpi-impact');
+  const kpiOppsEl = document.getElementById('admin-vol-kpi-opps-total');
   const oppsCntEl = document.getElementById('admin-vol-opps-cnt');
   const rosterCntEl = document.getElementById('admin-vol-roster-cnt');
 
   if (kpiHoursEl) kpiHoursEl.textContent = `+${totalHours.toLocaleString()}`;
   if (kpiVolsEl) kpiVolsEl.textContent = `+${totalVols.toLocaleString()}`;
-  if (kpiImpactEl) kpiImpactEl.textContent = `${totalImpact.toLocaleString()} ر.س`;
+  if (kpiOppsEl) kpiOppsEl.textContent = `+${oppsList.length} فرصة`;
   if (oppsCntEl) oppsCntEl.textContent = oppsList.length;
   if (rosterCntEl) rosterCntEl.textContent = volsList.length;
 
@@ -6429,8 +6420,8 @@ window.renderAdminVolunteeringTable = function() {
             <td style="text-align: center;">
               <strong style="color: #0D6E46; font-size: 0.95rem;">+${(v.hoursCount || 0).toLocaleString()} س</strong>
             </td>
-            <td style="text-align: center; font-weight: 800; color: #92400E;">
-              ${v.economicImpact || ((v.hoursCount || 0) * 50).toLocaleString() + ' ر.س'}
+            <td style="text-align: center; font-size: 0.82rem; color: #1E3A8A; font-weight: 700;">
+              ${v.mode || 'حضوري بمقر الحاضنة'}
             </td>
             <td style="text-align: center;">
               <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
@@ -6481,7 +6472,6 @@ window.renderAdminVolunteeringTable = function() {
       tbodyRoster.innerHTML = filteredVols.map(vol => {
         const initials = (vol.name || 'متطوع').split(' ').slice(0, 2).map(w => w[0]).join('');
         const maskedId = vol.nationalId ? `${vol.nationalId.slice(0, 4)}***${vol.nationalId.slice(-3)}` : '1098***615';
-        const econVal = vol.economicValue || `${((parseInt(vol.hours, 10) || 25) * 50).toLocaleString()} ر.س`;
 
         return `
           <tr>
@@ -6508,8 +6498,8 @@ window.renderAdminVolunteeringTable = function() {
             <td style="text-align: center;">
               <strong style="color: #166534; font-size: 0.95rem;">+${vol.hours} س</strong>
             </td>
-            <td style="text-align: center; font-weight: 800; color: #92400E; font-size: 0.88rem;">
-              ${econVal}
+            <td style="text-align: center; color: var(--c-text-muted); font-size: 0.82rem;">
+              ${vol.joinDate || '2025-09-15'}
             </td>
             <td style="text-align: center;">
               <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
@@ -6571,13 +6561,9 @@ window.updateVolOppCalculations = function() {
   const hoursPerVol = parseInt(document.getElementById('vol-opp-hours-per-vol')?.value, 10) || 30;
 
   const totalHours = volsCount * hoursPerVol;
-  const economicImpact = totalHours * 50;
-
   const hoursDisplay = document.getElementById('vol-opp-calc-hours');
-  const impactDisplay = document.getElementById('vol-opp-calc-impact');
 
   if (hoursDisplay) hoursDisplay.textContent = `${totalHours.toLocaleString()} ساعة`;
-  if (impactDisplay) impactDisplay.textContent = `${economicImpact.toLocaleString()} ر.س`;
 };
 
 window.submitCreateVolOpportunity = function() {
@@ -6603,7 +6589,6 @@ window.submitCreateVolOpportunity = function() {
   const volunteersCount = parseInt(volsInput?.value, 10) || 10;
   const hoursPerVol = parseInt(hoursInput?.value, 10) || 30;
   const totalHours = volunteersCount * hoursPerVol;
-  const economicImpact = `${(totalHours * 50).toLocaleString()} ر.س`;
   const platformRef = refInput?.value || `NVG-1446-${Math.floor(1000 + Math.random() * 9000)}`;
   const description = descInput?.value || '';
 
@@ -6613,7 +6598,6 @@ window.submitCreateVolOpportunity = function() {
     opportunityTitle: title,
     volunteersCount: volunteersCount,
     hoursCount: totalHours,
-    economicImpact: economicImpact,
     platformRef: platformRef,
     status: 'معتمد وموثق بالمنصة الوطنية ✓',
     category: category,
@@ -6663,12 +6647,7 @@ window.closeAddVolunteerModal = function() {
 };
 
 window.updateAddVolCalculations = function() {
-  const hoursInput = document.getElementById('vol-add-hours');
-  const hours = parseInt(hoursInput?.value, 10) || 25;
-  const econDisplay = document.getElementById('vol-add-economic-val');
-  if (econDisplay) {
-    econDisplay.textContent = `${(hours * 50).toLocaleString()} ر.س`;
-  }
+  // Pure volunteer hours without monetary valuation
 };
 
 window.autoFillVolunteerSample = function() {
@@ -6747,7 +6726,6 @@ window.submitAddVolunteer = function() {
     phone: phone || '0550000000',
     specialization: spec || 'تطوع تخصصي',
     hours: hours,
-    economicValue: `${(hours * 50).toLocaleString()} ر.س`,
     joinDate: new Date().toISOString().slice(0, 10),
     status: 'معتمد وموثق بالمنصة الوطنية ✓',
     nvgRef: opp.platformRef || 'NVG-1446-7734'
@@ -6780,7 +6758,6 @@ window.printVolunteerCertificateAction = function(volunteerId) {
       vol.assocName,
       vol.opportunityTitle,
       vol.hours,
-      vol.economicValue,
       vol.nvgRef
     );
   } else {
@@ -6791,7 +6768,7 @@ window.printVolunteerCertificateAction = function(volunteerId) {
 
 window.exportVolunteeringReport = function() {
   const list = APP_STATE.volunteering || [];
-  const headers = ['الجمعية المستفيدة', 'وضع الجمعية', 'المبادرة التطوعية', 'المجال', 'عدد المتطوعين', 'ساعات التطوع', 'العائد التقديري', 'المرجع الوطني', 'الحالة'];
+  const headers = ['الجمعية المستفيدة', 'وضع الجمعية', 'المبادرة التطوعية', 'المجال', 'عدد المتطوعين', 'ساعات التطوع', 'نمط التنفيذ', 'المرجع الوطني', 'الحالة'];
 
   let csvContent = '\uFEFF';
   csvContent += headers.join(',') + '\r\n';
@@ -6805,7 +6782,7 @@ window.exportVolunteeringReport = function() {
       `"${v.category}"`,
       `"${v.volunteersCount}"`,
       `"${v.hoursCount}"`,
-      `"${v.economicImpact}"`,
+      `"${v.mode || 'حضوري بمقر الحاضنة'}"`,
       `"${v.platformRef}"`,
       `"${v.status}"`
     ];

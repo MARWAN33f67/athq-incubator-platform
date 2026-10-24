@@ -355,7 +355,7 @@ class AthqPrintEngine {
   }
 
   // توليد وطباعة شهادة إنجاز ساعات تطوعية رسمية (Official Volunteering Certificate)
-  printVolunteerCertificate(volunteerName = 'سعود بن فهد البلوي', assocName = 'جمعية ديوان الشبابية', opportunityTitle = 'برنامج إرشاد القيادات الشابة وتصميم المبادرات', hours = 45, economicValue = '2,250 ر.س', nvgRef = 'NVG-1446-7734') {
+  printVolunteerCertificate(volunteerName = 'سعود بن فهد البلوي', assocName = 'جمعية ديوان الشبابية', opportunityTitle = 'برنامج إرشاد القيادات الشابة وتصميم المبادرات', hours = 45, nvgRef = 'NVG-1446-7734') {
     const ref = `ATHQ-VOL-CERT-${Math.floor(1000 + Math.random() * 9000)}`;
 
     const content = `
@@ -367,7 +367,7 @@ class AthqPrintEngine {
             <i class="fa-solid fa-award"></i> وثيقة معتمدة ومسجلة رسمياً بالمنصة الوطنية للعمل التطوعي (NVG)
           </span>
           <h2 style="font-size: 1.45rem; font-weight: 900; color: #0D6E46; margin: 0 0 6px 0;">شـهـادة شـكـر وتـقـديـر وتـوثـيـق عـطـاء</h2>
-          <p style="font-size: 0.88rem; color: #475569; margin: 0;">وفق المعيار الوطني السعودي للساعات التطوعية واحتساب القيمة الاقتصادية</p>
+          <p style="font-size: 0.88rem; color: #475569; margin: 0;">تقديراً للعطاء المجتمعي المتميز وتوثيق الساعات التطوعية المنجزة</p>
         </div>
 
         <div style="background: #FFFFFF; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
@@ -388,8 +388,8 @@ class AthqPrintEngine {
             <tr style="background: #F8FAFC;">
               <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 800; color: #0D6E46;">الساعات المعتمدة:</td>
               <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 900; color: #166534; font-size: 1.05rem;">${hours} ساعة تطوعية</td>
-              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 800; color: #0D6E46;">القيمة الاقتصادية:</td>
-              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 900; color: #92400E; font-size: 1.05rem;">${economicValue}</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 800; color: #0D6E46;">حالة الاعتماد:</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 900; color: #166534; font-size: 0.95rem;">موثق ومعتمد رسمياً ✓</td>
             </tr>
             <tr>
               <td style="padding: 10px 14px; border: 1px solid #CBD5E1; font-weight: 800; color: #0D6E46;">رمز المنصة الوطنية NVG:</td>
