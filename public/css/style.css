@@ -8502,4 +8502,266 @@ img, svg {
   }
 }
 
+/* ==========================================================================
+   Features Enhancement: 100-Day Roadmap, Service Catalog, Broadcast & Inquiries
+   ========================================================================== */
+
+/* 1. Contact Form Type Switcher (Individual vs Entity) */
+.contact-type-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  background: var(--c-surface-secondary, rgba(0, 0, 0, 0.04));
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--c-border);
+}
+
+.contact-type-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--c-text-muted);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+.contact-type-btn:hover {
+  color: var(--c-primary);
+  background: rgba(14, 110, 65, 0.05);
+}
+
+.contact-type-btn.active {
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-dark) 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(14, 110, 65, 0.25);
+  border-color: var(--c-primary);
+}
+
+/* 2. Broadcast & Announcements Banner for Associations */
+.assoc-broadcast-banner {
+  background: linear-gradient(135deg, rgba(14, 110, 65, 0.08) 0%, rgba(217, 155, 38, 0.12) 100%);
+  border: 1.5px solid var(--c-gold);
+  border-radius: 14px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(217, 155, 38, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInDown 0.4s ease-out;
+}
+
+.assoc-broadcast-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-gold) 0%, var(--c-primary) 100%);
+}
+
+.broadcast-meta-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.broadcast-pulse-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--c-gold) 0%, var(--c-gold-dark) 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 0 16px rgba(217, 155, 38, 0.4);
+  animation: pulseGold 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseGold {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 155, 38, 0.5); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(217, 155, 38, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 155, 38, 0); }
+}
+
+/* 3. 100-Day Acceleration Roadmap */
+.roadmap-100-overview {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.roadmap-day-counter {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #FFFFFF;
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 170px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.roadmap-day-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #38BDF8;
+  font-feature-settings: "tnum";
+}
+
+.roadmap-phase-card {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  transition: all 0.25s ease;
+}
+
+.roadmap-phase-card.active-phase {
+  border-color: var(--c-primary);
+  box-shadow: 0 6px 20px rgba(14, 110, 65, 0.12);
+  background: linear-gradient(180deg, rgba(14, 110, 65, 0.02) 0%, var(--c-surface) 100%);
+}
+
+.roadmap-phase-card.completed-phase {
+  border-color: #86EFAC;
+  background: #F0FDF4;
+}
+
+.roadmap-milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.roadmap-milestone-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.roadmap-milestone-item.done {
+  background: rgba(14, 110, 65, 0.06);
+  border-color: rgba(14, 110, 65, 0.25);
+}
+
+.roadmap-milestone-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--c-primary);
+}
+
+/* 4. Services Catalog Grid */
+.service-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.service-card-item {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-card-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-primary);
+  box-shadow: 0 12px 28px rgba(14, 110, 65, 0.14);
+}
+
+.service-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+/* 5. Events & Workshops Hub */
+.events-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.event-card-item {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.event-card-item:hover {
+  border-color: var(--c-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.event-card-item.broadcast-highlight {
+  border-color: var(--c-gold);
+  background: linear-gradient(180deg, rgba(217, 155, 38, 0.03) 0%, var(--c-surface) 100%);
+}
+
+.event-registered-badge {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
 

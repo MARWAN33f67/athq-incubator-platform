@@ -8512,6 +8512,268 @@ img, svg {
   }
 }
 
+/* ==========================================================================
+   Features Enhancement: 100-Day Roadmap, Service Catalog, Broadcast & Inquiries
+   ========================================================================== */
+
+/* 1. Contact Form Type Switcher (Individual vs Entity) */
+.contact-type-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  background: var(--c-surface-secondary, rgba(0, 0, 0, 0.04));
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid var(--c-border);
+}
+
+.contact-type-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--c-text-muted);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+}
+
+.contact-type-btn:hover {
+  color: var(--c-primary);
+  background: rgba(14, 110, 65, 0.05);
+}
+
+.contact-type-btn.active {
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-dark) 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(14, 110, 65, 0.25);
+  border-color: var(--c-primary);
+}
+
+/* 2. Broadcast & Announcements Banner for Associations */
+.assoc-broadcast-banner {
+  background: linear-gradient(135deg, rgba(14, 110, 65, 0.08) 0%, rgba(217, 155, 38, 0.12) 100%);
+  border: 1.5px solid var(--c-gold);
+  border-radius: 14px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(217, 155, 38, 0.12);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInDown 0.4s ease-out;
+}
+
+.assoc-broadcast-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-gold) 0%, var(--c-primary) 100%);
+}
+
+.broadcast-meta-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.broadcast-pulse-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--c-gold) 0%, var(--c-gold-dark) 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 0 16px rgba(217, 155, 38, 0.4);
+  animation: pulseGold 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseGold {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 155, 38, 0.5); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(217, 155, 38, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 155, 38, 0); }
+}
+
+/* 3. 100-Day Acceleration Roadmap */
+.roadmap-100-overview {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.roadmap-day-counter {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #FFFFFF;
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 170px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.roadmap-day-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #38BDF8;
+  font-feature-settings: "tnum";
+}
+
+.roadmap-phase-card {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  transition: all 0.25s ease;
+}
+
+.roadmap-phase-card.active-phase {
+  border-color: var(--c-primary);
+  box-shadow: 0 6px 20px rgba(14, 110, 65, 0.12);
+  background: linear-gradient(180deg, rgba(14, 110, 65, 0.02) 0%, var(--c-surface) 100%);
+}
+
+.roadmap-phase-card.completed-phase {
+  border-color: #86EFAC;
+  background: #F0FDF4;
+}
+
+.roadmap-milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.roadmap-milestone-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.roadmap-milestone-item.done {
+  background: rgba(14, 110, 65, 0.06);
+  border-color: rgba(14, 110, 65, 0.25);
+}
+
+.roadmap-milestone-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--c-primary);
+}
+
+/* 4. Services Catalog Grid */
+.service-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.service-card-item {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-card-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-primary);
+  box-shadow: 0 12px 28px rgba(14, 110, 65, 0.14);
+}
+
+.service-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+/* 5. Events & Workshops Hub */
+.events-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.event-card-item {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.event-card-item:hover {
+  border-color: var(--c-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.event-card-item.broadcast-highlight {
+  border-color: var(--c-gold);
+  background: linear-gradient(180deg, rgba(217, 155, 38, 0.03) 0%, var(--c-surface) 100%);
+}
+
+.event-registered-badge {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
 
 
 </style>
@@ -8722,6 +8984,13 @@ img, svg {
               <div class="dropdown-text">
                 <span class="dropdown-title">تواصل مع إدارة الحاضنة</span>
                 <span class="dropdown-desc">الموقع، الهاتف، والقنوات المباشرة</span>
+              </div>
+            </a>
+            <a href="#contact" onclick="setContactType('individual')" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon-box" style="background: rgba(14,110,65,0.12); color: var(--c-primary);"><i class="fa-solid fa-user-circle"></i></div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">استفسار الأفراد والمجتمع (شخص عادي)</span>
+                <span class="dropdown-desc">استفسارات المهتمين، الباحثين، والمتطوعين</span>
               </div>
             </a>
           </div>
@@ -10162,18 +10431,44 @@ img, svg {
           <!-- Form Column -->
           <div class="contact-form-panel">
             <div class="form-panel-header">
-              <h3><i class="fa-solid fa-paper-plane text-gold"></i> نموذج التواصل المباشر</h3>
-              <p>أدخل بياناتك واستفسارك وسيتم الرد عليك في غضون 24 ساعة عمل من قبل فريق الحاضنة المختص:</p>
+              <h3><i class="fa-solid fa-paper-plane text-gold"></i> قنوات الاستفسار والتواصل المباشر</h3>
+              <p>نسعد باستقبال كافة الاستفسارات من الأفراد والمهتمين بالقطاع غير الربحي والجمعيات الأهلية والشركاء:</p>
+            </div>
+
+            <!-- Segmented Switcher: Individual (شخص عادي) vs Entity (جهة اعتبارية) -->
+            <div class="contact-type-selector">
+              <button type="button" class="contact-type-btn active" id="btnContactIndividual" onclick="setContactType('individual')">
+                <i class="fa-solid fa-user"></i> أنا فرد / مهتم / رائد أعمال (شخص عادي)
+              </button>
+              <button type="button" class="contact-type-btn" id="btnContactEntity" onclick="setContactType('entity')">
+                <i class="fa-solid fa-building-ngo"></i> نحن جمعية أهلية / جهة اعتبارية
+              </button>
+            </div>
+
+            <!-- Dynamic Guidance Hint -->
+            <div id="contact-type-hint" style="background: rgba(14,110,65,0.07); border-right: 3px solid var(--c-primary); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: var(--c-primary-dark); margin-bottom: 16px;">
+              <i class="fa-solid fa-circle-info"></i> نرحب بالأفراد والمهتمين، الباحثين، والمتطوعين ورواد الأعمال المجتمعية للإجابة عن تساؤلاتكم أو عرض أفكاركم ومبادراتكم.
             </div>
 
             <form id="directContactForm" onsubmit="handleDirectContactSubmit(event)" novalidate>
+              <input type="hidden" id="contact-sender-type" value="individual">
               <div class="form-row-2">
                 <div class="form-group">
-                  <label class="form-label" for="contact-name">الاسم الكامل <span class="required-star">*</span></label>
-                  <input type="text" class="form-control" id="contact-name" placeholder="مثال: د. عبدالرحمن الأحمدي" required>
+                  <label class="form-label" for="contact-name" id="label-contact-name">الاسم الكامل <span class="required-star">*</span></label>
+                  <input type="text" class="form-control" id="contact-name" placeholder="مثال: خالد عبدالرحمن السالم" required>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="contact-org">اسم الجمعية أو الكيان <span class="text-muted">(اختياري)</span></label>
+                <div class="form-group" id="group-contact-role">
+                  <label class="form-label" for="contact-role" id="label-contact-role">الصفة أو نوع الاهتمام <span class="required-star">*</span></label>
+                  <select class="form-control" id="contact-role">
+                    <option value="صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)">💡 صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)</option>
+                    <option value="متطوع يرغب في تقديم خبراته التخصصية">🤝 متطوع يرغب في تقديم خبراته التخصصية</option>
+                    <option value="باحث أو أكاديمي في القطاع غير الربحي">🎓 باحث أو أكاديمي في القطاع غير الربحي</option>
+                    <option value="مهتم بالقطاع غير الربحي وتأسيس الجمعيات">🌱 مهتم بالقطاع غير الربحي وتأسيس الجمعيات</option>
+                    <option value="مستفيد عام أو استفسار عن خدمات الحاضنة">❓ مستفيد عام أو استفسار عن خدمات الحاضنة</option>
+                  </select>
+                </div>
+                <div class="form-group" id="group-contact-org" style="display: none;">
+                  <label class="form-label" for="contact-org">اسم الجمعية أو الكيان <span class="required-star">*</span></label>
                   <input type="text" class="form-control" id="contact-org" placeholder="مثال: جمعية روافد التنموية">
                 </div>
               </div>
@@ -10185,33 +10480,30 @@ img, svg {
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="contact-email">البريد الإلكتروني <span class="required-star">*</span></label>
-                  <input type="email" class="form-control" id="contact-email" placeholder="name@domain.org.sa" dir="ltr" style="text-align: right;" required>
+                  <input type="email" class="form-control" id="contact-email" placeholder="name@domain.com" dir="ltr" style="text-align: right;" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="contact-subject">مجال الاستفسار أو الطلب <span class="required-star">*</span></label>
                 <select class="form-control" id="contact-subject" required>
-                  <option value="" disabled selected>اختر مجال الاستفسار...</option>
-                  <option value="طلب احتضان وتسجيل جمعية ناشئة">طلب احتضان وتسجيل جمعية ناشئة</option>
-                  <option value="الاستفسار عن حزم الدعم التأسيسي والحوكمة">الاستفسار عن حزم الدعم التأسيسي والحوكمة</option>
-                  <option value="حجز قاعات ومرافق ومقرات الحاضنة">حجز قاعات ومرافق ومقرات الحاضنة</option>
-                  <option value="طلب جلسة استشارية متخصصة">طلب جلسة استشارية متخصصة</option>
-                  <option value="الانضمام كخبير أو مستشار متعاون">الانضمام كخبير أو مستشار متعاون</option>
-                  <option value="عقد شراكة استراتيجية أو مبادرة مانحة">عقد شراكة استراتيجية أو مبادرة مانحة</option>
-                  <option value="استفسار عام أو دعم فني للمنصة">استفسار عام أو دعم فني للمنصة</option>
+                  <option value="عرض فكرة مبادرة مجتمعية للاحتضان" selected>💡 عرض فكرة مبادرة مجتمعية للاحتضان بحاضنة الأفكار</option>
+                  <option value="كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟">🌱 كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟</option>
+                  <option value="طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية">🤝 طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية</option>
+                  <option value="طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق">🏢 طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق</option>
+                  <option value="استفسار عام أو مقترح تطويري للمنظومة">📝 استفسار عام أو مقترح تطويري للمنظومة</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="contact-message">نص الرسالة أو تفاصيل الاستفسار <span class="required-star">*</span></label>
+                <label class="form-label" for="contact-message" id="label-contact-message">نص الاستفسار أو تفاصيل الفكرة <span class="required-star">*</span></label>
                 <textarea class="form-control" id="contact-message" rows="4" placeholder="يرجى كتابة كافة تفاصيل طلبك أو استفسارك هنا لتمكين الفريق من مساعدتك بدقة وسرعة..." required></textarea>
               </div>
 
               <div class="form-actions-contact">
                 <button type="submit" class="btn btn-gold btn-lg btn-contact-submit" id="contactSubmitBtn">
                   <i class="fa-solid fa-paper-plane"></i>
-                  <span>إرسال الرسالة المباشرة</span>
+                  <span>إرسال الاستفسار الآن</span>
                 </button>
               </div>
 
@@ -10503,8 +10795,28 @@ img, svg {
         </div>
       </div>
 
+      <!-- Official Urgent Broadcast & Meeting Banner for Associations -->
+      <div id="assoc-broadcast-banner" class="assoc-broadcast-banner" style="margin-bottom: 20px;">
+        <!-- Rendered dynamically via landing.js renderAssocEvents() -->
+      </div>
+
       <!-- Association Tabs Navigation -->
       <div class="portal-tabs-nav">
+        <!-- 1. خطة الـ 100 يوم للانطلاقة والتمكين -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-100days')" style="background: rgba(14,110,65,0.06); border-color: var(--c-primary);">
+          <i class="fa-solid fa-calendar-check" style="color: var(--c-primary);"></i> خطة الـ 100 يوم للتمكين
+          <span class="tab-badge" id="assoc-100days-nav-badge" style="background: var(--c-primary); color: #fff;">اليوم 42 (68%)</span>
+        </button>
+        <!-- 2. طلب خدمات وحزم الحاضنة -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-service-catalog')" style="background: rgba(217,155,38,0.08); border-color: var(--c-gold);">
+          <i class="fa-solid fa-boxes-packing" style="color: var(--c-gold-dark);"></i> طلب خدمات الحاضنة
+          <span class="tab-badge" id="assoc-services-nav-badge" style="background: var(--c-gold); color: #000;">8 خدمات</span>
+        </button>
+        <!-- 3. اللقاءات والبرامج والتعاميم -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-events')" style="background: rgba(37,99,235,0.06); border-color: #3B82F6;">
+          <i class="fa-solid fa-bullhorn" style="color: #2563EB;"></i> اللقاءات والبرامج والتعاميم
+          <span class="tab-badge" id="assoc-events-nav-badge" style="background: #2563EB; color: #fff;">3 لقاءات</span>
+        </button>
         <button class="portal-tab-btn active" onclick="switchAssocTab(this, 'assoc-tab-evidences')">
           <i class="fa-solid fa-folder-open"></i> مستودع الشواهد ووثائق الحوكمة <span class="badge" id="assoc-evidences-count-badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.72rem; padding: 2px 8px; border-radius: 12px;">7</span>
         </button>
@@ -10772,6 +11084,153 @@ img, svg {
             <h5>وسام التخرج والاستدامة المالية</h5>
             <p>التخرج الكامل من مسرعة عذق واستقطاب المنح والشراكات التنموية.</p>
             <span class="badge-status-tag" style="background: rgba(203,142,30,0.15); color: var(--c-gold-dark);">المرحلة القادمة</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 6: خطة الـ 100 يوم للانطلاقة والتمكين المؤسسي -->
+      <div id="assoc-tab-100days" class="portal-tab-pane">
+        <div class="roadmap-100-overview">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <div class="roadmap-day-counter">
+                <span style="font-size: 0.75rem; text-transform: uppercase; color: #94A3B8; display: block; margin-bottom: 2px;">الجدول الزمني المباشر</span>
+                <div class="roadmap-day-number" id="assoc-100days-day-display">42</div>
+                <span style="font-size: 0.72rem; color: #38BDF8;">من أصل 100 يوم</span>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                  <h3 style="font-size: 1.3rem; color: var(--c-primary); font-weight: 900; margin: 0;">خطة الـ 100 يوم للانطلاقة والتمكين المؤسسي</h3>
+                  <span class="badge" style="background: rgba(14,110,65,0.12); color: var(--c-primary); font-weight: 800; padding: 4px 12px; border-radius: 20px;">نطاق التميز الأخضر ✓</span>
+                </div>
+                <p style="font-size: 0.84rem; color: var(--c-text-muted); margin: 0; max-width: 650px;">
+                  خارطة طريق تسريع وتأهيل الجمعية خلال أول 100 يوم من الاحتضان، مقسمة على 4 مراحل محكمة لاستكمال المقر، التراخيص، الحوكمة، وإطلاق أول مبادرة مجتمعية.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" onclick="printAssoc100DaysReport()" style="font-weight: 800; padding: 8px 18px;">
+                <i class="fa-solid fa-file-pdf"></i> طباعة الخطة التنفيذية (PDF)
+              </button>
+              <button class="btn btn-outline-primary btn-sm" onclick="openAssocUploadEvidenceModal()">
+                <i class="fa-solid fa-cloud-arrow-up"></i> رفع شاهد لمستهدف
+              </button>
+            </div>
+          </div>
+
+          <!-- Overall Progress Bar Strip -->
+          <div style="background: var(--c-bg); border: 1px solid var(--c-border); padding: 14px 18px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 800; margin-bottom: 6px;">
+                <span style="color: var(--c-text);">إجمالي نسبة إنجاز مستهدفات الـ 100 يوم:</span>
+                <span style="color: var(--c-primary); font-size: 0.95rem;" id="assoc-100days-pct-display">68%</span>
+              </div>
+              <div style="width: 100%; height: 10px; background: #E2E8F0; border-radius: 6px; overflow: hidden;">
+                <div id="assoc-100days-progressbar" style="width: 68%; height: 100%; background: linear-gradient(90deg, #0D6E46 0%, #D99B26 100%); border-radius: 6px; transition: width 0.4s ease;"></div>
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--c-text-muted); display: flex; gap: 14px;">
+              <span><i class="fa-solid fa-circle-check" style="color: #166534;"></i> 9 مستهدفات منجزة</span>
+              <span><i class="fa-solid fa-hourglass-half" style="color: #D97706;"></i> 3 قيد التنفيذ</span>
+              <span><i class="fa-solid fa-calendar" style="color: #64748B;"></i> 4 مستهدفة قادمة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Sequential Phase Milestone Cards Container -->
+        <div id="assoc-100days-phases-container">
+          <!-- Rendered dynamically via landing.js renderAssoc100DaysRoadmap() -->
+        </div>
+      </div>
+
+      <!-- Tab 7: طلب خدمات وحزم الحاضنة (Service Catalog & Requests) -->
+      <div id="assoc-tab-service-catalog" class="portal-tab-pane">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.2rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">
+              <i class="fa-solid fa-boxes-packing text-gold"></i> كتالوج خدمات وحزم حاضنة ومسرعة عذق
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">
+              يمكن للجمعية المحتضنة التقديم على أي من الخدمات التشغيلية والمقرات والاستشارات التخصصية بطلب مباشر
+            </p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openRequestServiceModal('')" style="font-weight: 800; padding: 7px 16px;">
+            <i class="fa-solid fa-plus-circle"></i> تقديم طلب خدمة جديدة
+          </button>
+        </div>
+
+        <!-- Category Filters -->
+        <div style="display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;">
+          <button class="evidence-filter-btn active" onclick="filterAssocCatalog(this, 'all')">جميع الخدمات (8)</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'مساحات')">المقرات والقاعات</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'استشارات')">الاستشارات المتخصصة</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'تشغيل')">التشغيل والتطوع</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'إعلام')">الإعلام والهوية</button>
+        </div>
+
+        <!-- 8 Services Cards Grid -->
+        <div class="service-catalog-grid" id="assocServicesCatalogGrid">
+          <!-- Rendered dynamically via landing.js renderAssocServicesCatalog() -->
+        </div>
+
+        <!-- Previous Requests History Table -->
+        <div style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); margin-top: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+              <i class="fa-solid fa-clock-rotate-left"></i> سجل طلبات خدمات الجمعية السابقة وحالتها
+            </h4>
+            <span class="badge" id="assoc-requests-count-badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-weight: 800;">3 طلبات</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead>
+                <tr style="background: var(--c-bg); border-bottom: 1px solid var(--c-border); text-align: right;">
+                  <th style="padding: 10px 12px;">رقم الطلب</th>
+                  <th style="padding: 10px 12px;">الخدمة المطلوبة</th>
+                  <th style="padding: 10px 12px;">تاريخ الطلب</th>
+                  <th style="padding: 10px 12px;">الموعد المستهدف</th>
+                  <th style="padding: 10px 12px;">الغرض من الطلب</th>
+                  <th style="padding: 10px 12px; text-align: center;">حالة الطلب</th>
+                  <th style="padding: 10px 12px;">ملاحظات الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="assoc-service-requests-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 8: اللقاءات والبرامج التدريبية والتعاميم الرسمية (Events & Workshops Hub) -->
+      <div id="assoc-tab-events" class="portal-tab-pane">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.2rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">
+              <i class="fa-solid fa-bullhorn text-gold"></i> جدول اللقاءات والبرامج والتعاميم المعتمدة
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">
+              ورش العمل والملتقيات التخصصية الموجهة للجمعيات المحتضنة مع روابط البث المباشر وتسجيل الحضور
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline-primary btn-sm" onclick="filterAssocEvents('all')">جميع الفعاليات</button>
+            <button class="btn btn-outline-primary btn-sm" onclick="filterAssocEvents('registered')">المسجل بها فقط</button>
+          </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="events-showcase-grid" id="assocEventsShowcaseGrid">
+          <!-- Rendered dynamically via landing.js renderAssocEvents() -->
+        </div>
+
+        <!-- Archive and Materials Note -->
+        <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 1.4rem; color: #2563EB;"><i class="fa-solid fa-folder-closed"></i></div>
+          <div style="font-size: 0.82rem; color: #1E3A8A;">
+            <strong>مكتبة تسجيلات اللقاءات والمواد العلمية:</strong> يتم أرشفة كافة العروض التقديمية وتسجيلات Zoom في مستودع المعرفة للجمعيات المحتضنة للاستفادة منها ومشاركتها مع فريق العمل.
           </div>
         </div>
       </div>
@@ -11043,6 +11502,12 @@ img, svg {
           <button class="btn btn-primary btn-sm" onclick="openAdminNewAppModal()" title="تسجيل طلب احتضان جديد">
             <i class="fa-solid fa-plus"></i> إضافة طلب جديد
           </button>
+          <button class="btn btn-outline-primary btn-sm" onclick="openPublishEventModal()" style="border-color: #2563EB; color: #2563EB; font-weight: 800;" title="إعلان لقاء أو برنامج تدريبي جديد وتعميمه فورياً لجميع الجمعيات">
+            <i class="fa-solid fa-bullhorn"></i> + إعلان لقاء أو تعميم
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="openContactInquiriesModal()" style="border-color: #7C3AED; color: #7C3AED; font-weight: 800;" title="صندوق الاستفسارات ورسائل التواصل الواردة (الأفراد والكيانات)">
+            <i class="fa-solid fa-inbox"></i> استفسارات التواصل (<span id="admin-inbox-count">2</span>)
+          </button>
           <button class="btn btn-primary btn-sm" onclick="openMonthlyImpactReportModal()" style="font-weight: 800; background: linear-gradient(135deg, var(--c-primary) 0%, #0D9488 100%); border: none;" title="استعراض وتصدير تقرير الأثر ونسبة التقدم من شهر لآخر للجمعيات">
             <i class="fa-solid fa-chart-line"></i> تقرير الأثر والتقدم الشهري (MoM)
           </button>
@@ -11251,25 +11716,78 @@ img, svg {
           </div>
         </div>
 
-        <!-- High-Clarity Applications Table -->
-        <div class="admin-table-card">
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th style="min-width: 240px;">الجمعية والوضع ونوع الاحتضان</th>
-                  <th>الترخيص و 700</th>
-                  <th style="min-width: 170px;">ممثل الجمعية والتواصل</th>
-                  <th style="min-width: 180px;">مسار الاحتضان والجاهزية</th>
-                  <th style="min-width: 160px;">المرحلة الحالية</th>
-                  <th>الحالة</th>
-                  <th style="text-align: center; min-width: 150px;">الإجراءات السريعة</th>
-                </tr>
-              </thead>
-              <tbody id="admin-applications-tbody">
-                <!-- Dynamically rendered via landing.js -->
-              </tbody>
-            </table>
+        <!-- Sub-view toggle: Applications Table vs. 100-Day Acceleration Matrix -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px; background: var(--c-surface); padding: 5px; border-radius: 10px; border: 1px solid var(--c-border); width: fit-content;">
+          <button type="button" class="btn btn-sm btn-primary" id="btnAdminAppsTable" onclick="switchAdminAppsSubView('table')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px;">
+            <i class="fa-solid fa-list-check"></i> جدول طلبات وملفات الجمعيات
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminApps100Days" onclick="switchAdminAppsSubView('100days')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: var(--c-primary); color: var(--c-primary);">
+            <i class="fa-solid fa-calendar-check"></i> مصفوفة متابعة خطة الـ 100 يوم للجمعيات (<span id="admin-100d-cnt">15</span>)
+          </button>
+        </div>
+
+        <!-- Sub-view 1: Applications Table -->
+        <div id="admin-subview-apps-table">
+          <div class="admin-table-card">
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="min-width: 240px;">الجمعية والوضع ونوع الاحتضان</th>
+                    <th>الترخيص و 700</th>
+                    <th style="min-width: 170px;">ممثل الجمعية والتواصل</th>
+                    <th style="min-width: 180px;">مسار الاحتضان والجاهزية</th>
+                    <th style="min-width: 160px;">المرحلة الحالية</th>
+                    <th>الحالة</th>
+                    <th style="text-align: center; min-width: 150px;">الإجراءات السريعة</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-applications-tbody">
+                  <!-- Dynamically rendered via landing.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-view 2: 100-Day Acceleration Roadmap Matrix Container -->
+        <div id="admin-subview-100days" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #F8FAFC;">
+              <div>
+                <h4 style="font-size: 1.1rem; font-weight: 900; color: var(--c-primary); margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-chart-line text-gold"></i> لوحة الرقابة والمتابعة لخطة الـ 100 يوم (Acceleration Roadmap)
+                </h4>
+                <p style="font-size: 0.8rem; color: var(--c-text-muted); margin: 0;">
+                  متابعة تقدم الجمعيات المحتضنة في مستهدفات التأسيس والامتثال والحوكمة والبرامج شهراً بشهر ويوم بيوم
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 6px 12px; border-radius: 20px;">متوسط الإنجاز: 64.2%</span>
+                <button class="btn btn-primary btn-sm" onclick="exportAdmin100DaysReport()">
+                  <i class="fa-solid fa-file-pdf"></i> تصدير تقرير الـ 100 يوم التنفيذي
+                </button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr style="background: var(--c-bg); border-bottom: 2px solid var(--c-border);">
+                    <th style="min-width: 220px;">الجمعية والوضع الاحتضاني</th>
+                    <th style="min-width: 130px; text-align: center;">اليوم بالخطة</th>
+                    <th style="min-width: 170px;">المرحلة التنفيذية الحالية</th>
+                    <th style="min-width: 180px;">شريط نسبة الإنجاز</th>
+                    <th style="min-width: 140px; text-align: center;">الالتزام الزمني</th>
+                    <th style="min-width: 150px;">المستهدف التالي</th>
+                    <th style="min-width: 150px; text-align: center;">الإجراء الرقابي</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-100days-tbody">
+                  <!-- Rendered dynamically via landing.js renderAdmin100DaysMatrix() -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -11577,23 +12095,75 @@ img, svg {
           </div>
         </div>
 
-        <div class="admin-table-card">
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th style="min-width: 200px;">الخدمة أو المرفق أو المنتج</th>
-                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
-                  <th style="min-width: 140px;">التصنيف والتجهيز</th>
-                  <th style="min-width: 120px;">تاريخ الاستفادة</th>
-                  <th style="text-align: center; min-width: 100px;">الحالة</th>
-                  <th style="text-align: center; min-width: 130px;">الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="admin-services-tbody">
-                <!-- Dynamically rendered via landing.js -->
-              </tbody>
-            </table>
+        <!-- Sub-view toggle: Allocated Services vs Incoming Association Requests -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px; background: var(--c-surface); padding: 5px; border-radius: 10px; border: 1px solid var(--c-border); width: fit-content;">
+          <button type="button" class="btn btn-sm btn-primary" id="btnAdminServicesTable" onclick="switchAdminServicesSubView('allocated')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px;">
+            <i class="fa-solid fa-boxes-stacked"></i> سجل الخدمات والمرافق المخصصة
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminServicesRequests" onclick="switchAdminServicesSubView('requests')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: var(--c-gold-dark); color: var(--c-gold-dark);">
+            <i class="fa-solid fa-bell"></i> طلبات الخدمات الواردة من الجمعيات (<span id="admin-incoming-services-cnt">3</span>)
+          </button>
+        </div>
+
+        <!-- Sub-view 1: Allocated Services Table -->
+        <div id="admin-subview-services-allocated">
+          <div class="admin-table-card">
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="min-width: 200px;">الخدمة أو المرفق أو المنتج</th>
+                    <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                    <th style="min-width: 140px;">التصنيف والتجهيز</th>
+                    <th style="min-width: 120px;">تاريخ الاستفادة</th>
+                    <th style="text-align: center; min-width: 100px;">الحالة</th>
+                    <th style="text-align: center; min-width: 130px;">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-services-tbody">
+                  <!-- Dynamically rendered via landing.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-view 2: Incoming Requests from Associations -->
+        <div id="admin-subview-services-requests" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #FFFBEB;">
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 900; color: #92400E; margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-bell text-gold"></i> طلبات الخدمات والحزم التشغيلية الواردة من الجمعيات المحتضنة
+                </h4>
+                <p style="font-size: 0.8rem; color: #B45309; margin: 0;">
+                  الطلبات المرفوعة من بوابات الجمعيات لحجز قاعات، استشارات، مكاتب، أو دعم إعلامي وتطوعي
+                </p>
+              </div>
+              <button class="btn btn-gold btn-sm" onclick="renderAdminIncomingServiceRequestsTable()">
+                <i class="fa-solid fa-rotate"></i> تحديث الطلبات
+              </button>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr style="background: var(--c-bg); border-bottom: 2px solid var(--c-border); text-align: right;">
+                    <th style="min-width: 110px;">رقم الطلب</th>
+                    <th style="min-width: 220px;">الجمعية ووضعها الاحتضاني</th>
+                    <th style="min-width: 200px;">الخدمة أو الحزمة المطلوبة</th>
+                    <th style="min-width: 110px;">تاريخ الطلب</th>
+                    <th style="min-width: 110px;">الموعد المستهدف</th>
+                    <th style="min-width: 200px;">الغرض والتفاصيل</th>
+                    <th style="min-width: 130px; text-align: center;">الحالة</th>
+                    <th style="min-width: 160px; text-align: center;">القرار والإجراء</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-incoming-services-tbody">
+                  <!-- Rendered dynamically via landing.js -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -13312,6 +13882,288 @@ img, svg {
             إغلاق
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: نشر وتعميم لقاء أو برنامج تدريبي جديد للجمعيات -->
+  <div class="modal-overlay" id="modalPublishEvent">
+    <div class="wizard-modal-box" style="max-width: 680px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);">
+        <button class="modal-close-btn" onclick="closePublishEventModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.25); color: #FFFFFF; font-size: 0.75rem;">مركز الفعاليات والتعاميم</span>
+          <span class="badge" style="background: #FEF08A; color: #854D0E; font-weight: 800;">بث فوري لجميع الجمعيات</span>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-bullhorn"></i> إعلان لقاء أو برنامج تدريبي وتعميمه
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          يتم نشر هذا اللقاء مباشرة في بوابات جميع الجمعيات المحتضنة وإرسال إشعار فوري لها مع إمكانية تأكيد الحضور
+        </p>
+      </div>
+
+      <form id="formPublishEvent" onsubmit="submitPublishEvent(event)">
+        <div class="wizard-body" style="padding: 24px; max-height: 70vh; overflow-y: auto;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="pub-event-title">عنوان اللقاء أو البرنامج التدريبي <span class="required-star">*</span></label>
+            <input type="text" id="pub-event-title" class="form-control" placeholder="مثال: ورشة عمل: إعداد الموازنات التقديرية ومؤشرات الامتثال المالي" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-cat">تصنيف الفعالية <span class="required-star">*</span></label>
+              <select id="pub-event-cat" class="form-control" required>
+                <option value="ورشة تدريبية تخصصية">ورشة تدريبية تخصصية</option>
+                <option value="ملتقى شراكات وتنمية موارد">ملتقى شراكات وتنمية موارد</option>
+                <option value="جلسة طاولة مستديرة إثرائية">جلسة طاولة مستديرة إثرائية</option>
+                <option value="لقاء تعريفي وتوجيهي">لقاء تعريفي وتوجيهي</option>
+                <option value="تعميم رسمي وتوجيهات عاجلة">تعميم رسمي وتوجيهات عاجلة</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-target">الفئة المستهدفة <span class="required-star">*</span></label>
+              <select id="pub-event-target" class="form-control" required>
+                <option value="جميع الجمعيات المحتضنة">جميع الجمعيات المحتضنة</option>
+                <option value="حاضنة الأفكار (قيد التأسيس)">حاضنة الأفكار (قيد التأسيس)</option>
+                <option value="الاحتضان المكاني والتشغيلي">الاحتضان المكاني والتشغيلي</option>
+                <option value="مسرعة أعمال ونمو الأثر">مسرعة أعمال ونمو الأثر</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-date">تاريخ وموعد اللقاء <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-date" class="form-control" placeholder="مثال: الثلاثاء 28 أكتوبر 2026" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-time">التوقيت والمدة <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-time" class="form-control" placeholder="مثال: 10:00 صباحاً - 1:00 ظهراً" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-venue">المقر أو نوع الحضور <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-venue" class="form-control" placeholder="مثال: قاعة التدريب والابتكار بالحاضنة (أو عن بُعد)" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-speaker">المحاضر أو المتحدث الرئيسي</label>
+              <input type="text" id="pub-event-speaker" class="form-control" placeholder="مثال: د. إبراهيم الجهني - خبير مالي معتمد">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-seats">عدد المقاعد المتاحة</label>
+              <input type="number" id="pub-event-seats" class="form-control" value="35" min="5" max="200">
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-zoom">رابط القاعة الافتراضية Zoom (إن وجد)</label>
+              <input type="url" id="pub-event-zoom" class="form-control" placeholder="https://zoom.us/j/..." dir="ltr" style="text-align: right;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="pub-event-desc">المحاور والتفاصيل التنفيذية <span class="required-star">*</span></label>
+            <textarea id="pub-event-desc" class="form-control" rows="3" placeholder="اكتب نبذة عن اللقاء، المخرجات المتوقعة، وما يجب على الجمعية تحضيره..." required></textarea>
+          </div>
+
+          <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="pub-event-broadcast-check" checked style="width: 18px; height: 18px; accent-color: #2563EB;">
+            <label for="pub-event-broadcast-check" style="font-size: 0.8rem; font-weight: 700; color: #1E3A8A; cursor: pointer; margin: 0;">
+              تفعيل شريط التعاميم التنبيهي المتوهج في أعلى بوابات الجمعيات وإرسال إشعار فوري
+            </label>
+          </div>
+        </div>
+
+        <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closePublishEventModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-sm" style="background: #2563EB; border-color: #1D4ED8; font-weight: 800; padding: 7px 20px;">
+            <i class="fa-solid fa-paper-plane"></i> نشر وتعميم اللقاء الآن
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: تقديم طلب خدمة أو حزمة تشغيلية للحاضنة -->
+  <div class="modal-overlay" id="modalRequestIncubatorService">
+    <div class="wizard-modal-box" style="max-width: 620px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
+        <button class="modal-close-btn" onclick="closeRequestServiceModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-size: 0.75rem;">بوابة الجمعيات المحتضنة</span>
+          <span class="badge" style="background: var(--c-gold-subtle); color: var(--c-gold-dark); font-weight: 800;">طلب خدمة فورية</span>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-boxes-packing text-gold"></i> تقديم طلب خدمة أو حزمة تشغيلية
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          يتم توجيه طلبكم مباشرة إلى إدارة الحاضنة وتعيين المرفق أو المستشار وجدولة الموعد خلال 24 ساعة عمل
+        </p>
+      </div>
+
+      <form id="formRequestService" onsubmit="submitServiceRequest(event)">
+        <div class="wizard-body" style="padding: 22px; max-height: 70vh; overflow-y: auto;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-title">الخدمة أو الحزمة المطلوبة <span class="required-star">*</span></label>
+            <select id="req-service-title" class="form-control" required>
+              <option value="حجز قاعة الاجتماعات الرئيسية الذكية">🎤 حجز قاعة الاجتماعات الرئيسية الذكية</option>
+              <option value="حجز مختبر التدريب والابتكار التفاعلي">💡 حجز مختبر التدريب والابتكار التفاعلي</option>
+              <option value="استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)">⚖️ استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)</option>
+              <option value="استشارة استدامة وتنمية موارد مالية وأوقاف">💰 استشارة استدامة وتنمية موارد مالية وأوقاف</option>
+              <option value="إصدار وتوثيق العنوان الوطني والمقر المعتمد">📮 إصدار وتوثيق العنوان الوطني والمقر المعتمد</option>
+              <option value="استقطاب متطوعين تخصصيين وتوثيق الساعات NVG">🤝 استقطاب متطوعين تخصصيين وتوثيق الساعات NVG</option>
+              <option value="تصميم هوية بصرية وحملة إعلامية رقمية">🎨 تصميم هوية بصرية وحملة إعلامية رقمية</option>
+              <option value="مراجعة وتدقيق اللائحة المالية والموازنة التقديرية">📊 مراجعة وتدقيق اللائحة المالية والموازنة التقديرية</option>
+            </select>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="req-service-date">الموعد أو التاريخ المستهدف <span class="required-star">*</span></label>
+              <input type="date" id="req-service-date" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="req-service-time">الوقت المفضل (إن كان لقاعة أو جلسة)</label>
+              <select id="req-service-time" class="form-control">
+                <option value="صباحي (9:00 ص - 12:00 م)">صباحي (9:00 ص - 12:00 م)</option>
+                <option value="ظهيرة (1:00 م - 4:00 م)">ظهيرة (1:00 م - 4:00 م)</option>
+                <option value="مسائي (5:00 م - 8:00 م)">مسائي (5:00 م - 8:00 م)</option>
+                <option value="مرن حسب توفر المستشار / المرفق">مرن حسب توفر المستشار / المرفق</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-purpose">الغرض من الخدمة ومبررات الاحتياج <span class="required-star">*</span></label>
+            <input type="text" id="req-service-purpose" class="form-control" placeholder="مثال: عقد اجتماع مجلس الإدارة الربعي لمناقشة اللائحة الأساسية" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-notes">أي متطلبات أو تجهيزات خاصة إضافية</label>
+            <textarea id="req-service-notes" class="form-control" rows="3" placeholder="مثال: نحتاج توفير شاشة تفاعلية، نظام بث هجين Zoom، وضيافة لـ 12 شخصاً..."></textarea>
+          </div>
+        </div>
+
+        <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeRequestServiceModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-sm" style="font-weight: 800; padding: 7px 20px;">
+            <i class="fa-solid fa-check"></i> تأكيد إرسال الطلب للإدارة
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: متابعة وتحديث خطة الـ 100 يوم للجمعية (إدارة) -->
+  <div class="modal-overlay" id="modalAdmin100Days">
+    <div class="wizard-modal-box" style="max-width: 760px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
+        <button class="modal-close-btn" onclick="closeAdmin100DaysModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-size: 0.75rem;">لوحة الرقابة التنفيذية</span>
+          <span class="badge" id="admin-100d-modal-badge" style="background: #DCFCE7; color: #166534; font-weight: 800;">خطة الـ 100 يوم</span>
+        </div>
+        <h3 id="admin-100d-modal-title" style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          متابعة وتحديث خطة الـ 100 يوم: جمعية ديوان الشبابية
+        </h3>
+        <p id="admin-100d-modal-sub" style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          ترخيص 1842 • مسار الحوكمة والتمكين الشامل • تاريخ بدء الاحتضان: 1 ربيع الأول 1446هـ
+        </p>
+      </div>
+
+      <div class="wizard-body" style="padding: 24px; max-height: 70vh; overflow-y: auto;">
+        <!-- Controls: Day & Progress -->
+        <div style="background: #F8FAFC; border: 1px solid var(--c-border); padding: 16px; border-radius: 12px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">اليوم الحالي في الخطة (من 100):</label>
+            <input type="number" id="admin-100d-input-day" class="form-control" min="1" max="100" value="42" onchange="calcAdmin100DaysModalPreview()">
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">نسبة الإنجاز التراكمي (%):</label>
+            <input type="number" id="admin-100d-input-pct" class="form-control" min="0" max="100" value="68" onchange="calcAdmin100DaysModalPreview()">
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">حالة الالتزام الزمني:</label>
+            <select id="admin-100d-input-status" class="form-control">
+              <option value="ملتزم بالجدول ✓">ملتزم بالجدول ✓</option>
+              <option value="متقدم عن الخطة 🚀">متقدم عن الخطة 🚀</option>
+              <option value="يحتاج مساندة وتوجيه ⚠️">يحتاج مساندة وتوجيه ⚠️</option>
+              <option value="متأخر عن المستهدف 🛑">متأخر عن المستهدف 🛑</option>
+            </select>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--c-primary); margin-bottom: 10px;">
+          المستهدفات والمخرجات التنفيذية للخطة:
+        </h4>
+        <div id="admin-100d-milestones-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="admin-100d-feedback">توجيه وملاحظة المشرف الرقابي للجمعية:</label>
+          <textarea id="admin-100d-feedback" class="form-control" rows="2" placeholder="اكتب توجيهات المتابعة أو المتطلبات الناقصة لتظهر فورياً في بوابة الجمعية..."></textarea>
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-outline-primary btn-sm" onclick="printAssoc100DaysFromAdmin()">
+          <i class="fa-solid fa-print"></i> طباعة الخطة التنفيذية الرسمية
+        </button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeAdmin100DaysModal()">إلغاء</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveAdmin100DaysProgress()" style="font-weight: 800; padding: 7px 18px;">
+            <i class="fa-solid fa-floppy-disk"></i> حفظ التحديثات واعتماد الخطة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: صندوق استفسارات ورسائل التواصل (الأفراد والجمعيات) -->
+  <div class="modal-overlay" id="modalContactInquiries">
+    <div class="wizard-modal-box" style="max-width: 820px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);">
+        <button class="modal-close-btn" onclick="closeContactInquiriesModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.25); color: #FFFFFF; font-size: 0.75rem;">خدمة المستفيدين والتواصل</span>
+          <span class="badge" style="background: #F3E8FF; color: #581C87; font-weight: 800;" id="inbox-count-badge">3 رسائل</span>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-inbox"></i> صندوق الاستفسارات ورسائل التواصل الواردة
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          إدارة استفسارات الأفراد (المواطنين والمهتمين) والجمعيات الأهلية والشركاء مع إمكانية الرد وتحديث الحالة
+        </p>
+      </div>
+
+      <div class="wizard-body" style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+        <!-- Filters: All vs Individual vs Entity -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; gap: 8px;">
+            <button class="evidence-filter-btn active" id="btnFilterInboxAll" onclick="filterInboxMessages('all')">جميع الرسائل</button>
+            <button class="evidence-filter-btn" id="btnFilterInboxInd" onclick="filterInboxMessages('individual')">👤 استفسارات الأفراد (شخص عادي)</button>
+            <button class="evidence-filter-btn" id="btnFilterInboxEnt" onclick="filterInboxMessages('entity')">🏢 استفسارات الجمعيات (جهات اعتبارية)</button>
+          </div>
+          <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+            <i class="fa-solid fa-check-double text-gold"></i> تحديث تلقائي فوري
+          </span>
+        </div>
+
+        <div id="inbox-messages-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Dynamically populated via landing.js -->
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 0.78rem; color: var(--c-text-muted);">
+          متوسط زمن الاستجابة والرد: أقل من ساعتين عمل
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeContactInquiriesModal()">إلغاء</button>
       </div>
     </div>
   </div>
@@ -17747,7 +18599,132 @@ class AthqPrintEngine {
     this.showPrintPreview(content, `تقرير_الأثر_والتقدم_الشهري_${targetMonth.replace(/\s+/g, '_')}`);
   }
 
-  // 10. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
+  // 10. توليد وطباعة خطة الـ 100 يوم التنفيذية للجمعية (100-Day Acceleration Roadmap PDF)
+  print100DaysRoadmap(assocName = 'جمعية ديوان الشبابية', lic = '1842', roadmap = null) {
+    const ref = `ATHQ-100D-1446-${Math.floor(100 + Math.random() * 900)}`;
+    const currDay = (roadmap && roadmap.dayCurrent) ? roadmap.dayCurrent : 42;
+    const progress = (roadmap && roadmap.overallProgress) ? roadmap.overallProgress : 68;
+
+    const content = `
+      <div class="report-paper" style="border: 2px solid #CBD5E1; padding: 26px; border-radius: 12px; background: #FFFFFF; direction: rtl; font-size: 0.86rem; line-height: 1.7;">
+        ${this.getHeaderHtml('خطة الـ 100 يوم التنفيذية للانطلاقة والتمكين المؤسسي', ref)}
+
+        <!-- Association & Roadmap Summary Bar -->
+        <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; padding: 16px 20px; border-radius: 10px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <div style="font-size: 1.25rem; font-weight: 900; color: #0D6E46; margin-bottom: 4px;">${assocName}</div>
+            <div style="font-size: 0.82rem; color: #64748B;">
+              <span>ترخيص رقم: <strong style="color: #0F172A;">${lic}</strong></span> • 
+              <span>حاضنة ومسرعة عذق • المدينة المنورة</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center;">
+            <div style="background: #0F172A; color: #38BDF8; padding: 8px 16px; border-radius: 8px; text-align: center;">
+              <span style="font-size: 0.72rem; display: block; color: #94A3B8;">الجدول الزمني:</span>
+              <strong style="font-size: 1.15rem; font-weight: 900;">اليوم ${currDay} / 100</strong>
+            </div>
+            <div style="background: #DCFCE7; color: #166534; padding: 8px 16px; border-radius: 8px; text-align: center; border: 1px solid #86EFAC;">
+              <span style="font-size: 0.72rem; display: block; color: #15803D;">نسبة الإنجاز التراكمي:</span>
+              <strong style="font-size: 1.15rem; font-weight: 900;">${progress}% مكتمل</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Phases Breakdown Table -->
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 22px; font-size: 0.83rem;">
+          <thead>
+            <tr style="background: #0D6E46; color: #FFFFFF; text-align: right;">
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1;">المرحلة والنطاق الزمني</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1;">المستهدفات والمخرجات التنفيذية</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; width: 110px;">الحالة</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; width: 100px;">نسبة الإنجاز</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                1. التهيئة والتأسيس المؤسسي<br><small style="color: #64748B; font-weight: normal;">(الأيام 1 - 25)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • توقيع عقد الاحتضان ولوائح الحاضنة المعتمدة.<br>
+                • استلام المقر المجهز وتفعيل العنوان الوطني الرسمي.<br>
+                • فتح الحسابات البنكية المعتمدة باسم الكيان.<br>
+                • تعيين المدير التنفيذي وتسكين الفريق الأساسي.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #166534; font-weight: 800; background: #DCFCE7;">
+                مكتمل ✓
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #166534;">
+                100%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                2. الامتثال والحوكمة الذكية<br><small style="color: #64748B; font-weight: normal;">(الأيام 26 - 50)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • إقرار واعتماد اللائحة الأساسية واللوائح الداخلية الـ 7.<br>
+                • تشكيل لجان مجلس الإدارة وتحديث مصفوفة الصلاحيات المالية.<br>
+                • استيفاء مؤشرات السلامة المالية والشفافية بالمركز الوطني NCNP.<br>
+                • جلسة المراجعة القانونية والحوكمة مع مستشار الحاضنة.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #B45309; font-weight: 800; background: #FEF3C7;">
+                جاري التنفيذ ⏳
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #B45309;">
+                75%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                3. بناء البرامج وتفعيل التطوع<br><small style="color: #64748B; font-weight: normal;">(الأيام 51 - 75)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • اعتماد الخطة التشغيلية السنوية ومؤشرات الأثر المجتمعي.<br>
+                • نشر أول فرصة تطوعية تخصصية عبر المنصة الوطنية NVG.<br>
+                • عقد ورشة العمل التصميمية للمبادرة المجتمعية الأولى.<br>
+                • الاستفادة من 3 استشارات تخصصية بقاعات عذق.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #1D4ED8; font-weight: 800; background: #EFF6FF;">
+                مجدول 📅
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #1D4ED8;">
+                25%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                4. إطلاق الأثر والاستدامة المالية<br><small style="color: #64748B; font-weight: normal;">(الأيام 76 - 100)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • إطلاق المبادرة المجتمعية الأولى وتوثيق مؤشرات العائد.<br>
+                • تفعيل المتجر الإلكتروني واستقطاب أول منحة تمويلية.<br>
+                • مراجعة تقرير إنجاز خطة الـ 100 يوم مع لجنة التقييم.<br>
+                • تسليم شهادة اجتياز خطة الـ 100 يوم والانتقال للتسريع.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #6B21A8; font-weight: 800; background: #FAF5FF;">
+                المرحلة القادمة
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #6B21A8;">
+                0%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Quality & Supervision Recommendation -->
+        <div style="background: #FFFBEB; border: 1px solid #FCD34D; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.82rem; color: #92400E;">
+          <strong>توصية المشرف المتابع:</strong> الجمعية تسير وفق الجدول الزمني المخطط له، ويوصى باستكمال رفع سياسة الإبلاغ عن المخالفات قبل نهاية اليوم الـ 48 للانتقال السلس إلى مرحلة البرامج والتطوع.
+        </div>
+
+        ${this.getFooterAndSignatureHtml('مشرف حاضنة ومسرعة عذق', 'المدير التنفيذي للجمعية')}
+      </div>
+    `;
+
+    this.showPrintPreview(content, `خطة_الـ_100_يوم_${assocName.replace(/\s+/g, '_')}`);
+  }
+
+  // 11. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
   printGenericDocument(title, category, contentHtml) {
     const ref = `ATHQ-DOC-${Math.floor(100 + Math.random() * 900)}`;
 
@@ -17955,7 +18932,22 @@ const DEFAULT_SEED_DATA = {
   ],
   contactMessages: [
     {
+      id: "MSG-1083",
+      senderType: "individual",
+      role: "صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)",
+      name: "خالد بن صالح الحربي",
+      org: "فرد / رائد أعمال اجتماعي",
+      phone: "0505123456",
+      email: "khaled.harbi@gmail.com",
+      subject: "عرض فكرة مبادرة مجتمعية للاحتضان",
+      message: "لدي فكرة مبادرة نوعية لتدريب وتأهيل الأيتام على المهارات الرقمية المتقدمة ونرغب في احتضان الفكرة في حاضنة الأفكار واستكمال متطلبات تأسيس جمعية أهلية.",
+      date: "1446/08/14",
+      status: "جديد"
+    },
+    {
       id: "MSG-1082",
+      senderType: "entity",
+      role: "ممثل جمعية أهلية",
       name: "أحمد بن عبدالمحسن النعيمي",
       org: "مبادرة التمكين الرقمي",
       phone: "0501234987",
@@ -17967,8 +18959,10 @@ const DEFAULT_SEED_DATA = {
     },
     {
       id: "MSG-1081",
+      senderType: "individual",
+      role: "مستشار وخبير حوكمة",
       name: "د. خالد السبيعي",
-      org: "مستشار حوكمة مستقل",
+      org: "فرد / خبير مستقل",
       phone: "0559871234",
       email: "dr.khaled@example.org",
       subject: "الانضمام كخبير أو مستشار متعاون",
@@ -18238,8 +19232,254 @@ const DEFAULT_SEED_DATA = {
       hours: 30,
       slots: ["الإثنين: 06:00 م - 08:00 م (افتراضي)", "الأربعاء: 05:00 م - 07:00 م (حضوري)"]
     }
+  ],
+  announcementsAndEvents: [
+    {
+      id: "EVT-2026-01",
+      title: "ورشة عمل: إعداد الموازنات التقديرية ومؤشرات الامتثال المالي للجمعيات لعام 2026",
+      category: "ورشة تدريبية تخصصية",
+      date: "الثلاثاء 28 أكتوبر 2026",
+      time: "10:00 صباحاً - 1:00 ظهراً",
+      venue: "قاعة التدريب والابتكار بالحاضنة (مع بث Zoom مباشر)",
+      speaker: "د. إبراهيم الجهني - خبير الإدارة المالية غير الربحية",
+      target: "جميع الجمعيات المحتضنة وممثلي الإدارة والمالية",
+      seatsTotal: 40,
+      seatsTaken: 28,
+      zoomLink: "https://zoom.us/j/8923412098",
+      isBroadcastActive: true,
+      badgeColor: "success",
+      registeredAssocs: ["جمعية ديوان الشبابية", "جمعية إرشاد", "جمعية النقاء"],
+      description: "تتناول الورشة صياغة الموازنات التشغيلية والرأسمالية، وربطها بمعايير المركز الوطني لتنمية القطاع غير الربحي NCNP، ونموذج إعداد التدفقات النقدية."
+    },
+    {
+      id: "EVT-2026-02",
+      title: "ملتقى الشراكات الاستراتيجية وتنمية الموارد مع الجهات المانحة والأوقاف",
+      category: "ملتقى وشراكات",
+      date: "الأربعاء 5 نوفمبر 2026",
+      time: "5:00 مساءً - 8:30 مساءً",
+      venue: "قاعة عذق الكبرى للمؤتمرات",
+      speaker: "أ. ماجد العوفي بمشاركة ممثلي 4 أوقاف مانحة",
+      target: "جمعيات الاحتضان المكاني ومسرعة الأعمال",
+      seatsTotal: 50,
+      seatsTaken: 42,
+      zoomLink: "",
+      isBroadcastActive: false,
+      badgeColor: "warning",
+      registeredAssocs: ["وقف العمل الصالح", "جمعية ديوان الشبابية", "جمعية سفراء"],
+      description: "عرض ملفات الجمعيات المحتضنة على ممثلي الصناديق والمؤسسات الأهلية المانحة لدعم المبادرات المجتمعية وتوقيع مذكرات التفاهم."
+    },
+    {
+      id: "EVT-2026-03",
+      title: "لقاء الطاولة المستديرة: تحديات التحول الرقمي وتطبيق ERP السحابي الموحد",
+      category: "طاولة مستديرة إثرائية",
+      date: "الخميس 13 نوفمبر 2026",
+      time: "11:00 صباحاً - 1:00 ظهراً",
+      venue: "عن بُعد عبر منصة Zoom التفاعلية",
+      speaker: "م. فهد الأحمدي - مستشار الحلول الرقمية والحوكمة",
+      target: "المدراء التنفيذيون ومسؤولو التقنية في الجمعيات",
+      seatsTotal: 30,
+      seatsTaken: 19,
+      zoomLink: "https://zoom.us/j/9912048321",
+      isBroadcastActive: false,
+      badgeColor: "primary",
+      registeredAssocs: ["جمعية ديوان الشبابية", "جمعية همم"],
+      description: "مناقشة متطلبات الفوترة الإلكترونية، والربط المحاسبي السحابي، وأتمتة إدارة الأعضاء والاشتراكات."
+    }
+  ],
+  serviceRequests: [
+    {
+      id: "SRV-2026-081",
+      assocName: "جمعية ديوان الشبابية",
+      serviceTitle: "حجز قاعة الاجتماعات الرئيسية الذكية",
+      category: "مساحات ومقرات",
+      requestDate: "2026-10-20",
+      targetDate: "2026-10-26",
+      purpose: "اجتماع مجلس الإدارة الربعي لمناقشة الخطة التشغيلية واللوائح",
+      notes: "مطلوب شاشة تفاعلية وتجهيز نظام البث الهجين Zoom",
+      status: "معتمد ومجدول",
+      adminFeedback: "تم حجز القاعة وتجهيز الشاشات والضيافة المعتمدة"
+    },
+    {
+      id: "SRV-2026-082",
+      assocName: "جمعية ديوان الشبابية",
+      serviceTitle: "استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)",
+      category: "استشارات متخصصة",
+      requestDate: "2026-10-22",
+      targetDate: "2026-10-29",
+      purpose: "مراجعة سياسة الإبلاغ عن المخالفات واعتماد جدول الصلاحيات",
+      notes: "جلسة حضورية مع د. سليمان الحربي بقاعة الاستشارات",
+      status: "قيد المراجعة",
+      adminFeedback: "جاري التنسيق مع المستشار لتأكيد موعد الجلسة"
+    },
+    {
+      id: "SRV-2026-075",
+      assocName: "جمعية إرشاد",
+      serviceTitle: "استقطاب متطوعين تخصصيين وتوثيق الساعات NVG",
+      category: "تشغيل وتطوع",
+      requestDate: "2026-10-15",
+      targetDate: "2026-10-22",
+      purpose: "طلب 4 متطوعين لإدارة الحملة الإعلامية لتدشين الجمعية",
+      notes: "تم استقطاب المتطوعين وبدء ساعاتهم المعتمدة",
+      status: "مكتمل ومُنفّذ",
+      adminFeedback: "تم التنفيذ واعتماد ساعات التطوع على منصة العمل التطوعي"
+    }
   ]
 };
+
+// Default Roadmap for Incubated Associations
+const DEFAULT_100_DAYS_ROADMAP = {
+  dayCurrent: 42,
+  totalDays: 100,
+  overallProgress: 68,
+  scheduleStatus: "ملتزم بالجدول ✓",
+  supervisorFeedback: "الجمعية تسير بوتيرة ممتازة في مرحلة الامتثال والحوكمة. يرجى استكمال سياسة الإبلاغ عن المخالفات خلال الأسبوع الحالي للانتقال لمرحلة تفعيل التطوع والبرامج.",
+  phases: [
+    {
+      id: "p1",
+      number: 1,
+      title: "المرحلة الأولى: التهيئة والتأسيس المؤسسي",
+      daysRange: "الأيام 1 - 25",
+      status: "مكتمل",
+      progress: 100,
+      badgeClass: "completed-phase",
+      milestones: [
+        { id: "m1_1", title: "توقيع عقد الاحتضان ولوائح الحاضنة المعتمدة", done: true, targetDay: "اليوم 3" },
+        { id: "m1_2", title: "استلام المقر المجهز وتفعيل العنوان الوطني الرسمي", done: true, targetDay: "اليوم 7" },
+        { id: "m1_3", title: "فتح الحسابات البنكية المعتمدة باسم الكيان", done: true, targetDay: "اليوم 14" },
+        { id: "m1_4", title: "تعيين المدير التنفيذي وتسكين الفريق الأساسي", done: true, targetDay: "اليوم 21" }
+      ]
+    },
+    {
+      id: "p2",
+      number: 2,
+      title: "المرحلة الثانية: الامتثال والحوكمة الذكية (معايير NCNP)",
+      daysRange: "الأيام 26 - 50",
+      status: "جاري التنفيذ",
+      progress: 75,
+      badgeClass: "active-phase",
+      milestones: [
+        { id: "m2_1", title: "إقرار واعتماد اللائحة الأساسية واللوائح الداخلية الـ 7", done: true, targetDay: "اليوم 30" },
+        { id: "m2_2", title: "تشكيل لجان مجلس الإدارة ومصفوفة الصلاحيات المالية", done: true, targetDay: "اليوم 38" },
+        { id: "m2_3", title: "جلسة المراجعة القانونية والحوكمة مع مستشار الحاضنة", done: true, targetDay: "اليوم 40" },
+        { id: "m2_4", title: "استيفاء مؤشرات السلامة المالية والشفافية بالمركز الوطني", done: false, targetDay: "مستهدف اليوم 48" }
+      ]
+    },
+    {
+      id: "p3",
+      number: 3,
+      title: "المرحلة الثالثة: بناء البرامج وتفعيل التطوع التخصصي",
+      daysRange: "الأيام 51 - 75",
+      status: "مجدول",
+      progress: 25,
+      badgeClass: "",
+      milestones: [
+        { id: "m3_1", title: "اعتماد الخطة التشغيلية السنوية ومؤشرات الأثر المجتمعي", done: false, targetDay: "مستهدف اليوم 55" },
+        { id: "m3_2", title: "نشر أول فرصة تطوعية تخصصية عبر المنصة الوطنية NVG", done: true, targetDay: "مبكر - اليوم 35" },
+        { id: "m3_3", title: "عقد ورشة العمل التصميمية للمبادرة المجتمعية الأولى", done: false, targetDay: "مستهدف اليوم 65" },
+        { id: "m3_4", title: "الاستفادة من 3 استشارات تخصصية بقاعات عذق", done: false, targetDay: "مستهدف اليوم 70" }
+      ]
+    },
+    {
+      id: "p4",
+      number: 4,
+      title: "المرحلة الرابعة: إطلاق الأثر والاستدامة المالية",
+      daysRange: "الأيام 76 - 100",
+      status: "قادم",
+      progress: 0,
+      badgeClass: "",
+      milestones: [
+        { id: "m4_1", title: "إطلاق المبادرة المجتمعية الأولى وتوثيق مؤشرات العائد", done: false, targetDay: "مستهدف اليوم 82" },
+        { id: "m4_2", title: "تفعيل المتجر الإلكتروني واستقطاب أول منحة تمويلية", done: false, targetDay: "مستهدف اليوم 90" },
+        { id: "m4_3", title: "مراجعة تقرير إنجاز خطة الـ 100 يوم مع لجنة التقييم", done: false, targetDay: "مستهدف اليوم 96" },
+        { id: "m4_4", title: "تسليم شهادة اجتياز خطة الـ 100 يوم والانتقال للتسريع", done: false, targetDay: "اليوم 100" }
+      ]
+    }
+  ]
+};
+
+// Default Services Catalog
+const DEFAULT_SERVICES_CATALOG = [
+  {
+    key: "main_hall",
+    title: "حجز قاعة الاجتماعات الرئيسية الذكية",
+    cat: "مساحات",
+    icon: "fa-people-roof",
+    color: "#0D6E46",
+    bg: "rgba(14, 110, 65, 0.1)",
+    desc: "سعة 25 شخصاً • شاشات تفاعلية 85 بوصة • نظام مؤتمرات هجين Zoom Rooms • خدمة الضيافة والبروتوكول",
+    deliverables: "مجهزة لاجتماعات مجالس الإدارة والجمعيات العمومية"
+  },
+  {
+    key: "innovation_lab",
+    title: "مختبر التدريب والابتكار التفاعلي",
+    cat: "مساحات",
+    icon: "fa-chalkboard-user",
+    color: "#D97706",
+    bg: "rgba(217, 119, 6, 0.1)",
+    desc: "سعة 30 متدرباً • منصة تدريبية ذكية • سبورات تفاعلية متطورة • نظام صوتي سحابي وتجهيزات ورش العمل",
+    deliverables: "مخصص للبرامج التدريبية ومختبرات الابتكار الاجتماعي"
+  },
+  {
+    key: "national_address",
+    title: "إصدار وتوثيق المقر والعنوان الوطني",
+    cat: "مساحات",
+    icon: "fa-envelopes-bulk",
+    color: "#2563EB",
+    bg: "rgba(37, 99, 235, 0.1)",
+    desc: "توفير عنوان وطني معتمد لدى البريد السعودي SPL • لوحة الكيان الرسمية • استلام وتسليم الطرود والمراسلات",
+    deliverables: "متطلب أساسي للترخيص ومطابقة شروط المركز الوطني NCNP"
+  },
+  {
+    key: "governance_advisory",
+    title: "استشارة حوكمة وتحديث اللوائح والصلاحيات",
+    cat: "استشارات",
+    icon: "fa-scale-balanced",
+    color: "#0D6E46",
+    bg: "rgba(14, 110, 65, 0.1)",
+    desc: "جلسة مباشرة مع مستشار حوكمة معتمد • مراجعة اللائحة الأساسية والسياسات الـ 7 • تأهيل الجمعية للنطاق الأخضر",
+    deliverables: "مصفوفة صلاحيات معتمدة وتقارير الامتثال النظامي"
+  },
+  {
+    key: "finance_advisory",
+    title: "استشارة استدامة مالية وموازنات تقديرية",
+    cat: "استشارات",
+    icon: "fa-chart-pie",
+    color: "#7C3AED",
+    bg: "rgba(124, 58, 237, 0.1)",
+    desc: "صياغة الموازنة التشغيلية • هندسة المحافظ الوقفية • إعداد خطة تنمية الموارد وجذب المنح والشراكات التنموية",
+    deliverables: "نموذج التدفقات النقدية وخطة الاستدامة المالية"
+  },
+  {
+    key: "volunteer_recruitment",
+    title: "استقطاب وإدارة متطوعين عبر منصة NVG",
+    cat: "تشغيل",
+    icon: "fa-hand-holding-heart",
+    color: "#059669",
+    bg: "rgba(5, 150, 105, 0.1)",
+    desc: "نشر الفرص التطوعية التخصصية بالمنصة الوطنية • فرز المتقدمين • توثيق الساعات وإصدار الشهادات الرسمية",
+    deliverables: "ساعات تطوعية موثقة رسمياً ورفع القيمة الاقتصادية"
+  },
+  {
+    key: "operational_plan",
+    title: "صياغة وتطوير الخطة التشغيلية للمبادرات",
+    cat: "تشغيل",
+    icon: "fa-diagram-project",
+    color: "#D97706",
+    bg: "rgba(217, 119, 6, 0.1)",
+    desc: "مواءمة المبادرات مع استراتيجية الجمعية • تحديد مؤشرات الأداء KPIs • جدولة المخرجات وموازنة المبادرة",
+    deliverables: "خطة تشغيلية متكاملة جاهزة للعرض على المانحين"
+  },
+  {
+    key: "branding_media",
+    title: "تصميم الهوية البصرية والحملات الرقمية",
+    cat: "إعلام",
+    icon: "fa-palette",
+    color: "#DC2626",
+    bg: "rgba(220, 38, 38, 0.1)",
+    desc: "تصميم البروفايل المؤسسي التعريفي • قوالب شبكات التواصل • إنتاج فيديو تعريفي أو بودكاست باستوديو عذق",
+    deliverables: "حقيبة إعلامية كاملة وهوية بصرية موثقة"
+  }
+];
 
 // Load or Initialize State
 function loadPlatformState() {
@@ -18254,13 +19494,33 @@ function loadPlatformState() {
         if (!parsed.directoryOrgs || parsed.directoryOrgs.length === 0) {
           parsed.directoryOrgs = DEFAULT_SEED_DATA.directoryOrgs;
         }
+        if (!parsed.announcementsAndEvents || parsed.announcementsAndEvents.length === 0) {
+          parsed.announcementsAndEvents = DEFAULT_SEED_DATA.announcementsAndEvents;
+        }
+        if (!parsed.serviceRequests || parsed.serviceRequests.length === 0) {
+          parsed.serviceRequests = DEFAULT_SEED_DATA.serviceRequests;
+        }
+        if (!parsed.contactMessages || parsed.contactMessages.length === 0) {
+          parsed.contactMessages = DEFAULT_SEED_DATA.contactMessages;
+        }
+        parsed.applications.forEach(app => {
+          if (!app.roadmap100Days) {
+            app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+          }
+        });
         return parsed;
       }
     }
   } catch (e) {
     console.warn("Could not read from localStorage", e);
   }
-  return JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+  const fresh = JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+  fresh.applications.forEach(app => {
+    if (!app.roadmap100Days) {
+      app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+    }
+  });
+  return fresh;
 }
 
 let APP_STATE = loadPlatformState();
@@ -18531,7 +19791,67 @@ window.openActionModal = function(type) {
   }
 };
 
-// 7.1 Direct Contact Form Handler (نموذج التواصل المباشر)
+// 7.1 Direct Contact Form Handler (نموذج التواصل المباشر والأفراد)
+window.setContactType = function(type) {
+  const btnInd = document.getElementById('btnContactIndividual');
+  const btnEnt = document.getElementById('btnContactEntity');
+  const hintEl = document.getElementById('contact-type-hint');
+  const senderTypeInput = document.getElementById('contact-sender-type');
+  const groupRole = document.getElementById('group-contact-role');
+  const groupOrg = document.getElementById('group-contact-org');
+  const labelName = document.getElementById('label-contact-name');
+  const labelMsg = document.getElementById('label-contact-message');
+  const subjectSelect = document.getElementById('contact-subject');
+
+  if (senderTypeInput) senderTypeInput.value = type;
+
+  if (type === 'individual') {
+    if (btnInd) btnInd.classList.add('active');
+    if (btnEnt) btnEnt.classList.remove('active');
+    if (groupRole) groupRole.style.display = 'block';
+    if (groupOrg) groupOrg.style.display = 'none';
+    if (labelName) labelName.innerHTML = 'الاسم الكامل (شخص عادي) <span class="required-star">*</span>';
+    if (labelMsg) labelMsg.innerHTML = 'نص الاستفسار أو تفاصيل الفكرة <span class="required-star">*</span>';
+    if (hintEl) {
+      hintEl.innerHTML = '<i class="fa-solid fa-circle-info"></i> نرحب بالأفراد والمهتمين، الباحثين، والمتطوعين ورواد الأعمال المجتمعية للإجابة عن تساؤلاتكم أو عرض أفكاركم ومبادراتكم.';
+    }
+    if (subjectSelect) {
+      subjectSelect.innerHTML = `
+        <option value="عرض فكرة مبادرة مجتمعية للاحتضان" selected>💡 عرض فكرة مبادرة مجتمعية للاحتضان بحاضنة الأفكار</option>
+        <option value="كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟">🌱 كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟</option>
+        <option value="طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية">🤝 طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية</option>
+        <option value="طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق">🏢 طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق</option>
+        <option value="استفسار عام أو مقترح تطويري للمنظومة">📝 استفسار عام أو مقترح تطويري للمنظومة</option>
+      `;
+    }
+  } else {
+    if (btnInd) btnInd.classList.remove('active');
+    if (btnEnt) btnEnt.classList.add('active');
+    if (groupRole) groupRole.style.display = 'none';
+    if (groupOrg) groupOrg.style.display = 'block';
+    if (labelName) labelName.innerHTML = 'اسم ممثل الجهة / المفوض <span class="required-star">*</span>';
+    if (labelMsg) labelMsg.innerHTML = 'تفاصيل الطلب أو الاستفسار المؤسسي <span class="required-star">*</span>';
+    if (hintEl) {
+      hintEl.innerHTML = '<i class="fa-solid fa-building-shield"></i> مخصص للجمعيات الأهلية، الصناديق والمؤسسات المانحة، والجهات الحكومية والخاصة لعقد الشراكات وطلب الاحتضان.';
+    }
+    if (subjectSelect) {
+      subjectSelect.innerHTML = `
+        <option value="طلب احتضان وتسجيل جمعية ناشئة" selected>🏢 طلب احتضان وتسجيل جمعية أهلية ناشئة</option>
+        <option value="الاستفسار عن حزم الدعم التأسيسي والحوكمة NCNP">⚖️ الاستفسار عن حزم الدعم التأسيسي والحوكمة NCNP</option>
+        <option value="حجز قاعات ومرافق ومقرات الحاضنة">🎤 حجز قاعات ومرافق ومقرات الحاضنة</option>
+        <option value="طلب جلسة استشارية متخصصة للجمعية">💡 طلب جلسة استشارية متخصصة للجمعية</option>
+        <option value="عقد شراكة استراتيجية أو مبادرة مانحة">🤝 عقد شراكة استراتيجية أو مبادرة مانحة</option>
+        <option value="استفسار عام أو دعم فني للمنصة">📝 استفسار عام أو دعم فني للمنصة</option>
+      `;
+    }
+  }
+
+  const contactSec = document.getElementById('contact');
+  if (contactSec && window.scrollY < contactSec.offsetTop - 300) {
+    contactSec.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 function handleDirectContactSubmit(e) {
   if (e && e.preventDefault) e.preventDefault();
 
@@ -18543,9 +19863,14 @@ function handleDirectContactSubmit(e) {
   const messageInput = document.getElementById('contact-message');
   const alertBox = document.getElementById('contactFormAlert');
   const submitBtn = document.getElementById('contactSubmitBtn');
+  const senderTypeInput = document.getElementById('contact-sender-type');
+  const roleInput = document.getElementById('contact-role');
 
+  const senderType = senderTypeInput ? senderTypeInput.value : 'individual';
+  const role = roleInput ? roleInput.value : '';
   const name = nameInput ? nameInput.value.trim() : '';
-  const org = orgInput ? orgInput.value.trim() : 'جهة غير محددة';
+  const org = orgInput ? orgInput.value.trim() : '';
+  const finalOrg = senderType === 'individual' ? `فرد (${role || 'شخص عادي'})` : (org || 'جمعية غير محددة');
   const phone = phoneInput ? phoneInput.value.trim() : '';
   const email = emailInput ? emailInput.value.trim() : '';
   const subject = subjectInput ? subjectInput.value.trim() : '';
@@ -18595,8 +19920,10 @@ function handleDirectContactSubmit(e) {
     if (!APP_STATE.contactMessages) APP_STATE.contactMessages = [];
     const newMsg = {
       id: 'MSG-' + Math.floor(1000 + Math.random() * 9000),
+      senderType,
+      role: role || (senderType === 'individual' ? 'شخص عادي' : 'جهة اعتبارية'),
       name,
-      org: org || 'جهة غير محددة',
+      org: finalOrg,
       phone: cleanPhone,
       email,
       subject,
@@ -18611,14 +19938,17 @@ function handleDirectContactSubmit(e) {
     if (!APP_STATE.notifications) APP_STATE.notifications = [];
     APP_STATE.notifications.unshift({
       id: 'NTF-' + Math.floor(100 + Math.random() * 900),
-      title: 'رسالة تواصل مباشر جديدة',
-      text: `تم استلام رسالة من: ${name} بخصوص: ${subject}`,
+      title: senderType === 'individual' ? 'استفسار جديد من فرد (شخص عادي)' : 'رسالة تواصل من جمعية أهلية',
+      text: `استلمت المنصة استفساراً من: ${name} (${finalOrg}) بخصوص: ${subject}`,
       time: 'الآن',
       unread: true,
-      icon: 'fa-envelope-open-text'
+      icon: senderType === 'individual' ? 'fa-user' : 'fa-building-ngo'
     });
 
     savePlatformState();
+
+    const inboxBadge = document.getElementById('admin-inbox-count');
+    if (inboxBadge) inboxBadge.textContent = APP_STATE.contactMessages.length;
 
     if (alertBox) {
       alertBox.className = 'contact-alert-box success';
@@ -19642,6 +20972,9 @@ function renderAssociationDashboard() {
   renderAssocEvidencesList(currentAssoc);
   renderAssocBookingsList();
   renderAssocConsultationsList();
+  renderAssoc100DaysRoadmap();
+  renderAssocServicesCatalog();
+  renderAssocEvents();
 }
 
 // ========================== Association Journey State Machine (Prompt 2) ==========================
@@ -22573,6 +23906,21 @@ function renderAdminDashboard() {
   renderAdminKanbanBoard();
   renderAdminAnalyticsAndLogs();
   populateAdminModalSelects();
+
+  renderAdmin100DaysMatrix();
+  renderAdminIncomingServiceRequestsTable();
+
+  // Badges update
+  const admin100dCnt = document.getElementById('admin-100d-cnt');
+  if (admin100dCnt) admin100dCnt.textContent = apps.length;
+
+  const adminIncomingServicesCnt = document.getElementById('admin-incoming-services-cnt');
+  if (adminIncomingServicesCnt) {
+    adminIncomingServicesCnt.textContent = (APP_STATE.serviceRequests || []).filter(r => r.status === 'قيد المراجعة').length;
+  }
+
+  const inboxBadge = document.getElementById('admin-inbox-count');
+  if (inboxBadge) inboxBadge.textContent = (APP_STATE.contactMessages || []).length;
 }
 
 // Helper: Filter admin applications by clicking summary cards
@@ -25298,6 +26646,951 @@ window.toggleFoundationalService = function(key) {
     showToast(`تم تحديث جاهزية الخدمة: ${item.title} (${item.done ? 'مكتملة ✓' : 'غير مكتملة'})`, 'info');
   }
 };
+
+/* ==========================================================================
+   MODULE: 100-DAY ACCELERATION ROADMAP (بوابة الجمعيات ولوحة الإدارة)
+   ========================================================================== */
+
+let adminActive100DaysAssocIndex = 0;
+
+window.renderAssoc100DaysRoadmap = function() {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  if (!currentAssoc.roadmap100Days) {
+    currentAssoc.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+  }
+  const roadmap = currentAssoc.roadmap100Days;
+
+  // Header Displays
+  const dayEl = document.getElementById('assoc-100days-day-display');
+  const pctEl = document.getElementById('assoc-100days-pct-display');
+  const barEl = document.getElementById('assoc-100days-progressbar');
+  const navBadgeEl = document.getElementById('assoc-100days-nav-badge');
+
+  if (dayEl) dayEl.textContent = roadmap.dayCurrent || 42;
+  if (pctEl) pctEl.textContent = `${roadmap.overallProgress || 68}%`;
+  if (barEl) barEl.style.width = `${roadmap.overallProgress || 68}%`;
+  if (navBadgeEl) navBadgeEl.textContent = `اليوم ${roadmap.dayCurrent || 42} (${roadmap.overallProgress || 68}%)`;
+
+  // Render 4 Phases Container
+  const container = document.getElementById('assoc-100days-phases-container');
+  if (!container) return;
+
+  container.innerHTML = (roadmap.phases || []).map((phase, pIdx) => {
+    const isCompleted = phase.progress === 100;
+    const isActive = phase.status === 'جاري التنفيذ' || phase.badgeClass === 'active-phase';
+
+    return `
+      <div class="roadmap-phase-card ${isCompleted ? 'completed-phase' : (isActive ? 'active-phase' : '')}">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--c-border); padding-bottom: 12px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
+              <span class="badge" style="background: ${isCompleted ? '#DCFCE7' : (isActive ? '#FEF3C7' : 'var(--c-bg)')}; color: ${isCompleted ? '#166534' : (isActive ? '#92400E' : 'var(--c-text-muted)')}; font-weight: 800; font-size: 0.75rem;">
+                ${phase.daysRange}
+              </span>
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+                ${phase.title}
+              </h4>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+              ${isCompleted ? 'تم استيفاء وتوثيق كافة المخرجات بنجاح ✓' : (isActive ? 'المرحلة النشطة الحالية - جاري استكمال الشواهد المطلوبة' : 'مرحلة مستقبلية مجدولة وفق الخطة الزمنية')}
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="text-align: left;">
+              <span style="font-size: 0.72rem; color: var(--c-text-muted); display: block;">الإنجاز بالمرحلة:</span>
+              <strong style="font-size: 0.95rem; font-weight: 900; color: ${isCompleted ? '#166534' : (isActive ? '#D97706' : 'var(--c-text-muted)')};">${phase.progress}%</strong>
+            </div>
+            <span class="badge" style="background: ${isCompleted ? '#DCFCE7' : (isActive ? '#FEF3C7' : '#F1F5F9')}; color: ${isCompleted ? '#166534' : (isActive ? '#B45309' : '#64748B')}; font-weight: 800; padding: 4px 12px; border-radius: 20px;">
+              ${phase.status}
+            </span>
+          </div>
+        </div>
+
+        <!-- Milestones Checklist -->
+        <div class="roadmap-milestones-list">
+          ${(phase.milestones || []).map((m, mIdx) => `
+            <div class="roadmap-milestone-item ${m.done ? 'done' : ''}">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <input type="checkbox" id="chk-m-${pIdx}-${mIdx}" class="roadmap-milestone-checkbox" ${m.done ? 'checked' : ''} onchange="toggle100DaysMilestone(${pIdx}, ${mIdx})">
+                <label for="chk-m-${pIdx}-${mIdx}" style="cursor: pointer; font-size: 0.84rem; font-weight: 700; color: ${m.done ? 'var(--c-primary)' : 'var(--c-text)'}; margin: 0; text-decoration: ${m.done ? 'line-through' : 'none'};">
+                  ${m.title}
+                </label>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.75rem; color: var(--c-text-muted); background: var(--c-surface); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--c-border);">
+                  <i class="fa-regular fa-clock"></i> ${m.targetDay}
+                </span>
+                <span class="badge" style="font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; background: ${m.done ? '#DCFCE7' : '#FEF3C7'}; color: ${m.done ? '#166534' : '#92400E'};">
+                  ${m.done ? 'منجز وموثق ✓' : 'قيد الإجراء'}
+                </span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('') + `
+    <!-- Supervisor Recommendation Card -->
+    <div style="background: #FFFBEB; border: 1.5px solid #FCD34D; border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; margin-top: 18px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #FDE68A; color: #92400E; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+        <i class="fa-solid fa-user-tie"></i>
+      </div>
+      <div>
+        <strong style="font-size: 0.88rem; color: #92400E; display: block; margin-bottom: 2px;">توجيه وملاحظة المشرف المتابع المعتمد:</strong>
+        <p style="font-size: 0.82rem; color: #78350F; margin: 0; line-height: 1.6;">
+          ${roadmap.supervisorFeedback || 'الجمعية تسير بوتيرة ممتازة في مرحلة الامتثال والحوكمة. يرجى استكمال سياسة الإبلاغ عن المخالفات خلال الأسبوع الحالي للانتقال لمرحلة تفعيل التطوع والبرامج.'}
+        </p>
+      </div>
+    </div>
+  `;
+};
+
+window.toggle100DaysMilestone = function(pIdx, mIdx) {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc || !currentAssoc.roadmap100Days) return;
+
+  const phase = currentAssoc.roadmap100Days.phases[pIdx];
+  if (!phase || !phase.milestones[mIdx]) return;
+
+  const m = phase.milestones[mIdx];
+  m.done = !m.done;
+
+  // Recalculate phase progress
+  const doneCount = phase.milestones.filter(item => item.done).length;
+  phase.progress = Math.round((doneCount / phase.milestones.length) * 100);
+  if (phase.progress === 100) {
+    phase.status = 'مكتمل';
+  } else if (phase.progress > 0) {
+    phase.status = 'جاري التنفيذ';
+  } else {
+    phase.status = 'مجدول';
+  }
+
+  // Recalculate overall roadmap progress
+  const allMilestones = currentAssoc.roadmap100Days.phases.flatMap(p => p.milestones);
+  const totalDone = allMilestones.filter(item => item.done).length;
+  currentAssoc.roadmap100Days.overallProgress = Math.round((totalDone / allMilestones.length) * 100);
+
+  savePlatformState();
+  renderAssoc100DaysRoadmap();
+  showToast(`تم تحديث حالة المستهدف: ${m.title} (${m.done ? 'منجز ✓' : 'قيد الإجراء'})`, 'success');
+};
+
+window.printAssoc100DaysReport = function() {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+  if (typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(currentAssoc.associationName, currentAssoc.licenseNumber, currentAssoc.roadmap100Days);
+  }
+};
+
+/* ==========================================================================
+   MODULE: SERVICE CATALOG & ASSOCIATION REQUESTS
+   ========================================================================== */
+
+let assocCatalogCurrentFilter = 'all';
+
+window.renderAssocServicesCatalog = function(filter = assocCatalogCurrentFilter) {
+  assocCatalogCurrentFilter = filter;
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const container = document.getElementById('assocServicesCatalogGrid');
+  if (container) {
+    const list = filter === 'all' 
+      ? DEFAULT_SERVICES_CATALOG 
+      : DEFAULT_SERVICES_CATALOG.filter(s => s.cat === filter);
+
+    container.innerHTML = list.map(s => `
+      <div class="service-card-item">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div class="service-card-icon" style="background: ${s.bg}; color: ${s.color};">
+              <i class="fa-solid ${s.icon}"></i>
+            </div>
+            <span class="badge" style="background: var(--c-bg); color: var(--c-text-muted); font-size: 0.72rem; border: 1px solid var(--c-border);">
+              ${s.cat}
+            </span>
+          </div>
+          <h4 style="font-size: 1rem; font-weight: 800; color: var(--c-primary); margin-bottom: 6px;">
+            ${s.title}
+          </h4>
+          <p style="font-size: 0.78rem; color: var(--c-text-muted); line-height: 1.6; margin-bottom: 12px;">
+            ${s.desc}
+          </p>
+          <div style="font-size: 0.74rem; background: var(--c-bg); padding: 6px 10px; border-radius: 6px; color: var(--c-text-primary); margin-bottom: 14px; border-right: 2px solid ${s.color};">
+            <i class="fa-solid fa-circle-check" style="color: ${s.color};"></i> <strong>المخرج:</strong> ${s.deliverables}
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-sm" onclick="openRequestServiceModal('${s.title}')" style="width: 100%; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <i class="fa-solid fa-paper-plane"></i> طلب الخدمة الآن
+        </button>
+      </div>
+    `).join('');
+  }
+
+  // Render Requests History Table
+  const tbody = document.getElementById('assoc-service-requests-tbody');
+  const countBadge = document.getElementById('assoc-requests-count-badge');
+  if (tbody) {
+    const requests = (APP_STATE.serviceRequests || []).filter(r => 
+      !r.assocName || r.assocName === currentAssoc.associationName || r.assocName === 'جميع الجمعيات'
+    );
+
+    if (countBadge) countBadge.textContent = `${requests.length} طلبات`;
+
+    if (requests.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--c-text-muted);">لا توجد طلبات سابقة للجمعية حالياً. اضغط "تقديم طلب خدمة جديدة" للبدء.</td></tr>`;
+    } else {
+      tbody.innerHTML = requests.map(r => {
+        let statusBadge = '<span class="badge" style="background: #FEF3C7; color: #92400E;">قيد المراجعة</span>';
+        if (r.status.includes('معتمد')) statusBadge = '<span class="badge" style="background: #DCFCE7; color: #166534;">معتمد ومجدول ✓</span>';
+        if (r.status.includes('مكتمل')) statusBadge = '<span class="badge" style="background: #EFF6FF; color: #1D4ED8;">مكتمل ومُنفّذ ✓</span>';
+        if (r.status.includes('مرفوض')) statusBadge = '<span class="badge" style="background: #FEE2E2; color: #991B1B;">مرفوض</span>';
+
+        return `
+          <tr style="border-bottom: 1px solid var(--c-border);">
+            <td style="padding: 10px 12px; font-weight: 800; font-family: monospace; color: var(--c-primary);">${r.id}</td>
+            <td style="padding: 10px 12px; font-weight: 800;">${r.serviceTitle}</td>
+            <td style="padding: 10px 12px; color: var(--c-text-muted);">${r.requestDate}</td>
+            <td style="padding: 10px 12px; color: var(--c-text-muted);">${r.targetDate}</td>
+            <td style="padding: 10px 12px; font-size: 0.78rem;">${r.purpose}</td>
+            <td style="padding: 10px 12px; text-align: center;">${statusBadge}</td>
+            <td style="padding: 10px 12px; font-size: 0.78rem; color: #15803D;">${r.adminFeedback || 'بانتظار مراجعة وتأكيد المشرف المختص'}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+};
+
+window.filterAssocCatalog = function(btn, cat) {
+  document.querySelectorAll('#assoc-tab-service-catalog .evidence-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAssocServicesCatalog(cat);
+};
+
+window.openRequestServiceModal = function(serviceTitle = '') {
+  const modal = document.getElementById('modalRequestIncubatorService');
+  if (!modal) return;
+  modal.style.display = 'flex';
+
+  const titleSelect = document.getElementById('req-service-title');
+  if (titleSelect && serviceTitle) {
+    for (let opt of titleSelect.options) {
+      if (opt.value.includes(serviceTitle) || serviceTitle.includes(opt.value)) {
+        titleSelect.value = opt.value;
+        break;
+      }
+    }
+  }
+
+  const dateInput = document.getElementById('req-service-date');
+  if (dateInput && !dateInput.value) {
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 5);
+    dateInput.value = nextWeek.toISOString().split('T')[0];
+  }
+};
+
+window.closeRequestServiceModal = function() {
+  const modal = document.getElementById('modalRequestIncubatorService');
+  if (modal) modal.style.display = 'none';
+};
+
+window.submitServiceRequest = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const title = document.getElementById('req-service-title')?.value || 'طلب خدمة عامة';
+  const targetDate = document.getElementById('req-service-date')?.value || new Date().toISOString().split('T')[0];
+  const preferredTime = document.getElementById('req-service-time')?.value || '';
+  const purpose = document.getElementById('req-service-purpose')?.value || '';
+  const notes = document.getElementById('req-service-notes')?.value || '';
+
+  const newReq = {
+    id: `SRV-2026-${Math.floor(100 + Math.random() * 900)}`,
+    assocName: currentAssoc.associationName,
+    serviceTitle: title,
+    category: title.includes('قاعة') || title.includes('مختبر') || title.includes('مقر') ? 'مساحات ومقرات' : 'استشارات وتشغيل',
+    requestDate: new Date().toISOString().split('T')[0],
+    targetDate: targetDate + (preferredTime ? ` (${preferredTime})` : ''),
+    purpose,
+    notes,
+    status: 'قيد المراجعة',
+    adminFeedback: 'تم استلام طلبكم وجاري الجدولة من قِبل إدارة الحاضنة'
+  };
+
+  if (!APP_STATE.serviceRequests) APP_STATE.serviceRequests = [];
+  APP_STATE.serviceRequests.unshift(newReq);
+
+  // Push notification to admin
+  if (!APP_STATE.notifications) APP_STATE.notifications = [];
+  APP_STATE.notifications.unshift({
+    id: `NTF-${Math.floor(100 + Math.random() * 900)}`,
+    title: 'طلب خدمة جديد من جمعية',
+    text: `طلبت ${currentAssoc.associationName} خدمة: ${title}`,
+    time: 'الآن',
+    unread: true,
+    icon: 'fa-boxes-packing'
+  });
+
+  savePlatformState();
+  closeRequestServiceModal();
+  renderAssocServicesCatalog();
+  renderAdminIncomingServiceRequestsTable();
+  showToast(`تم إرسال طلب ${title} بنجاح برقم مرجع: ${newReq.id}`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: EVENTS, WORKSHOPS & BROADCAST ANNOUNCEMENTS
+   ========================================================================== */
+
+let assocEventsCurrentFilter = 'all';
+
+window.renderAssocEvents = function(filter = assocEventsCurrentFilter) {
+  assocEventsCurrentFilter = filter;
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const events = APP_STATE.announcementsAndEvents || [];
+
+  // Render Broadcast Glowing Banner
+  const banner = document.getElementById('assoc-broadcast-banner');
+  if (banner) {
+    const activeBroadcast = events.find(e => e.isBroadcastActive);
+    if (activeBroadcast) {
+      const isRegistered = (activeBroadcast.registeredAssocs || []).includes(currentAssoc.associationName);
+      banner.style.display = 'flex';
+      banner.innerHTML = `
+        <div class="broadcast-meta-box">
+          <div class="broadcast-pulse-icon">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
+              <span class="badge" style="background: #F59E0B; color: #FFFFFF; font-weight: 800; font-size: 0.72rem;">تعميم عاجل وملتقى قادم</span>
+              <span style="font-size: 0.75rem; color: var(--c-text-muted);"><i class="fa-regular fa-clock"></i> ${activeBroadcast.date} • ${activeBroadcast.time}</span>
+            </div>
+            <strong style="font-size: 0.95rem; color: var(--c-primary); display: block;">
+              ${activeBroadcast.title}
+            </strong>
+            <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+              المتحدث: ${activeBroadcast.speaker} • ${activeBroadcast.venue}
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+          ${isRegistered ? `
+            <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 7px 14px; border: 1px solid #86EFAC;">
+              <i class="fa-solid fa-circle-check"></i> تم تأكيد حضور الجمعية ✓
+            </span>
+          ` : `
+            <button class="btn btn-primary btn-sm" onclick="confirmAssocEventAttendance('${activeBroadcast.id}')" style="font-weight: 800; padding: 7px 16px;">
+              <i class="fa-solid fa-check"></i> تأكيد الحضور الآن
+            </button>
+          `}
+          ${activeBroadcast.zoomLink ? `
+            <a href="${activeBroadcast.zoomLink}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm" style="font-weight: 700;">
+              <i class="fa-solid fa-video"></i> رابط Zoom
+            </a>
+          ` : ''}
+        </div>
+      `;
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Render Events Grid
+  const grid = document.getElementById('assocEventsShowcaseGrid');
+  const countBadge = document.getElementById('assoc-events-nav-badge');
+  if (grid) {
+    let list = events;
+    if (filter === 'registered') {
+      list = events.filter(e => (e.registeredAssocs || []).includes(currentAssoc.associationName));
+    }
+
+    if (countBadge) countBadge.textContent = `${events.length} لقاءات`;
+
+    if (list.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--c-text-muted);">لا توجد لقاءات مسجلة حالياً بهذا الفلتر.</div>`;
+    } else {
+      grid.innerHTML = list.map(evt => {
+        const isRegistered = (evt.registeredAssocs || []).includes(currentAssoc.associationName);
+
+        return `
+          <div class="event-card-item ${evt.isBroadcastActive ? 'broadcast-highlight' : ''}">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <span class="badge" style="background: rgba(37,99,235,0.1); color: #2563EB; font-weight: 800; font-size: 0.75rem;">
+                  ${evt.category}
+                </span>
+                ${evt.isBroadcastActive ? '<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.7rem; font-weight: 800;">بث عاجل 📢</span>' : ''}
+              </div>
+
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin-bottom: 8px; line-height: 1.5;">
+                ${evt.title}
+              </h4>
+
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.78rem; color: var(--c-text-muted); margin-bottom: 14px;">
+                <span><i class="fa-solid fa-calendar-day" style="color: var(--c-gold-dark);"></i> ${evt.date} • ${evt.time}</span>
+                <span><i class="fa-solid fa-location-dot" style="color: var(--c-primary);"></i> ${evt.venue}</span>
+                <span><i class="fa-solid fa-user-tie" style="color: #64748B;"></i> المحاضر: <strong>${evt.speaker}</strong></span>
+                <span><i class="fa-solid fa-users" style="color: #64748B;"></i> المقاعد: <strong>${evt.seatsTaken} / ${evt.seatsTotal}</strong> مقعداً مسجلاً</span>
+              </div>
+
+              <p style="font-size: 0.78rem; color: var(--c-text); background: var(--c-bg); padding: 8px 12px; border-radius: 8px; line-height: 1.6; margin-bottom: 16px;">
+                ${evt.description}
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between; border-top: 1px solid var(--c-border); padding-top: 12px;">
+              ${isRegistered ? `
+                <span class="event-registered-badge">
+                  <i class="fa-solid fa-circle-check"></i> تم تأكيد حضوركم ✓
+                </span>
+              ` : `
+                <button class="btn btn-primary btn-sm" onclick="confirmAssocEventAttendance('${evt.id}')" style="font-weight: 800;">
+                  <i class="fa-solid fa-check"></i> تأكيد الحضور
+                </button>
+              `}
+              <div style="display: flex; gap: 6px;">
+                ${evt.zoomLink ? `
+                  <a href="${evt.zoomLink}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm" title="رابط Zoom">
+                    <i class="fa-solid fa-video"></i>
+                  </a>
+                ` : ''}
+                <button class="btn btn-outline btn-sm" onclick="addToGoogleCalendar('${evt.title}')" title="إضافة للتقويم">
+                  <i class="fa-regular fa-calendar-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+};
+
+window.filterAssocEvents = function(filter) {
+  renderAssocEvents(filter);
+};
+
+window.confirmAssocEventAttendance = function(eventId) {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const event = (APP_STATE.announcementsAndEvents || []).find(e => e.id === eventId);
+  if (!event) return;
+
+  if (!event.registeredAssocs) event.registeredAssocs = [];
+  if (!event.registeredAssocs.includes(currentAssoc.associationName)) {
+    event.registeredAssocs.push(currentAssoc.associationName);
+    event.seatsTaken = (event.seatsTaken || 0) + 1;
+    savePlatformState();
+    renderAssocEvents();
+    showToast(`تم تأكيد حضور ${currentAssoc.associationName} للقاء: ${event.title}`, 'success');
+  } else {
+    showToast(`أنتم مسجلون بالفعل في هذا اللقاء!`, 'info');
+  }
+};
+
+window.addToGoogleCalendar = function(title) {
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent('حاضنة ومسرعة عذق للجمعيات الأهلية بالمدينة المنورة')}&location=${encodeURIComponent('قاعات حاضنة عذق')}`;
+  window.open(url, '_blank');
+};
+
+/* ==========================================================================
+   MODULE: ADMIN 100-DAY ACCELERATION MATRIX & TRACKING
+   ========================================================================== */
+
+window.switchAdminAppsSubView = function(subview) {
+  const btnTable = document.getElementById('btnAdminAppsTable');
+  const btn100Days = document.getElementById('btnAdminApps100Days');
+  const viewTable = document.getElementById('admin-subview-apps-table');
+  const view100Days = document.getElementById('admin-subview-100days');
+
+  if (subview === 'table') {
+    if (btnTable) { btnTable.className = 'btn btn-sm btn-primary'; }
+    if (btn100Days) { btn100Days.className = 'btn btn-sm btn-outline'; btn100Days.style.color = 'var(--c-primary)'; }
+    if (viewTable) viewTable.style.display = 'block';
+    if (view100Days) view100Days.style.display = 'none';
+  } else {
+    if (btnTable) { btnTable.className = 'btn btn-sm btn-outline'; }
+    if (btn100Days) { btn100Days.className = 'btn btn-sm btn-primary'; btn100Days.style.color = '#FFFFFF'; }
+    if (viewTable) viewTable.style.display = 'none';
+    if (view100Days) view100Days.style.display = 'block';
+    renderAdmin100DaysMatrix();
+  }
+};
+
+window.renderAdmin100DaysMatrix = function() {
+  const tbody = document.getElementById('admin-100days-tbody');
+  if (!tbody) return;
+
+  const apps = APP_STATE.applications || [];
+  tbody.innerHTML = apps.map((app, idx) => {
+    if (!app.roadmap100Days) {
+      app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+    }
+    const roadmap = app.roadmap100Days;
+    const modeInfo = getAssociationModeInfo(app.associationName);
+
+    // Current phase logic
+    const currentPhase = roadmap.phases.find(p => p.status === 'جاري التنفيذ') || roadmap.phases[0];
+    const isLate = roadmap.scheduleStatus.includes('متأخر') || roadmap.scheduleStatus.includes('مساندة');
+
+    return `
+      <tr style="border-bottom: 1px solid var(--c-border);">
+        <td style="padding: 12px 14px;">
+          <div style="font-weight: 900; color: var(--c-primary); font-size: 0.95rem; margin-bottom: 3px;">
+            ${app.associationName}
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            ${modeInfo.badgeHtml}
+            <span style="font-size: 0.72rem; color: var(--c-text-muted);">ترخيص: ${app.licenseNumber}</span>
+          </div>
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <span style="font-family: monospace; font-size: 1.1rem; font-weight: 900; color: #0F172A; background: #F1F5F9; padding: 4px 10px; border-radius: 8px;">
+            ${roadmap.dayCurrent} / 100
+          </span>
+        </td>
+
+        <td style="padding: 12px 14px;">
+          <div style="font-size: 0.82rem; font-weight: 800; color: var(--c-text);">
+            ${currentPhase.title}
+          </div>
+          <small style="color: var(--c-text-muted); font-size: 0.72rem;">${currentPhase.daysRange}</small>
+        </td>
+
+        <td style="padding: 12px 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; margin-bottom: 4px;">
+            <span>الإنجاز:</span>
+            <span style="color: #0D6E46;">${roadmap.overallProgress}%</span>
+          </div>
+          <div style="width: 100%; height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+            <div style="width: ${roadmap.overallProgress}%; height: 100%; background: linear-gradient(90deg, #0D6E46 0%, #D99B26 100%);"></div>
+          </div>
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <span class="badge" style="background: ${isLate ? '#FEF3C7' : '#DCFCE7'}; color: ${isLate ? '#92400E' : '#166534'}; font-weight: 800; font-size: 0.75rem;">
+            ${roadmap.scheduleStatus || 'ملتزم بالجدول ✓'}
+          </span>
+        </td>
+
+        <td style="padding: 12px 14px; font-size: 0.78rem; color: #64748B;">
+          ${(currentPhase.milestones.find(m => !m.done) || {}).title || 'تم اكتمال المرحلة'}
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <button class="btn btn-outline-primary btn-sm" onclick="openAdmin100DaysModal(${idx})" style="font-size: 0.76rem; font-weight: 800;">
+            <i class="fa-solid fa-pen-to-square"></i> متابعة الخطة
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.openAdmin100DaysModal = function(appIdx) {
+  adminActive100DaysAssocIndex = appIdx;
+  const app = (APP_STATE.applications || [])[appIdx];
+  if (!app) return;
+
+  if (!app.roadmap100Days) {
+    app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+  }
+  const roadmap = app.roadmap100Days;
+
+  const modal = document.getElementById('modalAdmin100Days');
+  if (!modal) return;
+  modal.style.display = 'flex';
+
+  const titleEl = document.getElementById('admin-100d-modal-title');
+  const subEl = document.getElementById('admin-100d-modal-sub');
+  const dayInput = document.getElementById('admin-100d-input-day');
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  const statusInput = document.getElementById('admin-100d-input-status');
+  const feedbackInput = document.getElementById('admin-100d-feedback');
+  const milestonesList = document.getElementById('admin-100d-milestones-list');
+
+  if (titleEl) titleEl.textContent = `متابعة وتحديث خطة الـ 100 يوم: ${app.associationName}`;
+  if (subEl) subEl.textContent = `ترخيص: ${app.licenseNumber} • ${app.track || 'مسار الحوكمة'} • اليوم الحالي بالخطة: ${roadmap.dayCurrent} / 100`;
+
+  if (dayInput) dayInput.value = roadmap.dayCurrent || 42;
+  if (pctInput) pctInput.value = roadmap.overallProgress || 68;
+  if (statusInput) statusInput.value = roadmap.scheduleStatus || 'ملتزم بالجدول ✓';
+  if (feedbackInput) feedbackInput.value = roadmap.supervisorFeedback || '';
+
+  if (milestonesList) {
+    milestonesList.innerHTML = (roadmap.phases || []).flatMap((p, pIdx) => {
+      return (p.milestones || []).map((m, mIdx) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1px solid var(--c-border); padding: 8px 12px; border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="admin-chk-${pIdx}-${mIdx}" ${m.done ? 'checked' : ''} onchange="adminToggleMilestone(${pIdx}, ${mIdx})" style="width: 18px; height: 18px; accent-color: var(--c-primary);">
+            <label for="admin-chk-${pIdx}-${mIdx}" style="margin: 0; font-size: 0.8rem; font-weight: 700; color: ${m.done ? '#166534' : 'var(--c-text)'};">
+              ${m.title}
+            </label>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">${p.title.split(':')[0]} • ${m.targetDay}</span>
+        </div>
+      `);
+    }).join('');
+  }
+};
+
+window.closeAdmin100DaysModal = function() {
+  const modal = document.getElementById('modalAdmin100Days');
+  if (modal) modal.style.display = 'none';
+};
+
+window.adminToggleMilestone = function(pIdx, mIdx) {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (!app || !app.roadmap100Days) return;
+
+  const phase = app.roadmap100Days.phases[pIdx];
+  if (!phase || !phase.milestones[mIdx]) return;
+
+  phase.milestones[mIdx].done = !phase.milestones[mIdx].done;
+
+  // Recalculate
+  const allMilestones = app.roadmap100Days.phases.flatMap(p => p.milestones);
+  const doneCount = allMilestones.filter(item => item.done).length;
+  app.roadmap100Days.overallProgress = Math.round((doneCount / allMilestones.length) * 100);
+
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  if (pctInput) pctInput.value = app.roadmap100Days.overallProgress;
+};
+
+window.calcAdmin100DaysModalPreview = function() {
+  // Handled live
+};
+
+window.saveAdmin100DaysProgress = function() {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (!app || !app.roadmap100Days) return;
+
+  const dayInput = document.getElementById('admin-100d-input-day');
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  const statusInput = document.getElementById('admin-100d-input-status');
+  const feedbackInput = document.getElementById('admin-100d-feedback');
+
+  if (dayInput) app.roadmap100Days.dayCurrent = parseInt(dayInput.value) || app.roadmap100Days.dayCurrent;
+  if (pctInput) app.roadmap100Days.overallProgress = parseInt(pctInput.value) || app.roadmap100Days.overallProgress;
+  if (statusInput) app.roadmap100Days.scheduleStatus = statusInput.value;
+  if (feedbackInput) app.roadmap100Days.supervisorFeedback = feedbackInput.value;
+
+  savePlatformState();
+  closeAdmin100DaysModal();
+  renderAdmin100DaysMatrix();
+  renderAssoc100DaysRoadmap();
+  showToast(`تم حفظ وتحديث خطة الـ 100 يوم لـ ${app.associationName} بنجاح!`, 'success');
+};
+
+window.printAssoc100DaysFromAdmin = function() {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (app && typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(app.associationName, app.licenseNumber, app.roadmap100Days);
+  }
+};
+
+window.exportAdmin100DaysReport = function() {
+  const app = (APP_STATE.applications || [])[0];
+  if (app && typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(app.associationName, app.licenseNumber, app.roadmap100Days);
+  }
+};
+
+/* ==========================================================================
+   MODULE: ADMIN INCOMING SERVICE REQUESTS
+   ========================================================================== */
+
+window.switchAdminServicesSubView = function(subview) {
+  const btnAllocated = document.getElementById('btnAdminServicesTable');
+  const btnRequests = document.getElementById('btnAdminServicesRequests');
+  const viewAllocated = document.getElementById('admin-subview-services-allocated');
+  const viewRequests = document.getElementById('admin-subview-services-requests');
+
+  if (subview === 'allocated') {
+    if (btnAllocated) btnAllocated.className = 'btn btn-sm btn-primary';
+    if (btnRequests) { btnRequests.className = 'btn btn-sm btn-outline'; btnRequests.style.color = 'var(--c-gold-dark)'; }
+    if (viewAllocated) viewAllocated.style.display = 'block';
+    if (viewRequests) viewRequests.style.display = 'none';
+  } else {
+    if (btnAllocated) btnAllocated.className = 'btn btn-sm btn-outline';
+    if (btnRequests) { btnRequests.className = 'btn btn-sm btn-primary'; btnRequests.style.color = '#FFFFFF'; }
+    if (viewAllocated) viewAllocated.style.display = 'none';
+    if (viewRequests) viewRequests.style.display = 'block';
+    renderAdminIncomingServiceRequestsTable();
+  }
+};
+
+window.renderAdminIncomingServiceRequestsTable = function() {
+  const tbody = document.getElementById('admin-incoming-services-tbody');
+  const countBadge = document.getElementById('admin-incoming-services-cnt');
+  if (!tbody) return;
+
+  const requests = APP_STATE.serviceRequests || [];
+  if (countBadge) countBadge.textContent = requests.filter(r => r.status === 'قيد المراجعة').length;
+
+  if (requests.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 25px; color: var(--c-text-muted);">لا توجد طلبات خدمات معلقة حالياً من الجمعيات.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = requests.map(r => {
+    const modeInfo = getAssociationModeInfo(r.assocName);
+    let statusPill = '<span class="badge" style="background: #FEF3C7; color: #92400E;">قيد المراجعة</span>';
+    if (r.status.includes('معتمد')) statusPill = '<span class="badge" style="background: #DCFCE7; color: #166534;">معتمد ومجدول ✓</span>';
+    if (r.status.includes('مكتمل')) statusPill = '<span class="badge" style="background: #EFF6FF; color: #1D4ED8;">مكتمل ومُنفّذ ✓</span>';
+
+    return `
+      <tr style="border-bottom: 1px solid var(--c-border);">
+        <td style="padding: 10px 12px; font-weight: 800; font-family: monospace; color: var(--c-primary);">${r.id}</td>
+        <td style="padding: 10px 12px;">
+          <div style="font-weight: 800; color: var(--c-primary);">${r.assocName}</div>
+          ${modeInfo.badgeHtml}
+        </td>
+        <td style="padding: 10px 12px; font-weight: 800;">
+          ${r.serviceTitle}
+          <div style="font-size: 0.72rem; color: var(--c-text-muted);">${r.category}</div>
+        </td>
+        <td style="padding: 10px 12px; font-size: 0.8rem; color: var(--c-text-muted);">${r.requestDate}</td>
+        <td style="padding: 10px 12px; font-size: 0.8rem; font-weight: 700; color: #0F172A;">${r.targetDate}</td>
+        <td style="padding: 10px 12px; font-size: 0.78rem;">
+          <div><strong>الهدف:</strong> ${r.purpose}</div>
+          ${r.notes ? `<div style="color: var(--c-text-muted); font-size: 0.72rem;">ملاحظة: ${r.notes}</div>` : ''}
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">${statusPill}</td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <div style="display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">
+            ${r.status === 'قيد المراجعة' ? `
+              <button class="btn btn-primary btn-sm" onclick="updateIncomingServiceStatus('${r.id}', 'معتمد ومجدول')" style="font-size: 0.72rem; padding: 3px 8px;">
+                <i class="fa-solid fa-check"></i> اعتماد
+              </button>
+            ` : ''}
+            ${r.status.includes('معتمد') ? `
+              <button class="btn btn-outline btn-sm" onclick="updateIncomingServiceStatus('${r.id}', 'مكتمل ومُنفّذ')" style="font-size: 0.72rem; padding: 3px 8px; border-color: #166534; color: #166534;">
+                <i class="fa-solid fa-check-double"></i> اكتمال
+              </button>
+            ` : ''}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.updateIncomingServiceStatus = function(reqId, newStatus) {
+  const req = (APP_STATE.serviceRequests || []).find(r => r.id === reqId);
+  if (!req) return;
+
+  req.status = newStatus;
+  if (newStatus.includes('معتمد')) {
+    req.adminFeedback = 'تم اعتماد الطلب وتخصيص المرفق/المستشار وجدولة الموعد بنجاح';
+  } else if (newStatus.includes('مكتمل')) {
+    req.adminFeedback = 'تم تنفيذ الخدمة واستيفاء مخرجاتها بنجاح';
+  }
+
+  savePlatformState();
+  renderAdminIncomingServiceRequestsTable();
+  renderAssocServicesCatalog();
+  showToast(`تم تحديث حالة طلب الخدمة ${reqId} إلى: ${newStatus}`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: PUBLISH EVENT & BROADCAST MODAL CONTROLLER
+   ========================================================================== */
+
+window.openPublishEventModal = function() {
+  const modal = document.getElementById('modalPublishEvent');
+  if (modal) modal.style.display = 'flex';
+};
+
+window.closePublishEventModal = function() {
+  const modal = document.getElementById('modalPublishEvent');
+  if (modal) modal.style.display = 'none';
+};
+
+window.submitPublishEvent = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+
+  const title = document.getElementById('pub-event-title')?.value || '';
+  const category = document.getElementById('pub-event-cat')?.value || 'ورشة تدريبية تخصصية';
+  const target = document.getElementById('pub-event-target')?.value || 'جميع الجمعيات المحتضنة';
+  const date = document.getElementById('pub-event-date')?.value || '';
+  const time = document.getElementById('pub-event-time')?.value || '';
+  const venue = document.getElementById('pub-event-venue')?.value || '';
+  const speaker = document.getElementById('pub-event-speaker')?.value || 'فريق خبراء حاضنة عذق';
+  const seats = parseInt(document.getElementById('pub-event-seats')?.value) || 35;
+  const zoomLink = document.getElementById('pub-event-zoom')?.value || '';
+  const desc = document.getElementById('pub-event-desc')?.value || '';
+  const isBroadcast = document.getElementById('pub-event-broadcast-check')?.checked ?? true;
+
+  const newEvt = {
+    id: `EVT-2026-${Math.floor(10 + Math.random() * 90)}`,
+    title,
+    category,
+    date,
+    time,
+    venue,
+    speaker,
+    target,
+    seatsTotal: seats,
+    seatsTaken: 0,
+    zoomLink,
+    isBroadcastActive: isBroadcast,
+    badgeColor: 'success',
+    registeredAssocs: [],
+    description: desc
+  };
+
+  if (isBroadcast && APP_STATE.announcementsAndEvents) {
+    APP_STATE.announcementsAndEvents.forEach(evt => evt.isBroadcastActive = false);
+  }
+
+  if (!APP_STATE.announcementsAndEvents) APP_STATE.announcementsAndEvents = [];
+  APP_STATE.announcementsAndEvents.unshift(newEvt);
+
+  // Push broadcast notification
+  if (!APP_STATE.notifications) APP_STATE.notifications = [];
+  APP_STATE.notifications.unshift({
+    id: `NTF-${Math.floor(100 + Math.random() * 900)}`,
+    title: `تعميم لقاء جديد: ${title}`,
+    text: `أعلنت إدارة الحاضنة عن ${category} بموعد ${date}. يرجى تأكيد حضور الجمعية.`,
+    time: 'الآن',
+    unread: true,
+    icon: 'fa-bullhorn'
+  });
+
+  savePlatformState();
+  closePublishEventModal();
+  renderAssocEvents();
+  showToast(`تم نشر وتعميم الفعالية بنجاح: "${title}" ووصلت لجميع الجمعيات!`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: CONTACT INBOX MODAL CONTROLLER (INDIVIDUALS & ENTITIES)
+   ========================================================================== */
+
+let contactInboxCurrentFilter = 'all';
+
+window.openContactInquiriesModal = function() {
+  const modal = document.getElementById('modalContactInquiries');
+  if (modal) modal.style.display = 'flex';
+  renderContactInquiriesList(contactInboxCurrentFilter);
+};
+
+window.closeContactInquiriesModal = function() {
+  const modal = document.getElementById('modalContactInquiries');
+  if (modal) modal.style.display = 'none';
+};
+
+window.filterInboxMessages = function(filter) {
+  contactInboxCurrentFilter = filter;
+  document.getElementById('btnFilterInboxAll')?.classList.toggle('active', filter === 'all');
+  document.getElementById('btnFilterInboxInd')?.classList.toggle('active', filter === 'individual');
+  document.getElementById('btnFilterInboxEnt')?.classList.toggle('active', filter === 'entity');
+  renderContactInquiriesList(filter);
+};
+
+window.renderContactInquiriesList = function(filter = 'all') {
+  const container = document.getElementById('inbox-messages-list');
+  const countBadge = document.getElementById('inbox-count-badge');
+  const adminInboxCount = document.getElementById('admin-inbox-count');
+  if (!container) return;
+
+  const messages = APP_STATE.contactMessages || [];
+  if (adminInboxCount) adminInboxCount.textContent = messages.length;
+
+  let list = messages;
+  if (filter === 'individual') {
+    list = messages.filter(m => m.senderType === 'individual' || m.org?.includes('فرد'));
+  } else if (filter === 'entity') {
+    list = messages.filter(m => m.senderType === 'entity' || (!m.senderType && !m.org?.includes('فرد')));
+  }
+
+  if (countBadge) countBadge.textContent = `${list.length} رسائل`;
+
+  if (list.length === 0) {
+    container.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--c-text-muted);">لا توجد رسائل واردة في هذا التصنيف.</div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(msg => {
+    const isIndividual = msg.senderType === 'individual' || msg.org?.includes('فرد');
+    let statusClass = '#FEF3C7';
+    let statusColor = '#92400E';
+    if (msg.status.includes('تواصل') || msg.status.includes('رد')) {
+      statusClass = '#DCFCE7';
+      statusColor = '#166534';
+    } else if (msg.status === 'مغلق') {
+      statusClass = '#F1F5F9';
+      statusColor = '#64748B';
+    }
+
+    return `
+      <div style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 12px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span class="badge" style="background: ${isIndividual ? '#E0E7FF' : '#DCFCE7'}; color: ${isIndividual ? '#3730A3' : '#166534'}; font-weight: 800; font-size: 0.75rem;">
+                <i class="fa-solid ${isIndividual ? 'fa-user' : 'fa-building-ngo'}"></i> ${isIndividual ? 'فرد (شخص عادي)' : 'جهة اعتبارية'}
+              </span>
+              <strong style="font-size: 1rem; color: var(--c-primary);">${msg.name}</strong>
+              <span style="font-size: 0.78rem; color: var(--c-text-muted);">(${msg.org || 'مقدم الاستفسار'})</span>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--c-text-muted); display: flex; gap: 12px;">
+              <span><i class="fa-solid fa-phone"></i> ${msg.phone}</span>
+              <span><i class="fa-solid fa-envelope"></i> ${msg.email}</span>
+              <span><i class="fa-regular fa-calendar"></i> ${msg.date}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge" style="background: ${statusClass}; color: ${statusColor}; font-weight: 800; font-size: 0.78rem;">
+              ${msg.status}
+            </span>
+            <button class="btn btn-outline btn-sm" onclick="updateContactMessageStatus('${msg.id}', 'تم الرد والتواصل')" style="font-size: 0.72rem; padding: 3px 8px;" title="تحديث الحالة إلى تم الرد">
+              <i class="fa-solid fa-check"></i> تم الرد
+            </button>
+          </div>
+        </div>
+
+        <div style="background: var(--c-bg); padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px; border-right: 3px solid ${isIndividual ? '#4F46E5' : 'var(--c-primary)'};">
+          <strong style="color: var(--c-primary); display: block; margin-bottom: 3px;">
+            الموضوع: ${msg.subject}
+          </strong>
+          <p style="margin: 0; color: var(--c-text); line-height: 1.6;">
+            ${msg.message}
+          </p>
+        </div>
+      </div>
+    `;
+  }).join('');
+};
+
+window.updateContactMessageStatus = function(msgId, newStatus) {
+  const msg = (APP_STATE.contactMessages || []).find(m => m.id === msgId);
+  if (!msg) return;
+
+  msg.status = newStatus;
+  savePlatformState();
+  renderContactInquiriesList(contactInboxCurrentFilter);
+  showToast(`تم تحديث حالة الرسالة ${msgId} إلى: ${newStatus}`, 'success');
+};
+
 
 
 

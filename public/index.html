@@ -217,6 +217,13 @@
                 <span class="dropdown-desc">الموقع، الهاتف، والقنوات المباشرة</span>
               </div>
             </a>
+            <a href="#contact" onclick="setContactType('individual')" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon-box" style="background: rgba(14,110,65,0.12); color: var(--c-primary);"><i class="fa-solid fa-user-circle"></i></div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">استفسار الأفراد والمجتمع (شخص عادي)</span>
+                <span class="dropdown-desc">استفسارات المهتمين، الباحثين، والمتطوعين</span>
+              </div>
+            </a>
           </div>
         </div>
       </nav>
@@ -1655,18 +1662,44 @@
           <!-- Form Column -->
           <div class="contact-form-panel">
             <div class="form-panel-header">
-              <h3><i class="fa-solid fa-paper-plane text-gold"></i> نموذج التواصل المباشر</h3>
-              <p>أدخل بياناتك واستفسارك وسيتم الرد عليك في غضون 24 ساعة عمل من قبل فريق الحاضنة المختص:</p>
+              <h3><i class="fa-solid fa-paper-plane text-gold"></i> قنوات الاستفسار والتواصل المباشر</h3>
+              <p>نسعد باستقبال كافة الاستفسارات من الأفراد والمهتمين بالقطاع غير الربحي والجمعيات الأهلية والشركاء:</p>
+            </div>
+
+            <!-- Segmented Switcher: Individual (شخص عادي) vs Entity (جهة اعتبارية) -->
+            <div class="contact-type-selector">
+              <button type="button" class="contact-type-btn active" id="btnContactIndividual" onclick="setContactType('individual')">
+                <i class="fa-solid fa-user"></i> أنا فرد / مهتم / رائد أعمال (شخص عادي)
+              </button>
+              <button type="button" class="contact-type-btn" id="btnContactEntity" onclick="setContactType('entity')">
+                <i class="fa-solid fa-building-ngo"></i> نحن جمعية أهلية / جهة اعتبارية
+              </button>
+            </div>
+
+            <!-- Dynamic Guidance Hint -->
+            <div id="contact-type-hint" style="background: rgba(14,110,65,0.07); border-right: 3px solid var(--c-primary); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: var(--c-primary-dark); margin-bottom: 16px;">
+              <i class="fa-solid fa-circle-info"></i> نرحب بالأفراد والمهتمين، الباحثين، والمتطوعين ورواد الأعمال المجتمعية للإجابة عن تساؤلاتكم أو عرض أفكاركم ومبادراتكم.
             </div>
 
             <form id="directContactForm" onsubmit="handleDirectContactSubmit(event)" novalidate>
+              <input type="hidden" id="contact-sender-type" value="individual">
               <div class="form-row-2">
                 <div class="form-group">
-                  <label class="form-label" for="contact-name">الاسم الكامل <span class="required-star">*</span></label>
-                  <input type="text" class="form-control" id="contact-name" placeholder="مثال: د. عبدالرحمن الأحمدي" required>
+                  <label class="form-label" for="contact-name" id="label-contact-name">الاسم الكامل <span class="required-star">*</span></label>
+                  <input type="text" class="form-control" id="contact-name" placeholder="مثال: خالد عبدالرحمن السالم" required>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="contact-org">اسم الجمعية أو الكيان <span class="text-muted">(اختياري)</span></label>
+                <div class="form-group" id="group-contact-role">
+                  <label class="form-label" for="contact-role" id="label-contact-role">الصفة أو نوع الاهتمام <span class="required-star">*</span></label>
+                  <select class="form-control" id="contact-role">
+                    <option value="صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)">💡 صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)</option>
+                    <option value="متطوع يرغب في تقديم خبراته التخصصية">🤝 متطوع يرغب في تقديم خبراته التخصصية</option>
+                    <option value="باحث أو أكاديمي في القطاع غير الربحي">🎓 باحث أو أكاديمي في القطاع غير الربحي</option>
+                    <option value="مهتم بالقطاع غير الربحي وتأسيس الجمعيات">🌱 مهتم بالقطاع غير الربحي وتأسيس الجمعيات</option>
+                    <option value="مستفيد عام أو استفسار عن خدمات الحاضنة">❓ مستفيد عام أو استفسار عن خدمات الحاضنة</option>
+                  </select>
+                </div>
+                <div class="form-group" id="group-contact-org" style="display: none;">
+                  <label class="form-label" for="contact-org">اسم الجمعية أو الكيان <span class="required-star">*</span></label>
                   <input type="text" class="form-control" id="contact-org" placeholder="مثال: جمعية روافد التنموية">
                 </div>
               </div>
@@ -1678,33 +1711,30 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="contact-email">البريد الإلكتروني <span class="required-star">*</span></label>
-                  <input type="email" class="form-control" id="contact-email" placeholder="name@domain.org.sa" dir="ltr" style="text-align: right;" required>
+                  <input type="email" class="form-control" id="contact-email" placeholder="name@domain.com" dir="ltr" style="text-align: right;" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="contact-subject">مجال الاستفسار أو الطلب <span class="required-star">*</span></label>
                 <select class="form-control" id="contact-subject" required>
-                  <option value="" disabled selected>اختر مجال الاستفسار...</option>
-                  <option value="طلب احتضان وتسجيل جمعية ناشئة">طلب احتضان وتسجيل جمعية ناشئة</option>
-                  <option value="الاستفسار عن حزم الدعم التأسيسي والحوكمة">الاستفسار عن حزم الدعم التأسيسي والحوكمة</option>
-                  <option value="حجز قاعات ومرافق ومقرات الحاضنة">حجز قاعات ومرافق ومقرات الحاضنة</option>
-                  <option value="طلب جلسة استشارية متخصصة">طلب جلسة استشارية متخصصة</option>
-                  <option value="الانضمام كخبير أو مستشار متعاون">الانضمام كخبير أو مستشار متعاون</option>
-                  <option value="عقد شراكة استراتيجية أو مبادرة مانحة">عقد شراكة استراتيجية أو مبادرة مانحة</option>
-                  <option value="استفسار عام أو دعم فني للمنصة">استفسار عام أو دعم فني للمنصة</option>
+                  <option value="عرض فكرة مبادرة مجتمعية للاحتضان" selected>💡 عرض فكرة مبادرة مجتمعية للاحتضان بحاضنة الأفكار</option>
+                  <option value="كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟">🌱 كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟</option>
+                  <option value="طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية">🤝 طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية</option>
+                  <option value="طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق">🏢 طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق</option>
+                  <option value="استفسار عام أو مقترح تطويري للمنظومة">📝 استفسار عام أو مقترح تطويري للمنظومة</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="contact-message">نص الرسالة أو تفاصيل الاستفسار <span class="required-star">*</span></label>
+                <label class="form-label" for="contact-message" id="label-contact-message">نص الاستفسار أو تفاصيل الفكرة <span class="required-star">*</span></label>
                 <textarea class="form-control" id="contact-message" rows="4" placeholder="يرجى كتابة كافة تفاصيل طلبك أو استفسارك هنا لتمكين الفريق من مساعدتك بدقة وسرعة..." required></textarea>
               </div>
 
               <div class="form-actions-contact">
                 <button type="submit" class="btn btn-gold btn-lg btn-contact-submit" id="contactSubmitBtn">
                   <i class="fa-solid fa-paper-plane"></i>
-                  <span>إرسال الرسالة المباشرة</span>
+                  <span>إرسال الاستفسار الآن</span>
                 </button>
               </div>
 
@@ -1996,8 +2026,28 @@
         </div>
       </div>
 
+      <!-- Official Urgent Broadcast & Meeting Banner for Associations -->
+      <div id="assoc-broadcast-banner" class="assoc-broadcast-banner" style="margin-bottom: 20px;">
+        <!-- Rendered dynamically via landing.js renderAssocEvents() -->
+      </div>
+
       <!-- Association Tabs Navigation -->
       <div class="portal-tabs-nav">
+        <!-- 1. خطة الـ 100 يوم للانطلاقة والتمكين -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-100days')" style="background: rgba(14,110,65,0.06); border-color: var(--c-primary);">
+          <i class="fa-solid fa-calendar-check" style="color: var(--c-primary);"></i> خطة الـ 100 يوم للتمكين
+          <span class="tab-badge" id="assoc-100days-nav-badge" style="background: var(--c-primary); color: #fff;">اليوم 42 (68%)</span>
+        </button>
+        <!-- 2. طلب خدمات وحزم الحاضنة -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-service-catalog')" style="background: rgba(217,155,38,0.08); border-color: var(--c-gold);">
+          <i class="fa-solid fa-boxes-packing" style="color: var(--c-gold-dark);"></i> طلب خدمات الحاضنة
+          <span class="tab-badge" id="assoc-services-nav-badge" style="background: var(--c-gold); color: #000;">8 خدمات</span>
+        </button>
+        <!-- 3. اللقاءات والبرامج والتعاميم -->
+        <button class="portal-tab-btn" onclick="switchAssocTab(this, 'assoc-tab-events')" style="background: rgba(37,99,235,0.06); border-color: #3B82F6;">
+          <i class="fa-solid fa-bullhorn" style="color: #2563EB;"></i> اللقاءات والبرامج والتعاميم
+          <span class="tab-badge" id="assoc-events-nav-badge" style="background: #2563EB; color: #fff;">3 لقاءات</span>
+        </button>
         <button class="portal-tab-btn active" onclick="switchAssocTab(this, 'assoc-tab-evidences')">
           <i class="fa-solid fa-folder-open"></i> مستودع الشواهد ووثائق الحوكمة <span class="badge" id="assoc-evidences-count-badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.72rem; padding: 2px 8px; border-radius: 12px;">7</span>
         </button>
@@ -2265,6 +2315,153 @@
             <h5>وسام التخرج والاستدامة المالية</h5>
             <p>التخرج الكامل من مسرعة عذق واستقطاب المنح والشراكات التنموية.</p>
             <span class="badge-status-tag" style="background: rgba(203,142,30,0.15); color: var(--c-gold-dark);">المرحلة القادمة</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 6: خطة الـ 100 يوم للانطلاقة والتمكين المؤسسي -->
+      <div id="assoc-tab-100days" class="portal-tab-pane">
+        <div class="roadmap-100-overview">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <div class="roadmap-day-counter">
+                <span style="font-size: 0.75rem; text-transform: uppercase; color: #94A3B8; display: block; margin-bottom: 2px;">الجدول الزمني المباشر</span>
+                <div class="roadmap-day-number" id="assoc-100days-day-display">42</div>
+                <span style="font-size: 0.72rem; color: #38BDF8;">من أصل 100 يوم</span>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                  <h3 style="font-size: 1.3rem; color: var(--c-primary); font-weight: 900; margin: 0;">خطة الـ 100 يوم للانطلاقة والتمكين المؤسسي</h3>
+                  <span class="badge" style="background: rgba(14,110,65,0.12); color: var(--c-primary); font-weight: 800; padding: 4px 12px; border-radius: 20px;">نطاق التميز الأخضر ✓</span>
+                </div>
+                <p style="font-size: 0.84rem; color: var(--c-text-muted); margin: 0; max-width: 650px;">
+                  خارطة طريق تسريع وتأهيل الجمعية خلال أول 100 يوم من الاحتضان، مقسمة على 4 مراحل محكمة لاستكمال المقر، التراخيص، الحوكمة، وإطلاق أول مبادرة مجتمعية.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" onclick="printAssoc100DaysReport()" style="font-weight: 800; padding: 8px 18px;">
+                <i class="fa-solid fa-file-pdf"></i> طباعة الخطة التنفيذية (PDF)
+              </button>
+              <button class="btn btn-outline-primary btn-sm" onclick="openAssocUploadEvidenceModal()">
+                <i class="fa-solid fa-cloud-arrow-up"></i> رفع شاهد لمستهدف
+              </button>
+            </div>
+          </div>
+
+          <!-- Overall Progress Bar Strip -->
+          <div style="background: var(--c-bg); border: 1px solid var(--c-border); padding: 14px 18px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 800; margin-bottom: 6px;">
+                <span style="color: var(--c-text);">إجمالي نسبة إنجاز مستهدفات الـ 100 يوم:</span>
+                <span style="color: var(--c-primary); font-size: 0.95rem;" id="assoc-100days-pct-display">68%</span>
+              </div>
+              <div style="width: 100%; height: 10px; background: #E2E8F0; border-radius: 6px; overflow: hidden;">
+                <div id="assoc-100days-progressbar" style="width: 68%; height: 100%; background: linear-gradient(90deg, #0D6E46 0%, #D99B26 100%); border-radius: 6px; transition: width 0.4s ease;"></div>
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--c-text-muted); display: flex; gap: 14px;">
+              <span><i class="fa-solid fa-circle-check" style="color: #166534;"></i> 9 مستهدفات منجزة</span>
+              <span><i class="fa-solid fa-hourglass-half" style="color: #D97706;"></i> 3 قيد التنفيذ</span>
+              <span><i class="fa-solid fa-calendar" style="color: #64748B;"></i> 4 مستهدفة قادمة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Sequential Phase Milestone Cards Container -->
+        <div id="assoc-100days-phases-container">
+          <!-- Rendered dynamically via landing.js renderAssoc100DaysRoadmap() -->
+        </div>
+      </div>
+
+      <!-- Tab 7: طلب خدمات وحزم الحاضنة (Service Catalog & Requests) -->
+      <div id="assoc-tab-service-catalog" class="portal-tab-pane">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.2rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">
+              <i class="fa-solid fa-boxes-packing text-gold"></i> كتالوج خدمات وحزم حاضنة ومسرعة عذق
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">
+              يمكن للجمعية المحتضنة التقديم على أي من الخدمات التشغيلية والمقرات والاستشارات التخصصية بطلب مباشر
+            </p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openRequestServiceModal('')" style="font-weight: 800; padding: 7px 16px;">
+            <i class="fa-solid fa-plus-circle"></i> تقديم طلب خدمة جديدة
+          </button>
+        </div>
+
+        <!-- Category Filters -->
+        <div style="display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;">
+          <button class="evidence-filter-btn active" onclick="filterAssocCatalog(this, 'all')">جميع الخدمات (8)</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'مساحات')">المقرات والقاعات</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'استشارات')">الاستشارات المتخصصة</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'تشغيل')">التشغيل والتطوع</button>
+          <button class="evidence-filter-btn" onclick="filterAssocCatalog(this, 'إعلام')">الإعلام والهوية</button>
+        </div>
+
+        <!-- 8 Services Cards Grid -->
+        <div class="service-catalog-grid" id="assocServicesCatalogGrid">
+          <!-- Rendered dynamically via landing.js renderAssocServicesCatalog() -->
+        </div>
+
+        <!-- Previous Requests History Table -->
+        <div style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); margin-top: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+              <i class="fa-solid fa-clock-rotate-left"></i> سجل طلبات خدمات الجمعية السابقة وحالتها
+            </h4>
+            <span class="badge" id="assoc-requests-count-badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-weight: 800;">3 طلبات</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+              <thead>
+                <tr style="background: var(--c-bg); border-bottom: 1px solid var(--c-border); text-align: right;">
+                  <th style="padding: 10px 12px;">رقم الطلب</th>
+                  <th style="padding: 10px 12px;">الخدمة المطلوبة</th>
+                  <th style="padding: 10px 12px;">تاريخ الطلب</th>
+                  <th style="padding: 10px 12px;">الموعد المستهدف</th>
+                  <th style="padding: 10px 12px;">الغرض من الطلب</th>
+                  <th style="padding: 10px 12px; text-align: center;">حالة الطلب</th>
+                  <th style="padding: 10px 12px;">ملاحظات الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="assoc-service-requests-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 8: اللقاءات والبرامج التدريبية والتعاميم الرسمية (Events & Workshops Hub) -->
+      <div id="assoc-tab-events" class="portal-tab-pane">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h3 style="font-size: 1.2rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">
+              <i class="fa-solid fa-bullhorn text-gold"></i> جدول اللقاءات والبرامج والتعاميم المعتمدة
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">
+              ورش العمل والملتقيات التخصصية الموجهة للجمعيات المحتضنة مع روابط البث المباشر وتسجيل الحضور
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline-primary btn-sm" onclick="filterAssocEvents('all')">جميع الفعاليات</button>
+            <button class="btn btn-outline-primary btn-sm" onclick="filterAssocEvents('registered')">المسجل بها فقط</button>
+          </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="events-showcase-grid" id="assocEventsShowcaseGrid">
+          <!-- Rendered dynamically via landing.js renderAssocEvents() -->
+        </div>
+
+        <!-- Archive and Materials Note -->
+        <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 14px;">
+          <div style="font-size: 1.4rem; color: #2563EB;"><i class="fa-solid fa-folder-closed"></i></div>
+          <div style="font-size: 0.82rem; color: #1E3A8A;">
+            <strong>مكتبة تسجيلات اللقاءات والمواد العلمية:</strong> يتم أرشفة كافة العروض التقديمية وتسجيلات Zoom في مستودع المعرفة للجمعيات المحتضنة للاستفادة منها ومشاركتها مع فريق العمل.
           </div>
         </div>
       </div>
@@ -2536,6 +2733,12 @@
           <button class="btn btn-primary btn-sm" onclick="openAdminNewAppModal()" title="تسجيل طلب احتضان جديد">
             <i class="fa-solid fa-plus"></i> إضافة طلب جديد
           </button>
+          <button class="btn btn-outline-primary btn-sm" onclick="openPublishEventModal()" style="border-color: #2563EB; color: #2563EB; font-weight: 800;" title="إعلان لقاء أو برنامج تدريبي جديد وتعميمه فورياً لجميع الجمعيات">
+            <i class="fa-solid fa-bullhorn"></i> + إعلان لقاء أو تعميم
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="openContactInquiriesModal()" style="border-color: #7C3AED; color: #7C3AED; font-weight: 800;" title="صندوق الاستفسارات ورسائل التواصل الواردة (الأفراد والكيانات)">
+            <i class="fa-solid fa-inbox"></i> استفسارات التواصل (<span id="admin-inbox-count">2</span>)
+          </button>
           <button class="btn btn-primary btn-sm" onclick="openMonthlyImpactReportModal()" style="font-weight: 800; background: linear-gradient(135deg, var(--c-primary) 0%, #0D9488 100%); border: none;" title="استعراض وتصدير تقرير الأثر ونسبة التقدم من شهر لآخر للجمعيات">
             <i class="fa-solid fa-chart-line"></i> تقرير الأثر والتقدم الشهري (MoM)
           </button>
@@ -2744,25 +2947,78 @@
           </div>
         </div>
 
-        <!-- High-Clarity Applications Table -->
-        <div class="admin-table-card">
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th style="min-width: 240px;">الجمعية والوضع ونوع الاحتضان</th>
-                  <th>الترخيص و 700</th>
-                  <th style="min-width: 170px;">ممثل الجمعية والتواصل</th>
-                  <th style="min-width: 180px;">مسار الاحتضان والجاهزية</th>
-                  <th style="min-width: 160px;">المرحلة الحالية</th>
-                  <th>الحالة</th>
-                  <th style="text-align: center; min-width: 150px;">الإجراءات السريعة</th>
-                </tr>
-              </thead>
-              <tbody id="admin-applications-tbody">
-                <!-- Dynamically rendered via landing.js -->
-              </tbody>
-            </table>
+        <!-- Sub-view toggle: Applications Table vs. 100-Day Acceleration Matrix -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px; background: var(--c-surface); padding: 5px; border-radius: 10px; border: 1px solid var(--c-border); width: fit-content;">
+          <button type="button" class="btn btn-sm btn-primary" id="btnAdminAppsTable" onclick="switchAdminAppsSubView('table')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px;">
+            <i class="fa-solid fa-list-check"></i> جدول طلبات وملفات الجمعيات
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminApps100Days" onclick="switchAdminAppsSubView('100days')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: var(--c-primary); color: var(--c-primary);">
+            <i class="fa-solid fa-calendar-check"></i> مصفوفة متابعة خطة الـ 100 يوم للجمعيات (<span id="admin-100d-cnt">15</span>)
+          </button>
+        </div>
+
+        <!-- Sub-view 1: Applications Table -->
+        <div id="admin-subview-apps-table">
+          <div class="admin-table-card">
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="min-width: 240px;">الجمعية والوضع ونوع الاحتضان</th>
+                    <th>الترخيص و 700</th>
+                    <th style="min-width: 170px;">ممثل الجمعية والتواصل</th>
+                    <th style="min-width: 180px;">مسار الاحتضان والجاهزية</th>
+                    <th style="min-width: 160px;">المرحلة الحالية</th>
+                    <th>الحالة</th>
+                    <th style="text-align: center; min-width: 150px;">الإجراءات السريعة</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-applications-tbody">
+                  <!-- Dynamically rendered via landing.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-view 2: 100-Day Acceleration Roadmap Matrix Container -->
+        <div id="admin-subview-100days" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #F8FAFC;">
+              <div>
+                <h4 style="font-size: 1.1rem; font-weight: 900; color: var(--c-primary); margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-chart-line text-gold"></i> لوحة الرقابة والمتابعة لخطة الـ 100 يوم (Acceleration Roadmap)
+                </h4>
+                <p style="font-size: 0.8rem; color: var(--c-text-muted); margin: 0;">
+                  متابعة تقدم الجمعيات المحتضنة في مستهدفات التأسيس والامتثال والحوكمة والبرامج شهراً بشهر ويوم بيوم
+                </p>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 6px 12px; border-radius: 20px;">متوسط الإنجاز: 64.2%</span>
+                <button class="btn btn-primary btn-sm" onclick="exportAdmin100DaysReport()">
+                  <i class="fa-solid fa-file-pdf"></i> تصدير تقرير الـ 100 يوم التنفيذي
+                </button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr style="background: var(--c-bg); border-bottom: 2px solid var(--c-border);">
+                    <th style="min-width: 220px;">الجمعية والوضع الاحتضاني</th>
+                    <th style="min-width: 130px; text-align: center;">اليوم بالخطة</th>
+                    <th style="min-width: 170px;">المرحلة التنفيذية الحالية</th>
+                    <th style="min-width: 180px;">شريط نسبة الإنجاز</th>
+                    <th style="min-width: 140px; text-align: center;">الالتزام الزمني</th>
+                    <th style="min-width: 150px;">المستهدف التالي</th>
+                    <th style="min-width: 150px; text-align: center;">الإجراء الرقابي</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-100days-tbody">
+                  <!-- Rendered dynamically via landing.js renderAdmin100DaysMatrix() -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -3070,23 +3326,75 @@
           </div>
         </div>
 
-        <div class="admin-table-card">
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th style="min-width: 200px;">الخدمة أو المرفق أو المنتج</th>
-                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
-                  <th style="min-width: 140px;">التصنيف والتجهيز</th>
-                  <th style="min-width: 120px;">تاريخ الاستفادة</th>
-                  <th style="text-align: center; min-width: 100px;">الحالة</th>
-                  <th style="text-align: center; min-width: 130px;">الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="admin-services-tbody">
-                <!-- Dynamically rendered via landing.js -->
-              </tbody>
-            </table>
+        <!-- Sub-view toggle: Allocated Services vs Incoming Association Requests -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px; background: var(--c-surface); padding: 5px; border-radius: 10px; border: 1px solid var(--c-border); width: fit-content;">
+          <button type="button" class="btn btn-sm btn-primary" id="btnAdminServicesTable" onclick="switchAdminServicesSubView('allocated')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px;">
+            <i class="fa-solid fa-boxes-stacked"></i> سجل الخدمات والمرافق المخصصة
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminServicesRequests" onclick="switchAdminServicesSubView('requests')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: var(--c-gold-dark); color: var(--c-gold-dark);">
+            <i class="fa-solid fa-bell"></i> طلبات الخدمات الواردة من الجمعيات (<span id="admin-incoming-services-cnt">3</span>)
+          </button>
+        </div>
+
+        <!-- Sub-view 1: Allocated Services Table -->
+        <div id="admin-subview-services-allocated">
+          <div class="admin-table-card">
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="min-width: 200px;">الخدمة أو المرفق أو المنتج</th>
+                    <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                    <th style="min-width: 140px;">التصنيف والتجهيز</th>
+                    <th style="min-width: 120px;">تاريخ الاستفادة</th>
+                    <th style="text-align: center; min-width: 100px;">الحالة</th>
+                    <th style="text-align: center; min-width: 130px;">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-services-tbody">
+                  <!-- Dynamically rendered via landing.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-view 2: Incoming Requests from Associations -->
+        <div id="admin-subview-services-requests" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #FFFBEB;">
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 900; color: #92400E; margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-bell text-gold"></i> طلبات الخدمات والحزم التشغيلية الواردة من الجمعيات المحتضنة
+                </h4>
+                <p style="font-size: 0.8rem; color: #B45309; margin: 0;">
+                  الطلبات المرفوعة من بوابات الجمعيات لحجز قاعات، استشارات، مكاتب، أو دعم إعلامي وتطوعي
+                </p>
+              </div>
+              <button class="btn btn-gold btn-sm" onclick="renderAdminIncomingServiceRequestsTable()">
+                <i class="fa-solid fa-rotate"></i> تحديث الطلبات
+              </button>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr style="background: var(--c-bg); border-bottom: 2px solid var(--c-border); text-align: right;">
+                    <th style="min-width: 110px;">رقم الطلب</th>
+                    <th style="min-width: 220px;">الجمعية ووضعها الاحتضاني</th>
+                    <th style="min-width: 200px;">الخدمة أو الحزمة المطلوبة</th>
+                    <th style="min-width: 110px;">تاريخ الطلب</th>
+                    <th style="min-width: 110px;">الموعد المستهدف</th>
+                    <th style="min-width: 200px;">الغرض والتفاصيل</th>
+                    <th style="min-width: 130px; text-align: center;">الحالة</th>
+                    <th style="min-width: 160px; text-align: center;">القرار والإجراء</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-incoming-services-tbody">
+                  <!-- Rendered dynamically via landing.js -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -4805,6 +5113,288 @@
             إغلاق
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: نشر وتعميم لقاء أو برنامج تدريبي جديد للجمعيات -->
+  <div class="modal-overlay" id="modalPublishEvent">
+    <div class="wizard-modal-box" style="max-width: 680px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);">
+        <button class="modal-close-btn" onclick="closePublishEventModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.25); color: #FFFFFF; font-size: 0.75rem;">مركز الفعاليات والتعاميم</span>
+          <span class="badge" style="background: #FEF08A; color: #854D0E; font-weight: 800;">بث فوري لجميع الجمعيات</span>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-bullhorn"></i> إعلان لقاء أو برنامج تدريبي وتعميمه
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          يتم نشر هذا اللقاء مباشرة في بوابات جميع الجمعيات المحتضنة وإرسال إشعار فوري لها مع إمكانية تأكيد الحضور
+        </p>
+      </div>
+
+      <form id="formPublishEvent" onsubmit="submitPublishEvent(event)">
+        <div class="wizard-body" style="padding: 24px; max-height: 70vh; overflow-y: auto;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="pub-event-title">عنوان اللقاء أو البرنامج التدريبي <span class="required-star">*</span></label>
+            <input type="text" id="pub-event-title" class="form-control" placeholder="مثال: ورشة عمل: إعداد الموازنات التقديرية ومؤشرات الامتثال المالي" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-cat">تصنيف الفعالية <span class="required-star">*</span></label>
+              <select id="pub-event-cat" class="form-control" required>
+                <option value="ورشة تدريبية تخصصية">ورشة تدريبية تخصصية</option>
+                <option value="ملتقى شراكات وتنمية موارد">ملتقى شراكات وتنمية موارد</option>
+                <option value="جلسة طاولة مستديرة إثرائية">جلسة طاولة مستديرة إثرائية</option>
+                <option value="لقاء تعريفي وتوجيهي">لقاء تعريفي وتوجيهي</option>
+                <option value="تعميم رسمي وتوجيهات عاجلة">تعميم رسمي وتوجيهات عاجلة</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-target">الفئة المستهدفة <span class="required-star">*</span></label>
+              <select id="pub-event-target" class="form-control" required>
+                <option value="جميع الجمعيات المحتضنة">جميع الجمعيات المحتضنة</option>
+                <option value="حاضنة الأفكار (قيد التأسيس)">حاضنة الأفكار (قيد التأسيس)</option>
+                <option value="الاحتضان المكاني والتشغيلي">الاحتضان المكاني والتشغيلي</option>
+                <option value="مسرعة أعمال ونمو الأثر">مسرعة أعمال ونمو الأثر</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-date">تاريخ وموعد اللقاء <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-date" class="form-control" placeholder="مثال: الثلاثاء 28 أكتوبر 2026" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-time">التوقيت والمدة <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-time" class="form-control" placeholder="مثال: 10:00 صباحاً - 1:00 ظهراً" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-venue">المقر أو نوع الحضور <span class="required-star">*</span></label>
+              <input type="text" id="pub-event-venue" class="form-control" placeholder="مثال: قاعة التدريب والابتكار بالحاضنة (أو عن بُعد)" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-speaker">المحاضر أو المتحدث الرئيسي</label>
+              <input type="text" id="pub-event-speaker" class="form-control" placeholder="مثال: د. إبراهيم الجهني - خبير مالي معتمد">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-seats">عدد المقاعد المتاحة</label>
+              <input type="number" id="pub-event-seats" class="form-control" value="35" min="5" max="200">
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="pub-event-zoom">رابط القاعة الافتراضية Zoom (إن وجد)</label>
+              <input type="url" id="pub-event-zoom" class="form-control" placeholder="https://zoom.us/j/..." dir="ltr" style="text-align: right;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="pub-event-desc">المحاور والتفاصيل التنفيذية <span class="required-star">*</span></label>
+            <textarea id="pub-event-desc" class="form-control" rows="3" placeholder="اكتب نبذة عن اللقاء، المخرجات المتوقعة، وما يجب على الجمعية تحضيره..." required></textarea>
+          </div>
+
+          <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.2); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="pub-event-broadcast-check" checked style="width: 18px; height: 18px; accent-color: #2563EB;">
+            <label for="pub-event-broadcast-check" style="font-size: 0.8rem; font-weight: 700; color: #1E3A8A; cursor: pointer; margin: 0;">
+              تفعيل شريط التعاميم التنبيهي المتوهج في أعلى بوابات الجمعيات وإرسال إشعار فوري
+            </label>
+          </div>
+        </div>
+
+        <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closePublishEventModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-sm" style="background: #2563EB; border-color: #1D4ED8; font-weight: 800; padding: 7px 20px;">
+            <i class="fa-solid fa-paper-plane"></i> نشر وتعميم اللقاء الآن
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: تقديم طلب خدمة أو حزمة تشغيلية للحاضنة -->
+  <div class="modal-overlay" id="modalRequestIncubatorService">
+    <div class="wizard-modal-box" style="max-width: 620px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
+        <button class="modal-close-btn" onclick="closeRequestServiceModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-size: 0.75rem;">بوابة الجمعيات المحتضنة</span>
+          <span class="badge" style="background: var(--c-gold-subtle); color: var(--c-gold-dark); font-weight: 800;">طلب خدمة فورية</span>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-boxes-packing text-gold"></i> تقديم طلب خدمة أو حزمة تشغيلية
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          يتم توجيه طلبكم مباشرة إلى إدارة الحاضنة وتعيين المرفق أو المستشار وجدولة الموعد خلال 24 ساعة عمل
+        </p>
+      </div>
+
+      <form id="formRequestService" onsubmit="submitServiceRequest(event)">
+        <div class="wizard-body" style="padding: 22px; max-height: 70vh; overflow-y: auto;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-title">الخدمة أو الحزمة المطلوبة <span class="required-star">*</span></label>
+            <select id="req-service-title" class="form-control" required>
+              <option value="حجز قاعة الاجتماعات الرئيسية الذكية">🎤 حجز قاعة الاجتماعات الرئيسية الذكية</option>
+              <option value="حجز مختبر التدريب والابتكار التفاعلي">💡 حجز مختبر التدريب والابتكار التفاعلي</option>
+              <option value="استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)">⚖️ استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)</option>
+              <option value="استشارة استدامة وتنمية موارد مالية وأوقاف">💰 استشارة استدامة وتنمية موارد مالية وأوقاف</option>
+              <option value="إصدار وتوثيق العنوان الوطني والمقر المعتمد">📮 إصدار وتوثيق العنوان الوطني والمقر المعتمد</option>
+              <option value="استقطاب متطوعين تخصصيين وتوثيق الساعات NVG">🤝 استقطاب متطوعين تخصصيين وتوثيق الساعات NVG</option>
+              <option value="تصميم هوية بصرية وحملة إعلامية رقمية">🎨 تصميم هوية بصرية وحملة إعلامية رقمية</option>
+              <option value="مراجعة وتدقيق اللائحة المالية والموازنة التقديرية">📊 مراجعة وتدقيق اللائحة المالية والموازنة التقديرية</option>
+            </select>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="req-service-date">الموعد أو التاريخ المستهدف <span class="required-star">*</span></label>
+              <input type="date" id="req-service-date" class="form-control" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label" for="req-service-time">الوقت المفضل (إن كان لقاعة أو جلسة)</label>
+              <select id="req-service-time" class="form-control">
+                <option value="صباحي (9:00 ص - 12:00 م)">صباحي (9:00 ص - 12:00 م)</option>
+                <option value="ظهيرة (1:00 م - 4:00 م)">ظهيرة (1:00 م - 4:00 م)</option>
+                <option value="مسائي (5:00 م - 8:00 م)">مسائي (5:00 م - 8:00 م)</option>
+                <option value="مرن حسب توفر المستشار / المرفق">مرن حسب توفر المستشار / المرفق</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-purpose">الغرض من الخدمة ومبررات الاحتياج <span class="required-star">*</span></label>
+            <input type="text" id="req-service-purpose" class="form-control" placeholder="مثال: عقد اجتماع مجلس الإدارة الربعي لمناقشة اللائحة الأساسية" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="req-service-notes">أي متطلبات أو تجهيزات خاصة إضافية</label>
+            <textarea id="req-service-notes" class="form-control" rows="3" placeholder="مثال: نحتاج توفير شاشة تفاعلية، نظام بث هجين Zoom، وضيافة لـ 12 شخصاً..."></textarea>
+          </div>
+        </div>
+
+        <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeRequestServiceModal()">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-sm" style="font-weight: 800; padding: 7px 20px;">
+            <i class="fa-solid fa-check"></i> تأكيد إرسال الطلب للإدارة
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: متابعة وتحديث خطة الـ 100 يوم للجمعية (إدارة) -->
+  <div class="modal-overlay" id="modalAdmin100Days">
+    <div class="wizard-modal-box" style="max-width: 760px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
+        <button class="modal-close-btn" onclick="closeAdmin100DaysModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; font-size: 0.75rem;">لوحة الرقابة التنفيذية</span>
+          <span class="badge" id="admin-100d-modal-badge" style="background: #DCFCE7; color: #166534; font-weight: 800;">خطة الـ 100 يوم</span>
+        </div>
+        <h3 id="admin-100d-modal-title" style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          متابعة وتحديث خطة الـ 100 يوم: جمعية ديوان الشبابية
+        </h3>
+        <p id="admin-100d-modal-sub" style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          ترخيص 1842 • مسار الحوكمة والتمكين الشامل • تاريخ بدء الاحتضان: 1 ربيع الأول 1446هـ
+        </p>
+      </div>
+
+      <div class="wizard-body" style="padding: 24px; max-height: 70vh; overflow-y: auto;">
+        <!-- Controls: Day & Progress -->
+        <div style="background: #F8FAFC; border: 1px solid var(--c-border); padding: 16px; border-radius: 12px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">اليوم الحالي في الخطة (من 100):</label>
+            <input type="number" id="admin-100d-input-day" class="form-control" min="1" max="100" value="42" onchange="calcAdmin100DaysModalPreview()">
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">نسبة الإنجاز التراكمي (%):</label>
+            <input type="number" id="admin-100d-input-pct" class="form-control" min="0" max="100" value="68" onchange="calcAdmin100DaysModalPreview()">
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 0.78rem;">حالة الالتزام الزمني:</label>
+            <select id="admin-100d-input-status" class="form-control">
+              <option value="ملتزم بالجدول ✓">ملتزم بالجدول ✓</option>
+              <option value="متقدم عن الخطة 🚀">متقدم عن الخطة 🚀</option>
+              <option value="يحتاج مساندة وتوجيه ⚠️">يحتاج مساندة وتوجيه ⚠️</option>
+              <option value="متأخر عن المستهدف 🛑">متأخر عن المستهدف 🛑</option>
+            </select>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--c-primary); margin-bottom: 10px;">
+          المستهدفات والمخرجات التنفيذية للخطة:
+        </h4>
+        <div id="admin-100d-milestones-list" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="admin-100d-feedback">توجيه وملاحظة المشرف الرقابي للجمعية:</label>
+          <textarea id="admin-100d-feedback" class="form-control" rows="2" placeholder="اكتب توجيهات المتابعة أو المتطلبات الناقصة لتظهر فورياً في بوابة الجمعية..."></textarea>
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-outline-primary btn-sm" onclick="printAssoc100DaysFromAdmin()">
+          <i class="fa-solid fa-print"></i> طباعة الخطة التنفيذية الرسمية
+        </button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeAdmin100DaysModal()">إلغاء</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveAdmin100DaysProgress()" style="font-weight: 800; padding: 7px 18px;">
+            <i class="fa-solid fa-floppy-disk"></i> حفظ التحديثات واعتماد الخطة
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: صندوق استفسارات ورسائل التواصل (الأفراد والجمعيات) -->
+  <div class="modal-overlay" id="modalContactInquiries">
+    <div class="wizard-modal-box" style="max-width: 820px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);">
+        <button class="modal-close-btn" onclick="closeContactInquiriesModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.25); color: #FFFFFF; font-size: 0.75rem;">خدمة المستفيدين والتواصل</span>
+          <span class="badge" style="background: #F3E8FF; color: #581C87; font-weight: 800;" id="inbox-count-badge">3 رسائل</span>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">
+          <i class="fa-solid fa-inbox"></i> صندوق الاستفسارات ورسائل التواصل الواردة
+        </h3>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin: 0;">
+          إدارة استفسارات الأفراد (المواطنين والمهتمين) والجمعيات الأهلية والشركاء مع إمكانية الرد وتحديث الحالة
+        </p>
+      </div>
+
+      <div class="wizard-body" style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+        <!-- Filters: All vs Individual vs Entity -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; gap: 8px;">
+            <button class="evidence-filter-btn active" id="btnFilterInboxAll" onclick="filterInboxMessages('all')">جميع الرسائل</button>
+            <button class="evidence-filter-btn" id="btnFilterInboxInd" onclick="filterInboxMessages('individual')">👤 استفسارات الأفراد (شخص عادي)</button>
+            <button class="evidence-filter-btn" id="btnFilterInboxEnt" onclick="filterInboxMessages('entity')">🏢 استفسارات الجمعيات (جهات اعتبارية)</button>
+          </div>
+          <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+            <i class="fa-solid fa-check-double text-gold"></i> تحديث تلقائي فوري
+          </span>
+        </div>
+
+        <div id="inbox-messages-list" style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Dynamically populated via landing.js -->
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 0.78rem; color: var(--c-text-muted);">
+          متوسط زمن الاستجابة والرد: أقل من ساعتين عمل
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="closeContactInquiriesModal()">إلغاء</button>
       </div>
     </div>
   </div>

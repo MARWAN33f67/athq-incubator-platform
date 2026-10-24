@@ -24,7 +24,22 @@ const DEFAULT_SEED_DATA = {
   ],
   contactMessages: [
     {
+      id: "MSG-1083",
+      senderType: "individual",
+      role: "صاحب فكرة مبادرة مجتمعية (رائد أعمال اجتماعي)",
+      name: "خالد بن صالح الحربي",
+      org: "فرد / رائد أعمال اجتماعي",
+      phone: "0505123456",
+      email: "khaled.harbi@gmail.com",
+      subject: "عرض فكرة مبادرة مجتمعية للاحتضان",
+      message: "لدي فكرة مبادرة نوعية لتدريب وتأهيل الأيتام على المهارات الرقمية المتقدمة ونرغب في احتضان الفكرة في حاضنة الأفكار واستكمال متطلبات تأسيس جمعية أهلية.",
+      date: "1446/08/14",
+      status: "جديد"
+    },
+    {
       id: "MSG-1082",
+      senderType: "entity",
+      role: "ممثل جمعية أهلية",
       name: "أحمد بن عبدالمحسن النعيمي",
       org: "مبادرة التمكين الرقمي",
       phone: "0501234987",
@@ -36,8 +51,10 @@ const DEFAULT_SEED_DATA = {
     },
     {
       id: "MSG-1081",
+      senderType: "individual",
+      role: "مستشار وخبير حوكمة",
       name: "د. خالد السبيعي",
-      org: "مستشار حوكمة مستقل",
+      org: "فرد / خبير مستقل",
       phone: "0559871234",
       email: "dr.khaled@example.org",
       subject: "الانضمام كخبير أو مستشار متعاون",
@@ -307,8 +324,254 @@ const DEFAULT_SEED_DATA = {
       hours: 30,
       slots: ["الإثنين: 06:00 م - 08:00 م (افتراضي)", "الأربعاء: 05:00 م - 07:00 م (حضوري)"]
     }
+  ],
+  announcementsAndEvents: [
+    {
+      id: "EVT-2026-01",
+      title: "ورشة عمل: إعداد الموازنات التقديرية ومؤشرات الامتثال المالي للجمعيات لعام 2026",
+      category: "ورشة تدريبية تخصصية",
+      date: "الثلاثاء 28 أكتوبر 2026",
+      time: "10:00 صباحاً - 1:00 ظهراً",
+      venue: "قاعة التدريب والابتكار بالحاضنة (مع بث Zoom مباشر)",
+      speaker: "د. إبراهيم الجهني - خبير الإدارة المالية غير الربحية",
+      target: "جميع الجمعيات المحتضنة وممثلي الإدارة والمالية",
+      seatsTotal: 40,
+      seatsTaken: 28,
+      zoomLink: "https://zoom.us/j/8923412098",
+      isBroadcastActive: true,
+      badgeColor: "success",
+      registeredAssocs: ["جمعية ديوان الشبابية", "جمعية إرشاد", "جمعية النقاء"],
+      description: "تتناول الورشة صياغة الموازنات التشغيلية والرأسمالية، وربطها بمعايير المركز الوطني لتنمية القطاع غير الربحي NCNP، ونموذج إعداد التدفقات النقدية."
+    },
+    {
+      id: "EVT-2026-02",
+      title: "ملتقى الشراكات الاستراتيجية وتنمية الموارد مع الجهات المانحة والأوقاف",
+      category: "ملتقى وشراكات",
+      date: "الأربعاء 5 نوفمبر 2026",
+      time: "5:00 مساءً - 8:30 مساءً",
+      venue: "قاعة عذق الكبرى للمؤتمرات",
+      speaker: "أ. ماجد العوفي بمشاركة ممثلي 4 أوقاف مانحة",
+      target: "جمعيات الاحتضان المكاني ومسرعة الأعمال",
+      seatsTotal: 50,
+      seatsTaken: 42,
+      zoomLink: "",
+      isBroadcastActive: false,
+      badgeColor: "warning",
+      registeredAssocs: ["وقف العمل الصالح", "جمعية ديوان الشبابية", "جمعية سفراء"],
+      description: "عرض ملفات الجمعيات المحتضنة على ممثلي الصناديق والمؤسسات الأهلية المانحة لدعم المبادرات المجتمعية وتوقيع مذكرات التفاهم."
+    },
+    {
+      id: "EVT-2026-03",
+      title: "لقاء الطاولة المستديرة: تحديات التحول الرقمي وتطبيق ERP السحابي الموحد",
+      category: "طاولة مستديرة إثرائية",
+      date: "الخميس 13 نوفمبر 2026",
+      time: "11:00 صباحاً - 1:00 ظهراً",
+      venue: "عن بُعد عبر منصة Zoom التفاعلية",
+      speaker: "م. فهد الأحمدي - مستشار الحلول الرقمية والحوكمة",
+      target: "المدراء التنفيذيون ومسؤولو التقنية في الجمعيات",
+      seatsTotal: 30,
+      seatsTaken: 19,
+      zoomLink: "https://zoom.us/j/9912048321",
+      isBroadcastActive: false,
+      badgeColor: "primary",
+      registeredAssocs: ["جمعية ديوان الشبابية", "جمعية همم"],
+      description: "مناقشة متطلبات الفوترة الإلكترونية، والربط المحاسبي السحابي، وأتمتة إدارة الأعضاء والاشتراكات."
+    }
+  ],
+  serviceRequests: [
+    {
+      id: "SRV-2026-081",
+      assocName: "جمعية ديوان الشبابية",
+      serviceTitle: "حجز قاعة الاجتماعات الرئيسية الذكية",
+      category: "مساحات ومقرات",
+      requestDate: "2026-10-20",
+      targetDate: "2026-10-26",
+      purpose: "اجتماع مجلس الإدارة الربعي لمناقشة الخطة التشغيلية واللوائح",
+      notes: "مطلوب شاشة تفاعلية وتجهيز نظام البث الهجين Zoom",
+      status: "معتمد ومجدول",
+      adminFeedback: "تم حجز القاعة وتجهيز الشاشات والضيافة المعتمدة"
+    },
+    {
+      id: "SRV-2026-082",
+      assocName: "جمعية ديوان الشبابية",
+      serviceTitle: "استشارة حوكمة وتحديث مصفوفة الصلاحيات (NCNP)",
+      category: "استشارات متخصصة",
+      requestDate: "2026-10-22",
+      targetDate: "2026-10-29",
+      purpose: "مراجعة سياسة الإبلاغ عن المخالفات واعتماد جدول الصلاحيات",
+      notes: "جلسة حضورية مع د. سليمان الحربي بقاعة الاستشارات",
+      status: "قيد المراجعة",
+      adminFeedback: "جاري التنسيق مع المستشار لتأكيد موعد الجلسة"
+    },
+    {
+      id: "SRV-2026-075",
+      assocName: "جمعية إرشاد",
+      serviceTitle: "استقطاب متطوعين تخصصيين وتوثيق الساعات NVG",
+      category: "تشغيل وتطوع",
+      requestDate: "2026-10-15",
+      targetDate: "2026-10-22",
+      purpose: "طلب 4 متطوعين لإدارة الحملة الإعلامية لتدشين الجمعية",
+      notes: "تم استقطاب المتطوعين وبدء ساعاتهم المعتمدة",
+      status: "مكتمل ومُنفّذ",
+      adminFeedback: "تم التنفيذ واعتماد ساعات التطوع على منصة العمل التطوعي"
+    }
   ]
 };
+
+// Default Roadmap for Incubated Associations
+const DEFAULT_100_DAYS_ROADMAP = {
+  dayCurrent: 42,
+  totalDays: 100,
+  overallProgress: 68,
+  scheduleStatus: "ملتزم بالجدول ✓",
+  supervisorFeedback: "الجمعية تسير بوتيرة ممتازة في مرحلة الامتثال والحوكمة. يرجى استكمال سياسة الإبلاغ عن المخالفات خلال الأسبوع الحالي للانتقال لمرحلة تفعيل التطوع والبرامج.",
+  phases: [
+    {
+      id: "p1",
+      number: 1,
+      title: "المرحلة الأولى: التهيئة والتأسيس المؤسسي",
+      daysRange: "الأيام 1 - 25",
+      status: "مكتمل",
+      progress: 100,
+      badgeClass: "completed-phase",
+      milestones: [
+        { id: "m1_1", title: "توقيع عقد الاحتضان ولوائح الحاضنة المعتمدة", done: true, targetDay: "اليوم 3" },
+        { id: "m1_2", title: "استلام المقر المجهز وتفعيل العنوان الوطني الرسمي", done: true, targetDay: "اليوم 7" },
+        { id: "m1_3", title: "فتح الحسابات البنكية المعتمدة باسم الكيان", done: true, targetDay: "اليوم 14" },
+        { id: "m1_4", title: "تعيين المدير التنفيذي وتسكين الفريق الأساسي", done: true, targetDay: "اليوم 21" }
+      ]
+    },
+    {
+      id: "p2",
+      number: 2,
+      title: "المرحلة الثانية: الامتثال والحوكمة الذكية (معايير NCNP)",
+      daysRange: "الأيام 26 - 50",
+      status: "جاري التنفيذ",
+      progress: 75,
+      badgeClass: "active-phase",
+      milestones: [
+        { id: "m2_1", title: "إقرار واعتماد اللائحة الأساسية واللوائح الداخلية الـ 7", done: true, targetDay: "اليوم 30" },
+        { id: "m2_2", title: "تشكيل لجان مجلس الإدارة ومصفوفة الصلاحيات المالية", done: true, targetDay: "اليوم 38" },
+        { id: "m2_3", title: "جلسة المراجعة القانونية والحوكمة مع مستشار الحاضنة", done: true, targetDay: "اليوم 40" },
+        { id: "m2_4", title: "استيفاء مؤشرات السلامة المالية والشفافية بالمركز الوطني", done: false, targetDay: "مستهدف اليوم 48" }
+      ]
+    },
+    {
+      id: "p3",
+      number: 3,
+      title: "المرحلة الثالثة: بناء البرامج وتفعيل التطوع التخصصي",
+      daysRange: "الأيام 51 - 75",
+      status: "مجدول",
+      progress: 25,
+      badgeClass: "",
+      milestones: [
+        { id: "m3_1", title: "اعتماد الخطة التشغيلية السنوية ومؤشرات الأثر المجتمعي", done: false, targetDay: "مستهدف اليوم 55" },
+        { id: "m3_2", title: "نشر أول فرصة تطوعية تخصصية عبر المنصة الوطنية NVG", done: true, targetDay: "مبكر - اليوم 35" },
+        { id: "m3_3", title: "عقد ورشة العمل التصميمية للمبادرة المجتمعية الأولى", done: false, targetDay: "مستهدف اليوم 65" },
+        { id: "m3_4", title: "الاستفادة من 3 استشارات تخصصية بقاعات عذق", done: false, targetDay: "مستهدف اليوم 70" }
+      ]
+    },
+    {
+      id: "p4",
+      number: 4,
+      title: "المرحلة الرابعة: إطلاق الأثر والاستدامة المالية",
+      daysRange: "الأيام 76 - 100",
+      status: "قادم",
+      progress: 0,
+      badgeClass: "",
+      milestones: [
+        { id: "m4_1", title: "إطلاق المبادرة المجتمعية الأولى وتوثيق مؤشرات العائد", done: false, targetDay: "مستهدف اليوم 82" },
+        { id: "m4_2", title: "تفعيل المتجر الإلكتروني واستقطاب أول منحة تمويلية", done: false, targetDay: "مستهدف اليوم 90" },
+        { id: "m4_3", title: "مراجعة تقرير إنجاز خطة الـ 100 يوم مع لجنة التقييم", done: false, targetDay: "مستهدف اليوم 96" },
+        { id: "m4_4", title: "تسليم شهادة اجتياز خطة الـ 100 يوم والانتقال للتسريع", done: false, targetDay: "اليوم 100" }
+      ]
+    }
+  ]
+};
+
+// Default Services Catalog
+const DEFAULT_SERVICES_CATALOG = [
+  {
+    key: "main_hall",
+    title: "حجز قاعة الاجتماعات الرئيسية الذكية",
+    cat: "مساحات",
+    icon: "fa-people-roof",
+    color: "#0D6E46",
+    bg: "rgba(14, 110, 65, 0.1)",
+    desc: "سعة 25 شخصاً • شاشات تفاعلية 85 بوصة • نظام مؤتمرات هجين Zoom Rooms • خدمة الضيافة والبروتوكول",
+    deliverables: "مجهزة لاجتماعات مجالس الإدارة والجمعيات العمومية"
+  },
+  {
+    key: "innovation_lab",
+    title: "مختبر التدريب والابتكار التفاعلي",
+    cat: "مساحات",
+    icon: "fa-chalkboard-user",
+    color: "#D97706",
+    bg: "rgba(217, 119, 6, 0.1)",
+    desc: "سعة 30 متدرباً • منصة تدريبية ذكية • سبورات تفاعلية متطورة • نظام صوتي سحابي وتجهيزات ورش العمل",
+    deliverables: "مخصص للبرامج التدريبية ومختبرات الابتكار الاجتماعي"
+  },
+  {
+    key: "national_address",
+    title: "إصدار وتوثيق المقر والعنوان الوطني",
+    cat: "مساحات",
+    icon: "fa-envelopes-bulk",
+    color: "#2563EB",
+    bg: "rgba(37, 99, 235, 0.1)",
+    desc: "توفير عنوان وطني معتمد لدى البريد السعودي SPL • لوحة الكيان الرسمية • استلام وتسليم الطرود والمراسلات",
+    deliverables: "متطلب أساسي للترخيص ومطابقة شروط المركز الوطني NCNP"
+  },
+  {
+    key: "governance_advisory",
+    title: "استشارة حوكمة وتحديث اللوائح والصلاحيات",
+    cat: "استشارات",
+    icon: "fa-scale-balanced",
+    color: "#0D6E46",
+    bg: "rgba(14, 110, 65, 0.1)",
+    desc: "جلسة مباشرة مع مستشار حوكمة معتمد • مراجعة اللائحة الأساسية والسياسات الـ 7 • تأهيل الجمعية للنطاق الأخضر",
+    deliverables: "مصفوفة صلاحيات معتمدة وتقارير الامتثال النظامي"
+  },
+  {
+    key: "finance_advisory",
+    title: "استشارة استدامة مالية وموازنات تقديرية",
+    cat: "استشارات",
+    icon: "fa-chart-pie",
+    color: "#7C3AED",
+    bg: "rgba(124, 58, 237, 0.1)",
+    desc: "صياغة الموازنة التشغيلية • هندسة المحافظ الوقفية • إعداد خطة تنمية الموارد وجذب المنح والشراكات التنموية",
+    deliverables: "نموذج التدفقات النقدية وخطة الاستدامة المالية"
+  },
+  {
+    key: "volunteer_recruitment",
+    title: "استقطاب وإدارة متطوعين عبر منصة NVG",
+    cat: "تشغيل",
+    icon: "fa-hand-holding-heart",
+    color: "#059669",
+    bg: "rgba(5, 150, 105, 0.1)",
+    desc: "نشر الفرص التطوعية التخصصية بالمنصة الوطنية • فرز المتقدمين • توثيق الساعات وإصدار الشهادات الرسمية",
+    deliverables: "ساعات تطوعية موثقة رسمياً ورفع القيمة الاقتصادية"
+  },
+  {
+    key: "operational_plan",
+    title: "صياغة وتطوير الخطة التشغيلية للمبادرات",
+    cat: "تشغيل",
+    icon: "fa-diagram-project",
+    color: "#D97706",
+    bg: "rgba(217, 119, 6, 0.1)",
+    desc: "مواءمة المبادرات مع استراتيجية الجمعية • تحديد مؤشرات الأداء KPIs • جدولة المخرجات وموازنة المبادرة",
+    deliverables: "خطة تشغيلية متكاملة جاهزة للعرض على المانحين"
+  },
+  {
+    key: "branding_media",
+    title: "تصميم الهوية البصرية والحملات الرقمية",
+    cat: "إعلام",
+    icon: "fa-palette",
+    color: "#DC2626",
+    bg: "rgba(220, 38, 38, 0.1)",
+    desc: "تصميم البروفايل المؤسسي التعريفي • قوالب شبكات التواصل • إنتاج فيديو تعريفي أو بودكاست باستوديو عذق",
+    deliverables: "حقيبة إعلامية كاملة وهوية بصرية موثقة"
+  }
+];
 
 // Load or Initialize State
 function loadPlatformState() {
@@ -323,13 +586,33 @@ function loadPlatformState() {
         if (!parsed.directoryOrgs || parsed.directoryOrgs.length === 0) {
           parsed.directoryOrgs = DEFAULT_SEED_DATA.directoryOrgs;
         }
+        if (!parsed.announcementsAndEvents || parsed.announcementsAndEvents.length === 0) {
+          parsed.announcementsAndEvents = DEFAULT_SEED_DATA.announcementsAndEvents;
+        }
+        if (!parsed.serviceRequests || parsed.serviceRequests.length === 0) {
+          parsed.serviceRequests = DEFAULT_SEED_DATA.serviceRequests;
+        }
+        if (!parsed.contactMessages || parsed.contactMessages.length === 0) {
+          parsed.contactMessages = DEFAULT_SEED_DATA.contactMessages;
+        }
+        parsed.applications.forEach(app => {
+          if (!app.roadmap100Days) {
+            app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+          }
+        });
         return parsed;
       }
     }
   } catch (e) {
     console.warn("Could not read from localStorage", e);
   }
-  return JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+  const fresh = JSON.parse(JSON.stringify(DEFAULT_SEED_DATA));
+  fresh.applications.forEach(app => {
+    if (!app.roadmap100Days) {
+      app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+    }
+  });
+  return fresh;
 }
 
 let APP_STATE = loadPlatformState();
@@ -600,7 +883,67 @@ window.openActionModal = function(type) {
   }
 };
 
-// 7.1 Direct Contact Form Handler (نموذج التواصل المباشر)
+// 7.1 Direct Contact Form Handler (نموذج التواصل المباشر والأفراد)
+window.setContactType = function(type) {
+  const btnInd = document.getElementById('btnContactIndividual');
+  const btnEnt = document.getElementById('btnContactEntity');
+  const hintEl = document.getElementById('contact-type-hint');
+  const senderTypeInput = document.getElementById('contact-sender-type');
+  const groupRole = document.getElementById('group-contact-role');
+  const groupOrg = document.getElementById('group-contact-org');
+  const labelName = document.getElementById('label-contact-name');
+  const labelMsg = document.getElementById('label-contact-message');
+  const subjectSelect = document.getElementById('contact-subject');
+
+  if (senderTypeInput) senderTypeInput.value = type;
+
+  if (type === 'individual') {
+    if (btnInd) btnInd.classList.add('active');
+    if (btnEnt) btnEnt.classList.remove('active');
+    if (groupRole) groupRole.style.display = 'block';
+    if (groupOrg) groupOrg.style.display = 'none';
+    if (labelName) labelName.innerHTML = 'الاسم الكامل (شخص عادي) <span class="required-star">*</span>';
+    if (labelMsg) labelMsg.innerHTML = 'نص الاستفسار أو تفاصيل الفكرة <span class="required-star">*</span>';
+    if (hintEl) {
+      hintEl.innerHTML = '<i class="fa-solid fa-circle-info"></i> نرحب بالأفراد والمهتمين، الباحثين، والمتطوعين ورواد الأعمال المجتمعية للإجابة عن تساؤلاتكم أو عرض أفكاركم ومبادراتكم.';
+    }
+    if (subjectSelect) {
+      subjectSelect.innerHTML = `
+        <option value="عرض فكرة مبادرة مجتمعية للاحتضان" selected>💡 عرض فكرة مبادرة مجتمعية للاحتضان بحاضنة الأفكار</option>
+        <option value="كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟">🌱 كيف أنشئ جمعية أهلية وأستفيد من حاضنة ومسرعة عذق؟</option>
+        <option value="طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية">🤝 طلب التطوع والمشاركة التخصصية عبر المنصة الوطنية</option>
+        <option value="طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق">🏢 طلب زيارة لمقر الحاضنة والاطلاع على القاعات والمرافق</option>
+        <option value="استفسار عام أو مقترح تطويري للمنظومة">📝 استفسار عام أو مقترح تطويري للمنظومة</option>
+      `;
+    }
+  } else {
+    if (btnInd) btnInd.classList.remove('active');
+    if (btnEnt) btnEnt.classList.add('active');
+    if (groupRole) groupRole.style.display = 'none';
+    if (groupOrg) groupOrg.style.display = 'block';
+    if (labelName) labelName.innerHTML = 'اسم ممثل الجهة / المفوض <span class="required-star">*</span>';
+    if (labelMsg) labelMsg.innerHTML = 'تفاصيل الطلب أو الاستفسار المؤسسي <span class="required-star">*</span>';
+    if (hintEl) {
+      hintEl.innerHTML = '<i class="fa-solid fa-building-shield"></i> مخصص للجمعيات الأهلية، الصناديق والمؤسسات المانحة، والجهات الحكومية والخاصة لعقد الشراكات وطلب الاحتضان.';
+    }
+    if (subjectSelect) {
+      subjectSelect.innerHTML = `
+        <option value="طلب احتضان وتسجيل جمعية ناشئة" selected>🏢 طلب احتضان وتسجيل جمعية أهلية ناشئة</option>
+        <option value="الاستفسار عن حزم الدعم التأسيسي والحوكمة NCNP">⚖️ الاستفسار عن حزم الدعم التأسيسي والحوكمة NCNP</option>
+        <option value="حجز قاعات ومرافق ومقرات الحاضنة">🎤 حجز قاعات ومرافق ومقرات الحاضنة</option>
+        <option value="طلب جلسة استشارية متخصصة للجمعية">💡 طلب جلسة استشارية متخصصة للجمعية</option>
+        <option value="عقد شراكة استراتيجية أو مبادرة مانحة">🤝 عقد شراكة استراتيجية أو مبادرة مانحة</option>
+        <option value="استفسار عام أو دعم فني للمنصة">📝 استفسار عام أو دعم فني للمنصة</option>
+      `;
+    }
+  }
+
+  const contactSec = document.getElementById('contact');
+  if (contactSec && window.scrollY < contactSec.offsetTop - 300) {
+    contactSec.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 function handleDirectContactSubmit(e) {
   if (e && e.preventDefault) e.preventDefault();
 
@@ -612,9 +955,14 @@ function handleDirectContactSubmit(e) {
   const messageInput = document.getElementById('contact-message');
   const alertBox = document.getElementById('contactFormAlert');
   const submitBtn = document.getElementById('contactSubmitBtn');
+  const senderTypeInput = document.getElementById('contact-sender-type');
+  const roleInput = document.getElementById('contact-role');
 
+  const senderType = senderTypeInput ? senderTypeInput.value : 'individual';
+  const role = roleInput ? roleInput.value : '';
   const name = nameInput ? nameInput.value.trim() : '';
-  const org = orgInput ? orgInput.value.trim() : 'جهة غير محددة';
+  const org = orgInput ? orgInput.value.trim() : '';
+  const finalOrg = senderType === 'individual' ? `فرد (${role || 'شخص عادي'})` : (org || 'جمعية غير محددة');
   const phone = phoneInput ? phoneInput.value.trim() : '';
   const email = emailInput ? emailInput.value.trim() : '';
   const subject = subjectInput ? subjectInput.value.trim() : '';
@@ -664,8 +1012,10 @@ function handleDirectContactSubmit(e) {
     if (!APP_STATE.contactMessages) APP_STATE.contactMessages = [];
     const newMsg = {
       id: 'MSG-' + Math.floor(1000 + Math.random() * 9000),
+      senderType,
+      role: role || (senderType === 'individual' ? 'شخص عادي' : 'جهة اعتبارية'),
       name,
-      org: org || 'جهة غير محددة',
+      org: finalOrg,
       phone: cleanPhone,
       email,
       subject,
@@ -680,14 +1030,17 @@ function handleDirectContactSubmit(e) {
     if (!APP_STATE.notifications) APP_STATE.notifications = [];
     APP_STATE.notifications.unshift({
       id: 'NTF-' + Math.floor(100 + Math.random() * 900),
-      title: 'رسالة تواصل مباشر جديدة',
-      text: `تم استلام رسالة من: ${name} بخصوص: ${subject}`,
+      title: senderType === 'individual' ? 'استفسار جديد من فرد (شخص عادي)' : 'رسالة تواصل من جمعية أهلية',
+      text: `استلمت المنصة استفساراً من: ${name} (${finalOrg}) بخصوص: ${subject}`,
       time: 'الآن',
       unread: true,
-      icon: 'fa-envelope-open-text'
+      icon: senderType === 'individual' ? 'fa-user' : 'fa-building-ngo'
     });
 
     savePlatformState();
+
+    const inboxBadge = document.getElementById('admin-inbox-count');
+    if (inboxBadge) inboxBadge.textContent = APP_STATE.contactMessages.length;
 
     if (alertBox) {
       alertBox.className = 'contact-alert-box success';
@@ -1711,6 +2064,9 @@ function renderAssociationDashboard() {
   renderAssocEvidencesList(currentAssoc);
   renderAssocBookingsList();
   renderAssocConsultationsList();
+  renderAssoc100DaysRoadmap();
+  renderAssocServicesCatalog();
+  renderAssocEvents();
 }
 
 // ========================== Association Journey State Machine (Prompt 2) ==========================
@@ -4642,6 +4998,21 @@ function renderAdminDashboard() {
   renderAdminKanbanBoard();
   renderAdminAnalyticsAndLogs();
   populateAdminModalSelects();
+
+  renderAdmin100DaysMatrix();
+  renderAdminIncomingServiceRequestsTable();
+
+  // Badges update
+  const admin100dCnt = document.getElementById('admin-100d-cnt');
+  if (admin100dCnt) admin100dCnt.textContent = apps.length;
+
+  const adminIncomingServicesCnt = document.getElementById('admin-incoming-services-cnt');
+  if (adminIncomingServicesCnt) {
+    adminIncomingServicesCnt.textContent = (APP_STATE.serviceRequests || []).filter(r => r.status === 'قيد المراجعة').length;
+  }
+
+  const inboxBadge = document.getElementById('admin-inbox-count');
+  if (inboxBadge) inboxBadge.textContent = (APP_STATE.contactMessages || []).length;
 }
 
 // Helper: Filter admin applications by clicking summary cards
@@ -7367,5 +7738,950 @@ window.toggleFoundationalService = function(key) {
     showToast(`تم تحديث جاهزية الخدمة: ${item.title} (${item.done ? 'مكتملة ✓' : 'غير مكتملة'})`, 'info');
   }
 };
+
+/* ==========================================================================
+   MODULE: 100-DAY ACCELERATION ROADMAP (بوابة الجمعيات ولوحة الإدارة)
+   ========================================================================== */
+
+let adminActive100DaysAssocIndex = 0;
+
+window.renderAssoc100DaysRoadmap = function() {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  if (!currentAssoc.roadmap100Days) {
+    currentAssoc.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+  }
+  const roadmap = currentAssoc.roadmap100Days;
+
+  // Header Displays
+  const dayEl = document.getElementById('assoc-100days-day-display');
+  const pctEl = document.getElementById('assoc-100days-pct-display');
+  const barEl = document.getElementById('assoc-100days-progressbar');
+  const navBadgeEl = document.getElementById('assoc-100days-nav-badge');
+
+  if (dayEl) dayEl.textContent = roadmap.dayCurrent || 42;
+  if (pctEl) pctEl.textContent = `${roadmap.overallProgress || 68}%`;
+  if (barEl) barEl.style.width = `${roadmap.overallProgress || 68}%`;
+  if (navBadgeEl) navBadgeEl.textContent = `اليوم ${roadmap.dayCurrent || 42} (${roadmap.overallProgress || 68}%)`;
+
+  // Render 4 Phases Container
+  const container = document.getElementById('assoc-100days-phases-container');
+  if (!container) return;
+
+  container.innerHTML = (roadmap.phases || []).map((phase, pIdx) => {
+    const isCompleted = phase.progress === 100;
+    const isActive = phase.status === 'جاري التنفيذ' || phase.badgeClass === 'active-phase';
+
+    return `
+      <div class="roadmap-phase-card ${isCompleted ? 'completed-phase' : (isActive ? 'active-phase' : '')}">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--c-border); padding-bottom: 12px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 3px;">
+              <span class="badge" style="background: ${isCompleted ? '#DCFCE7' : (isActive ? '#FEF3C7' : 'var(--c-bg)')}; color: ${isCompleted ? '#166534' : (isActive ? '#92400E' : 'var(--c-text-muted)')}; font-weight: 800; font-size: 0.75rem;">
+                ${phase.daysRange}
+              </span>
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+                ${phase.title}
+              </h4>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+              ${isCompleted ? 'تم استيفاء وتوثيق كافة المخرجات بنجاح ✓' : (isActive ? 'المرحلة النشطة الحالية - جاري استكمال الشواهد المطلوبة' : 'مرحلة مستقبلية مجدولة وفق الخطة الزمنية')}
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="text-align: left;">
+              <span style="font-size: 0.72rem; color: var(--c-text-muted); display: block;">الإنجاز بالمرحلة:</span>
+              <strong style="font-size: 0.95rem; font-weight: 900; color: ${isCompleted ? '#166534' : (isActive ? '#D97706' : 'var(--c-text-muted)')};">${phase.progress}%</strong>
+            </div>
+            <span class="badge" style="background: ${isCompleted ? '#DCFCE7' : (isActive ? '#FEF3C7' : '#F1F5F9')}; color: ${isCompleted ? '#166534' : (isActive ? '#B45309' : '#64748B')}; font-weight: 800; padding: 4px 12px; border-radius: 20px;">
+              ${phase.status}
+            </span>
+          </div>
+        </div>
+
+        <!-- Milestones Checklist -->
+        <div class="roadmap-milestones-list">
+          ${(phase.milestones || []).map((m, mIdx) => `
+            <div class="roadmap-milestone-item ${m.done ? 'done' : ''}">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <input type="checkbox" id="chk-m-${pIdx}-${mIdx}" class="roadmap-milestone-checkbox" ${m.done ? 'checked' : ''} onchange="toggle100DaysMilestone(${pIdx}, ${mIdx})">
+                <label for="chk-m-${pIdx}-${mIdx}" style="cursor: pointer; font-size: 0.84rem; font-weight: 700; color: ${m.done ? 'var(--c-primary)' : 'var(--c-text)'}; margin: 0; text-decoration: ${m.done ? 'line-through' : 'none'};">
+                  ${m.title}
+                </label>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.75rem; color: var(--c-text-muted); background: var(--c-surface); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--c-border);">
+                  <i class="fa-regular fa-clock"></i> ${m.targetDay}
+                </span>
+                <span class="badge" style="font-size: 0.72rem; padding: 3px 8px; border-radius: 12px; background: ${m.done ? '#DCFCE7' : '#FEF3C7'}; color: ${m.done ? '#166534' : '#92400E'};">
+                  ${m.done ? 'منجز وموثق ✓' : 'قيد الإجراء'}
+                </span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('') + `
+    <!-- Supervisor Recommendation Card -->
+    <div style="background: #FFFBEB; border: 1.5px solid #FCD34D; border-radius: 12px; padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; margin-top: 18px;">
+      <div style="width: 36px; height: 36px; border-radius: 10px; background: #FDE68A; color: #92400E; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+        <i class="fa-solid fa-user-tie"></i>
+      </div>
+      <div>
+        <strong style="font-size: 0.88rem; color: #92400E; display: block; margin-bottom: 2px;">توجيه وملاحظة المشرف المتابع المعتمد:</strong>
+        <p style="font-size: 0.82rem; color: #78350F; margin: 0; line-height: 1.6;">
+          ${roadmap.supervisorFeedback || 'الجمعية تسير بوتيرة ممتازة في مرحلة الامتثال والحوكمة. يرجى استكمال سياسة الإبلاغ عن المخالفات خلال الأسبوع الحالي للانتقال لمرحلة تفعيل التطوع والبرامج.'}
+        </p>
+      </div>
+    </div>
+  `;
+};
+
+window.toggle100DaysMilestone = function(pIdx, mIdx) {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc || !currentAssoc.roadmap100Days) return;
+
+  const phase = currentAssoc.roadmap100Days.phases[pIdx];
+  if (!phase || !phase.milestones[mIdx]) return;
+
+  const m = phase.milestones[mIdx];
+  m.done = !m.done;
+
+  // Recalculate phase progress
+  const doneCount = phase.milestones.filter(item => item.done).length;
+  phase.progress = Math.round((doneCount / phase.milestones.length) * 100);
+  if (phase.progress === 100) {
+    phase.status = 'مكتمل';
+  } else if (phase.progress > 0) {
+    phase.status = 'جاري التنفيذ';
+  } else {
+    phase.status = 'مجدول';
+  }
+
+  // Recalculate overall roadmap progress
+  const allMilestones = currentAssoc.roadmap100Days.phases.flatMap(p => p.milestones);
+  const totalDone = allMilestones.filter(item => item.done).length;
+  currentAssoc.roadmap100Days.overallProgress = Math.round((totalDone / allMilestones.length) * 100);
+
+  savePlatformState();
+  renderAssoc100DaysRoadmap();
+  showToast(`تم تحديث حالة المستهدف: ${m.title} (${m.done ? 'منجز ✓' : 'قيد الإجراء'})`, 'success');
+};
+
+window.printAssoc100DaysReport = function() {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+  if (typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(currentAssoc.associationName, currentAssoc.licenseNumber, currentAssoc.roadmap100Days);
+  }
+};
+
+/* ==========================================================================
+   MODULE: SERVICE CATALOG & ASSOCIATION REQUESTS
+   ========================================================================== */
+
+let assocCatalogCurrentFilter = 'all';
+
+window.renderAssocServicesCatalog = function(filter = assocCatalogCurrentFilter) {
+  assocCatalogCurrentFilter = filter;
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const container = document.getElementById('assocServicesCatalogGrid');
+  if (container) {
+    const list = filter === 'all' 
+      ? DEFAULT_SERVICES_CATALOG 
+      : DEFAULT_SERVICES_CATALOG.filter(s => s.cat === filter);
+
+    container.innerHTML = list.map(s => `
+      <div class="service-card-item">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div class="service-card-icon" style="background: ${s.bg}; color: ${s.color};">
+              <i class="fa-solid ${s.icon}"></i>
+            </div>
+            <span class="badge" style="background: var(--c-bg); color: var(--c-text-muted); font-size: 0.72rem; border: 1px solid var(--c-border);">
+              ${s.cat}
+            </span>
+          </div>
+          <h4 style="font-size: 1rem; font-weight: 800; color: var(--c-primary); margin-bottom: 6px;">
+            ${s.title}
+          </h4>
+          <p style="font-size: 0.78rem; color: var(--c-text-muted); line-height: 1.6; margin-bottom: 12px;">
+            ${s.desc}
+          </p>
+          <div style="font-size: 0.74rem; background: var(--c-bg); padding: 6px 10px; border-radius: 6px; color: var(--c-text-primary); margin-bottom: 14px; border-right: 2px solid ${s.color};">
+            <i class="fa-solid fa-circle-check" style="color: ${s.color};"></i> <strong>المخرج:</strong> ${s.deliverables}
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-sm" onclick="openRequestServiceModal('${s.title}')" style="width: 100%; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <i class="fa-solid fa-paper-plane"></i> طلب الخدمة الآن
+        </button>
+      </div>
+    `).join('');
+  }
+
+  // Render Requests History Table
+  const tbody = document.getElementById('assoc-service-requests-tbody');
+  const countBadge = document.getElementById('assoc-requests-count-badge');
+  if (tbody) {
+    const requests = (APP_STATE.serviceRequests || []).filter(r => 
+      !r.assocName || r.assocName === currentAssoc.associationName || r.assocName === 'جميع الجمعيات'
+    );
+
+    if (countBadge) countBadge.textContent = `${requests.length} طلبات`;
+
+    if (requests.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: var(--c-text-muted);">لا توجد طلبات سابقة للجمعية حالياً. اضغط "تقديم طلب خدمة جديدة" للبدء.</td></tr>`;
+    } else {
+      tbody.innerHTML = requests.map(r => {
+        let statusBadge = '<span class="badge" style="background: #FEF3C7; color: #92400E;">قيد المراجعة</span>';
+        if (r.status.includes('معتمد')) statusBadge = '<span class="badge" style="background: #DCFCE7; color: #166534;">معتمد ومجدول ✓</span>';
+        if (r.status.includes('مكتمل')) statusBadge = '<span class="badge" style="background: #EFF6FF; color: #1D4ED8;">مكتمل ومُنفّذ ✓</span>';
+        if (r.status.includes('مرفوض')) statusBadge = '<span class="badge" style="background: #FEE2E2; color: #991B1B;">مرفوض</span>';
+
+        return `
+          <tr style="border-bottom: 1px solid var(--c-border);">
+            <td style="padding: 10px 12px; font-weight: 800; font-family: monospace; color: var(--c-primary);">${r.id}</td>
+            <td style="padding: 10px 12px; font-weight: 800;">${r.serviceTitle}</td>
+            <td style="padding: 10px 12px; color: var(--c-text-muted);">${r.requestDate}</td>
+            <td style="padding: 10px 12px; color: var(--c-text-muted);">${r.targetDate}</td>
+            <td style="padding: 10px 12px; font-size: 0.78rem;">${r.purpose}</td>
+            <td style="padding: 10px 12px; text-align: center;">${statusBadge}</td>
+            <td style="padding: 10px 12px; font-size: 0.78rem; color: #15803D;">${r.adminFeedback || 'بانتظار مراجعة وتأكيد المشرف المختص'}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+};
+
+window.filterAssocCatalog = function(btn, cat) {
+  document.querySelectorAll('#assoc-tab-service-catalog .evidence-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAssocServicesCatalog(cat);
+};
+
+window.openRequestServiceModal = function(serviceTitle = '') {
+  const modal = document.getElementById('modalRequestIncubatorService');
+  if (!modal) return;
+  modal.style.display = 'flex';
+
+  const titleSelect = document.getElementById('req-service-title');
+  if (titleSelect && serviceTitle) {
+    for (let opt of titleSelect.options) {
+      if (opt.value.includes(serviceTitle) || serviceTitle.includes(opt.value)) {
+        titleSelect.value = opt.value;
+        break;
+      }
+    }
+  }
+
+  const dateInput = document.getElementById('req-service-date');
+  if (dateInput && !dateInput.value) {
+    const nextWeek = new Date();
+    nextWeek.setDate(nextWeek.getDate() + 5);
+    dateInput.value = nextWeek.toISOString().split('T')[0];
+  }
+};
+
+window.closeRequestServiceModal = function() {
+  const modal = document.getElementById('modalRequestIncubatorService');
+  if (modal) modal.style.display = 'none';
+};
+
+window.submitServiceRequest = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const title = document.getElementById('req-service-title')?.value || 'طلب خدمة عامة';
+  const targetDate = document.getElementById('req-service-date')?.value || new Date().toISOString().split('T')[0];
+  const preferredTime = document.getElementById('req-service-time')?.value || '';
+  const purpose = document.getElementById('req-service-purpose')?.value || '';
+  const notes = document.getElementById('req-service-notes')?.value || '';
+
+  const newReq = {
+    id: `SRV-2026-${Math.floor(100 + Math.random() * 900)}`,
+    assocName: currentAssoc.associationName,
+    serviceTitle: title,
+    category: title.includes('قاعة') || title.includes('مختبر') || title.includes('مقر') ? 'مساحات ومقرات' : 'استشارات وتشغيل',
+    requestDate: new Date().toISOString().split('T')[0],
+    targetDate: targetDate + (preferredTime ? ` (${preferredTime})` : ''),
+    purpose,
+    notes,
+    status: 'قيد المراجعة',
+    adminFeedback: 'تم استلام طلبكم وجاري الجدولة من قِبل إدارة الحاضنة'
+  };
+
+  if (!APP_STATE.serviceRequests) APP_STATE.serviceRequests = [];
+  APP_STATE.serviceRequests.unshift(newReq);
+
+  // Push notification to admin
+  if (!APP_STATE.notifications) APP_STATE.notifications = [];
+  APP_STATE.notifications.unshift({
+    id: `NTF-${Math.floor(100 + Math.random() * 900)}`,
+    title: 'طلب خدمة جديد من جمعية',
+    text: `طلبت ${currentAssoc.associationName} خدمة: ${title}`,
+    time: 'الآن',
+    unread: true,
+    icon: 'fa-boxes-packing'
+  });
+
+  savePlatformState();
+  closeRequestServiceModal();
+  renderAssocServicesCatalog();
+  renderAdminIncomingServiceRequestsTable();
+  showToast(`تم إرسال طلب ${title} بنجاح برقم مرجع: ${newReq.id}`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: EVENTS, WORKSHOPS & BROADCAST ANNOUNCEMENTS
+   ========================================================================== */
+
+let assocEventsCurrentFilter = 'all';
+
+window.renderAssocEvents = function(filter = assocEventsCurrentFilter) {
+  assocEventsCurrentFilter = filter;
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const events = APP_STATE.announcementsAndEvents || [];
+
+  // Render Broadcast Glowing Banner
+  const banner = document.getElementById('assoc-broadcast-banner');
+  if (banner) {
+    const activeBroadcast = events.find(e => e.isBroadcastActive);
+    if (activeBroadcast) {
+      const isRegistered = (activeBroadcast.registeredAssocs || []).includes(currentAssoc.associationName);
+      banner.style.display = 'flex';
+      banner.innerHTML = `
+        <div class="broadcast-meta-box">
+          <div class="broadcast-pulse-icon">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
+              <span class="badge" style="background: #F59E0B; color: #FFFFFF; font-weight: 800; font-size: 0.72rem;">تعميم عاجل وملتقى قادم</span>
+              <span style="font-size: 0.75rem; color: var(--c-text-muted);"><i class="fa-regular fa-clock"></i> ${activeBroadcast.date} • ${activeBroadcast.time}</span>
+            </div>
+            <strong style="font-size: 0.95rem; color: var(--c-primary); display: block;">
+              ${activeBroadcast.title}
+            </strong>
+            <span style="font-size: 0.78rem; color: var(--c-text-muted);">
+              المتحدث: ${activeBroadcast.speaker} • ${activeBroadcast.venue}
+            </span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+          ${isRegistered ? `
+            <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 7px 14px; border: 1px solid #86EFAC;">
+              <i class="fa-solid fa-circle-check"></i> تم تأكيد حضور الجمعية ✓
+            </span>
+          ` : `
+            <button class="btn btn-primary btn-sm" onclick="confirmAssocEventAttendance('${activeBroadcast.id}')" style="font-weight: 800; padding: 7px 16px;">
+              <i class="fa-solid fa-check"></i> تأكيد الحضور الآن
+            </button>
+          `}
+          ${activeBroadcast.zoomLink ? `
+            <a href="${activeBroadcast.zoomLink}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm" style="font-weight: 700;">
+              <i class="fa-solid fa-video"></i> رابط Zoom
+            </a>
+          ` : ''}
+        </div>
+      `;
+    } else {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Render Events Grid
+  const grid = document.getElementById('assocEventsShowcaseGrid');
+  const countBadge = document.getElementById('assoc-events-nav-badge');
+  if (grid) {
+    let list = events;
+    if (filter === 'registered') {
+      list = events.filter(e => (e.registeredAssocs || []).includes(currentAssoc.associationName));
+    }
+
+    if (countBadge) countBadge.textContent = `${events.length} لقاءات`;
+
+    if (list.length === 0) {
+      grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--c-text-muted);">لا توجد لقاءات مسجلة حالياً بهذا الفلتر.</div>`;
+    } else {
+      grid.innerHTML = list.map(evt => {
+        const isRegistered = (evt.registeredAssocs || []).includes(currentAssoc.associationName);
+
+        return `
+          <div class="event-card-item ${evt.isBroadcastActive ? 'broadcast-highlight' : ''}">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <span class="badge" style="background: rgba(37,99,235,0.1); color: #2563EB; font-weight: 800; font-size: 0.75rem;">
+                  ${evt.category}
+                </span>
+                ${evt.isBroadcastActive ? '<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.7rem; font-weight: 800;">بث عاجل 📢</span>' : ''}
+              </div>
+
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin-bottom: 8px; line-height: 1.5;">
+                ${evt.title}
+              </h4>
+
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.78rem; color: var(--c-text-muted); margin-bottom: 14px;">
+                <span><i class="fa-solid fa-calendar-day" style="color: var(--c-gold-dark);"></i> ${evt.date} • ${evt.time}</span>
+                <span><i class="fa-solid fa-location-dot" style="color: var(--c-primary);"></i> ${evt.venue}</span>
+                <span><i class="fa-solid fa-user-tie" style="color: #64748B;"></i> المحاضر: <strong>${evt.speaker}</strong></span>
+                <span><i class="fa-solid fa-users" style="color: #64748B;"></i> المقاعد: <strong>${evt.seatsTaken} / ${evt.seatsTotal}</strong> مقعداً مسجلاً</span>
+              </div>
+
+              <p style="font-size: 0.78rem; color: var(--c-text); background: var(--c-bg); padding: 8px 12px; border-radius: 8px; line-height: 1.6; margin-bottom: 16px;">
+                ${evt.description}
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between; border-top: 1px solid var(--c-border); padding-top: 12px;">
+              ${isRegistered ? `
+                <span class="event-registered-badge">
+                  <i class="fa-solid fa-circle-check"></i> تم تأكيد حضوركم ✓
+                </span>
+              ` : `
+                <button class="btn btn-primary btn-sm" onclick="confirmAssocEventAttendance('${evt.id}')" style="font-weight: 800;">
+                  <i class="fa-solid fa-check"></i> تأكيد الحضور
+                </button>
+              `}
+              <div style="display: flex; gap: 6px;">
+                ${evt.zoomLink ? `
+                  <a href="${evt.zoomLink}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm" title="رابط Zoom">
+                    <i class="fa-solid fa-video"></i>
+                  </a>
+                ` : ''}
+                <button class="btn btn-outline btn-sm" onclick="addToGoogleCalendar('${evt.title}')" title="إضافة للتقويم">
+                  <i class="fa-regular fa-calendar-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+};
+
+window.filterAssocEvents = function(filter) {
+  renderAssocEvents(filter);
+};
+
+window.confirmAssocEventAttendance = function(eventId) {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const event = (APP_STATE.announcementsAndEvents || []).find(e => e.id === eventId);
+  if (!event) return;
+
+  if (!event.registeredAssocs) event.registeredAssocs = [];
+  if (!event.registeredAssocs.includes(currentAssoc.associationName)) {
+    event.registeredAssocs.push(currentAssoc.associationName);
+    event.seatsTaken = (event.seatsTaken || 0) + 1;
+    savePlatformState();
+    renderAssocEvents();
+    showToast(`تم تأكيد حضور ${currentAssoc.associationName} للقاء: ${event.title}`, 'success');
+  } else {
+    showToast(`أنتم مسجلون بالفعل في هذا اللقاء!`, 'info');
+  }
+};
+
+window.addToGoogleCalendar = function(title) {
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent('حاضنة ومسرعة عذق للجمعيات الأهلية بالمدينة المنورة')}&location=${encodeURIComponent('قاعات حاضنة عذق')}`;
+  window.open(url, '_blank');
+};
+
+/* ==========================================================================
+   MODULE: ADMIN 100-DAY ACCELERATION MATRIX & TRACKING
+   ========================================================================== */
+
+window.switchAdminAppsSubView = function(subview) {
+  const btnTable = document.getElementById('btnAdminAppsTable');
+  const btn100Days = document.getElementById('btnAdminApps100Days');
+  const viewTable = document.getElementById('admin-subview-apps-table');
+  const view100Days = document.getElementById('admin-subview-100days');
+
+  if (subview === 'table') {
+    if (btnTable) { btnTable.className = 'btn btn-sm btn-primary'; }
+    if (btn100Days) { btn100Days.className = 'btn btn-sm btn-outline'; btn100Days.style.color = 'var(--c-primary)'; }
+    if (viewTable) viewTable.style.display = 'block';
+    if (view100Days) view100Days.style.display = 'none';
+  } else {
+    if (btnTable) { btnTable.className = 'btn btn-sm btn-outline'; }
+    if (btn100Days) { btn100Days.className = 'btn btn-sm btn-primary'; btn100Days.style.color = '#FFFFFF'; }
+    if (viewTable) viewTable.style.display = 'none';
+    if (view100Days) view100Days.style.display = 'block';
+    renderAdmin100DaysMatrix();
+  }
+};
+
+window.renderAdmin100DaysMatrix = function() {
+  const tbody = document.getElementById('admin-100days-tbody');
+  if (!tbody) return;
+
+  const apps = APP_STATE.applications || [];
+  tbody.innerHTML = apps.map((app, idx) => {
+    if (!app.roadmap100Days) {
+      app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+    }
+    const roadmap = app.roadmap100Days;
+    const modeInfo = getAssociationModeInfo(app.associationName);
+
+    // Current phase logic
+    const currentPhase = roadmap.phases.find(p => p.status === 'جاري التنفيذ') || roadmap.phases[0];
+    const isLate = roadmap.scheduleStatus.includes('متأخر') || roadmap.scheduleStatus.includes('مساندة');
+
+    return `
+      <tr style="border-bottom: 1px solid var(--c-border);">
+        <td style="padding: 12px 14px;">
+          <div style="font-weight: 900; color: var(--c-primary); font-size: 0.95rem; margin-bottom: 3px;">
+            ${app.associationName}
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            ${modeInfo.badgeHtml}
+            <span style="font-size: 0.72rem; color: var(--c-text-muted);">ترخيص: ${app.licenseNumber}</span>
+          </div>
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <span style="font-family: monospace; font-size: 1.1rem; font-weight: 900; color: #0F172A; background: #F1F5F9; padding: 4px 10px; border-radius: 8px;">
+            ${roadmap.dayCurrent} / 100
+          </span>
+        </td>
+
+        <td style="padding: 12px 14px;">
+          <div style="font-size: 0.82rem; font-weight: 800; color: var(--c-text);">
+            ${currentPhase.title}
+          </div>
+          <small style="color: var(--c-text-muted); font-size: 0.72rem;">${currentPhase.daysRange}</small>
+        </td>
+
+        <td style="padding: 12px 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; margin-bottom: 4px;">
+            <span>الإنجاز:</span>
+            <span style="color: #0D6E46;">${roadmap.overallProgress}%</span>
+          </div>
+          <div style="width: 100%; height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden;">
+            <div style="width: ${roadmap.overallProgress}%; height: 100%; background: linear-gradient(90deg, #0D6E46 0%, #D99B26 100%);"></div>
+          </div>
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <span class="badge" style="background: ${isLate ? '#FEF3C7' : '#DCFCE7'}; color: ${isLate ? '#92400E' : '#166534'}; font-weight: 800; font-size: 0.75rem;">
+            ${roadmap.scheduleStatus || 'ملتزم بالجدول ✓'}
+          </span>
+        </td>
+
+        <td style="padding: 12px 14px; font-size: 0.78rem; color: #64748B;">
+          ${(currentPhase.milestones.find(m => !m.done) || {}).title || 'تم اكتمال المرحلة'}
+        </td>
+
+        <td style="padding: 12px 14px; text-align: center;">
+          <button class="btn btn-outline-primary btn-sm" onclick="openAdmin100DaysModal(${idx})" style="font-size: 0.76rem; font-weight: 800;">
+            <i class="fa-solid fa-pen-to-square"></i> متابعة الخطة
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.openAdmin100DaysModal = function(appIdx) {
+  adminActive100DaysAssocIndex = appIdx;
+  const app = (APP_STATE.applications || [])[appIdx];
+  if (!app) return;
+
+  if (!app.roadmap100Days) {
+    app.roadmap100Days = JSON.parse(JSON.stringify(DEFAULT_100_DAYS_ROADMAP));
+  }
+  const roadmap = app.roadmap100Days;
+
+  const modal = document.getElementById('modalAdmin100Days');
+  if (!modal) return;
+  modal.style.display = 'flex';
+
+  const titleEl = document.getElementById('admin-100d-modal-title');
+  const subEl = document.getElementById('admin-100d-modal-sub');
+  const dayInput = document.getElementById('admin-100d-input-day');
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  const statusInput = document.getElementById('admin-100d-input-status');
+  const feedbackInput = document.getElementById('admin-100d-feedback');
+  const milestonesList = document.getElementById('admin-100d-milestones-list');
+
+  if (titleEl) titleEl.textContent = `متابعة وتحديث خطة الـ 100 يوم: ${app.associationName}`;
+  if (subEl) subEl.textContent = `ترخيص: ${app.licenseNumber} • ${app.track || 'مسار الحوكمة'} • اليوم الحالي بالخطة: ${roadmap.dayCurrent} / 100`;
+
+  if (dayInput) dayInput.value = roadmap.dayCurrent || 42;
+  if (pctInput) pctInput.value = roadmap.overallProgress || 68;
+  if (statusInput) statusInput.value = roadmap.scheduleStatus || 'ملتزم بالجدول ✓';
+  if (feedbackInput) feedbackInput.value = roadmap.supervisorFeedback || '';
+
+  if (milestonesList) {
+    milestonesList.innerHTML = (roadmap.phases || []).flatMap((p, pIdx) => {
+      return (p.milestones || []).map((m, mIdx) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1px solid var(--c-border); padding: 8px 12px; border-radius: 8px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="admin-chk-${pIdx}-${mIdx}" ${m.done ? 'checked' : ''} onchange="adminToggleMilestone(${pIdx}, ${mIdx})" style="width: 18px; height: 18px; accent-color: var(--c-primary);">
+            <label for="admin-chk-${pIdx}-${mIdx}" style="margin: 0; font-size: 0.8rem; font-weight: 700; color: ${m.done ? '#166534' : 'var(--c-text)'};">
+              ${m.title}
+            </label>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">${p.title.split(':')[0]} • ${m.targetDay}</span>
+        </div>
+      `);
+    }).join('');
+  }
+};
+
+window.closeAdmin100DaysModal = function() {
+  const modal = document.getElementById('modalAdmin100Days');
+  if (modal) modal.style.display = 'none';
+};
+
+window.adminToggleMilestone = function(pIdx, mIdx) {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (!app || !app.roadmap100Days) return;
+
+  const phase = app.roadmap100Days.phases[pIdx];
+  if (!phase || !phase.milestones[mIdx]) return;
+
+  phase.milestones[mIdx].done = !phase.milestones[mIdx].done;
+
+  // Recalculate
+  const allMilestones = app.roadmap100Days.phases.flatMap(p => p.milestones);
+  const doneCount = allMilestones.filter(item => item.done).length;
+  app.roadmap100Days.overallProgress = Math.round((doneCount / allMilestones.length) * 100);
+
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  if (pctInput) pctInput.value = app.roadmap100Days.overallProgress;
+};
+
+window.calcAdmin100DaysModalPreview = function() {
+  // Handled live
+};
+
+window.saveAdmin100DaysProgress = function() {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (!app || !app.roadmap100Days) return;
+
+  const dayInput = document.getElementById('admin-100d-input-day');
+  const pctInput = document.getElementById('admin-100d-input-pct');
+  const statusInput = document.getElementById('admin-100d-input-status');
+  const feedbackInput = document.getElementById('admin-100d-feedback');
+
+  if (dayInput) app.roadmap100Days.dayCurrent = parseInt(dayInput.value) || app.roadmap100Days.dayCurrent;
+  if (pctInput) app.roadmap100Days.overallProgress = parseInt(pctInput.value) || app.roadmap100Days.overallProgress;
+  if (statusInput) app.roadmap100Days.scheduleStatus = statusInput.value;
+  if (feedbackInput) app.roadmap100Days.supervisorFeedback = feedbackInput.value;
+
+  savePlatformState();
+  closeAdmin100DaysModal();
+  renderAdmin100DaysMatrix();
+  renderAssoc100DaysRoadmap();
+  showToast(`تم حفظ وتحديث خطة الـ 100 يوم لـ ${app.associationName} بنجاح!`, 'success');
+};
+
+window.printAssoc100DaysFromAdmin = function() {
+  const app = (APP_STATE.applications || [])[adminActive100DaysAssocIndex];
+  if (app && typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(app.associationName, app.licenseNumber, app.roadmap100Days);
+  }
+};
+
+window.exportAdmin100DaysReport = function() {
+  const app = (APP_STATE.applications || [])[0];
+  if (app && typeof AthqPrint !== 'undefined') {
+    AthqPrint.print100DaysRoadmap(app.associationName, app.licenseNumber, app.roadmap100Days);
+  }
+};
+
+/* ==========================================================================
+   MODULE: ADMIN INCOMING SERVICE REQUESTS
+   ========================================================================== */
+
+window.switchAdminServicesSubView = function(subview) {
+  const btnAllocated = document.getElementById('btnAdminServicesTable');
+  const btnRequests = document.getElementById('btnAdminServicesRequests');
+  const viewAllocated = document.getElementById('admin-subview-services-allocated');
+  const viewRequests = document.getElementById('admin-subview-services-requests');
+
+  if (subview === 'allocated') {
+    if (btnAllocated) btnAllocated.className = 'btn btn-sm btn-primary';
+    if (btnRequests) { btnRequests.className = 'btn btn-sm btn-outline'; btnRequests.style.color = 'var(--c-gold-dark)'; }
+    if (viewAllocated) viewAllocated.style.display = 'block';
+    if (viewRequests) viewRequests.style.display = 'none';
+  } else {
+    if (btnAllocated) btnAllocated.className = 'btn btn-sm btn-outline';
+    if (btnRequests) { btnRequests.className = 'btn btn-sm btn-primary'; btnRequests.style.color = '#FFFFFF'; }
+    if (viewAllocated) viewAllocated.style.display = 'none';
+    if (viewRequests) viewRequests.style.display = 'block';
+    renderAdminIncomingServiceRequestsTable();
+  }
+};
+
+window.renderAdminIncomingServiceRequestsTable = function() {
+  const tbody = document.getElementById('admin-incoming-services-tbody');
+  const countBadge = document.getElementById('admin-incoming-services-cnt');
+  if (!tbody) return;
+
+  const requests = APP_STATE.serviceRequests || [];
+  if (countBadge) countBadge.textContent = requests.filter(r => r.status === 'قيد المراجعة').length;
+
+  if (requests.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 25px; color: var(--c-text-muted);">لا توجد طلبات خدمات معلقة حالياً من الجمعيات.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = requests.map(r => {
+    const modeInfo = getAssociationModeInfo(r.assocName);
+    let statusPill = '<span class="badge" style="background: #FEF3C7; color: #92400E;">قيد المراجعة</span>';
+    if (r.status.includes('معتمد')) statusPill = '<span class="badge" style="background: #DCFCE7; color: #166534;">معتمد ومجدول ✓</span>';
+    if (r.status.includes('مكتمل')) statusPill = '<span class="badge" style="background: #EFF6FF; color: #1D4ED8;">مكتمل ومُنفّذ ✓</span>';
+
+    return `
+      <tr style="border-bottom: 1px solid var(--c-border);">
+        <td style="padding: 10px 12px; font-weight: 800; font-family: monospace; color: var(--c-primary);">${r.id}</td>
+        <td style="padding: 10px 12px;">
+          <div style="font-weight: 800; color: var(--c-primary);">${r.assocName}</div>
+          ${modeInfo.badgeHtml}
+        </td>
+        <td style="padding: 10px 12px; font-weight: 800;">
+          ${r.serviceTitle}
+          <div style="font-size: 0.72rem; color: var(--c-text-muted);">${r.category}</div>
+        </td>
+        <td style="padding: 10px 12px; font-size: 0.8rem; color: var(--c-text-muted);">${r.requestDate}</td>
+        <td style="padding: 10px 12px; font-size: 0.8rem; font-weight: 700; color: #0F172A;">${r.targetDate}</td>
+        <td style="padding: 10px 12px; font-size: 0.78rem;">
+          <div><strong>الهدف:</strong> ${r.purpose}</div>
+          ${r.notes ? `<div style="color: var(--c-text-muted); font-size: 0.72rem;">ملاحظة: ${r.notes}</div>` : ''}
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">${statusPill}</td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <div style="display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">
+            ${r.status === 'قيد المراجعة' ? `
+              <button class="btn btn-primary btn-sm" onclick="updateIncomingServiceStatus('${r.id}', 'معتمد ومجدول')" style="font-size: 0.72rem; padding: 3px 8px;">
+                <i class="fa-solid fa-check"></i> اعتماد
+              </button>
+            ` : ''}
+            ${r.status.includes('معتمد') ? `
+              <button class="btn btn-outline btn-sm" onclick="updateIncomingServiceStatus('${r.id}', 'مكتمل ومُنفّذ')" style="font-size: 0.72rem; padding: 3px 8px; border-color: #166534; color: #166534;">
+                <i class="fa-solid fa-check-double"></i> اكتمال
+              </button>
+            ` : ''}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.updateIncomingServiceStatus = function(reqId, newStatus) {
+  const req = (APP_STATE.serviceRequests || []).find(r => r.id === reqId);
+  if (!req) return;
+
+  req.status = newStatus;
+  if (newStatus.includes('معتمد')) {
+    req.adminFeedback = 'تم اعتماد الطلب وتخصيص المرفق/المستشار وجدولة الموعد بنجاح';
+  } else if (newStatus.includes('مكتمل')) {
+    req.adminFeedback = 'تم تنفيذ الخدمة واستيفاء مخرجاتها بنجاح';
+  }
+
+  savePlatformState();
+  renderAdminIncomingServiceRequestsTable();
+  renderAssocServicesCatalog();
+  showToast(`تم تحديث حالة طلب الخدمة ${reqId} إلى: ${newStatus}`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: PUBLISH EVENT & BROADCAST MODAL CONTROLLER
+   ========================================================================== */
+
+window.openPublishEventModal = function() {
+  const modal = document.getElementById('modalPublishEvent');
+  if (modal) modal.style.display = 'flex';
+};
+
+window.closePublishEventModal = function() {
+  const modal = document.getElementById('modalPublishEvent');
+  if (modal) modal.style.display = 'none';
+};
+
+window.submitPublishEvent = function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+
+  const title = document.getElementById('pub-event-title')?.value || '';
+  const category = document.getElementById('pub-event-cat')?.value || 'ورشة تدريبية تخصصية';
+  const target = document.getElementById('pub-event-target')?.value || 'جميع الجمعيات المحتضنة';
+  const date = document.getElementById('pub-event-date')?.value || '';
+  const time = document.getElementById('pub-event-time')?.value || '';
+  const venue = document.getElementById('pub-event-venue')?.value || '';
+  const speaker = document.getElementById('pub-event-speaker')?.value || 'فريق خبراء حاضنة عذق';
+  const seats = parseInt(document.getElementById('pub-event-seats')?.value) || 35;
+  const zoomLink = document.getElementById('pub-event-zoom')?.value || '';
+  const desc = document.getElementById('pub-event-desc')?.value || '';
+  const isBroadcast = document.getElementById('pub-event-broadcast-check')?.checked ?? true;
+
+  const newEvt = {
+    id: `EVT-2026-${Math.floor(10 + Math.random() * 90)}`,
+    title,
+    category,
+    date,
+    time,
+    venue,
+    speaker,
+    target,
+    seatsTotal: seats,
+    seatsTaken: 0,
+    zoomLink,
+    isBroadcastActive: isBroadcast,
+    badgeColor: 'success',
+    registeredAssocs: [],
+    description: desc
+  };
+
+  if (isBroadcast && APP_STATE.announcementsAndEvents) {
+    APP_STATE.announcementsAndEvents.forEach(evt => evt.isBroadcastActive = false);
+  }
+
+  if (!APP_STATE.announcementsAndEvents) APP_STATE.announcementsAndEvents = [];
+  APP_STATE.announcementsAndEvents.unshift(newEvt);
+
+  // Push broadcast notification
+  if (!APP_STATE.notifications) APP_STATE.notifications = [];
+  APP_STATE.notifications.unshift({
+    id: `NTF-${Math.floor(100 + Math.random() * 900)}`,
+    title: `تعميم لقاء جديد: ${title}`,
+    text: `أعلنت إدارة الحاضنة عن ${category} بموعد ${date}. يرجى تأكيد حضور الجمعية.`,
+    time: 'الآن',
+    unread: true,
+    icon: 'fa-bullhorn'
+  });
+
+  savePlatformState();
+  closePublishEventModal();
+  renderAssocEvents();
+  showToast(`تم نشر وتعميم الفعالية بنجاح: "${title}" ووصلت لجميع الجمعيات!`, 'success');
+};
+
+/* ==========================================================================
+   MODULE: CONTACT INBOX MODAL CONTROLLER (INDIVIDUALS & ENTITIES)
+   ========================================================================== */
+
+let contactInboxCurrentFilter = 'all';
+
+window.openContactInquiriesModal = function() {
+  const modal = document.getElementById('modalContactInquiries');
+  if (modal) modal.style.display = 'flex';
+  renderContactInquiriesList(contactInboxCurrentFilter);
+};
+
+window.closeContactInquiriesModal = function() {
+  const modal = document.getElementById('modalContactInquiries');
+  if (modal) modal.style.display = 'none';
+};
+
+window.filterInboxMessages = function(filter) {
+  contactInboxCurrentFilter = filter;
+  document.getElementById('btnFilterInboxAll')?.classList.toggle('active', filter === 'all');
+  document.getElementById('btnFilterInboxInd')?.classList.toggle('active', filter === 'individual');
+  document.getElementById('btnFilterInboxEnt')?.classList.toggle('active', filter === 'entity');
+  renderContactInquiriesList(filter);
+};
+
+window.renderContactInquiriesList = function(filter = 'all') {
+  const container = document.getElementById('inbox-messages-list');
+  const countBadge = document.getElementById('inbox-count-badge');
+  const adminInboxCount = document.getElementById('admin-inbox-count');
+  if (!container) return;
+
+  const messages = APP_STATE.contactMessages || [];
+  if (adminInboxCount) adminInboxCount.textContent = messages.length;
+
+  let list = messages;
+  if (filter === 'individual') {
+    list = messages.filter(m => m.senderType === 'individual' || m.org?.includes('فرد'));
+  } else if (filter === 'entity') {
+    list = messages.filter(m => m.senderType === 'entity' || (!m.senderType && !m.org?.includes('فرد')));
+  }
+
+  if (countBadge) countBadge.textContent = `${list.length} رسائل`;
+
+  if (list.length === 0) {
+    container.innerHTML = `<div style="text-align: center; padding: 30px; color: var(--c-text-muted);">لا توجد رسائل واردة في هذا التصنيف.</div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(msg => {
+    const isIndividual = msg.senderType === 'individual' || msg.org?.includes('فرد');
+    let statusClass = '#FEF3C7';
+    let statusColor = '#92400E';
+    if (msg.status.includes('تواصل') || msg.status.includes('رد')) {
+      statusClass = '#DCFCE7';
+      statusColor = '#166534';
+    } else if (msg.status === 'مغلق') {
+      statusClass = '#F1F5F9';
+      statusColor = '#64748B';
+    }
+
+    return `
+      <div style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 12px; padding: 16px 20px; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+              <span class="badge" style="background: ${isIndividual ? '#E0E7FF' : '#DCFCE7'}; color: ${isIndividual ? '#3730A3' : '#166534'}; font-weight: 800; font-size: 0.75rem;">
+                <i class="fa-solid ${isIndividual ? 'fa-user' : 'fa-building-ngo'}"></i> ${isIndividual ? 'فرد (شخص عادي)' : 'جهة اعتبارية'}
+              </span>
+              <strong style="font-size: 1rem; color: var(--c-primary);">${msg.name}</strong>
+              <span style="font-size: 0.78rem; color: var(--c-text-muted);">(${msg.org || 'مقدم الاستفسار'})</span>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--c-text-muted); display: flex; gap: 12px;">
+              <span><i class="fa-solid fa-phone"></i> ${msg.phone}</span>
+              <span><i class="fa-solid fa-envelope"></i> ${msg.email}</span>
+              <span><i class="fa-regular fa-calendar"></i> ${msg.date}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="badge" style="background: ${statusClass}; color: ${statusColor}; font-weight: 800; font-size: 0.78rem;">
+              ${msg.status}
+            </span>
+            <button class="btn btn-outline btn-sm" onclick="updateContactMessageStatus('${msg.id}', 'تم الرد والتواصل')" style="font-size: 0.72rem; padding: 3px 8px;" title="تحديث الحالة إلى تم الرد">
+              <i class="fa-solid fa-check"></i> تم الرد
+            </button>
+          </div>
+        </div>
+
+        <div style="background: var(--c-bg); padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; margin-top: 8px; border-right: 3px solid ${isIndividual ? '#4F46E5' : 'var(--c-primary)'};">
+          <strong style="color: var(--c-primary); display: block; margin-bottom: 3px;">
+            الموضوع: ${msg.subject}
+          </strong>
+          <p style="margin: 0; color: var(--c-text); line-height: 1.6;">
+            ${msg.message}
+          </p>
+        </div>
+      </div>
+    `;
+  }).join('');
+};
+
+window.updateContactMessageStatus = function(msgId, newStatus) {
+  const msg = (APP_STATE.contactMessages || []).find(m => m.id === msgId);
+  if (!msg) return;
+
+  msg.status = newStatus;
+  savePlatformState();
+  renderContactInquiriesList(contactInboxCurrentFilter);
+  showToast(`تم تحديث حالة الرسالة ${msgId} إلى: ${newStatus}`, 'success');
+};
+
 
 

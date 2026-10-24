@@ -709,7 +709,132 @@ class AthqPrintEngine {
     this.showPrintPreview(content, `تقرير_الأثر_والتقدم_الشهري_${targetMonth.replace(/\s+/g, '_')}`);
   }
 
-  // 10. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
+  // 10. توليد وطباعة خطة الـ 100 يوم التنفيذية للجمعية (100-Day Acceleration Roadmap PDF)
+  print100DaysRoadmap(assocName = 'جمعية ديوان الشبابية', lic = '1842', roadmap = null) {
+    const ref = `ATHQ-100D-1446-${Math.floor(100 + Math.random() * 900)}`;
+    const currDay = (roadmap && roadmap.dayCurrent) ? roadmap.dayCurrent : 42;
+    const progress = (roadmap && roadmap.overallProgress) ? roadmap.overallProgress : 68;
+
+    const content = `
+      <div class="report-paper" style="border: 2px solid #CBD5E1; padding: 26px; border-radius: 12px; background: #FFFFFF; direction: rtl; font-size: 0.86rem; line-height: 1.7;">
+        ${this.getHeaderHtml('خطة الـ 100 يوم التنفيذية للانطلاقة والتمكين المؤسسي', ref)}
+
+        <!-- Association & Roadmap Summary Bar -->
+        <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; padding: 16px 20px; border-radius: 10px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <div style="font-size: 1.25rem; font-weight: 900; color: #0D6E46; margin-bottom: 4px;">${assocName}</div>
+            <div style="font-size: 0.82rem; color: #64748B;">
+              <span>ترخيص رقم: <strong style="color: #0F172A;">${lic}</strong></span> • 
+              <span>حاضنة ومسرعة عذق • المدينة المنورة</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center;">
+            <div style="background: #0F172A; color: #38BDF8; padding: 8px 16px; border-radius: 8px; text-align: center;">
+              <span style="font-size: 0.72rem; display: block; color: #94A3B8;">الجدول الزمني:</span>
+              <strong style="font-size: 1.15rem; font-weight: 900;">اليوم ${currDay} / 100</strong>
+            </div>
+            <div style="background: #DCFCE7; color: #166534; padding: 8px 16px; border-radius: 8px; text-align: center; border: 1px solid #86EFAC;">
+              <span style="font-size: 0.72rem; display: block; color: #15803D;">نسبة الإنجاز التراكمي:</span>
+              <strong style="font-size: 1.15rem; font-weight: 900;">${progress}% مكتمل</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Phases Breakdown Table -->
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 22px; font-size: 0.83rem;">
+          <thead>
+            <tr style="background: #0D6E46; color: #FFFFFF; text-align: right;">
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1;">المرحلة والنطاق الزمني</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1;">المستهدفات والمخرجات التنفيذية</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; width: 110px;">الحالة</th>
+              <th style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; width: 100px;">نسبة الإنجاز</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                1. التهيئة والتأسيس المؤسسي<br><small style="color: #64748B; font-weight: normal;">(الأيام 1 - 25)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • توقيع عقد الاحتضان ولوائح الحاضنة المعتمدة.<br>
+                • استلام المقر المجهز وتفعيل العنوان الوطني الرسمي.<br>
+                • فتح الحسابات البنكية المعتمدة باسم الكيان.<br>
+                • تعيين المدير التنفيذي وتسكين الفريق الأساسي.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #166534; font-weight: 800; background: #DCFCE7;">
+                مكتمل ✓
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #166534;">
+                100%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                2. الامتثال والحوكمة الذكية<br><small style="color: #64748B; font-weight: normal;">(الأيام 26 - 50)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • إقرار واعتماد اللائحة الأساسية واللوائح الداخلية الـ 7.<br>
+                • تشكيل لجان مجلس الإدارة وتحديث مصفوفة الصلاحيات المالية.<br>
+                • استيفاء مؤشرات السلامة المالية والشفافية بالمركز الوطني NCNP.<br>
+                • جلسة المراجعة القانونية والحوكمة مع مستشار الحاضنة.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #B45309; font-weight: 800; background: #FEF3C7;">
+                جاري التنفيذ ⏳
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #B45309;">
+                75%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                3. بناء البرامج وتفعيل التطوع<br><small style="color: #64748B; font-weight: normal;">(الأيام 51 - 75)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • اعتماد الخطة التشغيلية السنوية ومؤشرات الأثر المجتمعي.<br>
+                • نشر أول فرصة تطوعية تخصصية عبر المنصة الوطنية NVG.<br>
+                • عقد ورشة العمل التصميمية للمبادرة المجتمعية الأولى.<br>
+                • الاستفادة من 3 استشارات تخصصية بقاعات عذق.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #1D4ED8; font-weight: 800; background: #EFF6FF;">
+                مجدول 📅
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #1D4ED8;">
+                25%
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; font-weight: 800; background: #F8FAFC;">
+                4. إطلاق الأثر والاستدامة المالية<br><small style="color: #64748B; font-weight: normal;">(الأيام 76 - 100)</small>
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1;">
+                • إطلاق المبادرة المجتمعية الأولى وتوثيق مؤشرات العائد.<br>
+                • تفعيل المتجر الإلكتروني واستقطاب أول منحة تمويلية.<br>
+                • مراجعة تقرير إنجاز خطة الـ 100 يوم مع لجنة التقييم.<br>
+                • تسليم شهادة اجتياز خطة الـ 100 يوم والانتقال للتسريع.
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; color: #6B21A8; font-weight: 800; background: #FAF5FF;">
+                المرحلة القادمة
+              </td>
+              <td style="padding: 10px 12px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #6B21A8;">
+                0%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Quality & Supervision Recommendation -->
+        <div style="background: #FFFBEB; border: 1px solid #FCD34D; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.82rem; color: #92400E;">
+          <strong>توصية المشرف المتابع:</strong> الجمعية تسير وفق الجدول الزمني المخطط له، ويوصى باستكمال رفع سياسة الإبلاغ عن المخالفات قبل نهاية اليوم الـ 48 للانتقال السلس إلى مرحلة البرامج والتطوع.
+        </div>
+
+        ${this.getFooterAndSignatureHtml('مشرف حاضنة ومسرعة عذق', 'المدير التنفيذي للجمعية')}
+      </div>
+    `;
+
+    this.showPrintPreview(content, `خطة_الـ_100_يوم_${assocName.replace(/\s+/g, '_')}`);
+  }
+
+  // 11. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
   printGenericDocument(title, category, contentHtml) {
     const ref = `ATHQ-DOC-${Math.floor(100 + Math.random() * 900)}`;
 
