@@ -178,6 +178,72 @@ CREATE TABLE IF NOT EXISTS athq_users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 13. جدول خطة الـ 100 يوم الأولى للجمعيات المحتضنة (100-Day Acceleration Roadmaps)
+CREATE TABLE IF NOT EXISTS athq_100days_roadmaps (
+    id VARCHAR(32) PRIMARY KEY,
+    application_id VARCHAR(32) NOT NULL,
+    association_name VARCHAR(255) NOT NULL,
+    license_number VARCHAR(64) NOT NULL,
+    day_current INT NOT NULL DEFAULT 1,
+    overall_progress INT NOT NULL DEFAULT 0, -- 0 to 100%
+    schedule_status VARCHAR(64) DEFAULT 'ملتزم بالجدول ✓',
+    supervisor_feedback TEXT,
+    phases_json JSON,                        -- تفاصيل المراحل الأربعة ومخرجاتها
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (application_id) REFERENCES athq_applications(id) ON DELETE CASCADE
+);
+
+-- 14. جدول طلبات الخدمات والحزم التشغيلية (Incubator Service Requests)
+CREATE TABLE IF NOT EXISTS athq_service_requests (
+    id VARCHAR(32) PRIMARY KEY,
+    association_name VARCHAR(255) NOT NULL,
+    service_title VARCHAR(255) NOT NULL,
+    category VARCHAR(64) NOT NULL,           -- مساحات ومقرات، حوكمة واستشارات، تقنية...
+    request_date DATE NOT NULL,
+    target_date VARCHAR(64) NOT NULL,
+    purpose TEXT NOT NULL,
+    notes TEXT,
+    status VARCHAR(64) DEFAULT 'قيد المراجعة', -- قيد المراجعة، معتمد ومجدول، مكتمل ومُنفّذ، مرفوض
+    admin_feedback TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 15. جدول اللقاءات والفعاليات والتعاميم العاجلة (Announcements & Events Broadcast)
+CREATE TABLE IF NOT EXISTS athq_announcements_events (
+    id VARCHAR(32) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(64) NOT NULL,           -- ورشة تدريبية، ملتقى شراكات، تعميم رسمي...
+    event_date VARCHAR(64) NOT NULL,
+    event_time VARCHAR(64) NOT NULL,
+    venue VARCHAR(255) NOT NULL,
+    speaker VARCHAR(128) DEFAULT 'فريق خبراء حاضنة عذق',
+    target_audience VARCHAR(128) DEFAULT 'جميع الجمعيات المحتضنة',
+    seats_total INT DEFAULT 35,
+    seats_taken INT DEFAULT 0,
+    zoom_link TEXT,
+    is_broadcast_active BOOLEAN DEFAULT FALSE,
+    description TEXT,
+    registered_assocs_json JSON,             -- قائمة الجمعيات المؤكد حضورها
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 16. جدول استفسارات ورسائل التواصل - الأفراد والجمعيات (Contact Inquiries)
+CREATE TABLE IF NOT EXISTS athq_contact_inquiries (
+    id VARCHAR(32) PRIMARY KEY,
+    sender_type VARCHAR(32) NOT NULL DEFAULT 'individual', -- individual (فرد), entity (جهة اعتبارية)
+    name VARCHAR(128) NOT NULL,
+    organization VARCHAR(255) DEFAULT 'فرد - باحث/رائد أعمال',
+    phone VARCHAR(32) NOT NULL,
+    email VARCHAR(128) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(64) DEFAULT 'جديد (بانتظار المراجعة)', -- جديد، قيد المراجعة، تم الرد والتواصل، مغلق
+    inquiry_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- إنشاء الفهارس لتحسين سرعة الاستعلامات والبحث
 CREATE INDEX IF NOT EXISTS idx_org_status ON athq_organizations(status);
 CREATE INDEX IF NOT EXISTS idx_org_track ON athq_organizations(track);
@@ -187,4 +253,9 @@ CREATE INDEX IF NOT EXISTS idx_booking_date ON athq_facility_bookings(booking_da
 CREATE INDEX IF NOT EXISTS idx_consult_date ON athq_consultations(session_date);
 CREATE INDEX IF NOT EXISTS idx_user_email ON athq_users(email);
 CREATE INDEX IF NOT EXISTS idx_user_role ON athq_users(role);
+CREATE INDEX IF NOT EXISTS idx_roadmap_app ON athq_100days_roadmaps(application_id);
+CREATE INDEX IF NOT EXISTS idx_srv_req_status ON athq_service_requests(status);
+CREATE INDEX IF NOT EXISTS idx_evt_broadcast ON athq_announcements_events(is_broadcast_active);
+CREATE INDEX IF NOT EXISTS idx_inquiry_type ON athq_contact_inquiries(sender_type);
+
 

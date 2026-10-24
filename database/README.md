@@ -24,7 +24,7 @@
 
 ## 📊 2. هيكل الجداول وقاموس البيانات (Data Dictionary)
 
-تتألف قاعدة البيانات من **10 جداول رئيسية** مترابطة ومنظمة:
+تتألف قاعدة البيانات من **14 جدولاً رئيسياً** مترابطة ومنظمة:
 
 | # | اسم الجدول (SQL Table) | مخزن IndexedDB | الوصف والدور في المنظومة | المفتاح الأساسي |
 |---|---|---|---|---|
@@ -35,9 +35,13 @@
 | **5** | `athq_facility_bookings` | `bookings` | حجوزات ومواعيد استخدام القاعات والمقرات | `id` (VARCHAR) |
 | **6** | `athq_consultants` | `consultants` | شبكة المستشارين والخبراء وساعات الخبرة والتقييم | `id` (VARCHAR) |
 | **7** | `athq_consultations` | `consultations` | الجلسات الاستشارية المجدولة وتقارير التوصيات | `id` (VARCHAR) |
-| **8** | `athq_contact_messages` | `contact_messages` | استفسارات ورسائل التواصل من الزوار والجهات | `id` (VARCHAR) |
-| **9** | `athq_notifications` | `notifications` | التنبيهات والإشعارات اللحظية لمستخدمي النظام | `id` (VARCHAR) |
-| **10** | `athq_audit_logs` | `audit_logs` | سجل التدقيق وتتبع العمليات وتوثيق قرارات الإدارة | `id` (VARCHAR) |
+| **8** | `athq_100days_roadmaps` | `roadmaps` | خطة الـ 100 يوم الأولى لتسريع وتمكين الجمعيات المحتضنة | `id` (VARCHAR) |
+| **9** | `athq_service_requests` | `service_requests` | طلبات الخدمات والحزم التشغيلية الواردة من الجمعيات | `id` (VARCHAR) |
+| **10** | `athq_announcements_events` | `announcements` | اللقاءات والبرامج التدريبية والتعاميم العاجلة | `id` (VARCHAR) |
+| **11** | `athq_contact_inquiries` | `contact_messages` | استفسارات التواصل (الأفراد والمواطنين والجهات) | `id` (VARCHAR) |
+| **12** | `athq_notifications` | `notifications` | التنبيهات والإشعارات اللحظية لمستخدمي النظام | `id` (VARCHAR) |
+| **13** | `athq_audit_logs` | `audit_logs` | سجل التدقيق وتتبع العمليات وتوثيق قرارات الإدارة | `id` (VARCHAR) |
+| **14** | `athq_users` | `users` | إدارة المستخدمين والهوية والصلاحيات وسجلات الدخول | `id` (VARCHAR) |
 
 ---
 
