@@ -164,12 +164,103 @@ const DEFAULT_SEED_DATA = {
     }
   ],
   bookings: [
-    { id: "BKG-101", assocName: "جمعية ديوان الشبابية", facility: "قاعة الاجتماعات الكبرى الذكية", date: "2025-10-12", time: "10:00 ص - 12:00 م", status: "مؤكد ✓" },
-    { id: "BKG-102", assocName: "وقف العمل الصالح", facility: "قاعة التدريب والتطوير", date: "2025-10-14", time: "05:00 م - 08:00 م", status: "مؤكد ✓" }
+    { id: "BKG-101", assocName: "جمعية ديوان الشبابية", facility: "قاعة الاجتماعات الكبرى الذكية", date: "2025-10-12", time: "10:00 ص - 12:00 م", status: "مؤكد ومعتمد ✓" },
+    { id: "BKG-102", assocName: "وقف العمل الصالح", facility: "قاعة التدريب والتطوير", date: "2025-10-14", time: "05:00 م - 08:00 م", status: "مؤكد ومعتمد ✓" }
+  ],
+  services: [
+    { id: "SRV-01", assocName: "جمعية ديوان الشبابية", title: "مقر مكتبي مستقل (المكتب المجهز رقم 4)", category: "مقرات ومكاتب", date: "2025-08-15", time: "دوام كامل (سنوي)", specs: "مكتب تنفيذي مجهز + حاسب آلي + هاتف داخلي + بصمة دخول", status: "نشط ومفعل ✓" },
+    { id: "SRV-02", assocName: "وقف العمل الصالح", title: "مساحة الابتكار والاستثمار الوقفي", category: "مقرات ومكاتب", date: "2025-07-10", time: "دوام كامل (سنوي)", specs: "مكتب ريادي مستقل + قاعة استشارات خاصة", status: "نشط ومفعل ✓" },
+    { id: "SRV-03", assocName: "جمعية همم الشبابية", title: "مساحة عمل مشتركة (محطة رقم 2)", category: "مقرات ومكاتب", date: "2025-09-15", time: "فترة مسائية (مرنة)", specs: "محطة عمل مرنة + إنترنت عالي السرعة + ضيافة", status: "نشط ومفعل ✓" },
+    { id: "SRV-04", assocName: "جمعية ديوان الشبابية", title: "قاعة الاجتماعات الكبرى الذكية", category: "قاعات ذكية", date: "2025-10-12", time: "10:00 ص - 12:00 م", specs: "شاشات عرض ذكية تفاعلية + نظام صوتي لاسلكي", status: "مؤكد ومعتمد ✓" },
+    { id: "SRV-05", assocName: "وقف العمل الصالح", title: "قاعة التدريب والتطوير والتأهيل", category: "قاعات ذكية", date: "2025-10-14", time: "05:00 م - 08:00 م", specs: "سعة 35 متدرباً + منصة ذكية + ضيافة", status: "مؤكد ومعتمد ✓" },
+    { id: "SRV-06", assocName: "جمعية ديوان الشبابية", title: "العنوان الوطني المعتمد والبريد الإداري", category: "عنوان وطني ولوجستيات", date: "2025-08-15", time: "خدمة دائمة", specs: "تسجيل العنوان الوطني الموحد + استلام الطرود الرسمية", status: "نشط ومفعل ✓" },
+    { id: "SRV-07", assocName: "جمعية همم الشبابية", title: "حزمة الربط المحاسبي السحابي المعتمد", category: "برمجيات ونظم", date: "2025-09-20", time: "اشتراك مدعوم", specs: "نظام قيود/دفاتر سحابي + شجرة حسابات غير ربحية", status: "نشط ومفعل ✓" }
+  ],
+  volunteering: [
+    {
+      id: "VOL-001",
+      assocName: "جمعية النقاء الصحية",
+      opportunityTitle: "تشغيل العيادات المتنقلة والتوعية الصحية الميدانية",
+      volunteersCount: 100,
+      hoursCount: 6000,
+      economicImpact: "300,000 ر.س",
+      platformRef: "NVG-1446-9921",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "صحي وميداني"
+    },
+    {
+      id: "VOL-002",
+      assocName: "جمعية التنمية الرياضية",
+      opportunityTitle: "تنظيم دوري الأحياء المجتمعي وتأهيل اليافعين",
+      volunteersCount: 56,
+      hoursCount: 1240,
+      economicImpact: "62,000 ر.س",
+      platformRef: "NVG-1446-8812",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "شبابي ورياضي"
+    },
+    {
+      id: "VOL-003",
+      assocName: "جمعية ديوان الشبابية",
+      opportunityTitle: "برنامج إرشاد القيادات الشابة وتصميم المبادرات",
+      volunteersCount: 36,
+      hoursCount: 197,
+      economicImpact: "19,700 ر.س",
+      platformRef: "NVG-1446-7734",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "حوكمة وتمكين"
+    },
+    {
+      id: "VOL-004",
+      assocName: "جمعية همم الشبابية",
+      opportunityTitle: "ملتقى بلورة الأفكار والمبادرات التأسيسية لليافعين",
+      volunteersCount: 8,
+      hoursCount: 30,
+      economicImpact: "3,000 ر.س",
+      platformRef: "NVG-1446-6621",
+      status: "قيد المراجعة بالمنصة",
+      category: "تأسيس ومبادرات"
+    },
+    {
+      id: "VOL-005",
+      assocName: "وقف العمل الصالح",
+      opportunityTitle: "توثيق الأوقاف وتنمية المنح والوصايا التنموية",
+      volunteersCount: 16,
+      hoursCount: 70,
+      economicImpact: "7,000 ر.س",
+      platformRef: "NVG-1446-5542",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "استدامة مالية"
+    },
+    {
+      id: "VOL-006",
+      assocName: "الجمعية الفلكية بالمدينة المنورة",
+      opportunityTitle: "تنظيم ليالي رصد الأهلة والمعارض الفلكية للزوار",
+      volunteersCount: 12,
+      hoursCount: 95,
+      economicImpact: "9,500 ر.س",
+      platformRef: "NVG-1446-4431",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "ثقافي وعلمي"
+    },
+    {
+      id: "VOL-007",
+      assocName: "جمعية سفراء",
+      opportunityTitle: "سفراء العمل التطوعي وخدمة ضيوف الرحمن وزوار المدينة",
+      volunteersCount: 45,
+      hoursCount: 320,
+      economicImpact: "32,000 ر.س",
+      platformRef: "NVG-1446-3319",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      category: "خدمة مجتمعية"
+    }
   ],
   consultations: [
-    { id: "CNS-501", assocName: "جمعية ديوان الشبابية", consultant: "د. سليمان الحربي", field: "حوكمة المنظمات واللوائح", date: "2025-10-15", status: "مجدولة" },
-    { id: "CNS-502", assocName: "وقف العمل الصالح", consultant: "أ. ماجد العوفي", field: "الاستدامة المالية وتنمية الموارد", date: "2025-10-08", status: "منجزة ✓" }
+    { id: "CNS-501", assocName: "جمعية ديوان الشبابية", consultant: "د. سليمان الحربي", field: "حوكمة المنظمات وبناء مصفوفة الصلاحيات", date: "2025-10-15", time: "10:00 ص - 12:00 م", status: "مجدولة" },
+    { id: "CNS-502", assocName: "وقف العمل الصالح", consultant: "أ. ماجد العوفي", field: "الاستدامة المالية والاستثمار الوقفي", date: "2025-10-08", time: "05:00 م - 07:00 م", status: "منجزة ✓" },
+    { id: "CNS-503", assocName: "جمعية همم الشبابية", consultant: "د. سليمان الحربي", field: "بناء اللائحة الأساسية ومسوغات التأسيس", date: "2025-10-18", time: "06:00 م - 08:00 م", status: "مجدولة" },
+    { id: "CNS-504", assocName: "جمعية التنمية الرياضية", consultant: "د. نورة البلوي", field: "قياس الأثر المجتمعي وهندسة المبادرات", date: "2025-10-05", time: "04:00 م - 06:00 م", status: "منجزة ✓" },
+    { id: "CNS-505", assocName: "الجمعية الفلكية بالمدينة المنورة", consultant: "أ. فهد الجهني", field: "التخطيط الاستراتيجي ومؤشرات الأداء OKRs", date: "2025-10-11", time: "11:00 ص - 01:00 م", status: "منجزة ✓" }
   ],
   consultants: [
     {
@@ -4447,9 +4538,11 @@ window.switchAdminTab = function(btn, paneId) {
     // If called programmatically with paneId
     const tabMap = {
       'admin-tab-applications': 'admin-tab-nav-apps',
-      'admin-tab-stages': 'admin-tab-nav-stages',
-      'admin-tab-bookings': 'admin-tab-nav-bookings',
+      'admin-tab-volunteering': 'admin-tab-nav-volunteering',
       'admin-tab-consultations': 'admin-tab-nav-consults',
+      'admin-tab-services': 'admin-tab-nav-services',
+      'admin-tab-bookings': 'admin-tab-nav-services',
+      'admin-tab-stages': 'admin-tab-nav-stages',
       'admin-tab-analytics': 'admin-tab-nav-analytics',
       'admin-tab-database': 'admin-tab-nav-database'
     };
@@ -4460,7 +4553,13 @@ window.switchAdminTab = function(btn, paneId) {
   const pane = document.getElementById(paneId);
   if (pane) pane.classList.add('active');
 
-  if (paneId === 'admin-tab-database' && typeof initDatabaseStudio === 'function') {
+  if (paneId === 'admin-tab-volunteering') {
+    renderAdminVolunteeringTable();
+  } else if (paneId === 'admin-tab-services' || paneId === 'admin-tab-bookings') {
+    renderAdminServicesTable();
+  } else if (paneId === 'admin-tab-consultations') {
+    renderAdminConsultationsTable();
+  } else if (paneId === 'admin-tab-database' && typeof initDatabaseStudio === 'function') {
     initDatabaseStudio();
   }
 };
@@ -4535,19 +4634,78 @@ function renderAdminDashboard() {
   if (cntApproved) cntApproved.textContent = apps.filter(a => a.status === 'مقبول').length;
   if (cntRejected) cntRejected.textContent = apps.filter(a => a.status === 'مرفوض').length;
 
-  // Render Sub-Components
+  // Render Sub-Components for All 4 Tracks
   renderAdminApplicationsTable();
-  renderAdminKanbanBoard();
-  renderAdminBookingsTable();
+  renderAdminVolunteeringTable();
   renderAdminConsultationsTable();
+  renderAdminServicesTable();
+  renderAdminKanbanBoard();
   renderAdminAnalyticsAndLogs();
   populateAdminModalSelects();
 }
+
+// Helper: Filter admin applications by clicking summary cards
+window.filterAdminByModeCard = function(mode) {
+  const select = document.getElementById('adminModeFilter');
+  if (select) {
+    select.value = mode;
+    filterAdminApplications();
+  }
+};
+
+// Helper: Get Association Incubation Mode Info (Badge, Label, Type)
+window.getAssociationModeInfo = function(assocName) {
+  if (!assocName) return { mode: 'spatial', title: 'احتضان مكاني وتشغيلي', badgeHtml: '<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 2px 7px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>' };
+
+  const app = (APP_STATE.applications || []).find(a => a.associationName === assocName);
+  if (app) {
+    const mode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+    return {
+      mode: mode,
+      title: mode === 'idea' ? 'احتضان فكرة ومبادرة' : (mode === 'accelerator' ? 'مسرعة أعمال ونمو الأثر' : 'احتضان مكاني وتشغيلي'),
+      badgeHtml: mode === 'idea'
+        ? '<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> فكرة ومبادرة</span>'
+        : (mode === 'accelerator'
+          ? '<span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال</span>'
+          : '<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 2px 7px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>')
+    };
+  }
+
+  const assoc = (APP_STATE.associations || []).find(a => a.name === assocName);
+  if (assoc) {
+    const isGrad = assoc.status === 'متخرجة' || (assoc.track || '').includes('مسرعة');
+    const isIdea = (assoc.badge || '').includes('فكرة') || assoc.lic === 'قيد التأسيس' || assoc.name.includes('همم');
+    const mode = isIdea ? 'idea' : (isGrad ? 'accelerator' : 'spatial');
+    return {
+      mode: mode,
+      title: mode === 'idea' ? 'احتضان فكرة ومبادرة' : (mode === 'accelerator' ? 'مسرعة أعمال ونمو الأثر' : 'احتضان مكاني وتشغيلي'),
+      badgeHtml: mode === 'idea'
+        ? '<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> فكرة ومبادرة</span>'
+        : (mode === 'accelerator'
+          ? '<span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال</span>'
+          : '<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 2px 7px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>')
+    };
+  }
+
+  return {
+    mode: 'spatial',
+    title: 'احتضان مكاني وتشغيلي',
+    badgeHtml: '<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 2px 7px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>'
+  };
+};
 
 // 4. Render Applications Table
 function renderAdminApplicationsTable() {
   const tbody = document.getElementById('admin-applications-tbody');
   if (!tbody) return;
+
+  // Update mode counts on the 3 strip cards
+  const cntModeIdea = document.getElementById('cnt-mode-idea');
+  const cntModeSpatial = document.getElementById('cnt-mode-spatial');
+  const cntModeAcc = document.getElementById('cnt-mode-accelerator');
+  if (cntModeIdea) cntModeIdea.textContent = (APP_STATE.associations || []).filter(a => (a.badge || '').includes('فكرة') || a.lic === 'قيد التأسيس' || a.name.includes('همم')).length || 1;
+  if (cntModeSpatial) cntModeSpatial.textContent = (APP_STATE.associations || []).filter(a => a.status === 'محتضنة' && !(a.track || '').includes('مسرعة')).length || 13;
+  if (cntModeAcc) cntModeAcc.textContent = (APP_STATE.associations || []).filter(a => a.status === 'متخرجة' || (a.track || '').includes('مسرعة')).length || 8;
 
   const apps = APP_STATE.applications || [];
   const query = (document.getElementById('adminAppSearch')?.value || '').trim().toLowerCase();
@@ -4777,103 +4935,284 @@ function renderAdminKanbanBoard() {
   });
 }
 
-// 6. Render Bookings Table
-function renderAdminBookingsTable() {
-  const tbody = document.getElementById('admin-bookings-tbody');
+// 6. Render Volunteering Track Table (مسار التطوع وساعات العطاء)
+window.renderAdminVolunteeringTable = function() {
+  const tbody = document.getElementById('admin-volunteering-tbody');
   if (!tbody) return;
 
-  const bookings = APP_STATE.bookings || [];
-  if (bookings.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 24px; color: var(--c-text-muted);">لا توجد حجوزات مسجلة</td></tr>`;
+  const list = APP_STATE.volunteering || [];
+  const modeFilter = document.getElementById('adminVolModeFilter')?.value || 'all';
+  const query = (document.getElementById('adminVolSearch')?.value || '').trim().toLowerCase();
+
+  let filtered = list.filter(item => {
+    const info = getAssociationModeInfo(item.assocName);
+    if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
+    if (query) {
+      const matchName = (item.assocName || '').toLowerCase().includes(query);
+      const matchTitle = (item.opportunityTitle || '').toLowerCase().includes(query);
+      const matchCat = (item.category || '').toLowerCase().includes(query);
+      if (!matchName && !matchTitle && !matchCat) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+          <i class="fa-solid fa-hand-holding-heart" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
+          لا توجد فرص تطوعية تطابق معايير الفرز المحددة
+        </td>
+      </tr>
+    `;
     return;
   }
 
-  tbody.innerHTML = bookings.map(b => {
-    let icon = 'fa-door-open';
-    if (b.facility.includes('الاجتماعات')) icon = 'fa-users';
-    if (b.facility.includes('التدريب')) icon = 'fa-chalkboard-user';
+  tbody.innerHTML = filtered.map(v => {
+    const info = getAssociationModeInfo(v.assocName);
+    return `
+      <tr>
+        <td>
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 3px;">
+            ${v.assocName}
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+            ${info.badgeHtml}
+            <span style="font-size: 0.72rem; color: var(--c-text-muted);">${v.category || 'تطوع تخصصي'}</span>
+          </div>
+        </td>
+        <td>
+          <div style="font-weight: 700; color: var(--c-text-primary); font-size: 0.86rem;">${v.opportunityTitle}</div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">مرجع المنصة: <code>${v.platformRef}</code></span>
+        </td>
+        <td style="text-align: center;">
+          <span class="badge" style="background: rgba(13,148,136,0.1); color: var(--c-primary); font-weight: 800; font-size: 0.78rem;">
+            ${v.volunteersCount} متطوع
+          </span>
+        </td>
+        <td style="text-align: center;">
+          <strong style="color: #0D6E46; font-size: 0.95rem;">+${v.hoursCount.toLocaleString()} س</strong>
+        </td>
+        <td style="text-align: center; font-weight: 800; color: #92400E;">
+          ${v.economicImpact}
+        </td>
+        <td style="text-align: center;">
+          <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
+            <i class="fa-solid fa-circle-check"></i> ${v.status}
+          </span>
+        </td>
+        <td style="text-align: center;">
+          <button class="btn btn-outline btn-sm" style="padding: 3px 10px; font-size: 0.72rem;" onclick="showToast('تم فتح إفادة توثيق الساعات التطوعية المعتمدة رسمياً', 'info')">
+            <i class="fa-solid fa-file-lines"></i> إفادة
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
 
-    const isApproved = (b.status || '').includes('معتمد') || (b.status || '').includes('مؤكد');
-    const isRejected = (b.status || '').includes('مرفوض');
+window.exportVolunteeringReport = function() {
+  const list = APP_STATE.volunteering || [];
+  const headers = ['الجمعية المستفيدة', 'وضع الجمعية', 'المبادرة التطوعية', 'المجال', 'عدد المتطوعين', 'ساعات التطوع', 'العائد التقديري', 'المرجع الوطني', 'الحالة'];
 
+  let csvContent = '\uFEFF';
+  csvContent += headers.join(',') + '\r\n';
+
+  list.forEach(v => {
+    const info = getAssociationModeInfo(v.assocName);
+    const row = [
+      `"${v.assocName}"`,
+      `"${info.title}"`,
+      `"${v.opportunityTitle}"`,
+      `"${v.category}"`,
+      `"${v.volunteersCount}"`,
+      `"${v.hoursCount}"`,
+      `"${v.economicImpact}"`,
+      `"${v.platformRef}"`,
+      `"${v.status}"`
+    ];
+    csvContent += row.join(',') + '\r\n';
+  });
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.setAttribute('download', `سجل_مسار_التطوع_المعتمد_${new Date().toISOString().slice(0, 10)}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+  showToast('تم تصدير سجل مسار التطوع Excel (CSV) بنجاح!', 'success');
+};
+
+// 7. Render Consultations Track Table (مسار الاستشارات والخبراء)
+window.renderAdminConsultationsTable = function() {
+  const tbody = document.getElementById('admin-consultations-tbody');
+  if (!tbody) return;
+
+  const consults = APP_STATE.consultations || [];
+  const modeFilter = document.getElementById('adminConsModeFilter')?.value || 'all';
+  const fieldFilter = document.getElementById('adminConsFieldFilter')?.value || 'all';
+  const query = (document.getElementById('adminConsSearch')?.value || '').trim().toLowerCase();
+
+  let filtered = consults.filter(c => {
+    const info = getAssociationModeInfo(c.assocName);
+    if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
+    if (fieldFilter !== 'all' && !(c.field || '').includes(fieldFilter)) return false;
+    if (query) {
+      const matchName = (c.assocName || '').toLowerCase().includes(query);
+      const matchCons = (c.consultant || '').toLowerCase().includes(query);
+      const matchField = (c.field || '').toLowerCase().includes(query);
+      if (!matchName && !matchCons && !matchField) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+          <i class="fa-solid fa-user-tie" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
+          لا توجد استشارات تطابق معايير الفلترة المحددة
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(c => {
+    const info = getAssociationModeInfo(c.assocName);
+    const isDone = (c.status || '').includes('منجزة');
     return `
       <tr>
         <td>
           <div style="font-weight: 800; color: var(--c-primary); display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid ${icon}"></i> ${b.facility}
+            <i class="fa-solid fa-user-tie"></i> ${c.consultant}
           </div>
         </td>
-        <td><strong>${b.assocName}</strong></td>
-        <td>${b.date}</td>
-        <td><span class="badge" style="background: var(--c-bg); color: var(--c-text);">${b.time}</span></td>
         <td>
-          <span class="badge" style="background: ${isRejected ? 'rgba(239,68,68,0.12)' : 'rgba(14,110,65,0.15)'}; color: ${isRejected ? '#EF4444' : '#0E6E41'}; font-weight: 700;">
-            ${b.status || 'مؤكد ومعتمد ✓'}
+          <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 3px;">${c.assocName}</div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            ${info.badgeHtml}
+          </div>
+        </td>
+        <td>
+          <div style="font-weight: 700; color: var(--c-text-primary);">${c.field || 'حوكمة واستشارات مؤسسية'}</div>
+        </td>
+        <td>
+          <div style="font-size: 0.82rem; color: var(--c-text); font-weight: 700;">${c.date}</div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">${c.time || '10:00 ص - 12:00 م'}</span>
+        </td>
+        <td style="text-align: center;">
+          <span class="badge" style="background: ${isDone ? '#DCFCE7' : '#FEF3C7'}; color: ${isDone ? '#166534' : '#92400E'}; font-weight: 800; border: 1px solid ${isDone ? '#86EFAC' : '#FCD34D'};">
+            ${c.status || 'مجدولة'}
           </span>
         </td>
         <td style="text-align: center;">
           <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
-            ${!isApproved ? `
-              <button class="btn btn-primary btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="adminApproveBooking('${b.id}')" title="اعتماد الحجز">
-                <i class="fa-solid fa-check"></i> اعتماد
-              </button>
-            ` : ''}
-            ${!isRejected ? `
-              <button class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 0.72rem; color: #D97706; border-color: #D97706;" onclick="adminRejectBooking('${b.id}')" title="رفض الحجز">
-                <i class="fa-solid fa-ban"></i> رفض
-              </button>
-            ` : ''}
-            <button class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 0.72rem; color: #EF4444; border-color: #EF4444;" onclick="adminCancelBooking('${b.id}')" title="حذف الحجز">
-              <i class="fa-solid fa-trash"></i>
+            <button class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="adminViewConsultationReport('${c.id}')" title="عرض التقرير">
+              <i class="fa-solid fa-file-lines"></i> التقرير
+            </button>
+            <button class="btn btn-primary btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="AthqPrint.printConsultationReport('${c.assocName}', '${c.consultant}', '${c.field}')" title="طباعة">
+              <i class="fa-solid fa-print"></i>
             </button>
           </div>
         </td>
       </tr>
     `;
   }).join('');
-}
+};
 
-// 7. Render Consultations Table
-function renderAdminConsultationsTable() {
-  const tbody = document.getElementById('admin-consultations-tbody');
+// 8. Render Services, Products & Facilities Track Table (مسار الخدمات والمنتجات والمرافق)
+window.renderAdminServicesTable = function() {
+  const tbody = document.getElementById('admin-services-tbody') || document.getElementById('admin-bookings-tbody');
   if (!tbody) return;
 
-  const consults = APP_STATE.consultations || [];
-  if (consults.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 24px; color: var(--c-text-muted);">لا توجد استشارات مجدولة</td></tr>`;
+  const list = APP_STATE.services || APP_STATE.bookings || [];
+  const modeFilter = document.getElementById('adminServicesModeFilter')?.value || 'all';
+  const catFilter = document.getElementById('adminServicesCategoryFilter')?.value || 'all';
+  const query = (document.getElementById('adminServicesSearch')?.value || '').trim().toLowerCase();
+
+  let filtered = list.filter(s => {
+    const info = getAssociationModeInfo(s.assocName);
+    if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
+    if (catFilter !== 'all' && !(s.category || s.facility || '').includes(catFilter)) return false;
+    if (query) {
+      const matchName = (s.assocName || '').toLowerCase().includes(query);
+      const matchTitle = (s.title || s.facility || '').toLowerCase().includes(query);
+      const matchCat = (s.category || '').toLowerCase().includes(query);
+      if (!matchName && !matchTitle && !matchCat) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+          <i class="fa-solid fa-boxes-packing" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
+          لا توجد خدمات تطابق معايير الفلترة المحددة
+        </td>
+      </tr>
+    `;
     return;
   }
 
-  tbody.innerHTML = consults.map(c => `
-    <tr>
-      <td>
-        <div style="font-weight: 800; color: var(--c-primary);">
-          <i class="fa-solid fa-user-tie"></i> ${c.consultant}
-        </div>
-      </td>
-      <td><strong>${c.assocName}</strong></td>
-      <td>${c.field || 'حوكمة واستشارات مؤسسية'}</td>
-      <td>${c.date}</td>
-      <td>
-        <span class="badge" style="background: ${c.status === 'منجزة ✓' ? 'rgba(14,110,65,0.15)' : 'rgba(245,158,11,0.15)'}; color: ${c.status === 'منجزة ✓' ? '#0E6E41' : '#D97706'}; font-weight: 700;">
-          ${c.status}
-        </span>
-      </td>
-      <td style="text-align: center;">
-        <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
-          <button class="btn btn-gold btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="openAdminAssignConsultModal('${c.id}')" title="توزيع وإسناد الاستشارة لمستشار متاح">
-            <i class="fa-solid fa-user-gear"></i> إسناد
-          </button>
-          ${c.status !== 'منجزة ✓' ? `
-            <button class="btn btn-outline-primary btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="adminCompleteConsult('${c.id}')">
-              <i class="fa-solid fa-check"></i> تم التنفيذ
+  tbody.innerHTML = filtered.map(s => {
+    const info = getAssociationModeInfo(s.assocName);
+    const serviceName = s.title || s.facility || 'خدمة مقر معتمدة';
+    let icon = 'fa-boxes-packing';
+    if (serviceName.includes('مكتب') || serviceName.includes('مقر')) icon = 'fa-building';
+    if (serviceName.includes('قاعة') || serviceName.includes('اجتماع')) icon = 'fa-chalkboard-user';
+    if (serviceName.includes('عنوان') || serviceName.includes('بريد')) icon = 'fa-envelope-open-text';
+    if (serviceName.includes('سحاب') || serviceName.includes('محاسب')) icon = 'fa-cloud';
+
+    return `
+      <tr>
+        <td>
+          <div style="font-weight: 800; color: var(--c-primary); display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid ${icon}"></i> ${serviceName}
+          </div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">كود الخدمة: <code>${s.id || 'SRV-01'}</code></span>
+        </td>
+        <td>
+          <div style="font-weight: 800; font-size: 0.92rem; margin-bottom: 3px;">${s.assocName}</div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            ${info.badgeHtml}
+          </div>
+        </td>
+        <td>
+          <span class="badge" style="background: rgba(0,0,0,0.04); color: var(--c-text-primary); font-weight: 700;">
+            ${s.category || 'تجهيز مكتبي وذكي'}
+          </span>
+          <div style="font-size: 0.72rem; color: var(--c-text-muted); margin-top: 2px;">${s.specs || 'شاشات ذكية + إنترنت + ضيافة'}</div>
+        </td>
+        <td>
+          <div style="font-size: 0.82rem; font-weight: 700;">${s.date}</div>
+          <span style="font-size: 0.72rem; color: var(--c-text-muted);">${s.time || 'دوام كامل'}</span>
+        </td>
+        <td style="text-align: center;">
+          <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC;">
+            ${s.status || 'نشط ومفعل ✓'}
+          </span>
+        </td>
+        <td style="text-align: center;">
+          <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="AthqPrint.printBookingPass('${s.assocName}', '${serviceName}', '${s.date}', '${s.time || 'دوام كامل'}')" title="طباعة تصريح الحجز">
+              <i class="fa-solid fa-print"></i> تصريح
             </button>
-          ` : `<span style="font-size: 0.75rem; color: #0E6E41; align-self: center;">منجزة ✓</span>`}
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.renderAdminBookingsTable = function() {
+  renderAdminServicesTable();
+};
 
 // 8. Render Analytics Charts & Audit Logs
 function renderAdminAnalyticsAndLogs() {

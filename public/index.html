@@ -2629,36 +2629,72 @@
         </div>
       </div>
 
-      <!-- Modern Portal Tabs Navigation -->
+      <!-- Modern Portal Tracks & Tabs Navigation (المسارات الأربعة الرئيسية للحاضنة والمسرعة) -->
       <div class="portal-tabs-nav">
+        <!-- 1. مسار الجمعيات والاحتضان -->
         <button class="portal-tab-btn active" id="admin-tab-nav-apps" onclick="switchAdminTab(this, 'admin-tab-applications')">
-          <i class="fa-solid fa-inbox"></i> طلبات الاحتضان الواردة
+          <i class="fa-solid fa-building-ngo"></i> مسار الجمعيات والاحتضان
           <span class="tab-badge" id="admin-apps-badge">0</span>
         </button>
-        <button class="portal-tab-btn" id="admin-tab-nav-stages" onclick="switchAdminTab(this, 'admin-tab-stages')">
-          <i class="fa-solid fa-stairs"></i> خط سير المراحل (BPMN Kanban)
+        <!-- 2. مسار التطوع وساعات العطاء -->
+        <button class="portal-tab-btn" id="admin-tab-nav-volunteering" onclick="switchAdminTab(this, 'admin-tab-volunteering')">
+          <i class="fa-solid fa-hand-holding-heart"></i> مسار التطوع
+          <span class="tab-badge" id="admin-vol-badge">+16K س</span>
         </button>
-        <button class="portal-tab-btn" id="admin-tab-nav-bookings" onclick="switchAdminTab(this, 'admin-tab-bookings')">
-          <i class="fa-solid fa-calendar-check"></i> حجوزات المرافق
-          <span class="tab-badge" id="admin-bookings-badge">0</span>
-        </button>
+        <!-- 3. مسار الاستشارات والخبراء -->
         <button class="portal-tab-btn" id="admin-tab-nav-consults" onclick="switchAdminTab(this, 'admin-tab-consultations')">
-          <i class="fa-solid fa-user-tie"></i> شبكة الاستشارات
+          <i class="fa-solid fa-user-tie"></i> مسار الاستشارات
           <span class="tab-badge" id="admin-consults-badge">0</span>
         </button>
+        <!-- 4. مسار الخدمات والمنتجات والمرافق -->
+        <button class="portal-tab-btn" id="admin-tab-nav-services" onclick="switchAdminTab(this, 'admin-tab-services')">
+          <i class="fa-solid fa-boxes-packing"></i> مسار الخدمات والمنتجات
+          <span class="tab-badge" id="admin-services-badge">28</span>
+        </button>
+        <!-- خط سير المراحل والأثر وقاعدة البيانات -->
+        <button class="portal-tab-btn" id="admin-tab-nav-stages" onclick="switchAdminTab(this, 'admin-tab-stages')">
+          <i class="fa-solid fa-stairs"></i> خط سير المراحل (Kanban)
+        </button>
         <button class="portal-tab-btn" id="admin-tab-nav-analytics" onclick="switchAdminTab(this, 'admin-tab-analytics')">
-          <i class="fa-solid fa-chart-pie"></i> مؤشرات الأثر وسجل النشاط
+          <i class="fa-solid fa-chart-pie"></i> مؤشرات الأثر
         </button>
         <button class="portal-tab-btn" id="admin-tab-nav-database" onclick="switchAdminTab(this, 'admin-tab-database')">
-          <i class="fa-solid fa-database"></i> قاعدة البيانات المركزية
+          <i class="fa-solid fa-database"></i> قاعدة البيانات
           <span class="tab-badge" style="background: var(--c-gold); color: #000;" id="admin-db-records-badge">Live</span>
         </button>
       </div>
 
       <!-- =====================================================================
-           Tab 1: طلبات الاحتضان الواردة (Applications Inbox)
+           Tab 1: مسار الجمعيات والاحتضان (Associations & Incubation Track)
            ===================================================================== -->
       <div id="admin-tab-applications" class="portal-tab-pane active">
+        <!-- Incubation Modes Live Distribution Strip -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px;">
+          <div onclick="filterAdminByModeCard('idea')" style="cursor: pointer; background: #FFFBEB; border: 1.5px solid #FCD34D; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;" class="hover-shadow">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 800; color: #92400E;"><i class="fa-solid fa-lightbulb"></i> 1. حاضنة الأفكار (قيد التأسيس)</div>
+              <div style="font-size: 0.72rem; color: #B45309; margin-top: 2px;">بلورة الفكرة، دراسة الأثر، واستكمال الترخيص</div>
+            </div>
+            <span class="badge" style="background: #FDE68A; color: #78350F; font-size: 0.95rem; font-weight: 900; padding: 4px 10px;" id="cnt-mode-idea">1</span>
+          </div>
+
+          <div onclick="filterAdminByModeCard('spatial')" style="cursor: pointer; background: #F0FDF4; border: 1.5px solid #86EFAC; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;" class="hover-shadow">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 800; color: #166534;"><i class="fa-solid fa-building"></i> 2. الاحتضان المكاني والتشغيلي</div>
+              <div style="font-size: 0.72rem; color: #15803D; margin-top: 2px;">مقرات مكتبية، عنوان وطني معتمد، وقاعات ذكية</div>
+            </div>
+            <span class="badge" style="background: #BBF7D0; color: #14532D; font-size: 0.95rem; font-weight: 900; padding: 4px 10px;" id="cnt-mode-spatial">13</span>
+          </div>
+
+          <div onclick="filterAdminByModeCard('accelerator')" style="cursor: pointer; background: #FAF5FF; border: 1.5px solid #DDD6FE; border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;" class="hover-shadow">
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 800; color: #5B21B6;"><i class="fa-solid fa-rocket"></i> 3. مسرعة أعمال ونمو الأثر</div>
+              <div style="font-size: 0.72rem; color: #6D28D9; margin-top: 2px;">توسع الاستدامة المالية وجذب المنح والشراكات</div>
+            </div>
+            <span class="badge" style="background: #E9D5FF; color: #4C1D95; font-size: 0.95rem; font-weight: 900; padding: 4px 10px;" id="cnt-mode-accelerator">8</span>
+          </div>
+        </div>
+
         <!-- Search and Multi-Filter Toolbar -->
         <div class="admin-filter-bar">
           <div class="admin-search-wrapper">
@@ -2796,37 +2832,81 @@
       </div>
 
       <!-- =====================================================================
-           Tab 3: إدارة حجوزات المرافق والمقرات (Facility Bookings)
+           Tab 2: مسار التطوع وساعات العطاء (Volunteering Track)
            ===================================================================== -->
-      <div id="admin-tab-bookings" class="portal-tab-pane">
+      <div id="admin-tab-volunteering" class="portal-tab-pane">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
-              <i class="fa-solid fa-calendar-check"></i> إدارة حجوزات مرافق وقاعات الحاضنة
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
+              <i class="fa-solid fa-hand-holding-heart"></i> مسار التطوع وساعات العطاء المعتمدة
             </h3>
             <p style="font-size: 0.8rem; color: var(--c-text-muted);">
-              جدول الحجوزات، المواعيد، وتأكيد حجز القاعات الذكية ومساحات العمل المشتركة
+              توثيق ورصد فرص وساعات التطوع المعتمدة لكل جمعية محتضنة عبر المنصة الوطنية للعمل التطوعي (NVG)
             </p>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="openAdminNewBookingModal()">
-            <i class="fa-solid fa-plus"></i> إضافة حجز جديد لمرفق
-          </button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="exportVolunteeringReport()" style="border-color: var(--c-gold); color: var(--c-gold-dark); font-weight: 800;">
+              <i class="fa-solid fa-file-excel"></i> تصدير كشف التطوع (Excel)
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="openAdminNewVolModal()">
+              <i class="fa-solid fa-plus"></i> تسجيل فرصة تطوعية جديدة
+            </button>
+          </div>
         </div>
 
+        <!-- 4 Volunteering Metric KPI Cards -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; text-align: center;">
+          <div style="background: var(--c-surface); border: 1.5px solid #86EFAC; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">+16,311</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">ساعة تطوعية معتمدة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #BFDBFE; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #1D4ED8;">+1,122</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">متطوع معتمد بالمنظومة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #FDE68A; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #92400E;">815,550 ر.س</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">العائد الاقتصادي التقديري</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #E9D5FF; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">100% ✓</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">توثيق بالمنصة الوطنية NVG</div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="admin-filter-bar">
+          <div class="admin-search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="adminVolSearch" class="admin-search-input" placeholder="ابحث باسم الجمعية أو الفرصة التطوعية..." oninput="renderAdminVolunteeringTable()">
+          </div>
+
+          <div style="min-width: 220px;">
+            <select id="adminVolModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminVolunteeringTable()">
+              <option value="all">جميع أوضاع الجمعيات</option>
+              <option value="idea">💡 احتضان فكرة ومبادرة</option>
+              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+              <option value="accelerator">🚀 مسرعة أعمال ونمو الأثر</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- High-Clarity Volunteering Table -->
         <div class="admin-table-card">
           <div style="overflow-x: auto;">
             <table>
               <thead>
                 <tr>
-                  <th>المرفق أو القاعة</th>
-                  <th>الجمعية المستفيدة</th>
-                  <th>تاريخ الحجز</th>
-                  <th>الفترة الزمنية</th>
-                  <th>الحالة</th>
-                  <th style="text-align: center;">الإجراءات</th>
+                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                  <th style="min-width: 200px;">الفرصة / المبادرة التطوعية</th>
+                  <th style="text-align: center; min-width: 100px;">المتطوعين</th>
+                  <th style="text-align: center; min-width: 110px;">ساعات التطوع</th>
+                  <th style="text-align: center; min-width: 120px;">العائد التقديري</th>
+                  <th style="text-align: center; min-width: 150px;">التوثيق الوطني</th>
+                  <th style="text-align: center; min-width: 120px;">الإجراءات</th>
                 </tr>
               </thead>
-              <tbody id="admin-bookings-tbody">
+              <tbody id="admin-volunteering-tbody">
                 <!-- Dynamically rendered via landing.js -->
               </tbody>
             </table>
@@ -2835,16 +2915,16 @@
       </div>
 
       <!-- =====================================================================
-           Tab 4: شبكة الاستشارات والخبراء (Consultations)
+           Tab 3: شبكة الاستشارات والخبراء (Consultations Track)
            ===================================================================== -->
       <div id="admin-tab-consultations" class="portal-tab-pane">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
-              <i class="fa-solid fa-user-tie"></i> شبكة الاستشارات وجلسات الخبراء المعتمدين
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
+              <i class="fa-solid fa-user-tie"></i> مسار الاستشارات التخصصية والخبراء المعتمدين
             </h3>
             <p style="font-size: 0.8rem; color: var(--c-text-muted);">
-              متابعة الجلسات الاستشارية بين الخبراء والجمعيات المحتضنة في مجالات الحوكمة والمالية والتقنية
+              متابعة الجلسات الاستشارية التخصصية في الحوكمة، الاستدامة المالية، والامتثال للجمعيات المحتضنة
             </p>
           </div>
           <button class="btn btn-primary btn-sm" onclick="openAdminNewConsultModal()">
@@ -2852,20 +2932,153 @@
           </button>
         </div>
 
+        <!-- 4 Consultations Metric KPI Cards -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; text-align: center;">
+          <div style="background: var(--c-surface); border: 1.5px solid #86EFAC; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">38 جلسة</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">جلسات استشارية منجزة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #BFDBFE; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #1D4ED8;">76 ساعة</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">ساعات استشارية موثقة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #FDE68A; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #92400E;">98% ★</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">نسبة رضا الجمعيات المستفيدة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #E9D5FF; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">4 خبراء</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">مستشارين معتمدين بالحاضنة</div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="admin-filter-bar">
+          <div class="admin-search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="adminConsSearch" class="admin-search-input" placeholder="ابحث باسم المستشار أو الجمعية أو المجال..." oninput="renderAdminConsultationsTable()">
+          </div>
+
+          <div style="min-width: 220px;">
+            <select id="adminConsModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
+              <option value="all">جميع أوضاع الجمعيات</option>
+              <option value="idea">💡 احتضان فكرة ومبادرة</option>
+              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+              <option value="accelerator">🚀 مسرعة أعمال ونمو الأثر</option>
+            </select>
+          </div>
+
+          <div style="min-width: 220px;">
+            <select id="adminConsFieldFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
+              <option value="all">جميع مجالات الاستشارة</option>
+              <option value="حوكمة">حوكمة وبناء لوائح</option>
+              <option value="استدامة">استدامة مالية وتنمية موارد</option>
+              <option value="استراتيجي">تخطيط استراتيجي</option>
+              <option value="أثر">قياس أثر وتحول مؤسسي</option>
+            </select>
+          </div>
+        </div>
+
         <div class="admin-table-card">
           <div style="overflow-x: auto;">
             <table>
               <thead>
                 <tr>
-                  <th>المستشار المعتمد</th>
-                  <th>الجمعية المستفيدة</th>
-                  <th>مجال الاستشارة</th>
-                  <th>الموعد المحدد</th>
-                  <th>حالة الجلسة</th>
-                  <th style="text-align: center;">الإجراءات</th>
+                  <th style="min-width: 170px;">المستشار المعتمد</th>
+                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                  <th style="min-width: 180px;">مجال الاستشارة</th>
+                  <th style="min-width: 130px;">الموعد المحدد</th>
+                  <th style="text-align: center; min-width: 100px;">حالة الجلسة</th>
+                  <th style="text-align: center; min-width: 130px;">الإجراءات</th>
                 </tr>
               </thead>
               <tbody id="admin-consultations-tbody">
+                <!-- Dynamically rendered via landing.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           Tab 4: مسار الخدمات والمنتجات والمرافق (Services & Products Track)
+           ===================================================================== -->
+      <div id="admin-tab-services" class="portal-tab-pane">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
+              <i class="fa-solid fa-boxes-packing"></i> مسار الخدمات والمنتجات والمرافق المعتمدة
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--c-text-muted);">
+              إدارة المكاتب المجهزة، القاعات الذكية، باقات العنوان الوطني المعتمد، والبرمجيات السحابية للجمعيات
+            </p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openAdminNewBookingModal()">
+            <i class="fa-solid fa-plus"></i> تخصيص خدمة / حجز مرفق
+          </button>
+        </div>
+
+        <!-- 4 Services Metric KPI Cards -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; text-align: center;">
+          <div style="background: var(--c-surface); border: 1.5px solid #86EFAC; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">12 مكتب</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">مقرات مجهزة ومؤثثة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #BFDBFE; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #1D4ED8;">4 مرافق</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">قاعات ذكية ومساحات مشتركة</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #FDE68A; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #92400E;">100% مفعل</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">العنوان الوطني والحساب السحابي</div>
+          </div>
+          <div style="background: var(--c-surface); border: 1.5px solid #E9D5FF; padding: 12px 10px; border-radius: 10px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">28 عملية</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">إجمالي الحجوزات والخدمات</div>
+          </div>
+        </div>
+
+        <!-- Filter Toolbar -->
+        <div class="admin-filter-bar">
+          <div class="admin-search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="adminServicesSearch" class="admin-search-input" placeholder="ابحث باسم الخدمة أو المرفق أو الجمعية..." oninput="renderAdminServicesTable()">
+          </div>
+
+          <div style="min-width: 220px;">
+            <select id="adminServicesModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminServicesTable()">
+              <option value="all">جميع أوضاع الجمعيات</option>
+              <option value="idea">💡 احتضان فكرة ومبادرة</option>
+              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+              <option value="accelerator">🚀 مسرعة أعمال ونمو الأثر</option>
+            </select>
+          </div>
+
+          <div style="min-width: 220px;">
+            <select id="adminServicesCategoryFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminServicesTable()">
+              <option value="all">جميع أنواع الخدمات والمنتجات</option>
+              <option value="مكتب">🏢 مقرات ومكاتب مستقلة</option>
+              <option value="قاعة">🎤 قاعات ذكية واجتماعات</option>
+              <option value="عنوان">📮 عنوان وطني وبريد إداري</option>
+              <option value="سحابي">💻 برمجيات ونظام محاسبي</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th style="min-width: 200px;">الخدمة أو المرفق أو المنتج</th>
+                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                  <th style="min-width: 140px;">التصنيف والتجهيز</th>
+                  <th style="min-width: 120px;">تاريخ الاستفادة</th>
+                  <th style="text-align: center; min-width: 100px;">الحالة</th>
+                  <th style="text-align: center; min-width: 130px;">الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="admin-services-tbody">
                 <!-- Dynamically rendered via landing.js -->
               </tbody>
             </table>
