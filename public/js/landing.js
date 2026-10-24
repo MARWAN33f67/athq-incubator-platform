@@ -5613,6 +5613,278 @@ window.closeDigitalCertificateModal = function() {
 };
 
 // ========================== 4. Admin Analytics & One-Click Exports ==========================
+
+// Dataset for Monthly Impact & Month-over-Month (MoM) Progress Tracking
+window.MOM_PROGRESS_DATA = [
+  {
+    name: "وقف العمل الصالح",
+    lic: "1530",
+    mode: "accelerator",
+    modeLabel: "مسرعة أعمال",
+    stage: "المرحلة الرابعة: مسرعة عذق",
+    prevProgress: 75,
+    currProgress: 90,
+    momChange: "+15.0%",
+    beneficiaries: "1,200",
+    volHours: "+70 س",
+    funding: "350,000 ر.س",
+    compliance: "95%",
+    note: "توسيع الاستدامة المالية وتوقيع 3 شراكات مانحة."
+  },
+  {
+    name: "جمعية ديوان الشبابية",
+    lic: "1842",
+    mode: "spatial",
+    modeLabel: "احتضان مكاني",
+    stage: "المرحلة الثالثة: الاحتضان المكاني",
+    prevProgress: 58,
+    currProgress: 76,
+    momChange: "+18.0%",
+    beneficiaries: "3,400",
+    volHours: "+197 س",
+    funding: "520,000 ر.س",
+    compliance: "92%",
+    note: "استكمال 4 لوائح حوكمة وتجهيز المكتب المخصص رقم 4."
+  },
+  {
+    name: "جمعية همم الشبابية",
+    lic: "2104",
+    mode: "idea",
+    modeLabel: "فكرة ومبادرة",
+    stage: "المرحلة الأولى: بلورة الفكرة",
+    prevProgress: 30,
+    currProgress: 52,
+    momChange: "+22.0%",
+    beneficiaries: "450",
+    volHours: "+30 س",
+    funding: "85,000 ر.س",
+    compliance: "84%",
+    note: "صياغة المبادرة والتهيئة لاستكمال مسوغات التأسيس."
+  },
+  {
+    name: "جمعية التنمية الرياضية",
+    lic: "1920",
+    mode: "spatial",
+    modeLabel: "احتضان مكاني",
+    stage: "المرحلة الثالثة: الاحتضان المكاني",
+    prevProgress: 60,
+    currProgress: 74,
+    momChange: "+14.0%",
+    beneficiaries: "2,100",
+    volHours: "+1,240 س",
+    funding: "210,000 ر.س",
+    compliance: "88%",
+    note: "تفعيل المتطوعين وإطلاق دوري الأحياء المجتمعي."
+  },
+  {
+    name: "الجمعية الفلكية بالمدينة المنورة",
+    lic: "1680",
+    mode: "spatial",
+    modeLabel: "احتضان مكاني",
+    stage: "المرحلة الثالثة: الاحتضان المكاني",
+    prevProgress: 65,
+    currProgress: 78,
+    momChange: "+13.0%",
+    beneficiaries: "1,800",
+    volHours: "+95 س",
+    funding: "140,000 ر.س",
+    compliance: "90%",
+    note: "شراكة مع المركز الوطني لتطوير رصد الأهلة والمعارض الفلكية."
+  },
+  {
+    name: "جمعية إرشاد التنموية",
+    lic: "1322",
+    mode: "accelerator",
+    modeLabel: "مسرعة أعمال",
+    stage: "المرحلة الرابعة: مسرعة عذق",
+    prevProgress: 80,
+    currProgress: 94,
+    momChange: "+14.0%",
+    beneficiaries: "2,600",
+    volHours: "+240 س",
+    funding: "600,000 ر.س",
+    compliance: "96%",
+    note: "الجاهزية التامة للتخرج والحصول على شهادة الامتثال المؤسسي."
+  },
+  {
+    name: "جمعية النقاء الصحية",
+    lic: "1450",
+    mode: "spatial",
+    modeLabel: "احتضان مكاني",
+    stage: "المرحلة الثالثة: الاحتضان المكاني",
+    prevProgress: 70,
+    currProgress: 88,
+    momChange: "+18.0%",
+    beneficiaries: "3,300",
+    volHours: "+6,000 س",
+    funding: "545,000 ر.س",
+    compliance: "94%",
+    note: "توسع العيادات المتنقلة وتحقيق أعلى ساعات تطوعية بالمنظومة."
+  }
+];
+
+window.openMonthlyImpactReportModal = function() {
+  const modal = document.getElementById('modalMonthlyImpactReport');
+  if (!modal) return;
+  modal.classList.add('active');
+  renderMonthlyImpactTable();
+};
+
+window.closeMonthlyImpactReportModal = function() {
+  document.getElementById('modalMonthlyImpactReport')?.classList.remove('active');
+};
+
+window.renderMonthlyImpactTable = function() {
+  const tbody = document.getElementById('mom-report-tbody');
+  if (!tbody) return;
+
+  const monthSelect = document.getElementById('momReportMonth');
+  const targetMonth = monthSelect ? monthSelect.value : 'ربيع الأول 1446هـ';
+  const selectedOpt = monthSelect?.options[monthSelect.selectedIndex];
+  const compareMonth = selectedOpt?.getAttribute('data-compare') || 'صفر 1446هـ';
+
+  const modeFilter = document.getElementById('momReportMode')?.value || 'all';
+  const searchQuery = (document.getElementById('momReportSearch')?.value || '').trim().toLowerCase();
+
+  // Update table header labels
+  const thPrev = document.getElementById('th-prev-month');
+  const thCurr = document.getElementById('th-curr-month');
+  if (thPrev) thPrev.textContent = `إنجاز (${compareMonth.split(' ')[0]})`;
+  if (thCurr) thCurr.textContent = `إنجاز (${targetMonth.split(' ')[0]})`;
+
+  let list = window.MOM_PROGRESS_DATA || [];
+
+  // Filter by mode
+  if (modeFilter !== 'all') {
+    list = list.filter(item => item.mode === modeFilter);
+  }
+
+  // Filter by search
+  if (searchQuery) {
+    list = list.filter(item => 
+      item.name.toLowerCase().includes(searchQuery) || 
+      item.lic.toLowerCase().includes(searchQuery)
+    );
+  }
+
+  if (list.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="8" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+          <i class="fa-solid fa-folder-open" style="font-size: 1.8rem; display: block; margin-bottom: 8px;"></i>
+          لا توجد جمعيات تطابق معايير الفلترة المحددة
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = list.map(item => {
+    let modeBadge = '';
+    if (item.mode === 'idea') {
+      modeBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> فكرة ومبادرة</span>`;
+    } else if (item.mode === 'accelerator') {
+      modeBadge = `<span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; padding: 2px 7px; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال</span>`;
+    } else {
+      modeBadge = `<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 2px 7px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>`;
+    }
+
+    return `
+      <tr style="border-bottom: 1px solid var(--c-border);">
+        <td style="padding: 10px 12px;">
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.88rem; margin-bottom: 2px;">
+            ${item.name}
+          </div>
+          <div style="font-size: 0.72rem; color: var(--c-text-muted);">ترخيص: <strong>${item.lic}</strong> • ${item.stage}</div>
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">
+          ${modeBadge}
+        </td>
+        <td style="padding: 10px 12px; text-align: center; font-weight: 700; color: var(--c-text-muted);">
+          ${item.prevProgress}%
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.95rem;">${item.currProgress}%</div>
+          <div style="width: 60px; height: 4px; background: #E2E8F0; border-radius: 2px; margin: 3px auto 0 auto; overflow: hidden;">
+            <div style="width: ${item.currProgress}%; height: 100%; background: var(--c-primary);"></div>
+          </div>
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <span style="display: inline-block; background: #DCFCE7; color: #166534; font-weight: 800; padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; border: 1px solid #86EFAC;">
+            ${item.momChange} ↗
+          </span>
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <div style="font-weight: 800; color: var(--c-text-primary); font-size: 0.84rem;">${item.beneficiaries} مستفيد</div>
+          <div style="font-size: 0.7rem; color: #64748B;">${item.volHours} تطوع</div>
+        </td>
+        <td style="padding: 10px 12px; text-align: center;">
+          <span style="font-weight: 900; color: #0D6E46; font-size: 0.9rem;">${item.compliance}</span>
+          <div style="font-size: 0.65rem; color: #16A34A; font-weight: 700;">مطابقة NCNP ✓</div>
+        </td>
+        <td style="padding: 10px 12px; font-size: 0.74rem; color: var(--c-text-body); line-height: 1.5;">
+          ${item.note}
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.printMonthlyImpactFromModal = function() {
+  const monthSelect = document.getElementById('momReportMonth');
+  const targetMonth = monthSelect ? monthSelect.value : 'ربيع الأول 1446هـ';
+  const selectedOpt = monthSelect?.options[monthSelect.selectedIndex];
+  const compareMonth = selectedOpt?.getAttribute('data-compare') || 'صفر 1446هـ';
+  const modeFilter = document.getElementById('momReportMode')?.value || 'all';
+
+  if (window.AthqPrint && typeof window.AthqPrint.printMonthlyImpactAndProgressReport === 'function') {
+    window.AthqPrint.printMonthlyImpactAndProgressReport(targetMonth, compareMonth, modeFilter);
+  } else {
+    window.print();
+  }
+};
+
+window.exportMonthlyImpactExcelCsv = function() {
+  const list = window.MOM_PROGRESS_DATA || [];
+  const monthSelect = document.getElementById('momReportMonth');
+  const targetMonth = monthSelect ? monthSelect.value : 'ربيع الأول 1446هـ';
+
+  const headers = ['اسم الجمعية', 'رقم الترخيص', 'وضع الجمعية', 'المرحلة', 'إنجاز الشهر السابق (%)', 'إنجاز الشهر الحالي (%)', 'نسبة التقدم الشهري (MoM)', 'المستفيدين', 'ساعات التطوع', 'التمويل المستقطب', 'نسبة الامتثال', 'ملاحظات الإشراف'];
+
+  let csvContent = '\uFEFF'; // UTF-8 BOM for Arabic support
+  csvContent += headers.join(',') + '\r\n';
+
+  list.forEach(item => {
+    const row = [
+      `"${item.name}"`,
+      `"${item.lic}"`,
+      `"${item.modeLabel}"`,
+      `"${item.stage}"`,
+      `"${item.prevProgress}%"`,
+      `"${item.currProgress}%"`,
+      `"${item.momChange}"`,
+      `"${item.beneficiaries}"`,
+      `"${item.volHours}"`,
+      `"${item.funding}"`,
+      `"${item.compliance}"`,
+      `"${item.note}"`
+    ];
+    csvContent += row.join(',') + '\r\n';
+  });
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.setAttribute('download', `تقرير_الأثر_ونسبة_التقدم_الشهري_${targetMonth.replace(/\s+/g, '_')}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+  showToast('تم تصدير تقرير الأثر ونسبة التقدم الشهري Excel (CSV) بنجاح!', 'success');
+};
+
 window.exportAdminExcelCsv = function() {
   const apps = APP_STATE.applications || [];
   const headers = ['كود الطلب', 'اسم الجمعية', 'رقم الترخيص', 'الرقم الوطني 700', 'ممثل الجمعية', 'رقم الجوال', 'المسار', 'المرحلة الحالية', 'الحالة', 'ساعات العمل', 'ساعات التطوع'];
@@ -5652,7 +5924,7 @@ window.exportAdminExcelCsv = function() {
 
 window.exportAdminPdfReport = function() {
   if (window.AthqPrint) {
-    window.AthqPrint.printExecutiveReport();
+    window.AthqPrint.printMonthlyImpactAndProgressReport();
   } else {
     window.print();
   }

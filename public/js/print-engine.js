@@ -534,7 +534,182 @@ class AthqPrintEngine {
     this.showPrintPreview(content, `بطاقة_أثر_${orgName.replace(/\s+/g, '_')}`);
   }
 
-  // 9. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
+  // 9. توليد وطباعة تقرير الأثر ونسبة التقدم من شهر لآخر (Month-over-Month Impact & Progress Report)
+  printMonthlyImpactAndProgressReport(targetMonth = 'ربيع الأول 1446هـ', compareMonth = 'صفر 1446هـ', filterMode = 'all') {
+    const ref = `ATHQ-MOM-1446-${Math.floor(100 + Math.random() * 900)}`;
+
+    const reportData = [
+      {
+        name: "وقف العمل الصالح", lic: "1530", mode: "accelerator", modeLabel: "مسرعة أعمال",
+        prevProgress: 75, currProgress: 90, momChange: "+15.0%",
+        beneficiaries: "1,200", volHours: "+70 س", funding: "350,000 ر.س", compliance: "95%",
+        note: "توسيع الاستدامة المالية وتوقيع 3 شراكات مانحة."
+      },
+      {
+        name: "جمعية ديوان الشبابية", lic: "1842", mode: "spatial", modeLabel: "احتضان مكاني",
+        prevProgress: 58, currProgress: 76, momChange: "+18.0%",
+        beneficiaries: "3,400", volHours: "+197 س", funding: "520,000 ر.س", compliance: "92%",
+        note: "استكمال 4 لوائح حوكمة وتجهيز المكتب رقم 4."
+      },
+      {
+        name: "جمعية همم الشبابية", lic: "2104", mode: "idea", modeLabel: "فكرة ومبادرة",
+        prevProgress: 30, currProgress: 52, momChange: "+22.0%",
+        beneficiaries: "450", volHours: "+30 س", funding: "85,000 ر.س", compliance: "84%",
+        note: "صياغة المبادرة والتهيئة لاستكمال مسوغات التأسيس."
+      },
+      {
+        name: "جمعية التنمية الرياضية", lic: "1920", mode: "spatial", modeLabel: "احتضان مكاني",
+        prevProgress: 60, currProgress: 74, momChange: "+14.0%",
+        beneficiaries: "2,100", volHours: "+1,240 س", funding: "210,000 ر.س", compliance: "88%",
+        note: "تفعيل المتطوعين وإطلاق دوري الأحياء المجتمعي."
+      },
+      {
+        name: "الجمعية الفلكية بالمدينة", lic: "1680", mode: "spatial", modeLabel: "احتضان مكاني",
+        prevProgress: 65, currProgress: 78, momChange: "+13.0%",
+        beneficiaries: "1,800", volHours: "+95 س", funding: "140,000 ر.س", compliance: "90%",
+        note: "شراكة مع المركز الوطني لتطوير رصد الأهلة."
+      },
+      {
+        name: "جمعية إرشاد التنموية", lic: "1322", mode: "accelerator", modeLabel: "مسرعة أعمال",
+        prevProgress: 80, currProgress: 94, momChange: "+14.0%",
+        beneficiaries: "2,600", volHours: "+240 س", funding: "600,000 ر.س", compliance: "96%",
+        note: "الجاهزية التامة للتخرج والحصول على شهادة الامتثال."
+      },
+      {
+        name: "جمعية النقاء الصحية", lic: "1450", mode: "spatial", modeLabel: "احتضان مكاني",
+        prevProgress: 70, currProgress: 88, momChange: "+18.0%",
+        beneficiaries: "3,300", volHours: "+6,000 س", funding: "545,000 ر.س", compliance: "94%",
+        note: "توسع العيادات المتنقلة وتحقيق أعلى ساعات تطوعية."
+      }
+    ];
+
+    const filtered = (filterMode === 'all') 
+      ? reportData 
+      : reportData.filter(d => d.mode === filterMode);
+
+    const rowsHtml = filtered.map(d => {
+      let modeBadgeStyle = 'background: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD;';
+      if (d.mode === 'idea') modeBadgeStyle = 'background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D;';
+      if (d.mode === 'accelerator') modeBadgeStyle = 'background: #EDE9FE; color: #5B21B6; border: 1px solid #DDD6FE;';
+
+      return `
+        <tr>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: right;">
+            <div style="font-weight: 800; color: #0D6E46; font-size: 0.86rem;">${d.name}</div>
+            <span style="font-size: 0.7rem; color: #64748B;">ترخيص: ${d.lic}</span>
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center;">
+            <span style="display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; ${modeBadgeStyle}">
+              ${d.modeLabel}
+            </span>
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center; color: #64748B; font-weight: 700;">
+            ${d.prevProgress}%
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center; color: #0D6E46; font-weight: 800; font-size: 0.9rem;">
+            ${d.currProgress}%
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center;">
+            <span style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; border: 1px solid #86EFAC;">
+              ${d.momChange} ↗
+            </span>
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center;">
+            <div style="font-weight: 800; color: #1E293B; font-size: 0.82rem;">${d.beneficiaries}</div>
+            <span style="font-size: 0.68rem; color: #64748B;">${d.volHours} تطوع</span>
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: center; font-weight: 800; color: #0D6E46;">
+            ${d.compliance}
+          </td>
+          <td style="padding: 8px 10px; border: 1px solid #CBD5E1; text-align: right; font-size: 0.72rem; color: #475569; line-height: 1.5;">
+            ${d.note}
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    const content = `
+      <div class="report-paper" style="border: 2px solid #CBD5E1; padding: 26px; border-radius: 12px; background: #FFFFFF; direction: rtl; font-size: 0.85rem; line-height: 1.7;">
+        ${this.getHeaderHtml('تقرير قياس الأثر ونسبة التقدم الشهري المقارن (MoM)', ref)}
+
+        <!-- فترة التقرير والتعريف -->
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: #0D6E46;">
+              <i class="fa-solid fa-calendar-check"></i> فترة التقرير المقارنة: ${targetMonth} مقارنة بـ (${compareMonth})
+            </div>
+            <div style="font-size: 0.75rem; color: #64748B; margin-top: 2px;">
+              صادر عن وحدة الرقابة والامتثال وقياس الأثر • معتمد لرفع التقارير للمركز الوطني NCNP ومجلس الإدارة
+            </div>
+          </div>
+          <div style="background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; padding: 4px 12px; border-radius: 20px; font-weight: 800; font-size: 0.75rem;">
+            تحديث دوري معتمد ✓
+          </div>
+        </div>
+
+        <!-- KPI Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;">
+          <div style="background: #F0FDF4; border: 1.5px solid #86EFAC; padding: 10px 6px; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">+16.4% ↗</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #1E293B;">متوسط النمو الشهري (MoM)</div>
+          </div>
+          <div style="background: #EFF6FF; border: 1.5px solid #BFDBFE; padding: 10px 6px; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #1D4ED8;">14,850</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #1E293B;">إجمالي المستفيدين المباشرين</div>
+          </div>
+          <div style="background: #FEF3C7; border: 1.5px solid #FDE68A; padding: 10px 6px; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #92400E;">2.45M ر.س</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #1E293B;">التمويل والمنح المستقطبة</div>
+          </div>
+          <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; padding: 10px 6px; border-radius: 8px;">
+            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">91.2%</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #1E293B;">متوسط الامتثال والحوكمة NCNP</div>
+          </div>
+        </div>
+
+        <!-- جدول المقارنة التفصيلي -->
+        <div style="margin-bottom: 18px;">
+          <h4 style="font-size: 0.92rem; font-weight: 800; color: #0D6E46; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+            <span><i class="fa-solid fa-table-list"></i> مصفوفة أداء الجمعيات ونسبة التقدم من شهر لآخر:</span>
+            <span style="font-size: 0.72rem; color: #64748B; font-weight: normal;">عدد المنظمات المشمولة: (${filtered.length})</span>
+          </h4>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem;">
+            <thead>
+              <tr style="background: #F1F5F9; color: #1E293B;">
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: right;">الجمعية والترخيص</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">وضع الجمعية</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">إنجاز (${compareMonth.split(' ')[0]})</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">إنجاز (${targetMonth.split(' ')[0]})</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">النمو الشهري (MoM)</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">المستفيدون والأثر</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: center;">الحوكمة والامتثال</th>
+                <th style="padding: 7px 8px; border: 1px solid #CBD5E1; text-align: right; width: 22%;">ملاحظات وتوصيات الإشراف</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- خلاصات وتوصيات لجنة الإشراف -->
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.78rem; line-height: 1.6;">
+          <strong style="color: #0D6E46; display: block; margin-bottom: 4px;"><i class="fa-solid fa-clipboard-check"></i> ملخص وتوصيات لجنة الإشراف والتقييم:</strong>
+          <ul style="margin: 0; padding-right: 18px; color: #334155;">
+            <li>سجلت المنظومة نمواً شهرياً متصاعداً بنسبة <strong>+16.4%</strong> مع تفوق مسرعة الأعمال في تحقيق الاستدامة وجذب المنح.</li>
+            <li>الجمعيات في طور الفكرة حققت أعلى قفزة في التأسيس المؤسسي بمعدل تقدم بلغ <strong>+22.0%</strong>.</li>
+            <li>توصي اللجنة باستمرار ربط الجمعيات ذات الامتثال الأقل من 85% بجلسات إرشاد حوكمة مكثفة قبل نهاية الربع الحالي.</li>
+          </ul>
+        </div>
+
+        ${this.getFooterAndSignatureHtml('المشرف العام على حاضنة ومسرعة عذق', 'مشرف وحدة الرقابة وقياس الأثر')}
+      </div>
+    `;
+
+    this.showPrintPreview(content, `تقرير_الأثر_والتقدم_الشهري_${targetMonth.replace(/\s+/g, '_')}`);
+  }
+
+  // 10. توليد وطباعة أي مستند أو وثيقة عامة بصيغة رسمية معتمدة
   printGenericDocument(title, category, contentHtml) {
     const ref = `ATHQ-DOC-${Math.floor(100 + Math.random() * 900)}`;
 
