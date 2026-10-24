@@ -224,6 +224,13 @@
                 <span class="dropdown-desc">استفسارات المهتمين، الباحثين، والمتطوعين</span>
               </div>
             </a>
+            <a href="javascript:void(0)" onclick="openConsultantWizard()" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon-box" style="background: rgba(197,155,39,0.15); color: var(--c-gold-dark);"><i class="fa-solid fa-user-tie"></i></div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">انضمام خبير ومستشار معتمد</span>
+                <span class="dropdown-desc">بوابة تقديم واعتماد المستشارين والخبراء</span>
+              </div>
+            </a>
           </div>
         </div>
       </nav>
@@ -256,6 +263,9 @@
         <!-- Theme Toggle -->
         <button class="btn-icon" id="themeToggle" title="تبديل المظهر النهاري/الليلي" aria-label="تبديل المظهر">
           <i class="fa-regular fa-moon"></i>
+        </button>
+        <button class="btn btn-outline-primary btn-sm" onclick="openConsultantWizard()" id="btnHeaderJoinConsultant" title="الانضمام كخبير ومستشار معتمد في شبكة عذق" style="border-color: var(--c-primary); color: var(--c-primary); font-weight: 800;">
+          <i class="fa-solid fa-user-tie"></i> انضم كمستشار
         </button>
         <button class="btn btn-primary btn-sm" onclick="openApplicationWizard()" id="btnHeaderRegister">
           <i class="fa-solid fa-seedling"></i> قدّم طلب احتضان
@@ -2137,27 +2147,85 @@
         <div id="assoc-bookings-list"></div>
       </div>
 
-      <!-- Tab 3: الجلسات والاستشارات التخصصية -->
+      <!-- Tab 3: الجلسات والاستشارات التخصصية والعيادات الأسبوعية -->
       <div id="assoc-tab-consultations" class="portal-tab-pane">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h3 style="font-size: 1.15rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">الاستشارات التخصصية المجدولة والمنجزة للجمعية</h3>
-            <p style="font-size: 0.82rem; color: var(--c-text-muted); margin: 0;">جلسات الدعم المباشر مع نخبة مستشاري الحوكمة والاستدامة والأنظمة</p>
-          </div>
-          <button class="btn btn-primary btn-sm" onclick="openBookConsultantModal()">
-            <i class="fa-solid fa-calendar-check"></i> حجز جلسة استشارية جديدة للجمعية
-          </button>
+        
+        <!-- 1. البانر التفاعلي للأسبوع الاستشاري التخصصي الحالي -->
+        <div class="advisory-week-banner" id="assoc-thematic-week-banner">
+          <!-- Rendered dynamically via landing.js renderAssocConsultationsTab() -->
         </div>
 
-        <div id="assoc-consultations-list"></div>
+        <!-- 2. شريط الأجندة التفاعلي للأسابيع الأربعة للشهر -->
+        <div style="margin-bottom: 22px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0 0 4px 0;">
+                <i class="fa-solid fa-calendar-week text-gold"></i> خطة وأجندة الأسابيع الاستشارية التخصصية الشهرية
+              </h4>
+              <p style="font-size: 0.8rem; color: var(--c-text-muted); margin: 0;">
+                تخصص الحاضنة كل أسبوع لمجال محدد مع نخبة من الخبراء، اضغط على أي أسبوع لاستعراض عياداته ومستشاريه:
+              </p>
+            </div>
+            <span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-weight: 800; font-size: 0.78rem;">
+              <i class="fa-solid fa-shield-halved"></i> عيادات تخصصية مجانية للجمعيات
+            </span>
+          </div>
 
-        <!-- Actionable Strategic Recommendations Box -->
+          <div class="thematic-weeks-nav" id="assoc-thematic-weeks-nav">
+            <!-- Rendered dynamically via landing.js -->
+          </div>
+        </div>
+
+        <!-- 3. دليل المستشارين والعيادات المتاحة للحجز -->
+        <div style="margin-bottom: 26px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h4 style="font-size: 1.1rem; color: var(--c-primary); font-weight: 800; margin-bottom: 4px;">
+                <i class="fa-solid fa-user-doctor text-gold"></i> دليل المستشارين والعيادات الاستشارية المتاحة للجمعيات
+              </h4>
+              <p style="font-size: 0.8rem; color: var(--c-text-muted); margin: 0;">
+                يمكن للجمعية حجز جلسة مباشرة مع المستشار في مواعيد تفرغه المحددة (حضوري بمقر عذق أو عن بُعد):
+              </p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openBookConsultantModal()">
+              <i class="fa-solid fa-calendar-plus"></i> + حجز جلسة استشارية جديدة
+            </button>
+          </div>
+
+          <!-- Domain filters -->
+          <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;" id="assoc-cons-filter-chips">
+            <button class="evidence-filter-btn active" onclick="filterAssocConsultants(this, 'all')">جميع المستشارين</button>
+            <button class="evidence-filter-btn" onclick="filterAssocConsultants(this, 'current_week')">⭐ مستشارو الأسبوع الحالي</button>
+            <button class="evidence-filter-btn" onclick="filterAssocConsultants(this, 'حوكمة')">الحوكمة والأنظمة</button>
+            <button class="evidence-filter-btn" onclick="filterAssocConsultants(this, 'استدامة')">الاستدامة والمالية</button>
+            <button class="evidence-filter-btn" onclick="filterAssocConsultants(this, 'تقنية')">التحول الرقمي</button>
+            <button class="evidence-filter-btn" onclick="filterAssocConsultants(this, 'تطوع')">التطوع والبرامج</button>
+          </div>
+
+          <div class="consultant-directory-grid" id="assoc-consultants-directory-grid">
+            <!-- Rendered dynamically via landing.js -->
+          </div>
+        </div>
+
+        <!-- 4. سجل استشارات الجمعية السابقة والقادمة -->
+        <div style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--c-primary); margin: 0;">
+              <i class="fa-solid fa-clock-rotate-left"></i> سجل جلسات الجمعية المحجوزة والتوصيات المنجزة
+            </h4>
+            <span class="badge" id="assoc-consultations-count-badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-weight: 800;">2 جلسة</span>
+          </div>
+
+          <div id="assoc-consultations-list"></div>
+        </div>
+
+        <!-- 5. صندوق التوصيات والمخرجات الاستشارية المعتمدة -->
         <div class="assoc-rec-card">
           <div class="assoc-rec-header">
             <h4><i class="fa-solid fa-lightbulb"></i> صندوق التوصيات والمخرجات الاستشارية المعتمدة</h4>
             <span class="badge" style="background: var(--c-gold-subtle); color: var(--c-gold-dark); font-weight: 800;">تحديث أسبوعي</span>
           </div>
-          <ul class="assoc-rec-list">
+          <ul class="assoc-rec-list" id="assoc-rec-list-container">
             <li class="assoc-rec-item">
               <i class="fa-solid fa-circle-check"></i>
               <div><strong>الحوكمة واللوائح (د. سليمان الحربي):</strong> إكمال رفع سياسة الإبلاغ عن المخالفات وتحديث مصفوفة الصلاحيات المالية خلال أسبوع للتأهيل للنطاق الأخضر الكامل (100%).</div>
@@ -3185,12 +3253,14 @@
               <i class="fa-solid fa-user-tie"></i> مسار الاستشارات التخصصية والخبراء المعتمدين
             </h3>
             <p style="font-size: 0.8rem; color: var(--c-text-muted);">
-              متابعة الجلسات الاستشارية التخصصية في الحوكمة، الاستدامة المالية، والامتثال للجمعيات المحتضنة
+              متابعة الجلسات الاستشارية التخصصية، مراجعة واعتماد طلبات المستشارين الجدد، وجدولة الأسابيع التخصصية
             </p>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="openAdminNewConsultModal()">
-            <i class="fa-solid fa-calendar-plus"></i> جدولة جلسة استشارية جديدة
-          </button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-primary btn-sm" onclick="openAdminNewConsultModal()">
+              <i class="fa-solid fa-calendar-plus"></i> جدولة جلسة استشارية جديدة
+            </button>
+          </div>
         </div>
 
         <!-- 4 Consultations Metric KPI Cards -->
@@ -3208,57 +3278,139 @@
             <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">نسبة رضا الجمعيات المستفيدة</div>
           </div>
           <div style="background: var(--c-surface); border: 1.5px solid #E9D5FF; padding: 12px 10px; border-radius: 10px;">
-            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">4 خبراء</div>
+            <div style="font-size: 1.5rem; font-weight: 900; color: #6B21A8;">6 خبراء</div>
             <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-primary);">مستشارين معتمدين بالحاضنة</div>
           </div>
         </div>
 
-        <!-- Filter Toolbar -->
-        <div class="admin-filter-bar">
-          <div class="admin-search-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="adminConsSearch" class="admin-search-input" placeholder="ابحث باسم المستشار أو الجمعية أو المجال..." oninput="renderAdminConsultationsTable()">
+        <!-- Sub-view Navigation Bar -->
+        <div style="display: flex; gap: 8px; margin-bottom: 16px; background: var(--c-surface); padding: 5px; border-radius: 10px; border: 1px solid var(--c-border); width: fit-content; flex-wrap: wrap;">
+          <button type="button" class="btn btn-sm btn-primary" id="btnAdminConsSessions" onclick="switchAdminConsSubView('sessions')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px;">
+            <i class="fa-solid fa-calendar-check"></i> الجلسات الاستشارية المجدولة
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminConsApplicants" onclick="switchAdminConsSubView('applicants')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: #D97706; color: #D97706;">
+            <i class="fa-solid fa-user-plus"></i> طلبات انضمام المستشارين الجدد (<span id="admin-cons-apps-badge">2</span>)
+          </button>
+          <button type="button" class="btn btn-sm btn-outline" id="btnAdminConsThematicWeeks" onclick="switchAdminConsSubView('weeks')" style="font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: var(--c-primary); color: var(--c-primary);">
+            <i class="fa-solid fa-calendar-week"></i> خطة وجدولة الأسابيع التخصصية
+          </button>
+        </div>
+
+        <!-- Sub-view 1: Consultations Sessions Table -->
+        <div id="admin-subview-cons-sessions">
+          <!-- Filter Toolbar -->
+          <div class="admin-filter-bar">
+            <div class="admin-search-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="adminConsSearch" class="admin-search-input" placeholder="ابحث باسم المستشار أو الجمعية أو المجال..." oninput="renderAdminConsultationsTable()">
+            </div>
+
+            <div style="min-width: 220px;">
+              <select id="adminConsModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
+                <option value="all">جميع أوضاع الجمعيات</option>
+                <option value="idea">💡 احتضان فكرة ومبادرة</option>
+                <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+                <option value="accelerator">🚀 مسرعة أعمال ونمو الأثر</option>
+              </select>
+            </div>
+
+            <div style="min-width: 220px;">
+              <select id="adminConsFieldFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
+                <option value="all">جميع مجالات الاستشارة</option>
+                <option value="حوكمة">حوكمة وبناء لوائح</option>
+                <option value="استدامة">استدامة مالية وتنمية موارد</option>
+                <option value="استراتيجي">تخطيط استراتيجي</option>
+                <option value="أثر">قياس أثر وتحول مؤسسي</option>
+              </select>
+            </div>
           </div>
 
-          <div style="min-width: 220px;">
-            <select id="adminConsModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
-              <option value="all">جميع أوضاع الجمعيات</option>
-              <option value="idea">💡 احتضان فكرة ومبادرة</option>
-              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
-              <option value="accelerator">🚀 مسرعة أعمال ونمو الأثر</option>
-            </select>
-          </div>
-
-          <div style="min-width: 220px;">
-            <select id="adminConsFieldFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="renderAdminConsultationsTable()">
-              <option value="all">جميع مجالات الاستشارة</option>
-              <option value="حوكمة">حوكمة وبناء لوائح</option>
-              <option value="استدامة">استدامة مالية وتنمية موارد</option>
-              <option value="استراتيجي">تخطيط استراتيجي</option>
-              <option value="أثر">قياس أثر وتحول مؤسسي</option>
-            </select>
+          <div class="admin-table-card">
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="min-width: 170px;">المستشار المعتمد</th>
+                    <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
+                    <th style="min-width: 180px;">مجال الاستشارة</th>
+                    <th style="min-width: 130px;">الموعد المحدد</th>
+                    <th style="text-align: center; min-width: 100px;">حالة الجلسة</th>
+                    <th style="text-align: center; min-width: 130px;">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-consultations-tbody">
+                  <!-- Dynamically rendered via landing.js -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-        <div class="admin-table-card">
-          <div style="overflow-x: auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th style="min-width: 170px;">المستشار المعتمد</th>
-                  <th style="min-width: 220px;">الجمعية المستفيدة ووضعها</th>
-                  <th style="min-width: 180px;">مجال الاستشارة</th>
-                  <th style="min-width: 130px;">الموعد المحدد</th>
-                  <th style="text-align: center; min-width: 100px;">حالة الجلسة</th>
-                  <th style="text-align: center; min-width: 130px;">الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="admin-consultations-tbody">
-                <!-- Dynamically rendered via landing.js -->
-              </tbody>
-            </table>
+        <!-- Sub-view 2: Consultant Applications Table (طلبات انضمام المستشارين الجدد) -->
+        <div id="admin-subview-cons-applicants" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 16px 20px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; background: #FFFBEB;">
+              <div>
+                <h4 style="font-size: 1.05rem; font-weight: 900; color: #92400E; margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-user-check"></i> صندوق مراجعة واعتماد طلبات المستشارين والخبراء الجدد
+                </h4>
+                <p style="font-size: 0.8rem; color: #B45309; margin: 0;">
+                  تدقيق السير الذاتية والمؤهلات المهنية واعتماد تفعيل المستشارين وإضافتهم لشبكة عذق التخصصية
+                </p>
+              </div>
+              <span class="badge" style="background: #FEF3C7; color: #92400E; font-weight: 800; padding: 6px 14px; border-radius: 20px;" id="admin-cons-apps-pill">
+                2 طلبات جديدة بانتظار الاعتماد
+              </span>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr style="background: var(--c-bg); border-bottom: 1px solid var(--c-border);">
+                    <th style="min-width: 180px;">المستشار المتقدم</th>
+                    <th style="min-width: 180px;">المسمى والمؤهل</th>
+                    <th style="min-width: 220px;">مجالات التخصص والخبرة</th>
+                    <th>سنوات الخبرة</th>
+                    <th>ساعات التفرغ</th>
+                    <th>نمط الجلسات</th>
+                    <th>تاريخ التقديم</th>
+                    <th>الحالة</th>
+                    <th style="text-align: center; min-width: 160px;">إجراءات الاعتماد</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-cons-applicants-tbody">
+                  <!-- Rendered dynamically via landing.js renderAdminConsultantApplicantsTable() -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+
+        <!-- Sub-view 3: Thematic Weeks Scheduler Manager (خطة الأسابيع التخصصية) -->
+        <div id="admin-subview-cons-weeks" style="display: none;">
+          <div class="admin-table-card">
+            <div style="padding: 18px 22px; border-bottom: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #F8FAFC;">
+              <div>
+                <h4 style="font-size: 1.1rem; font-weight: 900; color: var(--c-primary); margin: 0 0 4px 0;">
+                  <i class="fa-solid fa-calendar-week text-gold"></i> جدولة وإدارة الأسابيع الاستشارية التخصصية الشهرية
+                </h4>
+                <p style="font-size: 0.8rem; color: var(--c-text-muted); margin: 0;">
+                  تخصيص مجالات الأسابيع وتعيين المستشارين المنسقين وتفعيل الأسبوع النشط ليظهر فورياً لجميع الجمعيات
+                </p>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; padding: 6px 12px; border-radius: 20px;">
+                  الأسبوع النشط: أسبوع الحوكمة NCNP
+                </span>
+              </div>
+            </div>
+
+            <div style="padding: 20px;" id="admin-thematic-weeks-manager-container">
+              <!-- Rendered dynamically via landing.js renderAdminThematicWeeksManager() -->
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
 
       <!-- =====================================================================
@@ -5395,6 +5547,61 @@
           متوسط زمن الاستجابة والرد: أقل من ساعتين عمل
         </div>
         <button class="btn btn-outline btn-sm" onclick="closeContactInquiriesModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: استعراض تفاصيل وسيرة المستشار المتقدم للاعتماد (إدارة) -->
+  <div class="modal-overlay" id="modalApplicantCvPreview" onclick="if(event.target === this) closeApplicantCvPreviewModal()">
+    <div class="wizard-modal-box" style="max-width: 720px;">
+      <div class="wizard-header" style="background: linear-gradient(135deg, #78350F 0%, #B45309 100%);">
+        <button class="modal-close-btn" onclick="closeApplicantCvPreviewModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <span class="badge" style="background: rgba(255,255,255,0.25); color: #FFFFFF; font-size: 0.75rem;">ملف مستشار متقدم</span>
+          <span class="badge" style="background: #FEF3C7; color: #92400E; font-weight: 800;" id="app-cv-status-pill">قيد المراجعة</span>
+        </div>
+        <h3 id="app-cv-name" style="font-size: 1.3rem; font-weight: 900; color: #FFFFFF; margin-bottom: 2px;">اسم المستشار</h3>
+        <p id="app-cv-title" style="font-size: 0.82rem; color: rgba(255,255,255,0.85); margin: 0;">المسمى المهني والتخصص</p>
+      </div>
+
+      <div class="wizard-body" style="padding: 24px; max-height: 70vh; overflow-y: auto;">
+        <!-- Meta Details Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #F8FAFC; border: 1px solid var(--c-border); padding: 16px; border-radius: 12px; margin-bottom: 18px;">
+          <div><label class="form-label" style="font-size: 0.75rem;">رقم الجوال:</label><strong id="app-cv-phone" style="color: var(--c-primary);">05XXXXXXXX</strong></div>
+          <div><label class="form-label" style="font-size: 0.75rem;">البريد الإلكتروني:</label><strong id="app-cv-email" style="color: var(--c-primary);">advisor@example.com</strong></div>
+          <div><label class="form-label" style="font-size: 0.75rem;">سنوات الخبرة:</label><span id="app-cv-exp" style="font-weight: 700;">أكثر من 10 سنوات</span></div>
+          <div><label class="form-label" style="font-size: 0.75rem;">ساعات التفرغ ونمط الجلسات:</label><span id="app-cv-mode" style="font-weight: 700;">4 ساعات أسبوعياً (حضوري وافتراضي)</span></div>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label class="form-label" style="font-weight: 800; color: var(--c-primary);">مجالات التخصص الاستشاري المعتمدة:</label>
+          <div id="app-cv-domains" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <label class="form-label" style="font-weight: 800; color: var(--c-primary);">ملخص السيرة الذاتية وأبرز المؤهلات والشهادات:</label>
+          <div id="app-cv-bio" style="background: var(--c-bg); border-right: 3px solid var(--c-gold); padding: 12px 16px; border-radius: 8px; font-size: 0.85rem; line-height: 1.7; color: var(--c-text);"></div>
+        </div>
+
+        <div style="background: rgba(14,110,65,0.06); border: 1.5px dashed var(--c-primary-light); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem;">
+            <i class="fa-solid fa-file-pdf" style="font-size: 1.3rem; color: #DC2626;"></i>
+            <span>ملف السيرة الذاتية الرسمي المرفق (CV_Certified.pdf)</span>
+          </div>
+          <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800;">جاهز للتدقيق ✓</span>
+        </div>
+      </div>
+
+      <div class="wizard-footer" style="padding: 14px 24px; background: var(--c-bg); border-top: 1px solid var(--c-border); display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn btn-outline btn-sm" onclick="closeApplicantCvPreviewModal()">إلغاء</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-outline btn-sm" id="btnAppReject" onclick="rejectConsultantApplicantAction()" style="border-color: #EF4444; color: #DC2626;">
+            <i class="fa-solid fa-xmark"></i> اعتذار
+          </button>
+          <button class="btn btn-primary btn-sm" id="btnAppApprove" onclick="approveConsultantApplicantAction()" style="font-weight: 800; background: #0D6E46;">
+            <i class="fa-solid fa-check-double"></i> اعتماد وتفعيل المستشار فورياً ✓
+          </button>
+        </div>
       </div>
     </div>
   </div>

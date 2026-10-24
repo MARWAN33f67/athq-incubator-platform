@@ -323,6 +323,164 @@ const DEFAULT_SEED_DATA = {
       rating: "5.0 ★",
       hours: 30,
       slots: ["الإثنين: 06:00 م - 08:00 م (افتراضي)", "الأربعاء: 05:00 م - 07:00 م (حضوري)"]
+    },
+    {
+      id: "CONS-05",
+      name: "م. فهد الأحمدي",
+      specialty: "التحول الرقمي والبنية المؤسسية السحابية",
+      title: "مستشار الأنظمة والتحول الرقمي",
+      avatar: "💻",
+      experience: "13 سنة خبرة",
+      rating: "4.9 ★",
+      hours: 24,
+      slots: ["الثلاثاء: 04:00 م - 06:00 م (حضوري)", "الخميس: 07:00 م - 09:00 م (افتراضي)"]
+    },
+    {
+      id: "CONS-06",
+      name: "أ. محمد السناني",
+      specialty: "إدارة التطوع وتصميم المبادرات ذات الأثر",
+      title: "خبير استقطاب وتفعيل التطوع التخصصي",
+      avatar: "🤝",
+      experience: "10 سنوات خبرة",
+      rating: "4.8 ★",
+      hours: 32,
+      slots: ["الأحد: 06:00 م - 08:00 م (حضوري)", "الأربعاء: 04:00 م - 06:00 م (افتراضي)"]
+    }
+  ],
+  thematicWeeks: [
+    {
+      id: "week-1",
+      weekNumber: 1,
+      title: "أسبوع الحوكمة والامتثال المعياري NCNP",
+      domain: "حوكمة",
+      icon: "fa-scale-balanced",
+      color: "#0D6E46",
+      bgGradient: "linear-gradient(135deg, rgba(13,110,70,0.08) 0%, rgba(217,119,6,0.05) 100%)",
+      dates: "1 - 7 من كل شهر",
+      datesArabic: "الأسبوع الأول من الشهر",
+      status: "active",
+      statusLabel: "الأسبوع النشط حالياً ✓",
+      headline: "العيادة الشاملة لمطابقة لوائح وسياسات المركز الوطني NCNP وتحديث مصفوفة الصلاحيات المالية والإدارية",
+      targetAudience: "الجمعيات في مراحل التهيئة وتحديث اللوائح ومجالس الإدارة",
+      totalSlots: 16,
+      bookedSlots: 11,
+      remainingSlots: 5,
+      featuredConsultants: ["د. سليمان الحربي", "أ. فهد الجهني"],
+      highlights: [
+        "مراجعة وتحديث اللوائح الأساسية والداخلية الـ 7",
+        "إعداد مصفوفة الصلاحيات المالية والإدارية المعتمدة",
+        "فحص مؤشرات السلامة المالية والإفصاح والشفافية",
+        "معالجة متطلبات النطاق الأخضر للامتثال المؤسسي"
+      ]
+    },
+    {
+      id: "week-2",
+      weekNumber: 2,
+      title: "أسبوع الاستدامة المالية وتنمية الأوقاف والموارد",
+      domain: "استدامة",
+      icon: "fa-coins",
+      color: "#D97706",
+      bgGradient: "linear-gradient(135deg, rgba(217,119,6,0.08) 0%, rgba(13,110,70,0.05) 100%)",
+      dates: "8 - 14 من كل شهر",
+      datesArabic: "الأسبوع الثاني من الشهر",
+      status: "upcoming",
+      statusLabel: "مجدول وقادم",
+      headline: "تصميم النماذج المالية المستدامة، واستقطاب المنح، وتأسيس المحافظ الوقفية للجمعيات غير الربحية",
+      targetAudience: "المدراء الماليون ومسؤولو تنمية الموارد واللجان الاستثمارية",
+      totalSlots: 14,
+      bookedSlots: 8,
+      remainingSlots: 6,
+      featuredConsultants: ["أ. ماجد العوفي", "د. نورة البلوي"],
+      highlights: [
+        "بناء حقائب المشاريع الاستثمارية والوقفية القابلة للتمويل",
+        "إعداد موازنات البرامج وحساب التكلفة التشغيلية العادلة",
+        "التشبيك مع المؤسسات المانحة والأوقاف بالمدينة",
+        "تفعيل مصادر الدخل الذاتي والمتاجر الإلكترونية للجمعيات"
+      ]
+    },
+    {
+      id: "week-3",
+      weekNumber: 3,
+      title: "أسبوع التحول الرقمي وتأسيس الأنظمة السحابية",
+      domain: "تقنية",
+      icon: "fa-laptop-code",
+      color: "#2563EB",
+      bgGradient: "linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(14,110,65,0.05) 100%)",
+      dates: "15 - 21 من كل شهر",
+      datesArabic: "الأسبوع الثالث من الشهر",
+      status: "upcoming",
+      statusLabel: "مجدول وقادم",
+      headline: "ربط الأنظمة المحاسبية السحابية، أتمتة إدارة العضويات، ومطابقة ضوابط الأمن السيبراني للجمعيات",
+      targetAudience: "مسؤولو التقنية والتحول الرقمي وإدارة البيانات",
+      totalSlots: 12,
+      bookedSlots: 5,
+      remainingSlots: 7,
+      featuredConsultants: ["م. فهد الأحمدي"],
+      highlights: [
+        "اعتماد نظام المحاسبة السحابية (ERP) غير الربحي المعتمد",
+        "بوابة إدارة المستفيدين والمتبرعين وأتمتة التقارير",
+        "الامتثال لضوابط الهيئة الوطنية للأمن السيبراني (NCA)",
+        "تأهيل الكوادر لاستخدام أدوات العمل السحابية المشتركة"
+      ]
+    },
+    {
+      id: "week-4",
+      weekNumber: 4,
+      title: "أسبوع إدارة المتطوعين وتصميم البرامج ذات الأثر",
+      domain: "تطوع",
+      icon: "fa-hand-holding-heart",
+      color: "#7C3AED",
+      bgGradient: "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(217,119,6,0.05) 100%)",
+      dates: "22 - 28 من كل شهر",
+      datesArabic: "الأسبوع الرابع من الشهر",
+      status: "upcoming",
+      statusLabel: "مجدول وقادم",
+      headline: "تصميم الفرص التطوعية الاحترافية، حساب القيمة الاقتصادية، وهندسة المبادرات المجتمعية الملموسة",
+      targetAudience: "مسؤولو إدارة التطوع والبرامج والأنشطة المجتمعية",
+      totalSlots: 16,
+      bookedSlots: 6,
+      remainingSlots: 10,
+      featuredConsultants: ["أ. محمد السناني", "د. نورة البلوي"],
+      highlights: [
+        "تفعيل حساب الجمعية بالمنصة الوطنية للعمل التطوعي (NVG)",
+        "تصميم الفرص التخصصية للمتطوعين المحترفين",
+        "قياس العائد الاجتماعي على الاستثمار (SROI) للمبادرات",
+        "توثيق ساعات التطوع وإصدار السجلات المعتمدة للجمعية"
+      ]
+    }
+  ],
+  consultantApplications: [
+    {
+      id: "CAPP-101",
+      name: "د. طارق بن خالد الزهراني",
+      title: "مستشار الحوكمة والرقابة الداخلية",
+      phone: "0504123890",
+      email: "t.zahrani@governance.sa",
+      experience: "أكثر من 15 سنة (خبير أول)",
+      specialty: "حوكمة وبناء لوائح • إدارة المخاطر المؤسسية • الرقابة الداخلية NCNP",
+      volunteerType: "تطوع استشاري تخصصي معتمد",
+      hoursPerWeek: "4 ساعات أسبوعياً",
+      sessionMode: "حضوري بمقر عذق وعن بُعد",
+      bio: "دكتوراه في إدارة المنظمات غير الربحية، مستشار معتمد في الحوكمة وتطوير اللوائح المؤسسية، أشرف على حوكمة وتأهيل أكثر من 30 جمعية ومؤسسة أهلية بالمملكة وفق معايير المركز الوطني NCNP، حاصل على شهادة CGO وCRMA.",
+      status: "قيد المراجعة والاعتماد",
+      appliedDate: "2026-10-23",
+      cvFile: "Dr_Tariq_Zahrani_CV.pdf"
+    },
+    {
+      id: "CAPP-102",
+      name: "أ. ريم بنت عبدالعزيز القحطاني",
+      title: "خبيرة الاستدامة المالية وتنمية الأوقاف",
+      phone: "0556781290",
+      email: "reem.qahtani@endowments.org",
+      experience: "10 - 15 سنة (خبير)",
+      specialty: "الاستدامة المالية • تأسيس الصناديق والمحافظ الوقفية • استقطاب المنح",
+      volunteerType: "استشارات تطوعية مهنية",
+      hoursPerWeek: "3 ساعات أسبوعياً",
+      sessionMode: "عن بُعد (جلسات افتراضية تفاعلية)",
+      bio: "ماجستير تمويل وإدارة استثمار، مستشارة استدامة مالية غير ربحية، خبرة 11 عاماً في تصميم المنتجات الاستثمارية الوقفية وصناديق الاستدامة للجمعيات الخيرية، مدربة معتمدة في كتابة مقترحات المنح التمويلية.",
+      status: "قيد المراجعة والاعتماد",
+      appliedDate: "2026-10-24",
+      cvFile: "Reem_Qahtani_Consultant_CV.pdf"
     }
   ],
   announcementsAndEvents: [
@@ -594,6 +752,15 @@ function loadPlatformState() {
         }
         if (!parsed.contactMessages || parsed.contactMessages.length === 0) {
           parsed.contactMessages = DEFAULT_SEED_DATA.contactMessages;
+        }
+        if (!parsed.thematicWeeks || parsed.thematicWeeks.length === 0) {
+          parsed.thematicWeeks = DEFAULT_SEED_DATA.thematicWeeks;
+        }
+        if (!parsed.consultantApplications || parsed.consultantApplications.length === 0) {
+          parsed.consultantApplications = DEFAULT_SEED_DATA.consultantApplications;
+        }
+        if (!parsed.consultants || parsed.consultants.length < DEFAULT_SEED_DATA.consultants.length) {
+          parsed.consultants = DEFAULT_SEED_DATA.consultants;
         }
         parsed.applications.forEach(app => {
           if (!app.roadmap100Days) {
@@ -1595,8 +1762,8 @@ window.submitConsultantWizard = function() {
   const name = document.getElementById('cons-name')?.value.trim();
   const title = document.getElementById('cons-title')?.value.trim();
   const phone = document.getElementById('cons-phone')?.value.trim();
-  const hours = document.getElementById('cons-hours-select')?.value;
-  const mode = document.getElementById('cons-mode-select')?.value;
+  const hours = document.getElementById('cons-hours-select')?.value || '4 ساعات أسبوعياً';
+  const mode = document.getElementById('cons-mode-select')?.value || 'حضوري وافتراضي';
   const volunteerType = document.getElementById('cons-selected-volunteer-type')?.value || 'تطوع استشاري تخصصي';
   const bio = document.getElementById('cons-bio')?.value.trim() || 'مستشار حوكمة وتطوير مؤسسي معتمد';
 
@@ -1609,25 +1776,28 @@ window.submitConsultantWizard = function() {
   document.querySelectorAll('#cons-domains-chips .chip-item.active').forEach(c => activeChips.push(c.textContent.trim()));
   const specialty = activeChips.length > 0 ? activeChips.join(' • ') : 'استشارات عامة في الحوكمة والتطوير';
 
-  const newConsId = `CONS-0${(APP_STATE.consultants || []).length + 1}`;
-  const newCons = {
-    id: newConsId,
+  const newAppId = `CAPP-${Math.floor(100 + Math.random() * 900)}`;
+  const emailVal = document.getElementById('cons-email')?.value?.trim() || `${name.replace(/\s+/g, '.').toLowerCase()}@consultant.sa`;
+  
+  const newApplication = {
+    id: newAppId,
     name,
     title,
-    specialty,
-    avatar: '👨‍💼',
+    phone,
+    email: emailVal,
     experience: selectedConsXpText,
-    rating: '5.0 ★',
-    hours: 0,
-    volHours: 0,
+    specialty,
     volunteerType: volunteerType,
-    bio: bio,
-    slots: [`متاح: ${hours} (${mode})`]
+    hoursPerWeek: `${hours}`,
+    sessionMode: mode === 'حضوري' ? 'حضوري بمقر عذق' : (mode === 'افتراضي' ? 'عن بُعد (افتراضي)' : 'حضوري وافتراضي'),
+    bio,
+    status: 'قيد المراجعة والاعتماد',
+    appliedDate: new Date().toISOString().split('T')[0],
+    cvFile: `${name.replace(/\s+/g, '_')}_CV.pdf`
   };
 
-  if (!APP_STATE.consultants) APP_STATE.consultants = [];
-  APP_STATE.consultants.push(newCons);
-  currentActiveConsultantId = newConsId;
+  if (!APP_STATE.consultantApplications) APP_STATE.consultantApplications = [];
+  APP_STATE.consultantApplications.unshift(newApplication);
   savePlatformState();
 
   // Show VIP Welcome Card
@@ -1639,16 +1809,24 @@ window.submitConsultantWizard = function() {
   if (form) form.style.display = 'none';
   if (welcome) welcome.style.display = 'block';
   if (footer) footer.style.display = 'none';
-  if (regName) regName.textContent = `${name} (${title}) - ${volunteerType}`;
+  if (regName) {
+    regName.innerHTML = `
+      <strong>${name} (${title})</strong><br>
+      <span style="font-size: 0.8rem; color: #166534;">
+        <i class="fa-solid fa-clock-rotate-left"></i> تم رفع طلب انضمامك كخبير بنجاح برقم مرجعي: <strong>${newAppId}</strong>
+      </span><br>
+      <small style="color: var(--c-text-muted); font-size: 0.76rem;">الطلب قيد المراجعة والاعتماد الفوري من إدارة الحاضنة وتفعيل عياداتك التخصصية للجمعيات.</small>
+    `;
+  }
 
-  showToast(`أهلاً بك ${name}! تم تسجيل واعتماد حساب المستشار بنجاح.`);
-  renderConsultantDashboard();
+  showToast(`أهلاً بك ${name}! تم إرسال طلب الانضمام كخبير ومستشار معتمد بالحاضنة بنجاح.`);
+  if (typeof renderAdminConsultantApplicantsTable === 'function') renderAdminConsultantApplicantsTable();
 };
 
 // ========================== Dedicated Consultant Appointment Booking UI ==========================
 let selectedBookingConsId = 'CONS-01';
 
-window.openBookConsultantModal = function(preselectedConsId) {
+window.openBookConsultantModal = function(preselectedConsId, preselectedTopic) {
   // STRICT CONSTRAINT: Consultant booking is exclusively available within the Association Portal
   if (currentActiveRole !== 'association') {
     switchRole('association');
@@ -1668,6 +1846,12 @@ window.openBookConsultantModal = function(preselectedConsId) {
   const phoneInput = document.getElementById('booking-phone');
   if (assocInput && currentAssoc) assocInput.value = currentAssoc.associationName;
   if (phoneInput && currentAssoc) phoneInput.value = currentAssoc.repPhone;
+
+  // If topic provided, pre-select it
+  if (preselectedTopic) {
+    const inputTopic = document.getElementById('booking-selected-topic');
+    if (inputTopic) inputTopic.value = preselectedTopic;
+  }
 
   // Render consultants selector cards
   renderBookingConsultantsList(preselectedConsId || selectedBookingConsId);
@@ -2063,7 +2247,7 @@ function renderAssociationDashboard() {
   // Render Sub-Views
   renderAssocEvidencesList(currentAssoc);
   renderAssocBookingsList();
-  renderAssocConsultationsList();
+  renderAssocConsultationsTab();
   renderAssoc100DaysRoadmap();
   renderAssocServicesCatalog();
   renderAssocEvents();
@@ -4059,11 +4243,516 @@ window.cancelAssocBooking = function(idx) {
   }
 };
 
+// ========================== Association Thematic Advisory Weeks & Directory ==========================
+let selectedAssocThematicWeekId = 'week-1';
+let selectedAssocConsDomain = 'all';
+
+window.renderAssocConsultationsTab = function() {
+  renderAssocThematicWeekBanner();
+  renderAssocThematicWeeksNav();
+  renderAssocConsultantsDirectory();
+  renderAssocConsultationsList();
+};
+
+window.renderAssocThematicWeekBanner = function() {
+  const banner = document.getElementById('assoc-thematic-week-banner');
+  if (!banner) return;
+
+  const weeks = APP_STATE.thematicWeeks || DEFAULT_SEED_DATA.thematicWeeks || [];
+  const week = weeks.find(w => w.id === selectedAssocThematicWeekId) || weeks.find(w => w.status === 'active') || weeks[0];
+  if (!week) return;
+
+  banner.innerHTML = `
+    <div style="background: ${week.bgGradient || 'linear-gradient(135deg, rgba(13,110,70,0.08) 0%, rgba(217,119,6,0.05) 100%)'}; border: 1.5px solid ${week.color}33; border-radius: 14px; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <div style="display: flex; gap: 16px; align-items: flex-start; max-width: 760px;">
+        <div style="width: 56px; height: 56px; border-radius: 14px; background: ${week.color}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; box-shadow: 0 4px 14px ${week.color}40;">
+          <i class="fa-solid ${week.icon}"></i>
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+            <span class="badge" style="background: ${week.status === 'active' ? '#DCFCE7' : '#FEF3C7'}; color: ${week.status === 'active' ? '#166534' : '#92400E'}; font-weight: 800; font-size: 0.76rem; border: 1px solid ${week.status === 'active' ? '#86EFAC' : '#FCD34D'};">
+              <i class="fa-solid fa-bolt"></i> ${week.statusLabel || (week.status === 'active' ? 'الأسبوع الاستشاري النشط حالياً' : 'أسبوع مجدول قادم')}
+            </span>
+            <span style="font-size: 0.82rem; color: var(--c-text-muted); font-weight: 700;">
+              <i class="fa-regular fa-calendar"></i> ${week.datesArabic || week.dates} (${week.dates})
+            </span>
+            <span class="badge" style="background: rgba(14,110,65,0.1); color: var(--c-primary); font-size: 0.74rem; font-weight: 800;">
+              المقاعد المتبقية: <strong>${week.remainingSlots}</strong> من ${week.totalSlots} عيادة استشارية
+            </span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 900; color: var(--c-primary); margin: 0 0 6px 0;">
+            ${week.title}
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--c-text); line-height: 1.6; margin: 0 0 10px 0;">
+            ${week.headline}
+          </p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            ${(week.highlights || []).map(h => `
+              <span style="background: #FFFFFF; border: 1px solid var(--c-border); padding: 4px 10px; border-radius: 20px; font-size: 0.74rem; color: var(--c-text); font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-circle-check text-gold" style="font-size: 0.7rem;"></i> ${h}
+              </span>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end; justify-content: center;">
+        <button class="btn btn-primary" onclick="openBookConsultantModal(null, '${week.title}')" style="font-weight: 800; padding: 10px 22px; border-radius: 10px; box-shadow: var(--shadow-sm); font-size: 0.9rem;">
+          <i class="fa-solid fa-calendar-check"></i> احجز عيادتك في ${week.title.split(' ')[1] || 'هذا المجال'}
+        </button>
+        <small style="font-size: 0.72rem; color: var(--c-text-muted);">
+          <i class="fa-solid fa-video text-gold"></i> جلسات حضورية بمقر عذق أو اتصال مرئي مباشر
+        </small>
+      </div>
+    </div>
+  `;
+};
+
+window.renderAssocThematicWeeksNav = function() {
+  const container = document.getElementById('assoc-thematic-weeks-nav');
+  if (!container) return;
+
+  const weeks = APP_STATE.thematicWeeks || DEFAULT_SEED_DATA.thematicWeeks || [];
+  container.innerHTML = weeks.map(w => {
+    const isSelected = w.id === selectedAssocThematicWeekId;
+    return `
+      <div class="thematic-week-card ${isSelected ? 'active' : ''}" onclick="selectThematicWeekAssoc('${w.id}')" style="border: 2px solid ${isSelected ? w.color : 'var(--c-border)'}; border-radius: 12px; padding: 14px 16px; background: ${isSelected ? '#FFFFFF' : 'var(--c-surface)'}; cursor: pointer; transition: all 0.25s ease; position: relative; box-shadow: ${isSelected ? '0 6px 18px rgba(0,0,0,0.08)' : 'none'};">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+          <span class="badge" style="background: ${w.status === 'active' ? '#DCFCE7' : '#F1F5F9'}; color: ${w.status === 'active' ? '#166534' : '#64748B'}; font-weight: 800; font-size: 0.7rem;">
+            الأسبوع ${w.weekNumber} ${w.status === 'active' ? '• نشط الآن ✓' : ''}
+          </span>
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: ${w.color}18; color: ${w.color}; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+            <i class="fa-solid ${w.icon}"></i>
+          </div>
+        </div>
+        <div style="font-weight: 800; font-size: 0.92rem; color: var(--c-primary); margin-bottom: 4px; line-height: 1.4;">
+          ${w.title}
+        </div>
+        <div style="font-size: 0.75rem; color: var(--c-text-muted); margin-bottom: 8px;">
+          <i class="fa-regular fa-calendar"></i> ${w.datesArabic} (${w.dates})
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--c-border); padding-top: 8px; font-size: 0.72rem;">
+          <span style="color: var(--c-text-muted);">المستشارون: <strong style="color: var(--c-text);">${w.featuredConsultants?.join('، ') || 'نخبة الخبراء'}</strong></span>
+          <span style="font-weight: 800; color: ${w.remainingSlots > 0 ? '#166534' : '#DC2626'};">${w.remainingSlots} مقاعد متاحة</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+};
+
+window.selectThematicWeekAssoc = function(weekId) {
+  selectedAssocThematicWeekId = weekId;
+  renderAssocThematicWeekBanner();
+  renderAssocThematicWeeksNav();
+};
+
+window.filterAssocConsultants = function(btnEl, domain) {
+  selectedAssocConsDomain = domain;
+  if (btnEl) {
+    document.querySelectorAll('#assoc-cons-filter-chips .evidence-filter-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+  }
+  renderAssocConsultantsDirectory();
+};
+
+window.renderAssocConsultantsDirectory = function() {
+  const container = document.getElementById('assoc-consultants-directory-grid');
+  if (!container) return;
+
+  const consultants = APP_STATE.consultants || DEFAULT_SEED_DATA.consultants || [];
+  const weeks = APP_STATE.thematicWeeks || DEFAULT_SEED_DATA.thematicWeeks || [];
+  const activeWeek = weeks.find(w => w.status === 'active') || weeks[0];
+
+  let filtered = consultants.filter(c => {
+    if (selectedAssocConsDomain === 'all') return true;
+    if (selectedAssocConsDomain === 'current_week') {
+      if (activeWeek && activeWeek.featuredConsultants && activeWeek.featuredConsultants.includes(c.name)) return true;
+      if (activeWeek && (c.specialty || '').includes(activeWeek.domain)) return true;
+      return false;
+    }
+    return (c.specialty || '').includes(selectedAssocConsDomain) || (c.title || '').includes(selectedAssocConsDomain);
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 32px; background: var(--c-surface); border: 1px dashed var(--c-border); border-radius: 12px;">
+        <i class="fa-solid fa-user-doctor" style="font-size: 2rem; color: var(--c-text-muted); margin-bottom: 8px;"></i>
+        <div style="font-weight: 800; color: var(--c-text);">لا يوجد مستشارون مسجلون في هذا التصنيف حالياً</div>
+        <small style="color: var(--c-text-muted);">اختر "جميع المستشارين" أو تصفح الأسبوع النشط لاستعراض المواعيد المتاحة.</small>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = filtered.map(cons => `
+    <div class="consultant-pro-card" style="background: var(--c-surface); border: 1.5px solid var(--c-border); border-radius: 14px; padding: 20px; transition: all 0.25s ease; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-xs);">
+      <div>
+        <div style="display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--c-gold-subtle); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0;">
+            ${cons.avatar || '👨‍💼'}
+          </div>
+          <div style="flex: 1;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h5 style="margin: 0 0 2px 0; font-size: 1.05rem; font-weight: 900; color: var(--c-primary);">${cons.name}</h5>
+              <span style="font-size: 0.78rem; font-weight: 800; color: var(--c-gold-dark); background: var(--c-gold-subtle); padding: 2px 8px; border-radius: 20px;">
+                ${cons.rating || '5.0 ★'}
+              </span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--c-gold-dark); font-weight: 700; margin-bottom: 4px;">
+              ${cons.title}
+            </div>
+            <div style="font-size: 0.74rem; color: var(--c-text-muted);">
+              <i class="fa-solid fa-briefcase"></i> ${cons.experience || 'خبير معتمد'}
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 12px; min-height: 38px;">
+          <div style="font-size: 0.78rem; color: var(--c-text); line-height: 1.5; font-weight: 600;">
+            ${cons.specialty}
+          </div>
+        </div>
+
+        <!-- Available Slots Pockets -->
+        <div style="background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px;">
+          <div style="font-size: 0.72rem; font-weight: 800; color: var(--c-text-muted); margin-bottom: 6px; display: flex; justify-content: space-between;">
+            <span><i class="fa-regular fa-clock"></i> مواعيد العيادة الاستشارية:</span>
+            <span style="color: #166534; font-weight: 800;">متاح للحجز ✓</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            ${(cons.slots || ['الأحد: 05:00 م - 07:00 م (حضوري)', 'الثلاثاء: 06:00 م - 08:00 م (افتراضي)']).map(slot => `
+              <div style="font-size: 0.74rem; color: var(--c-text); display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-calendar-day text-gold" style="font-size: 0.7rem;"></i>
+                <span>${slot}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center; border-top: 1px solid var(--c-border); padding-top: 12px;">
+        <button class="btn btn-primary btn-sm" onclick="directBookConsultant('${cons.id}', '${cons.name}', '${cons.specialty.split('•')[0].trim()}')" style="flex: 1; font-weight: 800; font-size: 0.8rem; padding: 7px 12px;">
+          <i class="fa-solid fa-calendar-plus"></i> حجز جلسة استشارية
+        </button>
+      </div>
+    </div>
+  `).join('');
+};
+
+window.directBookConsultant = function(consId, consName, defaultTopic) {
+  openBookConsultantModal(consId, defaultTopic);
+};
+
+// ========================== Admin Track 3: Consultants & Thematic Weeks Logic ==========================
+let currentPreviewApplicantId = null;
+
+window.switchAdminConsSubView = function(subview) {
+  const sessionsView = document.getElementById('admin-subview-cons-sessions');
+  const applicantsView = document.getElementById('admin-subview-cons-applicants');
+  const weeksView = document.getElementById('admin-subview-cons-weeks');
+
+  const btnSessions = document.getElementById('btnAdminConsSessions');
+  const btnApplicants = document.getElementById('btnAdminConsApplicants');
+  const btnWeeks = document.getElementById('btnAdminConsThematicWeeks');
+
+  if (sessionsView) sessionsView.style.display = subview === 'sessions' ? 'block' : 'none';
+  if (applicantsView) applicantsView.style.display = subview === 'applicants' ? 'block' : 'none';
+  if (weeksView) weeksView.style.display = subview === 'weeks' ? 'block' : 'none';
+
+  if (btnSessions) {
+    btnSessions.className = subview === 'sessions' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+    btnSessions.style.borderColor = '';
+    btnSessions.style.color = '';
+  }
+  if (btnApplicants) {
+    btnApplicants.className = subview === 'applicants' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+    btnApplicants.style.borderColor = '#D97706';
+    btnApplicants.style.color = subview === 'applicants' ? '#FFFFFF' : '#D97706';
+  }
+  if (btnWeeks) {
+    btnWeeks.className = subview === 'weeks' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline';
+    btnWeeks.style.borderColor = 'var(--c-primary)';
+    btnWeeks.style.color = subview === 'weeks' ? '#FFFFFF' : 'var(--c-primary)';
+  }
+
+  if (subview === 'applicants') renderAdminConsultantApplicantsTable();
+  if (subview === 'weeks') renderAdminThematicWeeksManager();
+  if (subview === 'sessions') renderAdminConsultationsTable();
+};
+
+window.renderAdminConsultantApplicantsTable = function() {
+  const tbody = document.getElementById('admin-cons-applicants-tbody');
+  const apps = APP_STATE.consultantApplications || DEFAULT_SEED_DATA.consultantApplications || [];
+  
+  const pendingCount = apps.filter(a => a.status === 'قيد المراجعة والاعتماد').length;
+  const badgeEl = document.getElementById('admin-cons-apps-badge');
+  const pillEl = document.getElementById('admin-cons-apps-pill');
+  if (badgeEl) badgeEl.textContent = pendingCount;
+  if (pillEl) pillEl.textContent = `${pendingCount} طلبات جديدة بانتظار الاعتماد`;
+
+  if (!tbody) return;
+
+  if (apps.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+          <i class="fa-solid fa-user-check" style="font-size: 2rem; margin-bottom: 8px; display: block; color: var(--c-border);"></i>
+          لا توجد طلبات انضمام جديدة لمستشارين حالياً
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = apps.map(app => {
+    const isApproved = app.status === 'معتمد ونشط ✓';
+    const isPending = app.status === 'قيد المراجعة والاعتماد';
+    return `
+      <tr>
+        <td>
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.95rem; margin-bottom: 2px;">
+            <i class="fa-solid fa-user-tie"></i> ${app.name}
+          </div>
+          <div style="font-size: 0.78rem; color: var(--c-gold-dark); font-weight: 700;">
+            ${app.title}
+          </div>
+          <small style="color: var(--c-text-muted); font-size: 0.72rem;">
+            ${app.phone} • ${app.email || ''}
+          </small>
+        </td>
+        <td>
+          <div style="font-size: 0.78rem; font-weight: 600; line-height: 1.5; color: var(--c-text);">
+            ${app.specialty}
+          </div>
+        </td>
+        <td>
+          <div style="font-size: 0.8rem; font-weight: 800; color: var(--c-primary); margin-bottom: 2px;">
+            ${app.experience}
+          </div>
+          <span class="badge" style="background: rgba(217,119,6,0.12); color: #B45309; font-size: 0.7rem; font-weight: 700;">
+            ${app.volunteerType || 'تطوع تخصصي'}
+          </span>
+        </td>
+        <td>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--c-text);">${app.hoursPerWeek || '4 ساعات أسبوعياً'}</div>
+          <small style="font-size: 0.72rem; color: var(--c-text-muted);">${app.sessionMode || 'حضوري وافتراضي'}</small>
+        </td>
+        <td style="text-align: center;">
+          <span class="badge" style="background: ${isApproved ? '#DCFCE7' : (isPending ? '#FEF3C7' : '#FEE2E2')}; color: ${isApproved ? '#166534' : (isPending ? '#92400E' : '#991B1B')}; font-weight: 800; padding: 4px 10px; border-radius: 20px; font-size: 0.74rem;">
+            ${app.status}
+          </span>
+        </td>
+        <td style="text-align: center;">
+          <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm" onclick="openApplicantCvPreviewModal('${app.id}')" style="font-size: 0.74rem; padding: 4px 10px;" title="فحص المؤهلات والسيرة الذاتية">
+              <i class="fa-solid fa-file-lines"></i> فحص الملف
+            </button>
+            ${!isApproved ? `
+              <button class="btn btn-primary btn-sm" onclick="quickApproveConsultantApplicant('${app.id}')" style="font-size: 0.74rem; padding: 4px 10px; font-weight: 800; background: #0D6E46;" title="اعتماد فوري">
+                <i class="fa-solid fa-check"></i> اعتماد ✓
+              </button>
+            ` : ''}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+};
+
+window.openApplicantCvPreviewModal = function(appId) {
+  const apps = APP_STATE.consultantApplications || DEFAULT_SEED_DATA.consultantApplications || [];
+  const app = apps.find(a => a.id === appId);
+  if (!app) return;
+
+  currentPreviewApplicantId = appId;
+  const modal = document.getElementById('modalApplicantCvPreview');
+  if (!modal) return;
+
+  const nameEl = document.getElementById('app-cv-name');
+  const titleEl = document.getElementById('app-cv-title');
+  const phoneEl = document.getElementById('app-cv-phone');
+  const emailEl = document.getElementById('app-cv-email');
+  const expEl = document.getElementById('app-cv-exp');
+  const modeEl = document.getElementById('app-cv-mode');
+  const domainsEl = document.getElementById('app-cv-domains');
+  const bioEl = document.getElementById('app-cv-bio');
+  const statusPill = document.getElementById('app-cv-status-pill');
+
+  if (nameEl) nameEl.textContent = app.name;
+  if (titleEl) titleEl.textContent = `${app.title} • ${app.volunteerType || 'تطوع تخصصي'}`;
+  if (phoneEl) phoneEl.textContent = app.phone;
+  if (emailEl) emailEl.textContent = app.email || 'غير مسجل';
+  if (expEl) expEl.textContent = app.experience;
+  if (modeEl) modeEl.textContent = `${app.hoursPerWeek} (${app.sessionMode})`;
+  if (bioEl) bioEl.textContent = app.bio || 'لا يوجد ملخص سيرة ذاتية مسجل.';
+
+  if (statusPill) {
+    statusPill.textContent = app.status;
+    statusPill.style.background = app.status === 'معتمد ونشط ✓' ? '#DCFCE7' : '#FEF3C7';
+    statusPill.style.color = app.status === 'معتمد ونشط ✓' ? '#166534' : '#92400E';
+  }
+
+  if (domainsEl) {
+    const parts = (app.specialty || '').split('•').map(p => p.trim()).filter(Boolean);
+    domainsEl.innerHTML = parts.map(p => `
+      <span class="badge" style="background: rgba(14,110,65,0.12); color: var(--c-primary); font-weight: 700; font-size: 0.74rem;">
+        <i class="fa-solid fa-check text-gold"></i> ${p}
+      </span>
+    `).join('');
+  }
+
+  modal.classList.add('active');
+};
+
+window.closeApplicantCvPreviewModal = function() {
+  document.getElementById('modalApplicantCvPreview')?.classList.remove('active');
+  currentPreviewApplicantId = null;
+};
+
+window.quickApproveConsultantApplicant = function(appId) {
+  currentPreviewApplicantId = appId;
+  approveConsultantApplicantAction();
+};
+
+window.approveConsultantApplicantAction = function() {
+  if (!currentPreviewApplicantId) return;
+  const apps = APP_STATE.consultantApplications || [];
+  const app = apps.find(a => a.id === currentPreviewApplicantId);
+  if (!app) return;
+
+  app.status = 'معتمد ونشط ✓';
+
+  // Add into APP_STATE.consultants if not already present
+  if (!APP_STATE.consultants) APP_STATE.consultants = [];
+  const existing = APP_STATE.consultants.find(c => c.name === app.name);
+  if (!existing) {
+    const newConsId = `CONS-0${APP_STATE.consultants.length + 1}`;
+    APP_STATE.consultants.push({
+      id: newConsId,
+      name: app.name,
+      title: app.title,
+      specialty: app.specialty,
+      avatar: '👨‍💼',
+      experience: app.experience,
+      rating: '5.0 ★',
+      hours: 0,
+      volHours: 0,
+      volunteerType: app.volunteerType,
+      bio: app.bio,
+      slots: [`متاح: ${app.hoursPerWeek} (${app.sessionMode})`]
+    });
+  }
+
+  savePlatformState();
+  closeApplicantCvPreviewModal();
+  renderAdminConsultantApplicantsTable();
+  if (typeof renderAssocConsultationsTab === 'function') renderAssocConsultationsTab();
+  showToast(`تم اعتماد وتفعيل المستشار ${app.name} بنجاح وإضافته لدليل العيادات المتاحة للجمعيات ✓`, 'success');
+};
+
+window.rejectConsultantApplicantAction = function() {
+  if (!currentPreviewApplicantId) return;
+  const apps = APP_STATE.consultantApplications || [];
+  const app = apps.find(a => a.id === currentPreviewApplicantId);
+  if (!app) return;
+
+  app.status = 'معتذر عنه';
+  savePlatformState();
+  closeApplicantCvPreviewModal();
+  renderAdminConsultantApplicantsTable();
+  showToast(`تم حفظ الاعتذار عن طلب المستشار ${app.name}.`, 'info');
+};
+
+window.renderAdminThematicWeeksManager = function() {
+  const container = document.getElementById('admin-thematic-weeks-manager-container');
+  if (!container) return;
+
+  const weeks = APP_STATE.thematicWeeks || DEFAULT_SEED_DATA.thematicWeeks || [];
+  container.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+      ${weeks.map(w => {
+        const isActive = w.status === 'active';
+        return `
+          <div style="background: var(--c-surface); border: 2px solid ${isActive ? w.color : 'var(--c-border)'}; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: ${isActive ? '0 4px 14px rgba(0,0,0,0.06)' : 'none'};">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <span class="badge" style="background: ${isActive ? '#DCFCE7' : '#F1F5F9'}; color: ${isActive ? '#166534' : '#64748B'}; font-weight: 800; font-size: 0.72rem;">
+                  الأسبوع ${w.weekNumber} ${isActive ? '• النشط للجمعيات حالياً ✓' : ''}
+                </span>
+                <div style="width: 34px; height: 34px; border-radius: 8px; background: ${w.color}15; color: ${w.color}; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                  <i class="fa-solid ${w.icon}"></i>
+                </div>
+              </div>
+              <h5 style="font-size: 1rem; font-weight: 900; color: var(--c-primary); margin: 0 0 4px 0;">${w.title}</h5>
+              <div style="font-size: 0.76rem; color: var(--c-text-muted); margin-bottom: 8px;">
+                <i class="fa-regular fa-calendar"></i> ${w.datesArabic} (${w.dates})
+              </div>
+              <p style="font-size: 0.78rem; color: var(--c-text); line-height: 1.5; margin-bottom: 12px;">
+                ${w.headline}
+              </p>
+              
+              <div style="background: var(--c-bg); border: 1px solid var(--c-border); border-radius: 8px; padding: 10px; margin-bottom: 12px; font-size: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span style="color: var(--c-text-muted);">إجمالي العيادات:</span>
+                  <strong>${w.totalSlots} عيادة</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <span style="color: var(--c-text-muted);">العيادات المحجوزة:</span>
+                  <strong style="color: var(--c-gold-dark);">${w.bookedSlots} محجوزة</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: var(--c-text-muted);">المقاعد المتبقية:</span>
+                  <strong style="color: ${w.remainingSlots > 0 ? '#166534' : '#DC2626'};">${w.remainingSlots} مقاعد</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="border-top: 1px solid var(--c-border); padding-top: 12px;">
+              ${isActive ? `
+                <div style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.78rem; padding: 8px 12px; border-radius: 8px; text-align: center;">
+                  <i class="fa-solid fa-check-circle"></i> هذا الأسبوع نشط ومعتمد للجمعيات
+                </div>
+              ` : `
+                <button class="btn btn-outline btn-sm" onclick="setAdminActiveThematicWeek('${w.id}')" style="width: 100%; font-weight: 800; font-size: 0.78rem; border-color: var(--c-primary); color: var(--c-primary);">
+                  <i class="fa-solid fa-bolt"></i> تفعيل كأسبوع نشط للجمعيات ⚡
+                </button>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+};
+
+window.setAdminActiveThematicWeek = function(weekId) {
+  const weeks = APP_STATE.thematicWeeks || DEFAULT_SEED_DATA.thematicWeeks || [];
+  weeks.forEach(w => {
+    if (w.id === weekId) {
+      w.status = 'active';
+      w.statusLabel = 'الأسبوع النشط حالياً ✓';
+    } else {
+      w.status = 'upcoming';
+      w.statusLabel = 'مجدول وقادم';
+    }
+  });
+
+  selectedAssocThematicWeekId = weekId;
+  savePlatformState();
+  renderAdminThematicWeeksManager();
+  if (typeof renderAssocConsultationsTab === 'function') renderAssocConsultationsTab();
+  
+  const targetWeek = weeks.find(w => w.id === weekId);
+  showToast(`تم تفعيل (${targetWeek?.title || 'الأسبوع'}) كأسبوع نشط للجمعيات بنجاح ⚡`, 'success');
+};
+
 function renderAssocConsultationsList() {
   const container = document.getElementById('assoc-consultations-list');
+  const countBadge = document.getElementById('assoc-consultations-count-badge');
   if (!container) return;
 
   const consults = APP_STATE.consultations || [];
+  if (countBadge) countBadge.textContent = `${consults.length} جلسات`;
+
   if (consults.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 24px; background: var(--c-surface); border: 1px dashed var(--c-border); border-radius: 8px;">
@@ -4994,6 +5683,8 @@ function renderAdminDashboard() {
   renderAdminApplicationsTable();
   renderAdminVolunteeringTable();
   renderAdminConsultationsTable();
+  renderAdminConsultantApplicantsTable();
+  renderAdminThematicWeeksManager();
   renderAdminServicesTable();
   renderAdminKanbanBoard();
   renderAdminAnalyticsAndLogs();
@@ -5013,6 +5704,12 @@ function renderAdminDashboard() {
 
   const inboxBadge = document.getElementById('admin-inbox-count');
   if (inboxBadge) inboxBadge.textContent = (APP_STATE.contactMessages || []).length;
+
+  const pendingConsApps = (APP_STATE.consultantApplications || []).filter(a => a.status === 'قيد المراجعة والاعتماد').length;
+  const adminConsAppsBadge = document.getElementById('admin-cons-apps-badge');
+  const adminConsAppsPill = document.getElementById('admin-cons-apps-pill');
+  if (adminConsAppsBadge) adminConsAppsBadge.textContent = pendingConsApps;
+  if (adminConsAppsPill) adminConsAppsPill.textContent = `${pendingConsApps} طلبات جديدة بانتظار الاعتماد`;
 }
 
 // Helper: Filter admin applications by clicking summary cards
