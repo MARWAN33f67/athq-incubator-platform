@@ -272,6 +272,98 @@ const DEFAULT_SEED_DATA = {
       category: "خدمة مجتمعية"
     }
   ],
+  volunteers: [
+    {
+      id: "VOL-REC-001",
+      opportunityId: "VOL-003",
+      assocName: "جمعية ديوان الشبابية",
+      opportunityTitle: "برنامج إرشاد القيادات الشابة وتصميم المبادرات",
+      name: "عبدالرحمن بن خالد الجهني",
+      nationalId: "1098472615",
+      phone: "0554129988",
+      specialization: "إدارة مشاريع تنموية وحوكمة",
+      hours: 45,
+      economicValue: "2,250 ر.س",
+      joinDate: "2025-09-10",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-7734"
+    },
+    {
+      id: "VOL-REC-002",
+      opportunityId: "VOL-003",
+      assocName: "جمعية ديوان الشبابية",
+      opportunityTitle: "برنامج إرشاد القيادات الشابة وتصميم المبادرات",
+      name: "سارة بنت منصور الشريف",
+      nationalId: "1102847591",
+      phone: "0569871234",
+      specialization: "تخطيط استراتيجي وابتكار مجتمعي",
+      hours: 32,
+      economicValue: "1,600 ر.س",
+      joinDate: "2025-09-18",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-7734"
+    },
+    {
+      id: "VOL-REC-003",
+      opportunityId: "VOL-003",
+      assocName: "جمعية ديوان الشبابية",
+      opportunityTitle: "برنامج إرشاد القيادات الشابة وتصميم المبادرات",
+      name: "م. فيصل بن عبدالعزيز المرواني",
+      nationalId: "1087459123",
+      phone: "0543329988",
+      specialization: "تقنية معلومات وتحول رقمي",
+      hours: 28,
+      economicValue: "1,400 ر.س",
+      joinDate: "2025-09-25",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-7734"
+    },
+    {
+      id: "VOL-REC-004",
+      opportunityId: "VOL-001",
+      assocName: "جمعية النقاء الصحية",
+      opportunityTitle: "تشغيل العيادات المتنقلة والتوعية الصحية الميدانية",
+      name: "د. تركي بن سعد العوفي",
+      nationalId: "1087452134",
+      phone: "0503348821",
+      specialization: "طب أسرة ومجتمع وإسعافات",
+      hours: 60,
+      economicValue: "3,000 ر.س",
+      joinDate: "2025-08-25",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-9921"
+    },
+    {
+      id: "VOL-REC-005",
+      opportunityId: "VOL-002",
+      assocName: "جمعية التنمية الرياضية",
+      opportunityTitle: "تنظيم دوري الأحياء المجتمعي وتأهيل اليافعين",
+      name: "مازن بن عبدالله الأحمدي",
+      nationalId: "1076594832",
+      phone: "0541128790",
+      specialization: "إدارة وتنظيم فعاليات رياضية",
+      hours: 40,
+      economicValue: "2,000 ر.س",
+      joinDate: "2025-09-02",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-8812"
+    },
+    {
+      id: "VOL-REC-006",
+      opportunityId: "VOL-005",
+      assocName: "وقف العمل الصالح",
+      opportunityTitle: "توثيق الأوقاف وتنمية المنح والوصايا التنموية",
+      name: "هند بنت فهد العتيبي",
+      nationalId: "1123489102",
+      phone: "0559981122",
+      specialization: "توثيق قانوني وصياغة حجج وقفية",
+      hours: 32,
+      economicValue: "1,600 ر.س",
+      joinDate: "2025-10-01",
+      status: "معتمد وموثق بالمنصة الوطنية ✓",
+      nvgRef: "NVG-1446-5542"
+    }
+  ],
   consultations: [
     { id: "CNS-501", assocName: "جمعية ديوان الشبابية", consultant: "د. سليمان الحربي", field: "حوكمة المنظمات وبناء مصفوفة الصلاحيات", date: "2025-10-15", time: "10:00 ص - 12:00 م", status: "مجدولة" },
     { id: "CNS-502", assocName: "وقف العمل الصالح", consultant: "أ. ماجد العوفي", field: "الاستدامة المالية والاستثمار الوقفي", date: "2025-10-08", time: "05:00 م - 07:00 م", status: "منجزة ✓" },
@@ -761,6 +853,9 @@ function loadPlatformState() {
         }
         if (!parsed.consultants || parsed.consultants.length < DEFAULT_SEED_DATA.consultants.length) {
           parsed.consultants = DEFAULT_SEED_DATA.consultants;
+        }
+        if (!parsed.volunteers || parsed.volunteers.length === 0) {
+          parsed.volunteers = DEFAULT_SEED_DATA.volunteers;
         }
         parsed.applications.forEach(app => {
           if (!app.roadmap100Days) {
@@ -2251,6 +2346,7 @@ function renderAssociationDashboard() {
   renderAssoc100DaysRoadmap();
   renderAssocServicesCatalog();
   renderAssocEvents();
+  renderAssocVolunteeringTab();
 }
 
 // ========================== Association Journey State Machine (Prompt 2) ==========================
@@ -6003,80 +6099,694 @@ function renderAdminKanbanBoard() {
   });
 }
 
-// 6. Render Volunteering Track Table (مسار التطوع وساعات العطاء)
-window.renderAdminVolunteeringTable = function() {
-  const tbody = document.getElementById('admin-volunteering-tbody');
-  if (!tbody) return;
+// ========================== 6. Volunteering & Volunteers Track (مسار العمل التطوعي والمتطوعين NVG) ==========================
 
-  const list = APP_STATE.volunteering || [];
+// Switch subview in Association Volunteering Tab (الفرص المطروحة vs سجل المتطوعين)
+window.switchAssocVolSubView = function(subview) {
+  const btnOpps = document.getElementById('btnAssocVolOpps');
+  const btnRoster = document.getElementById('btnAssocVolRoster');
+  const viewOpps = document.getElementById('assoc-subview-vol-opps');
+  const viewRoster = document.getElementById('assoc-subview-vol-roster');
+
+  if (subview === 'opps') {
+    if (btnOpps) {
+      btnOpps.className = 'btn btn-sm btn-primary';
+      btnOpps.style.cssText = 'font-weight: 800; font-size: 0.82rem; padding: 7px 18px;';
+    }
+    if (btnRoster) {
+      btnRoster.className = 'btn btn-sm btn-outline';
+      btnRoster.style.cssText = 'font-weight: 800; font-size: 0.82rem; padding: 7px 18px; border-color: var(--c-primary); color: var(--c-primary);';
+    }
+    if (viewOpps) viewOpps.style.display = 'block';
+    if (viewRoster) viewRoster.style.display = 'none';
+  } else {
+    if (btnOpps) {
+      btnOpps.className = 'btn btn-sm btn-outline';
+      btnOpps.style.cssText = 'font-weight: 800; font-size: 0.82rem; padding: 7px 18px; border-color: var(--c-primary); color: var(--c-primary);';
+    }
+    if (btnRoster) {
+      btnRoster.className = 'btn btn-sm btn-primary';
+      btnRoster.style.cssText = 'font-weight: 800; font-size: 0.82rem; padding: 7px 18px;';
+    }
+    if (viewOpps) viewOpps.style.display = 'none';
+    if (viewRoster) viewRoster.style.display = 'block';
+  }
+};
+
+// Switch subview in Admin Volunteering Tab (الفرص والمبادرات vs السجل المركزي العام)
+window.switchAdminVolSubView = function(subview) {
+  const btnOpps = document.getElementById('btnAdminVolOpps');
+  const btnRoster = document.getElementById('btnAdminVolRoster');
+  const viewOpps = document.getElementById('admin-subview-vol-opps');
+  const viewRoster = document.getElementById('admin-subview-vol-roster');
+
+  if (subview === 'opps') {
+    if (btnOpps) {
+      btnOpps.className = 'btn btn-sm btn-primary';
+      btnOpps.style.cssText = 'font-weight: 800; font-size: 0.8rem; padding: 6px 16px;';
+    }
+    if (btnRoster) {
+      btnRoster.className = 'btn btn-sm btn-outline';
+      btnRoster.style.cssText = 'font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: #0D6E46; color: #0D6E46;';
+    }
+    if (viewOpps) viewOpps.style.display = 'block';
+    if (viewRoster) viewRoster.style.display = 'none';
+  } else {
+    if (btnOpps) {
+      btnOpps.className = 'btn btn-sm btn-outline';
+      btnOpps.style.cssText = 'font-weight: 800; font-size: 0.8rem; padding: 6px 16px; border-color: #0D6E46; color: #0D6E46;';
+    }
+    if (btnRoster) {
+      btnRoster.className = 'btn btn-sm btn-primary';
+      btnRoster.style.cssText = 'font-weight: 800; font-size: 0.8rem; padding: 6px 16px;';
+    }
+    if (viewOpps) viewOpps.style.display = 'none';
+    if (viewRoster) viewRoster.style.display = 'block';
+  }
+};
+
+// Render Association Volunteering Tab (الفرص وسجل المتطوعين لبوابة الجمعية)
+window.renderAssocVolunteeringTab = function() {
+  const currentAssoc = getActiveAssociation();
+  if (!currentAssoc) return;
+
+  const allOpps = APP_STATE.volunteering || [];
+  const allVols = APP_STATE.volunteers || [];
+
+  // Match opportunities for current association
+  const assocOpps = allOpps.filter(o => 
+    o.assocName === currentAssoc.associationName ||
+    o.assocName === currentAssoc.shortName ||
+    (o.assocName && currentAssoc.associationName && (currentAssoc.associationName.includes(o.assocName) || o.assocName.includes(currentAssoc.associationName)))
+  );
+
+  // Match volunteers for current association
+  const assocVols = allVols.filter(v => 
+    v.assocName === currentAssoc.associationName ||
+    v.assocName === currentAssoc.shortName ||
+    (v.assocName && currentAssoc.associationName && (currentAssoc.associationName.includes(v.assocName) || v.assocName.includes(currentAssoc.associationName)))
+  );
+
+  // Dynamic KPI calculations (Saudi standard: 50 SAR per volunteer hour)
+  const totalHours = assocVols.reduce((s, v) => s + (parseInt(v.hours, 10) || 0), 0) || 
+                     assocOpps.reduce((s, o) => s + (parseInt(o.hoursCount, 10) || 0), 0) || 
+                     (currentAssoc.volunteerHours || 197);
+  const totalVolunteers = assocVols.length > 0 ? assocVols.length : 
+                          (assocOpps.reduce((s, o) => s + (parseInt(o.volunteersCount, 10) || 0), 0) || (currentAssoc.volunteersCount || 36));
+  const totalImpact = totalHours * 50;
+
+  // Update KPI displays in Association Portal
+  const kpiHoursEl = document.getElementById('assoc-vol-kpi-hours');
+  const kpiVolsEl = document.getElementById('assoc-vol-kpi-volunteers');
+  const kpiImpactEl = document.getElementById('assoc-vol-kpi-impact');
+  const navBadgeEl = document.getElementById('assoc-vol-nav-badge');
+  const oppsCountEl = document.getElementById('assoc-vol-opps-count');
+  const rosterCountEl = document.getElementById('assoc-vol-roster-count');
+
+  if (kpiHoursEl) kpiHoursEl.textContent = `${totalHours.toLocaleString()} ساعة`;
+  if (kpiVolsEl) kpiVolsEl.textContent = `${totalVolunteers} متطوعاً`;
+  if (kpiImpactEl) kpiImpactEl.textContent = `${totalImpact.toLocaleString()} ر.س`;
+  if (navBadgeEl) navBadgeEl.textContent = `${totalVolunteers} متطوعاً`;
+  if (oppsCountEl) oppsCountEl.textContent = assocOpps.length;
+  if (rosterCountEl) rosterCountEl.textContent = assocVols.length;
+
+  // 1. Render Opportunities Grid
+  const oppsContainer = document.getElementById('assoc-vol-opportunities-container');
+  if (oppsContainer) {
+    if (assocOpps.length === 0) {
+      oppsContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: var(--c-surface); border: 1.5px dashed var(--c-border); border-radius: 14px;">
+          <i class="fa-solid fa-hand-holding-heart" style="font-size: 2.2rem; color: #10B981; margin-bottom: 12px; display: block;"></i>
+          <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--c-primary); margin-bottom: 6px;">لا توجد فرص تطوعية مطروحة حالياً لهذه الجمعية</h4>
+          <p style="font-size: 0.82rem; color: var(--c-text-muted); max-width: 480px; margin: 0 auto 16px auto;">
+            يمكنك الآن طرح فرصة تطوعية تخصصية جديدة وتوثيقها مباشرة بالمنصة الوطنية للعمل التطوعي (NVG).
+          </p>
+          <button class="btn btn-primary btn-sm" onclick="openCreateVolOpportunityModal('${currentAssoc.associationName}')" style="background: #0D6E46; font-weight: 800;">
+            <i class="fa-solid fa-plus"></i> + طرح فرصة تطوعية الآن
+          </button>
+        </div>
+      `;
+    } else {
+      oppsContainer.innerHTML = assocOpps.map(opp => {
+        const oppVols = assocVols.filter(v => v.opportunityId === opp.id || v.opportunityTitle === opp.opportunityTitle);
+        const recruitedCount = oppVols.length > 0 ? oppVols.length : Math.min(opp.volunteersCount, Math.floor(opp.volunteersCount * 0.75));
+        const progressPct = Math.min(100, Math.round((recruitedCount / (opp.volunteersCount || 1)) * 100));
+
+        return `
+          <div class="vol-opportunity-card">
+            <div class="vol-opportunity-header">
+              <span class="badge" style="background: rgba(13,110,70,0.12); color: var(--c-primary); font-weight: 800; font-size: 0.72rem;">
+                <i class="fa-solid fa-tag"></i> ${opp.category || 'تطوع تخصصي'}
+              </span>
+              <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.7rem; border: 1px solid #86EFAC;">
+                <i class="fa-solid fa-circle-check"></i> ${opp.status || 'معتمد وموثق ✓'}
+              </span>
+            </div>
+
+            <h4 class="vol-opportunity-title">${opp.opportunityTitle}</h4>
+            <div style="font-size: 0.74rem; color: var(--c-text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+              <span>المرجع الوطني:</span>
+              <code style="background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-weight: 700; color: #1E293B;">${opp.platformRef || 'NVG-1446-7734'}</code>
+            </div>
+
+            <!-- Recruitment Progress Bar -->
+            <div class="vol-progress-container">
+              <div style="display: flex; justify-content: space-between; font-size: 0.74rem; margin-bottom: 4px; font-weight: 700;">
+                <span style="color: var(--c-text-muted);">نسبة اكتمال شغل الفرصة:</span>
+                <span style="color: var(--c-primary); font-weight: 800;">${recruitedCount} من ${opp.volunteersCount} متطوع (${progressPct}%)</span>
+              </div>
+              <div class="vol-progress-bar-bg">
+                <div class="vol-progress-bar-fill" style="width: ${progressPct}%;"></div>
+              </div>
+            </div>
+
+            <!-- Meta Grid (Hours & Impact) -->
+            <div class="vol-meta-grid">
+              <div class="vol-meta-item">
+                <span class="vol-meta-label">الساعات المستهدفة:</span>
+                <span class="vol-meta-val" style="color: #166534;">+${opp.hoursCount} ساعة</span>
+              </div>
+              <div class="vol-meta-item">
+                <span class="vol-meta-label">العائد الاقتصادي التقديري:</span>
+                <span class="vol-meta-val" style="color: #92400E;">${opp.economicImpact || (opp.hoursCount * 50).toLocaleString() + ' ر.س'}</span>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div style="display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--c-border); flex-wrap: wrap;">
+              <button class="btn btn-primary btn-sm" onclick="openAddVolunteerModal('${opp.id}')" style="font-weight: 800; font-size: 0.75rem; padding: 5px 12px; background: #2563EB;">
+                <i class="fa-solid fa-user-plus"></i> + تسجيل متطوع
+              </button>
+              <button class="btn btn-outline btn-sm" onclick="switchAssocVolSubView('roster')" style="font-size: 0.75rem; padding: 5px 12px; border-color: var(--c-primary); color: var(--c-primary); font-weight: 700;">
+                <i class="fa-solid fa-list-check"></i> عرض السجل (${oppVols.length})
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  // 2. Render Volunteer Roster Table
+  const rosterTbody = document.getElementById('assoc-volunteers-roster-tbody');
+  if (rosterTbody) {
+    if (assocVols.length === 0) {
+      rosterTbody.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 32px 16px; color: var(--c-text-muted);">
+            <i class="fa-solid fa-users" style="font-size: 1.8rem; color: var(--c-border); margin-bottom: 8px; display: block;"></i>
+            لم يتم تسجيل أي متطوع في سجل هذه الجمعية بعد.
+            <div style="margin-top: 10px;">
+              <button class="btn btn-primary btn-sm" onclick="openAddVolunteerModal()" style="font-size: 0.75rem;">
+                <i class="fa-solid fa-plus"></i> تسجيل أول متطوع الآن
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    } else {
+      rosterTbody.innerHTML = assocVols.map(vol => {
+        const initials = (vol.name || 'متطوع').split(' ').slice(0, 2).map(w => w[0]).join('');
+        const maskedId = vol.nationalId ? `${vol.nationalId.slice(0, 4)}***${vol.nationalId.slice(-3)}` : '1098***615';
+        const econVal = vol.economicValue || `${((parseInt(vol.hours, 10) || 25) * 50).toLocaleString()} ر.س`;
+
+        return `
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="vol-roster-avatar">${initials}</div>
+                <div>
+                  <div style="font-weight: 800; color: var(--c-text-primary); font-size: 0.88rem;">${vol.name}</div>
+                  <div style="font-size: 0.72rem; color: var(--c-text-muted); direction: ltr; text-align: right;">${vol.phone || '05XXXXXXXX'}</div>
+                  ${vol.specialization ? `<div style="font-size: 0.7rem; color: var(--c-primary); font-weight: 700; margin-top: 1px;">${vol.specialization}</div>` : ''}
+                </div>
+              </div>
+            </td>
+            <td>
+              <code style="font-size: 0.8rem; font-weight: 700; background: #F1F5F9; padding: 3px 8px; border-radius: 5px; color: #334155;">${maskedId}</code>
+            </td>
+            <td>
+              <div style="font-weight: 700; font-size: 0.82rem; color: var(--c-text-primary);">${vol.opportunityTitle}</div>
+              <span style="font-size: 0.7rem; color: var(--c-text-muted);">مرجع المنصة: <code>${vol.nvgRef || 'NVG-1446-7734'}</code></span>
+            </td>
+            <td style="text-align: center;">
+              <strong style="color: #166534; font-size: 0.95rem;">+${vol.hours} س</strong>
+            </td>
+            <td style="text-align: center; font-weight: 800; color: #92400E; font-size: 0.88rem;">
+              ${econVal}
+            </td>
+            <td style="text-align: center;">
+              <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
+                <i class="fa-solid fa-circle-check"></i> ${vol.status || 'معتمد وموثق ✓'}
+              </span>
+            </td>
+            <td style="text-align: center;">
+              <button class="btn btn-outline btn-sm" onclick="printVolunteerCertificateAction('${vol.id}')" style="font-size: 0.72rem; padding: 4px 10px; font-weight: 800; border-color: #0D6E46; color: #0D6E46; background: rgba(13,110,70,0.05);" title="طباعة شهادة تطوع رسمية معتمدة">
+                <i class="fa-solid fa-print"></i> طباعة الشهادة
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+};
+
+// Render Admin Volunteering Tab (الفرص والمبادرات + السجل المركزي العام)
+window.renderAdminVolunteeringTable = function() {
+  const tbodyOpps = document.getElementById('admin-volunteering-tbody');
+  const tbodyRoster = document.getElementById('admin-volunteers-roster-tbody');
+
+  const oppsList = APP_STATE.volunteering || [];
+  const volsList = APP_STATE.volunteers || [];
   const modeFilter = document.getElementById('adminVolModeFilter')?.value || 'all';
   const query = (document.getElementById('adminVolSearch')?.value || '').trim().toLowerCase();
 
-  let filtered = list.filter(item => {
-    const info = getAssociationModeInfo(item.assocName);
-    if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
-    if (query) {
-      const matchName = (item.assocName || '').toLowerCase().includes(query);
-      const matchTitle = (item.opportunityTitle || '').toLowerCase().includes(query);
-      const matchCat = (item.category || '').toLowerCase().includes(query);
-      if (!matchName && !matchTitle && !matchCat) return false;
-    }
-    return true;
-  });
+  // 1. Update KPI Counters for Admin
+  const totalHours = volsList.reduce((sum, v) => sum + (parseInt(v.hours, 10) || 0), 0) + 
+                     oppsList.reduce((sum, o) => sum + (parseInt(o.hoursCount, 10) || 0), 0);
+  const totalVols = volsList.length + oppsList.reduce((sum, o) => sum + (parseInt(o.volunteersCount, 10) || 0), 0);
+  const totalImpact = totalHours * 50;
 
-  if (filtered.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
-          <i class="fa-solid fa-hand-holding-heart" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
-          لا توجد فرص تطوعية تطابق معايير الفرز المحددة
-        </td>
-      </tr>
-    `;
+  const kpiHoursEl = document.getElementById('admin-vol-kpi-hours');
+  const kpiVolsEl = document.getElementById('admin-vol-kpi-volunteers');
+  const kpiImpactEl = document.getElementById('admin-vol-kpi-impact');
+  const oppsCntEl = document.getElementById('admin-vol-opps-cnt');
+  const rosterCntEl = document.getElementById('admin-vol-roster-cnt');
+
+  if (kpiHoursEl) kpiHoursEl.textContent = `+${totalHours.toLocaleString()}`;
+  if (kpiVolsEl) kpiVolsEl.textContent = `+${totalVols.toLocaleString()}`;
+  if (kpiImpactEl) kpiImpactEl.textContent = `${totalImpact.toLocaleString()} ر.س`;
+  if (oppsCntEl) oppsCntEl.textContent = oppsList.length;
+  if (rosterCntEl) rosterCntEl.textContent = volsList.length;
+
+  // 2. Render Opportunities Table
+  if (tbodyOpps) {
+    let filteredOpps = oppsList.filter(item => {
+      const info = getAssociationModeInfo(item.assocName);
+      if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
+      if (query) {
+        const matchName = (item.assocName || '').toLowerCase().includes(query);
+        const matchTitle = (item.opportunityTitle || '').toLowerCase().includes(query);
+        const matchCat = (item.category || '').toLowerCase().includes(query);
+        if (!matchName && !matchTitle && !matchCat) return false;
+      }
+      return true;
+    });
+
+    if (filteredOpps.length === 0) {
+      tbodyOpps.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+            <i class="fa-solid fa-hand-holding-heart" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
+            لا توجد فرص تطوعية تطابق معايير الفرز المحددة
+          </td>
+        </tr>
+      `;
+    } else {
+      tbodyOpps.innerHTML = filteredOpps.map(v => {
+        const info = getAssociationModeInfo(v.assocName);
+        return `
+          <tr>
+            <td>
+              <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 3px;">
+                ${v.assocName}
+              </div>
+              <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                ${info.badgeHtml}
+                <span style="font-size: 0.72rem; color: var(--c-text-muted);">${v.category || 'تطوع تخصصي'}</span>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: var(--c-text-primary); font-size: 0.86rem;">${v.opportunityTitle}</div>
+              <span style="font-size: 0.72rem; color: var(--c-text-muted);">مرجع المنصة: <code>${v.platformRef}</code></span>
+            </td>
+            <td style="text-align: center;">
+              <span class="badge" style="background: rgba(13,148,136,0.1); color: var(--c-primary); font-weight: 800; font-size: 0.78rem;">
+                ${v.volunteersCount} متطوع
+              </span>
+            </td>
+            <td style="text-align: center;">
+              <strong style="color: #0D6E46; font-size: 0.95rem;">+${(v.hoursCount || 0).toLocaleString()} س</strong>
+            </td>
+            <td style="text-align: center; font-weight: 800; color: #92400E;">
+              ${v.economicImpact || ((v.hoursCount || 0) * 50).toLocaleString() + ' ر.س'}
+            </td>
+            <td style="text-align: center;">
+              <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
+                <i class="fa-solid fa-circle-check"></i> ${v.status}
+              </span>
+            </td>
+            <td style="text-align: center;">
+              <div style="display: flex; gap: 6px; justify-content: center; align-items: center;">
+                <button class="btn btn-outline-primary btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="openAddVolunteerModal('${v.id}')" title="تسجيل متطوع في هذه الفرصة">
+                  <i class="fa-solid fa-user-plus"></i> متطوع
+                </button>
+                <button class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 0.72rem;" onclick="showToast('تم فتح إفادة توثيق الساعات التطوعية المعتمدة رسمياً بالمنصة الوطنية', 'info')">
+                  <i class="fa-solid fa-file-lines"></i> إفادة
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+
+  // 3. Render Central Volunteers Roster Table
+  if (tbodyRoster) {
+    let filteredVols = volsList.filter(vol => {
+      const info = getAssociationModeInfo(vol.assocName);
+      if (modeFilter !== 'all' && info.mode !== modeFilter) return false;
+      if (query) {
+        const matchName = (vol.name || '').toLowerCase().includes(query);
+        const matchAssoc = (vol.assocName || '').toLowerCase().includes(query);
+        const matchTitle = (vol.opportunityTitle || '').toLowerCase().includes(query);
+        const matchId = (vol.nationalId || '').toLowerCase().includes(query);
+        if (!matchName && !matchAssoc && !matchTitle && !matchId) return false;
+      }
+      return true;
+    });
+
+    if (filteredVols.length === 0) {
+      tbodyRoster.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 28px; color: var(--c-text-muted);">
+            <i class="fa-solid fa-users" style="font-size: 1.8rem; margin-bottom: 6px; display: block; color: var(--c-border);"></i>
+            لا يوجد متطوعين مسجلين يطابقون معايير البحث
+          </td>
+        </tr>
+      `;
+    } else {
+      tbodyRoster.innerHTML = filteredVols.map(vol => {
+        const initials = (vol.name || 'متطوع').split(' ').slice(0, 2).map(w => w[0]).join('');
+        const maskedId = vol.nationalId ? `${vol.nationalId.slice(0, 4)}***${vol.nationalId.slice(-3)}` : '1098***615';
+        const econVal = vol.economicValue || `${((parseInt(vol.hours, 10) || 25) * 50).toLocaleString()} ر.س`;
+
+        return `
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="vol-roster-avatar">${initials}</div>
+                <div>
+                  <div style="font-weight: 800; color: var(--c-text-primary); font-size: 0.88rem;">${vol.name}</div>
+                  <div style="font-size: 0.72rem; color: var(--c-text-muted); direction: ltr; text-align: right;">${vol.phone || '05XXXXXXXX'}</div>
+                  ${vol.specialization ? `<div style="font-size: 0.7rem; color: var(--c-primary); font-weight: 700;">${vol.specialization}</div>` : ''}
+                </div>
+              </div>
+            </td>
+            <td>
+              <code style="font-size: 0.8rem; font-weight: 700; background: #F1F5F9; padding: 3px 8px; border-radius: 5px; color: #334155;">${maskedId}</code>
+            </td>
+            <td>
+              <div style="font-weight: 800; color: var(--c-primary); font-size: 0.85rem; margin-bottom: 2px;">
+                ${vol.assocName}
+              </div>
+              <div style="font-size: 0.78rem; color: var(--c-text-primary); font-weight: 600;">${vol.opportunityTitle}</div>
+              <span style="font-size: 0.7rem; color: var(--c-text-muted);">مرجع: <code>${vol.nvgRef || 'NVG-1446-7734'}</code></span>
+            </td>
+            <td style="text-align: center;">
+              <strong style="color: #166534; font-size: 0.95rem;">+${vol.hours} س</strong>
+            </td>
+            <td style="text-align: center; font-weight: 800; color: #92400E; font-size: 0.88rem;">
+              ${econVal}
+            </td>
+            <td style="text-align: center;">
+              <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
+                <i class="fa-solid fa-circle-check"></i> ${vol.status || 'معتمد وموثق ✓'}
+              </span>
+            </td>
+            <td style="text-align: center;">
+              <button class="btn btn-outline btn-sm" onclick="printVolunteerCertificateAction('${vol.id}')" style="font-size: 0.72rem; padding: 4px 10px; font-weight: 800; border-color: #0D6E46; color: #0D6E46; background: rgba(13,110,70,0.05);" title="طباعة شهادة تطوع رسمية معتمدة">
+                <i class="fa-solid fa-print"></i> طباعة الشهادة
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+};
+
+// Modal 1 Handlers: Create Volunteering Opportunity
+window.openCreateVolOpportunityModal = function(preselectedAssocName) {
+  const modal = document.getElementById('modalCreateVolOpportunity');
+  if (!modal) return;
+
+  const assocSelect = document.getElementById('vol-opp-assoc-select');
+  if (assocSelect) {
+    const list = APP_STATE.applications || [];
+    assocSelect.innerHTML = list.map(app => `
+      <option value="${app.associationName}" ${preselectedAssocName === app.associationName ? 'selected' : ''}>
+        ${app.associationName} (${app.licenseNumber || 'مرخصة'})
+      </option>
+    `).join('');
+
+    if (!preselectedAssocName) {
+      const activeAssoc = getActiveAssociation();
+      if (activeAssoc) assocSelect.value = activeAssoc.associationName;
+    }
+  }
+
+  const refInput = document.getElementById('vol-opp-platform-ref');
+  if (refInput && (!refInput.value || refInput.value.trim() === '')) {
+    refInput.value = `NVG-1446-${Math.floor(1000 + Math.random() * 9000)}`;
+  }
+
+  updateVolOppCalculations();
+  modal.classList.add('active');
+  modal.style.display = 'flex';
+};
+
+window.closeCreateVolOpportunityModal = function() {
+  const modal = document.getElementById('modalCreateVolOpportunity');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
+};
+
+window.updateVolOppCalculations = function() {
+  const volsCount = parseInt(document.getElementById('vol-opp-volunteers')?.value, 10) || 10;
+  const hoursPerVol = parseInt(document.getElementById('vol-opp-hours-per-vol')?.value, 10) || 30;
+
+  const totalHours = volsCount * hoursPerVol;
+  const economicImpact = totalHours * 50;
+
+  const hoursDisplay = document.getElementById('vol-opp-calc-hours');
+  const impactDisplay = document.getElementById('vol-opp-calc-impact');
+
+  if (hoursDisplay) hoursDisplay.textContent = `${totalHours.toLocaleString()} ساعة`;
+  if (impactDisplay) impactDisplay.textContent = `${economicImpact.toLocaleString()} ر.س`;
+};
+
+window.submitCreateVolOpportunity = function() {
+  const assocSelect = document.getElementById('vol-opp-assoc-select');
+  const titleInput = document.getElementById('vol-opp-title');
+  const categorySelect = document.getElementById('vol-opp-category');
+  const typeSelect = document.getElementById('vol-opp-type');
+  const volsInput = document.getElementById('vol-opp-volunteers');
+  const hoursInput = document.getElementById('vol-opp-hours-per-vol');
+  const refInput = document.getElementById('vol-opp-platform-ref');
+  const descInput = document.getElementById('vol-opp-description');
+
+  const title = (titleInput?.value || '').trim();
+  if (!title) {
+    showToast('يرجى إدخال مسمى الفرصة التطوعية', 'error');
+    if (titleInput) titleInput.focus();
     return;
   }
 
-  tbody.innerHTML = filtered.map(v => {
-    const info = getAssociationModeInfo(v.assocName);
-    return `
-      <tr>
-        <td>
-          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 3px;">
-            ${v.assocName}
-          </div>
-          <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-            ${info.badgeHtml}
-            <span style="font-size: 0.72rem; color: var(--c-text-muted);">${v.category || 'تطوع تخصصي'}</span>
-          </div>
-        </td>
-        <td>
-          <div style="font-weight: 700; color: var(--c-text-primary); font-size: 0.86rem;">${v.opportunityTitle}</div>
-          <span style="font-size: 0.72rem; color: var(--c-text-muted);">مرجع المنصة: <code>${v.platformRef}</code></span>
-        </td>
-        <td style="text-align: center;">
-          <span class="badge" style="background: rgba(13,148,136,0.1); color: var(--c-primary); font-weight: 800; font-size: 0.78rem;">
-            ${v.volunteersCount} متطوع
-          </span>
-        </td>
-        <td style="text-align: center;">
-          <strong style="color: #0D6E46; font-size: 0.95rem;">+${v.hoursCount.toLocaleString()} س</strong>
-        </td>
-        <td style="text-align: center; font-weight: 800; color: #92400E;">
-          ${v.economicImpact}
-        </td>
-        <td style="text-align: center;">
-          <span class="badge" style="background: #DCFCE7; color: #166534; font-weight: 800; border: 1px solid #86EFAC; font-size: 0.72rem;">
-            <i class="fa-solid fa-circle-check"></i> ${v.status}
-          </span>
-        </td>
-        <td style="text-align: center;">
-          <button class="btn btn-outline btn-sm" style="padding: 3px 10px; font-size: 0.72rem;" onclick="showToast('تم فتح إفادة توثيق الساعات التطوعية المعتمدة رسمياً', 'info')">
-            <i class="fa-solid fa-file-lines"></i> إفادة
-          </button>
-        </td>
-      </tr>
-    `;
-  }).join('');
+  const assocName = assocSelect?.value || 'جمعية ديوان الشبابية';
+  const category = categorySelect?.value || 'حوكمة وامتثال';
+  const mode = typeSelect?.value || 'حضوري بمقر الحاضنة';
+  const volunteersCount = parseInt(volsInput?.value, 10) || 10;
+  const hoursPerVol = parseInt(hoursInput?.value, 10) || 30;
+  const totalHours = volunteersCount * hoursPerVol;
+  const economicImpact = `${(totalHours * 50).toLocaleString()} ر.س`;
+  const platformRef = refInput?.value || `NVG-1446-${Math.floor(1000 + Math.random() * 9000)}`;
+  const description = descInput?.value || '';
+
+  const newOpp = {
+    id: `VOL-${String((APP_STATE.volunteering || []).length + 1).padStart(3, '0')}`,
+    assocName: assocName,
+    opportunityTitle: title,
+    volunteersCount: volunteersCount,
+    hoursCount: totalHours,
+    economicImpact: economicImpact,
+    platformRef: platformRef,
+    status: 'معتمد وموثق بالمنصة الوطنية ✓',
+    category: category,
+    mode: mode,
+    description: description,
+    createdAt: new Date().toISOString()
+  };
+
+  if (!APP_STATE.volunteering) APP_STATE.volunteering = [];
+  APP_STATE.volunteering.unshift(newOpp);
+
+  savePlatformState();
+  closeCreateVolOpportunityModal();
+
+  renderAssocVolunteeringTab();
+  renderAdminVolunteeringTable();
+
+  showToast(`تم طرح وتوثيق الفرصة التطوعية "${title}" بنجاح!`, 'success');
+};
+
+// Modal 2 Handlers: Register Volunteer & Log Hours
+window.openAddVolunteerModal = function(preselectedOppId) {
+  const modal = document.getElementById('modalAddVolunteer');
+  if (!modal) return;
+
+  const oppSelect = document.getElementById('vol-add-opp-select');
+  if (oppSelect) {
+    const opps = APP_STATE.volunteering || [];
+    oppSelect.innerHTML = opps.map(opp => `
+      <option value="${opp.id}" ${preselectedOppId === opp.id ? 'selected' : ''}>
+        [${opp.assocName}] - ${opp.opportunityTitle} (${opp.platformRef})
+      </option>
+    `).join('');
+  }
+
+  updateAddVolCalculations();
+  modal.classList.add('active');
+  modal.style.display = 'flex';
+};
+
+window.closeAddVolunteerModal = function() {
+  const modal = document.getElementById('modalAddVolunteer');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
+};
+
+window.updateAddVolCalculations = function() {
+  const hoursInput = document.getElementById('vol-add-hours');
+  const hours = parseInt(hoursInput?.value, 10) || 25;
+  const econDisplay = document.getElementById('vol-add-economic-val');
+  if (econDisplay) {
+    econDisplay.textContent = `${(hours * 50).toLocaleString()} ر.س`;
+  }
+};
+
+window.autoFillVolunteerSample = function() {
+  const sampleNames = [
+    'سعود بن فهد البلوي',
+    'عبدالعزيز بن تركي العوفي',
+    'أريج بنت صالح المحمدي',
+    'م. فيصل بن عبدالرحمن الجهني',
+    'ريم بنت عبدالله الحربي'
+  ];
+  const sampleSpecs = [
+    'إدارة مشاريع تنموية وحوكمة مؤسسية',
+    'تخطيط مالي واستثمار غير ربحي',
+    'تحول رقمي وبناء منصات معرفية',
+    'تصميم مبادرات وتمكين مجتمعي',
+    'هندسة فعاليات وإعلام تنموي'
+  ];
+
+  const rndIdx = Math.floor(Math.random() * sampleNames.length);
+  const nameInput = document.getElementById('vol-add-name');
+  const idInput = document.getElementById('vol-add-national-id');
+  const phoneInput = document.getElementById('vol-add-phone');
+  const specInput = document.getElementById('vol-add-spec');
+  const hoursInput = document.getElementById('vol-add-hours');
+
+  if (nameInput) nameInput.value = sampleNames[rndIdx];
+  if (idInput) idInput.value = `10${Math.floor(10000000 + Math.random() * 89999999)}`;
+  if (phoneInput) phoneInput.value = `055${Math.floor(1000000 + Math.random() * 8999999)}`;
+  if (specInput) specInput.value = sampleSpecs[rndIdx];
+  if (hoursInput) hoursInput.value = Math.floor(20 + Math.random() * 40);
+
+  updateAddVolCalculations();
+  showToast('تم تعبئة بيانات متطوع نموذجية بنجاح!', 'info');
+};
+
+window.submitAddVolunteer = function() {
+  const oppSelect = document.getElementById('vol-add-opp-select');
+  const nameInput = document.getElementById('vol-add-name');
+  const idInput = document.getElementById('vol-add-national-id');
+  const phoneInput = document.getElementById('vol-add-phone');
+  const specInput = document.getElementById('vol-add-spec');
+  const hoursInput = document.getElementById('vol-add-hours');
+
+  const name = (nameInput?.value || '').trim();
+  const nationalId = (idInput?.value || '').trim();
+  const phone = (phoneInput?.value || '').trim();
+  const spec = (specInput?.value || '').trim();
+  const hours = parseInt(hoursInput?.value, 10) || 25;
+
+  if (!name) {
+    showToast('يرجى كتابة اسم المتطوع الكامل', 'error');
+    if (nameInput) nameInput.focus();
+    return;
+  }
+  if (!nationalId || nationalId.length < 10) {
+    showToast('يرجى إدخال رقم هوية وطنية / إقامة صحيح مكون من 10 أرقام', 'error');
+    if (idInput) idInput.focus();
+    return;
+  }
+
+  const oppId = oppSelect?.value;
+  const opp = (APP_STATE.volunteering || []).find(o => o.id === oppId) || (APP_STATE.volunteering || [])[0] || {
+    id: 'VOL-001',
+    assocName: 'جمعية ديوان الشبابية',
+    opportunityTitle: 'برنامج إرشاد القيادات الشابة وتصميم المبادرات',
+    platformRef: 'NVG-1446-7734'
+  };
+
+  const newVolunteer = {
+    id: `VOL-REC-${String((APP_STATE.volunteers || []).length + 1).padStart(3, '0')}`,
+    opportunityId: opp.id,
+    assocName: opp.assocName,
+    opportunityTitle: opp.opportunityTitle,
+    name: name,
+    nationalId: nationalId,
+    phone: phone || '0550000000',
+    specialization: spec || 'تطوع تخصصي',
+    hours: hours,
+    economicValue: `${(hours * 50).toLocaleString()} ر.س`,
+    joinDate: new Date().toISOString().slice(0, 10),
+    status: 'معتمد وموثق بالمنصة الوطنية ✓',
+    nvgRef: opp.platformRef || 'NVG-1446-7734'
+  };
+
+  if (!APP_STATE.volunteers) APP_STATE.volunteers = [];
+  APP_STATE.volunteers.unshift(newVolunteer);
+
+  savePlatformState();
+  closeAddVolunteerModal();
+
+  renderAssocVolunteeringTab();
+  renderAdminVolunteeringTable();
+  renderAssociationDashboard();
+
+  showToast(`تم اعتماد المتطوع "${name}" وتوثيق ${hours} ساعة بنجاح!`, 'success');
+};
+
+// Print Certified Volunteer Certificate
+window.printVolunteerCertificateAction = function(volunteerId) {
+  const vol = (APP_STATE.volunteers || []).find(v => v.id === volunteerId);
+  if (!vol) {
+    showToast('لم يتم العثور على سجل المتطوع', 'error');
+    return;
+  }
+
+  if (window.AthqPrint && typeof AthqPrint.printVolunteerCertificate === 'function') {
+    AthqPrint.printVolunteerCertificate(
+      vol.name,
+      vol.assocName,
+      vol.opportunityTitle,
+      vol.hours,
+      vol.economicValue,
+      vol.nvgRef
+    );
+  } else {
+    showToast('جاري طباعة الشهادة...', 'info');
+    window.print();
+  }
 };
 
 window.exportVolunteeringReport = function() {

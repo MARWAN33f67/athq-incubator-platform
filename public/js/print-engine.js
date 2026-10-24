@@ -354,6 +354,61 @@ class AthqPrintEngine {
     this.showPrintPreview(content, `تقرير_استشارة_${assocName.replace(/\s+/g, '_')}`);
   }
 
+  // توليد وطباعة شهادة إنجاز ساعات تطوعية رسمية (Official Volunteering Certificate)
+  printVolunteerCertificate(volunteerName = 'سعود بن فهد البلوي', assocName = 'جمعية ديوان الشبابية', opportunityTitle = 'برنامج إرشاد القيادات الشابة وتصميم المبادرات', hours = 45, economicValue = '2,250 ر.س', nvgRef = 'NVG-1446-7734') {
+    const ref = `ATHQ-VOL-CERT-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    const content = `
+      <div class="volunteer-cert-paper" style="border: 4px double #0D6E46; padding: 32px; border-radius: 16px; background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%); direction: rtl; font-size: 0.9rem; line-height: 2;">
+        ${this.getHeaderHtml('شهادة إنجاز واعتماد ساعات عمل تطوعي رسمية', ref)}
+
+        <div style="text-align: center; margin: 24px 0 20px 0;">
+          <span style="display: inline-block; background: #DCFCE7; color: #166534; border: 1.5px solid #86EFAC; padding: 4px 18px; border-radius: 20px; font-weight: 800; font-size: 0.82rem; margin-bottom: 12px;">
+            <i class="fa-solid fa-award"></i> وثيقة معتمدة ومسجلة رسمياً بالمنصة الوطنية للعمل التطوعي (NVG)
+          </span>
+          <h2 style="font-size: 1.45rem; font-weight: 900; color: #0D6E46; margin: 0 0 6px 0;">شـهـادة شـكـر وتـقـديـر وتـوثـيـق عـطـاء</h2>
+          <p style="font-size: 0.88rem; color: #475569; margin: 0;">وفق المعيار الوطني السعودي للساعات التطوعية واحتساب القيمة الاقتصادية</p>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+          <p style="font-size: 1rem; color: #1E293B; margin-bottom: 16px; line-height: 2.2;">
+            تشهد <strong>حاضنة ومسرعة عذق للجمعيات الأهلية</strong> (جمعية البر بالمدينة المنورة) بأن المتطوع/ـة:
+            <br>
+            <strong style="font-size: 1.3rem; color: #0D6E46; display: inline-block; padding: 2px 14px; background: rgba(13,110,70,0.08); border-radius: 8px; margin: 6px 0;">
+              ${volunteerName}
+            </strong>
+            <br>
+            قد شارك(ت) بكفاءة واقتدار في تنفيذ الفرصة والمبادرة التطوعية التخصصية:
+            <br>
+            <strong style="color: #1E293B; font-size: 1.05rem;">«${opportunityTitle}»</strong>
+            التابعة لـ: <strong style="color: #0D6E46;">${assocName}</strong>
+          </p>
+
+          <table style="width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem;">
+            <tr style="background: #F8FAFC;">
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 800; color: #0D6E46;">الساعات المعتمدة:</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 900; color: #166534; font-size: 1.05rem;">${hours} ساعة تطوعية</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 800; color: #0D6E46;">القيمة الاقتصادية:</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; width: 25%; font-weight: 900; color: #92400E; font-size: 1.05rem;">${economicValue}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; font-weight: 800; color: #0D6E46;">رمز المنصة الوطنية NVG:</td>
+              <td style="padding: 10px 14px; border: 1px solid #CBD5E1; font-weight: 800; color: #1E3A8A;" colspan="3"><code>${nvgRef}</code></td>
+            </tr>
+          </table>
+        </div>
+
+        <p style="text-align: center; font-size: 0.82rem; color: #64748B; margin-bottom: 24px;">
+          سائلين المولى له/ـا مزيداً من التوفيق والسداد، ومثمنين هذا العطاء المبارك في خدمة المجتمع وإثراء القطاع غير الربحي بالمدينة المنورة.
+        </p>
+
+        ${this.getFooterAndSignatureHtml('المشرف العام على حاضنة عذق', `رئيس مجلس إدارة (${assocName})`)}
+      </div>
+    `;
+
+    this.showPrintPreview(content, `شهادة_تطوع_${volunteerName.replace(/\s+/g, '_')}`);
+  }
+
   // 5. توليد وطباعة بطاقة تصريح حجز قاعة / مرفق (Booking Pass)
   printBookingPass(assocName = 'جمعية ديوان الشبابية', facilityName = 'قاعة الاجتماعات الكبرى الذكية', bookingDate = '1446/08/20هـ', bookingTime = '10:00 ص - 12:00 م') {
     const ref = `ATHQ-BKG-${Math.floor(100 + Math.random() * 900)}`;
