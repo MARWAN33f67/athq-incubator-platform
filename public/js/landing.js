@@ -84,6 +84,8 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0551234567",
       track: "مسار الحوكمة والتمكين الشامل",
       incubationType: "احتضان مكاني ومؤسسي",
+      incubationMode: "spatial",
+      incubationModeTitle: "احتضان مكاني وتشغيلي",
       stage: "المرحلة الثالثة: الاحتضان المكاني",
       stageProgress: 75,
       status: "مقبول",
@@ -113,6 +115,8 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0543219876",
       track: "مسار البناء والتمكين المؤسسي",
       incubationType: "احتضان مكاني ومؤسسي",
+      incubationMode: "accelerator",
+      incubationModeTitle: "مسرعة أعمال ونمو الأثر",
       stage: "المرحلة الرابعة: مسرعة عذق",
       stageProgress: 90,
       status: "مقبول",
@@ -141,6 +145,9 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0567891234",
       track: "مسار التأهيل والتدريب المتخصص",
       incubationType: "مساحة عمل مشتركة",
+      incubationMode: "idea",
+      incubationModeTitle: "احتضان فكرة ومبادرة جديدة",
+      ideaSummary: "مبادرة شبابية قيد التأسيس لتمكين اليافعين وتأهيلهم لسوق العمل والريادة المجتمعية بالمدينة المنورة.",
       stage: "المرحلة الثانية: التهيئة المؤسسية",
       stageProgress: 50,
       status: "تحت المراجعة",
@@ -728,6 +735,51 @@ window.closeApplicationWizard = function() {
   document.getElementById('modalApplicationWizard')?.classList.remove('active');
 };
 
+window.selectAppModeCard = function(mode) {
+  document.querySelectorAll('#app-mode-grid .incubation-mode-card').forEach(c => c.classList.remove('selected'));
+  const card = document.getElementById(`mode-card-${mode}`);
+  if (card) card.classList.add('selected');
+
+  const modeInput = document.getElementById('app-incubation-mode');
+  if (modeInput) modeInput.value = mode;
+
+  const ideaBanner = document.getElementById('idea-mode-banner');
+  const accelBanner = document.getElementById('accelerator-mode-banner');
+  const ideaBox = document.getElementById('app-idea-details-box');
+  const licLabel = document.getElementById('app-label-assoc-lic');
+  const licInput = document.getElementById('app-assoc-lic');
+  const nameLabel = document.getElementById('app-label-assoc-name');
+
+  if (ideaBanner) ideaBanner.style.display = mode === 'idea' ? 'block' : 'none';
+  if (accelBanner) accelBanner.style.display = mode === 'accelerator' ? 'block' : 'none';
+  if (ideaBox) ideaBox.style.display = mode === 'idea' ? 'block' : 'none';
+
+  if (mode === 'idea') {
+    if (nameLabel) nameLabel.textContent = 'اسم المبادرة أو الجمعية الناشئة *';
+    if (licLabel) licLabel.textContent = 'رقم طلب التأسيس أو اكتب: قيد التأسيس *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: طلب تأسيس 4120 أو: قيد التأسيس';
+      if (!licInput.value.trim() || licInput.value === '2410') licInput.value = 'قيد التأسيس';
+    }
+  } else if (mode === 'accelerator') {
+    if (nameLabel) nameLabel.textContent = 'اسم الجمعية الأهلية القائمة *';
+    if (licLabel) licLabel.textContent = 'رقم ترخيص المركز الوطني NCNP *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: 1842';
+      if (licInput.value === 'قيد التأسيس') licInput.value = '2410';
+    }
+  } else {
+    if (nameLabel) nameLabel.textContent = 'اسم الجمعية أو المنظمة الأهلية *';
+    if (licLabel) licLabel.textContent = 'رقم الترخيص بالمركز الوطني (NCNP) *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: 2410';
+      if (licInput.value === 'قيد التأسيس') licInput.value = '2410';
+    }
+  }
+
+  updateLiveAppSummary();
+};
+
 window.selectAppSector = function(chip, sector) {
   document.querySelectorAll('#app-sector-chips .chip-item').forEach(c => c.classList.remove('active'));
   chip.classList.add('active');
@@ -831,16 +883,28 @@ function updateMandatoryDocsSummaryBadge() {
 }
 
 window.updateLiveAppSummary = function() {
+  const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
   const name = document.getElementById('app-assoc-name')?.value.trim() || 'لم يُحدد بعد';
   const lic = document.getElementById('app-assoc-lic')?.value.trim() || 'لم يُحدد بعد';
   const city = document.getElementById('app-assoc-city')?.value || 'المدينة المنورة';
   const track = document.getElementById('app-track-select')?.value || 'دعم تأسيسي وتشغيلي شامل';
   const rep = document.getElementById('app-rep-name')?.value.trim() || 'لم يُحدد بعد';
 
+  const sumMode = document.getElementById('summary-assoc-mode');
   const sumName = document.getElementById('summary-assoc-name');
   const sumCity = document.getElementById('summary-assoc-city');
   const sumTrack = document.getElementById('summary-assoc-track');
   const sumRep = document.getElementById('summary-assoc-rep');
+
+  if (sumMode) {
+    if (mode === 'idea') {
+      sumMode.innerHTML = `<span style="color: #B45309; font-weight: 800;"><i class="fa-solid fa-lightbulb"></i> 💡 احتضان فكرة ومبادرة جديدة</span>`;
+    } else if (mode === 'accelerator') {
+      sumMode.innerHTML = `<span style="color: #4F46E5; font-weight: 800;"><i class="fa-solid fa-rocket"></i> 🚀 مسرعة أعمال وتوسّع الأثر</span>`;
+    } else {
+      sumMode.innerHTML = `<span style="color: var(--c-primary); font-weight: 800;"><i class="fa-solid fa-building"></i> 🏢 احتضان مكاني وتشغيلي</span>`;
+    }
+  }
 
   if (sumName) sumName.textContent = name;
   if (sumCity) sumCity.textContent = city;
@@ -854,12 +918,20 @@ window.navigateWizard = function(dir) {
   if (dir === 1) {
     // Validate Step 1
     if (wizardCurrentStep === 1) {
+      const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
       const name = document.getElementById('app-assoc-name')?.value.trim();
-      const lic = document.getElementById('app-assoc-lic')?.value.trim();
+      let lic = document.getElementById('app-assoc-lic')?.value.trim();
       const rep = document.getElementById('app-rep-name')?.value.trim();
       const phone = document.getElementById('app-rep-phone')?.value.trim();
+
+      if (mode === 'idea' && !lic) {
+        lic = 'قيد التأسيس';
+        const licInput = document.getElementById('app-assoc-lic');
+        if (licInput) licInput.value = lic;
+      }
+
       if (!name || !lic || !rep || !phone) {
-        showToast('يرجى تعبئة كافة الحقول الإلزامية: (اسم الجمعية، الترخيص، اسم الممثل، ورقم الجوال).', 'error');
+        showToast('يرجى تعبئة كافة الحقول الإلزامية: (اسم الجهة، الترخيص أو حالة التأسيس، اسم الممثل، ورقم الجوال).', 'error');
         return;
       }
     }
@@ -867,7 +939,7 @@ window.navigateWizard = function(dir) {
     if (wizardCurrentStep === 3) {
       // Validate all 3 mandatory attachments
       if (!window.uploadedMandatoryDocs.doc1 || !window.uploadedMandatoryDocs.doc2 || !window.uploadedMandatoryDocs.doc3) {
-        showToast('إجراء إجباري: يجب رفع المرفقات الثلاثة كاملة (1. جواب الالتحاق، 2. الترخيص، 3. نموذج طلب الانضمام).', 'error');
+        showToast('إجراء إجباري: يجب رفع المرفقات الثلاثة كاملة (1. جواب الالتحاق، 2. الترخيص أو الفكرة، 3. نموذج الانضمام).', 'error');
         return;
       }
       submitApplicationForm();
@@ -904,14 +976,28 @@ function updateWizardStepView() {
 }
 
 function submitApplicationForm() {
+  const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
   const name = document.getElementById('app-assoc-name')?.value.trim() || 'جمعية روافد التنموية';
-  const lic = document.getElementById('app-assoc-lic')?.value.trim() || '2450';
+  const lic = document.getElementById('app-assoc-lic')?.value.trim() || (mode === 'idea' ? 'قيد التأسيس' : '2450');
   const city = document.getElementById('app-assoc-city')?.value || 'المدينة المنورة';
   const repName = document.getElementById('app-rep-name')?.value.trim() || 'ممثل الجمعية';
   const repPhone = document.getElementById('app-rep-phone')?.value.trim() || '0550000000';
   const track = document.getElementById('app-track-select')?.value || 'دعم تأسيسي وتشغيلي شامل';
   const incubationType = document.getElementById('app-type-select')?.value || 'احتضان مكاني ومقر مستقل';
+  const ideaSummary = document.getElementById('app-assoc-idea-summary')?.value.trim() || '';
   const newId = `ATHQ-2025-0${Math.floor(Math.random() * 80) + 20}`;
+
+  const modeTitles = {
+    idea: 'احتضان فكرة ومبادرة جديدة',
+    spatial: 'احتضان مكاني وتشغيلي',
+    accelerator: 'مسرعة أعمال ونمو الأثر'
+  };
+
+  const modeStageTitles = {
+    idea: 'المرحلة الأولى: احتضان الفكرة والتأسيس',
+    spatial: 'المرحلة الثالثة: الاحتضان المكاني والتشغيلي',
+    accelerator: 'المرحلة الرابعة: مسرعة عذق وتسريع النمو'
+  };
 
   const newApp = {
     id: newId,
@@ -924,27 +1010,34 @@ function submitApplicationForm() {
     repPhone: repPhone,
     track: track,
     incubationType: incubationType,
-    stage: 'المرحلة الأولى: احتضان الفكرة',
-    stageProgress: 25,
+    incubationMode: mode,
+    incubationModeTitle: modeTitles[mode] || 'احتضان مكاني وتشغيلي',
+    ideaSummary: ideaSummary,
+    stage: modeStageTitles[mode] || 'المرحلة الأولى: احتضان الفكرة',
+    stageProgress: mode === 'idea' ? 20 : (mode === 'spatial' ? 40 : 60),
     status: 'تحت المراجعة',
     stateMachineState: 'state1_review',
-    notes: 'تم تقديم الطلب إلكترونياً والمرفقات الثلاثة مكتملة وبانتظار جلسة الفرز وقرار الإدارة.',
+    notes: mode === 'idea' 
+      ? `طلب احتضان فكرة جديدة: "${ideaSummary || name}". بانتظار الفرز ودراسة الاحتياج المجتمعي.`
+      : (mode === 'accelerator' 
+        ? 'طلب انضمام إلى مسرعة عذق لتسريع نمو الأثر والاستدامة المالية.' 
+        : 'طلب احتضان مكاني ومقر مؤثث وتشغيل إداري ومحاسبي كامل.'),
     orientationMeetingDate: '',
     rejectionReason: '',
-    officeWanted: null,
-    fullTimeEmployee: 'قيد التحقق',
+    officeWanted: mode === 'spatial' ? 'مكتب مستقل مجهز' : (mode === 'idea' ? 'مساحة ابتكار مشتركة' : null),
+    fullTimeEmployee: mode === 'idea' ? 'قيد التأسيس' : 'قيد التحقق',
     examScore: 0,
     workHours: 0,
     volunteerHours: 0,
     volunteersCount: 0,
     mandatoryAttachments: {
       doc1: window.uploadedMandatoryDocs.doc1 || { name: 'جواب_الالتحاق.pdf', size: '1.2 MB' },
-      doc2: window.uploadedMandatoryDocs.doc2 || { name: 'شهادة_الترخيص.pdf', size: '1.9 MB' },
+      doc2: window.uploadedMandatoryDocs.doc2 || { name: mode === 'idea' ? 'مسودة_الفكرة_أو_طلب_التأسيس.pdf' : 'شهادة_الترخيص.pdf', size: '1.9 MB' },
       doc3: window.uploadedMandatoryDocs.doc3 || { name: 'نموذج_طلب_الانضمام.pdf', size: '1.5 MB' }
     },
     evidences: [
       { title: "1. جواب الالتحاق بالحاضنة معتمد", date: "اليوم", status: "مستلم وبانتظار الفرز ✓" },
-      { title: "2. شهادة ترخيص المركز الوطني NCNP", date: "اليوم", status: "مستلمة ✓" },
+      { title: mode === 'idea' ? "2. مسودة الفكرة التنموية / طلب التأسيس NCNP" : "2. شهادة ترخيص المركز الوطني NCNP", date: "اليوم", status: "مستلمة ✓" },
       { title: "3. نموذج طلب الانضمام موقع ومختوم", date: "اليوم", status: "مستلم ✓" }
     ]
   };
@@ -956,11 +1049,11 @@ function submitApplicationForm() {
   if (!APP_STATE.notifications) APP_STATE.notifications = [];
   APP_STATE.notifications.unshift({
     id: `NTF-${Date.now().toString().slice(-4)}`,
-    title: 'طلب احتضان جديد قيد المراجعة',
-    text: `تم استلام طلب انضمام جديد من: ${name} (ترخيص: ${lic}) مع 3 مرفقات إجبارية.`,
+    title: `طلب احتضان جديد (${modeTitles[mode]})`,
+    text: `تم استلام طلب جديد من: ${name} (النوع: ${modeTitles[mode]} • ترخيص: ${lic}).`,
     time: 'الآن',
     unread: true,
-    icon: 'fa-building-ngo'
+    icon: mode === 'idea' ? 'fa-lightbulb' : (mode === 'accelerator' ? 'fa-rocket' : 'fa-building-ngo')
   });
 
   savePlatformState();
@@ -972,17 +1065,33 @@ function submitApplicationForm() {
   const receiptId = document.getElementById('receipt-app-id');
   const receiptName = document.getElementById('receipt-assoc-name');
   const receiptTrack = document.getElementById('receipt-assoc-track');
+  const receiptMode = document.getElementById('receipt-assoc-mode-badge');
   const footer = document.getElementById('wizard-footer-buttons');
 
   if (receiptId) receiptId.textContent = newId;
   if (receiptName) receiptName.textContent = name;
   if (receiptTrack) receiptTrack.textContent = track;
+  if (receiptMode) {
+    if (mode === 'idea') {
+      receiptMode.style.background = 'rgba(245, 158, 11, 0.15)';
+      receiptMode.style.color = '#B45309';
+      receiptMode.innerHTML = '<i class="fa-solid fa-lightbulb"></i> 💡 احتضان فكرة ومبادرة جديدة';
+    } else if (mode === 'accelerator') {
+      receiptMode.style.background = 'rgba(99, 102, 241, 0.15)';
+      receiptMode.style.color = '#4F46E5';
+      receiptMode.innerHTML = '<i class="fa-solid fa-rocket"></i> 🚀 مسرعة أعمال ونمو الأثر';
+    } else {
+      receiptMode.style.background = 'rgba(13, 110, 70, 0.15)';
+      receiptMode.style.color = 'var(--c-primary)';
+      receiptMode.innerHTML = '<i class="fa-solid fa-building"></i> 🏢 احتضان مكاني وتشغيلي';
+    }
+  }
   if (footer) footer.style.display = 'none';
 
   // Set newly submitted app as active
   currentActiveAssocIndex = 0;
 
-  showToast(`تم إرسال طلب "${name}" بنجاح برقم: ${newId} (الحالة 1: قيد المراجعة)`, 'success');
+  showToast(`تم إرسال طلب "${name}" (${modeTitles[mode]}) بنجاح برقم: ${newId} ✓`, 'success');
 
   renderAdminDashboard();
   renderAssociationDashboard();
@@ -4443,6 +4552,7 @@ function renderAdminApplicationsTable() {
   const apps = APP_STATE.applications || [];
   const query = (document.getElementById('adminAppSearch')?.value || '').trim().toLowerCase();
   const trackFilter = document.getElementById('adminTrackFilter')?.value || 'all';
+  const modeFilter = document.getElementById('adminModeFilter')?.value || 'all';
 
   let filtered = apps.filter(app => {
     // Status Filter
@@ -4452,6 +4562,11 @@ function renderAdminApplicationsTable() {
     // Track Filter
     if (trackFilter !== 'all' && !(app.track || '').includes(trackFilter)) {
       return false;
+    }
+    // Mode Filter (وضع ومسار الجمعية)
+    if (modeFilter !== 'all') {
+      const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+      if (appMode !== modeFilter) return false;
     }
     // Search Query
     if (query) {
@@ -4501,14 +4616,26 @@ function renderAdminApplicationsTable() {
     const examScore = parseInt(app.examScore, 10) || 0;
     const isScoreOk = examScore >= 85;
 
+    // Incubation Mode Badge
+    const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+    let modeBadge = '';
+    if (appMode === 'idea') {
+      modeBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; padding: 1px 6px; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> فكرة ومبادرة</span>`;
+    } else if (appMode === 'accelerator') {
+      modeBadge = `<span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; padding: 1px 6px; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال</span>`;
+    } else {
+      modeBadge = `<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 1px 6px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>`;
+    }
+
     return `
       <tr>
         <td>
-          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 2px;">
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 3px;">
             ${app.associationName}
           </div>
           <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-            <span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.7rem; padding: 1px 7px;">
+            ${modeBadge}
+            <span class="badge" style="background: rgba(0,0,0,0.04); color: var(--c-text); font-size: 0.68rem; padding: 1px 6px;">
               ${app.incubationType || 'مكتب مجهز'}
             </span>
             <span style="font-size: 0.72rem; color: var(--c-text-muted);">${app.city || 'المدينة المنورة'}</span>
@@ -4825,6 +4952,26 @@ window.adminViewAppDetails = function(id) {
   const statusBadge = document.getElementById('admin-detail-status-badge');
   if (statusBadge) {
     statusBadge.textContent = app.status;
+  }
+
+  // Incubation Mode Display
+  const modeEl = document.getElementById('admin-detail-mode');
+  const ideaBox = document.getElementById('admin-detail-idea-box');
+  const ideaText = document.getElementById('admin-detail-idea-text');
+  const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+
+  if (modeEl) {
+    if (appMode === 'idea') {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> احتضان فكرة ومبادرة جديدة (مرحلة التأسيس وما قبله)</span>`;
+      if (ideaBox) ideaBox.style.display = 'block';
+      if (ideaText) ideaText.textContent = app.ideaSummary || app.notes || 'مبادرة نوعية تهدف لتقديم حلول مجتمعية مبتكرة واستكمال التأسيس الرسمي.';
+    } else if (appMode === 'accelerator') {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: #EDE9FE; color: #5B21B6; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال ونمو الأثر (جمعية قائمة مرخصة)</span>`;
+      if (ideaBox) ideaBox.style.display = 'none';
+    } else {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: var(--c-primary-subtle); color: var(--c-primary); padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid rgba(13,148,136,0.3);"><i class="fa-solid fa-building"></i> احتضان مكاني وتشغيلي (مقر مرخص + عنوان وطني + قاعات)</span>`;
+      if (ideaBox) ideaBox.style.display = 'none';
+    }
   }
 
   document.getElementById('admin-detail-lic').textContent = app.licenseNumber;

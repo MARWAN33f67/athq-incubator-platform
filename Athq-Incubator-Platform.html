@@ -4214,6 +4214,64 @@ img, svg {
   margin: 0;
 }
 
+/* Incubation Primary Mode Cards (Idea vs Spatial vs Accelerator) */
+.incubation-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .incubation-mode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.incubation-mode-card {
+  background: var(--c-surface);
+  border: 2px solid var(--c-border);
+  border-radius: var(--radius-lg, 14px);
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.incubation-mode-card:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.incubation-mode-card.selected {
+  border-color: var(--c-primary);
+  background: var(--c-primary-subtle);
+  box-shadow: 0 0 0 3px rgba(13, 110, 70, 0.2), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.incubation-mode-card .mode-check {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+.incubation-mode-card.selected .mode-check {
+  display: flex;
+}
+
 /* Incubation Type Cards */
 .incubation-type-grid {
   display: grid;
@@ -11124,7 +11182,16 @@ img, svg {
             </button>
           </div>
 
-          <div style="min-width: 180px;">
+          <div style="min-width: 170px;">
+            <select id="adminModeFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="filterAdminApplications()">
+              <option value="all">جميع أنواع الاحتضان</option>
+              <option value="idea">💡 احتضان فكرة (تأسيس)</option>
+              <option value="spatial">🏢 احتضان مكاني وتشغيلي</option>
+              <option value="accelerator">🚀 مسرعة أعمال (نمو)</option>
+            </select>
+          </div>
+
+          <div style="min-width: 170px;">
             <select id="adminTrackFilter" class="form-control" style="font-size: 0.82rem; padding: 7px 10px;" onchange="filterAdminApplications()">
               <option value="all">جميع المسارات</option>
               <option value="مسار الحوكمة">مسار الحوكمة والتمكين</option>
@@ -11140,7 +11207,7 @@ img, svg {
             <table>
               <thead>
                 <tr>
-                  <th style="min-width: 220px;">الجمعية ونوع الاحتضان</th>
+                  <th style="min-width: 240px;">الجمعية والوضع ونوع الاحتضان</th>
                   <th>الترخيص و 700</th>
                   <th style="min-width: 170px;">ممثل الجمعية والتواصل</th>
                   <th style="min-width: 180px;">مسار الاحتضان والجاهزية</th>
@@ -11533,21 +11600,83 @@ img, svg {
       </div>
 
       <div class="wizard-body" style="max-height: 70vh; overflow-y: auto;">
-        <!-- Step 1 Content: البيانات والترخيص -->
+        <!-- Step 1 Content: وضع المنظمة والبيانات المؤسسية -->
         <div class="wizard-step-content active" id="wizard-step-1">
+          
+          <!-- Primary Incubation Mode Selector -->
           <div class="booking-section-label">
+            <span class="step-num-pill"><i class="fa-solid fa-shapes"></i></span>
+            <strong>ما هو وضع الجمعية / المنظمة ونوع الاحتضان المطلوب؟ *</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--c-text-muted); margin-top: -6px; margin-bottom: 14px;">
+            حدد الوضع الراهن لمنظمتك لتخصيص مسار الدعم والخدمات والتجهيزات والشواهد المناسبة لمرحلتكم الفعلية:
+          </p>
+
+          <div class="incubation-mode-grid" id="app-mode-grid">
+            <!-- 1. Idea -->
+            <div class="incubation-mode-card" id="mode-card-idea" onclick="selectAppModeCard('idea')">
+              <div class="mode-check"><i class="fa-solid fa-check"></i></div>
+              <div style="font-size: 1.6rem; margin-bottom: 6px;">💡</div>
+              <span class="track-card-badge" style="background: rgba(245, 158, 11, 0.15); color: #B45309;">مرحلة التأسيس</span>
+              <h5 style="margin: 4px 0; font-size: 0.95rem; font-weight: 800; color: var(--c-primary);">احتضان فكرة ومبادرة جديدة</h5>
+              <p style="font-size: 0.74rem; color: var(--c-text-muted); line-height: 1.5; margin: 0;">
+                مبادرة قيد التأسيس، بلورة الفكرة التنموية، استكمال اللائحة الأساسية، والدعم لاستخراج ترخيص المركز الوطني NCNP.
+              </p>
+            </div>
+
+            <!-- 2. Spatial (Default) -->
+            <div class="incubation-mode-card selected" id="mode-card-spatial" onclick="selectAppModeCard('spatial')">
+              <div class="mode-check"><i class="fa-solid fa-check"></i></div>
+              <div style="font-size: 1.6rem; margin-bottom: 6px;">🏢</div>
+              <span class="track-card-badge" style="background: rgba(13, 110, 70, 0.15); color: var(--c-primary);">مرخصة رسمياً</span>
+              <h5 style="margin: 4px 0; font-size: 0.95rem; font-weight: 800; color: var(--c-primary);">احتضان مكاني وتشغيلي</h5>
+              <p style="font-size: 0.74rem; color: var(--c-text-muted); line-height: 1.5; margin: 0;">
+                جمعية مرخصة تبحث عن مقر مجهز، عنوان وطني معتمد، قاعات ذكية، وتأسيس إداري ومحاسبي وحوكمة.
+              </p>
+            </div>
+
+            <!-- 3. Accelerator -->
+            <div class="incubation-mode-card" id="mode-card-accelerator" onclick="selectAppModeCard('accelerator')">
+              <div class="mode-check"><i class="fa-solid fa-check"></i></div>
+              <div style="font-size: 1.6rem; margin-bottom: 6px;">🚀</div>
+              <span class="track-card-badge" style="background: rgba(99, 102, 241, 0.15); color: #4F46E5;">تسريع الأثر</span>
+              <h5 style="margin: 4px 0; font-size: 0.95rem; font-weight: 800; color: var(--c-primary);">مسرعة أعمال وتوسيع الأثر</h5>
+              <p style="font-size: 0.74rem; color: var(--c-text-muted); line-height: 1.5; margin: 0;">
+                جمعية قائمة ومستقرة تهدف لتوسيع نطاق أثرها ومشاريعها، تحقيق الاستدامة المالية، والربط بالصناديق المانحة.
+              </p>
+            </div>
+          </div>
+          <input type="hidden" id="app-incubation-mode" value="spatial">
+
+          <!-- Notice banner for Idea Mode -->
+          <div id="idea-mode-banner" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.78rem; color: #B45309;">
+            <i class="fa-solid fa-circle-info"></i> <strong>مسار احتضان الفكرة:</strong> مرحباً بكم! لا يُشترط وجود ترخيص نهائي صادر؛ يمكنك التقديم برقم طلب التأسيس بالمركز الوطني أو كتابة "قيد التأسيس" وتوضيح فكرة المبادرة.
+          </div>
+
+          <!-- Notice banner for Accelerator Mode -->
+          <div id="accelerator-mode-banner" style="display: none; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.78rem; color: #4338CA;">
+            <i class="fa-solid fa-rocket"></i> <strong>مسار مسرعة عذق:</strong> مخصص للجمعيات القائمة الراغبة في تسريع النمو، هندسة الاستدامة المالية، وربط المشاريع بالمانحين والمسؤولية المجتمعية.
+          </div>
+
+          <div class="booking-section-label" style="margin-top: 14px;">
             <span class="step-num-pill">1</span>
-            <strong>البيانات المؤسسية والتراخيص الرسمية:</strong>
+            <strong id="app-step1-section-label">البيانات المؤسسية والتراخيص الرسمية:</strong>
           </div>
           <div class="form-grid-2">
             <div class="form-group">
-              <label class="form-label">اسم الجمعية أو المنظمة الأهلية *</label>
+              <label class="form-label" id="app-label-assoc-name">اسم الجمعية أو المنظمة الأهلية / المبادرة *</label>
               <input type="text" class="form-control" id="app-assoc-name" placeholder="مثال: جمعية روافد التنموية بالمدينة" required oninput="updateLiveAppSummary()">
             </div>
             <div class="form-group">
-              <label class="form-label">رقم الترخيص بالمركز الوطني (NCNP) *</label>
+              <label class="form-label" id="app-label-assoc-lic">رقم الترخيص بالمركز الوطني (NCNP) *</label>
               <input type="text" class="form-control" id="app-assoc-lic" placeholder="مثال: 2410" required oninput="updateLiveAppSummary()">
             </div>
+          </div>
+
+          <!-- Dynamic Idea Details Box (Appears when Idea mode is active) -->
+          <div class="form-group" id="app-idea-details-box" style="display: none; margin-bottom: 14px;">
+            <label class="form-label">ملخص فكرة المبادرة وأهدافها المجتمعية *</label>
+            <textarea class="form-control" id="app-assoc-idea-summary" rows="2" placeholder="اشرح باختصار فكرة المبادرة، الفئة المستهدفة في المدينة المنورة، والأثر التنموي المرجو تحقيقه..." oninput="updateLiveAppSummary()"></textarea>
           </div>
           <div class="form-grid-2">
             <div class="form-group">
@@ -11731,6 +11860,10 @@ img, svg {
               <i class="fa-solid fa-clipboard-list"></i> ملخص بيانات طلب الاحتضان:
             </div>
             <div class="summary-row">
+              <span class="summary-label">وضع الجهة والاحتضان:</span>
+              <span class="summary-value" id="summary-assoc-mode" style="font-weight: 800; color: var(--c-primary);">🏢 احتضان مكاني وتشغيلي</span>
+            </div>
+            <div class="summary-row">
               <span class="summary-label">اسم الجمعية:</span>
               <span class="summary-value" id="summary-assoc-name">لم يحدد</span>
             </div>
@@ -11766,8 +11899,11 @@ img, svg {
             <span class="receipt-stamp">معتمد ومسجل رسمياً ✓</span>
             <div style="font-size: 0.95rem; font-weight: 700; color: var(--c-text-muted); margin-bottom: 4px;">رقم الطلب الرسمي المعتمد:</div>
             <div class="receipt-num" id="receipt-app-id">ATHQ-2025-018</div>
-            <h4 id="receipt-assoc-name" style="font-size: 1.35rem; font-weight: 800; color: var(--c-primary); margin-bottom: 6px;">جمعية روافد التنموية</h4>
-            <div id="receipt-assoc-track" style="font-size: 0.9rem; color: var(--c-gold-dark); font-weight: 700; margin-bottom: 14px;">مسار الحوكمة والتمكين الشامل</div>
+            <h4 id="receipt-assoc-name" style="font-size: 1.35rem; font-weight: 800; color: var(--c-primary); margin-bottom: 4px;">جمعية روافد التنموية</h4>
+            <div style="display: flex; gap: 8px; justify-content: center; align-items: center; margin-bottom: 12px; flex-wrap: wrap;">
+              <span id="receipt-assoc-mode-badge" class="badge" style="background: rgba(13, 110, 70, 0.15); color: var(--c-primary); font-weight: 800; font-size: 0.8rem; padding: 3px 10px; border-radius: 6px;">🏢 احتضان مكاني وتشغيلي</span>
+              <span id="receipt-assoc-track" style="font-size: 0.88rem; color: var(--c-gold-dark); font-weight: 700;">مسار الحوكمة والتمكين الشامل</span>
+            </div>
 
             <div style="background: var(--c-bg); border: 1px solid var(--c-border); padding: 16px; border-radius: 12px; margin-bottom: 20px; text-align: right; font-size: 0.84rem; line-height: 1.8;">
               <div><strong>🏛️ الجهة المشرفة:</strong> جمعية البر بالمدينة المنورة (ترخيص 22)</div>
@@ -12830,6 +12966,20 @@ img, svg {
       <div class="wizard-body" style="padding: 20px 24px; max-height: 70vh; overflow-y: auto;">
         <!-- Association Meta Grid -->
         <div class="admin-detail-grid">
+          <!-- Primary Incubation Mode Card -->
+          <div class="admin-detail-card" style="grid-column: 1 / -1; background: var(--c-primary-subtle); border: 1.5px solid var(--c-primary); border-radius: 10px; padding: 12px 16px;">
+            <label style="font-weight: 800; color: var(--c-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-shapes"></i> وضع الجمعية ومسار الاحتضان المطلوب:
+            </label>
+            <div id="admin-detail-mode" style="font-size: 0.95rem; font-weight: 800; color: var(--c-primary);">
+              <!-- Rendered via JS -->
+            </div>
+            <div id="admin-detail-idea-box" style="display: none; margin-top: 8px; font-size: 0.8rem; color: var(--c-text-body); background: var(--c-surface); padding: 8px 12px; border-radius: 8px; border: 1px dashed var(--c-gold); line-height: 1.6;">
+              <strong style="color: #B45309;"><i class="fa-solid fa-lightbulb"></i> ملخص فكرة المبادرة وأهدافها:</strong>
+              <div id="admin-detail-idea-text" style="margin-top: 4px;"></div>
+            </div>
+          </div>
+
           <div class="admin-detail-card">
             <label><i class="fa-solid fa-id-card"></i> رقم الترخيص الرسمي:</label>
             <value id="admin-detail-lic">1842</value>
@@ -12843,7 +12993,7 @@ img, svg {
             <value id="admin-detail-rep">عبدالله الحربي (0551234567)</value>
           </div>
           <div class="admin-detail-card">
-            <label><i class="fa-solid fa-route"></i> مسار ونوع الاحتضان:</label>
+            <label><i class="fa-solid fa-route"></i> المسار الداعم المخصص:</label>
             <value id="admin-detail-track">مسار الحوكمة والتمكين الشامل</value>
           </div>
           <div class="admin-detail-card">
@@ -17324,6 +17474,8 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0551234567",
       track: "مسار الحوكمة والتمكين الشامل",
       incubationType: "احتضان مكاني ومؤسسي",
+      incubationMode: "spatial",
+      incubationModeTitle: "احتضان مكاني وتشغيلي",
       stage: "المرحلة الثالثة: الاحتضان المكاني",
       stageProgress: 75,
       status: "مقبول",
@@ -17353,6 +17505,8 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0543219876",
       track: "مسار البناء والتمكين المؤسسي",
       incubationType: "احتضان مكاني ومؤسسي",
+      incubationMode: "accelerator",
+      incubationModeTitle: "مسرعة أعمال ونمو الأثر",
       stage: "المرحلة الرابعة: مسرعة عذق",
       stageProgress: 90,
       status: "مقبول",
@@ -17381,6 +17535,9 @@ const DEFAULT_SEED_DATA = {
       repPhone: "0567891234",
       track: "مسار التأهيل والتدريب المتخصص",
       incubationType: "مساحة عمل مشتركة",
+      incubationMode: "idea",
+      incubationModeTitle: "احتضان فكرة ومبادرة جديدة",
+      ideaSummary: "مبادرة شبابية قيد التأسيس لتمكين اليافعين وتأهيلهم لسوق العمل والريادة المجتمعية بالمدينة المنورة.",
       stage: "المرحلة الثانية: التهيئة المؤسسية",
       stageProgress: 50,
       status: "تحت المراجعة",
@@ -17968,6 +18125,51 @@ window.closeApplicationWizard = function() {
   document.getElementById('modalApplicationWizard')?.classList.remove('active');
 };
 
+window.selectAppModeCard = function(mode) {
+  document.querySelectorAll('#app-mode-grid .incubation-mode-card').forEach(c => c.classList.remove('selected'));
+  const card = document.getElementById(`mode-card-${mode}`);
+  if (card) card.classList.add('selected');
+
+  const modeInput = document.getElementById('app-incubation-mode');
+  if (modeInput) modeInput.value = mode;
+
+  const ideaBanner = document.getElementById('idea-mode-banner');
+  const accelBanner = document.getElementById('accelerator-mode-banner');
+  const ideaBox = document.getElementById('app-idea-details-box');
+  const licLabel = document.getElementById('app-label-assoc-lic');
+  const licInput = document.getElementById('app-assoc-lic');
+  const nameLabel = document.getElementById('app-label-assoc-name');
+
+  if (ideaBanner) ideaBanner.style.display = mode === 'idea' ? 'block' : 'none';
+  if (accelBanner) accelBanner.style.display = mode === 'accelerator' ? 'block' : 'none';
+  if (ideaBox) ideaBox.style.display = mode === 'idea' ? 'block' : 'none';
+
+  if (mode === 'idea') {
+    if (nameLabel) nameLabel.textContent = 'اسم المبادرة أو الجمعية الناشئة *';
+    if (licLabel) licLabel.textContent = 'رقم طلب التأسيس أو اكتب: قيد التأسيس *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: طلب تأسيس 4120 أو: قيد التأسيس';
+      if (!licInput.value.trim() || licInput.value === '2410') licInput.value = 'قيد التأسيس';
+    }
+  } else if (mode === 'accelerator') {
+    if (nameLabel) nameLabel.textContent = 'اسم الجمعية الأهلية القائمة *';
+    if (licLabel) licLabel.textContent = 'رقم ترخيص المركز الوطني NCNP *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: 1842';
+      if (licInput.value === 'قيد التأسيس') licInput.value = '2410';
+    }
+  } else {
+    if (nameLabel) nameLabel.textContent = 'اسم الجمعية أو المنظمة الأهلية *';
+    if (licLabel) licLabel.textContent = 'رقم الترخيص بالمركز الوطني (NCNP) *';
+    if (licInput) {
+      licInput.placeholder = 'مثال: 2410';
+      if (licInput.value === 'قيد التأسيس') licInput.value = '2410';
+    }
+  }
+
+  updateLiveAppSummary();
+};
+
 window.selectAppSector = function(chip, sector) {
   document.querySelectorAll('#app-sector-chips .chip-item').forEach(c => c.classList.remove('active'));
   chip.classList.add('active');
@@ -18071,16 +18273,28 @@ function updateMandatoryDocsSummaryBadge() {
 }
 
 window.updateLiveAppSummary = function() {
+  const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
   const name = document.getElementById('app-assoc-name')?.value.trim() || 'لم يُحدد بعد';
   const lic = document.getElementById('app-assoc-lic')?.value.trim() || 'لم يُحدد بعد';
   const city = document.getElementById('app-assoc-city')?.value || 'المدينة المنورة';
   const track = document.getElementById('app-track-select')?.value || 'دعم تأسيسي وتشغيلي شامل';
   const rep = document.getElementById('app-rep-name')?.value.trim() || 'لم يُحدد بعد';
 
+  const sumMode = document.getElementById('summary-assoc-mode');
   const sumName = document.getElementById('summary-assoc-name');
   const sumCity = document.getElementById('summary-assoc-city');
   const sumTrack = document.getElementById('summary-assoc-track');
   const sumRep = document.getElementById('summary-assoc-rep');
+
+  if (sumMode) {
+    if (mode === 'idea') {
+      sumMode.innerHTML = `<span style="color: #B45309; font-weight: 800;"><i class="fa-solid fa-lightbulb"></i> 💡 احتضان فكرة ومبادرة جديدة</span>`;
+    } else if (mode === 'accelerator') {
+      sumMode.innerHTML = `<span style="color: #4F46E5; font-weight: 800;"><i class="fa-solid fa-rocket"></i> 🚀 مسرعة أعمال وتوسّع الأثر</span>`;
+    } else {
+      sumMode.innerHTML = `<span style="color: var(--c-primary); font-weight: 800;"><i class="fa-solid fa-building"></i> 🏢 احتضان مكاني وتشغيلي</span>`;
+    }
+  }
 
   if (sumName) sumName.textContent = name;
   if (sumCity) sumCity.textContent = city;
@@ -18094,12 +18308,20 @@ window.navigateWizard = function(dir) {
   if (dir === 1) {
     // Validate Step 1
     if (wizardCurrentStep === 1) {
+      const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
       const name = document.getElementById('app-assoc-name')?.value.trim();
-      const lic = document.getElementById('app-assoc-lic')?.value.trim();
+      let lic = document.getElementById('app-assoc-lic')?.value.trim();
       const rep = document.getElementById('app-rep-name')?.value.trim();
       const phone = document.getElementById('app-rep-phone')?.value.trim();
+
+      if (mode === 'idea' && !lic) {
+        lic = 'قيد التأسيس';
+        const licInput = document.getElementById('app-assoc-lic');
+        if (licInput) licInput.value = lic;
+      }
+
       if (!name || !lic || !rep || !phone) {
-        showToast('يرجى تعبئة كافة الحقول الإلزامية: (اسم الجمعية، الترخيص، اسم الممثل، ورقم الجوال).', 'error');
+        showToast('يرجى تعبئة كافة الحقول الإلزامية: (اسم الجهة، الترخيص أو حالة التأسيس، اسم الممثل، ورقم الجوال).', 'error');
         return;
       }
     }
@@ -18107,7 +18329,7 @@ window.navigateWizard = function(dir) {
     if (wizardCurrentStep === 3) {
       // Validate all 3 mandatory attachments
       if (!window.uploadedMandatoryDocs.doc1 || !window.uploadedMandatoryDocs.doc2 || !window.uploadedMandatoryDocs.doc3) {
-        showToast('إجراء إجباري: يجب رفع المرفقات الثلاثة كاملة (1. جواب الالتحاق، 2. الترخيص، 3. نموذج طلب الانضمام).', 'error');
+        showToast('إجراء إجباري: يجب رفع المرفقات الثلاثة كاملة (1. جواب الالتحاق، 2. الترخيص أو الفكرة، 3. نموذج الانضمام).', 'error');
         return;
       }
       submitApplicationForm();
@@ -18144,14 +18366,28 @@ function updateWizardStepView() {
 }
 
 function submitApplicationForm() {
+  const mode = document.getElementById('app-incubation-mode')?.value || 'spatial';
   const name = document.getElementById('app-assoc-name')?.value.trim() || 'جمعية روافد التنموية';
-  const lic = document.getElementById('app-assoc-lic')?.value.trim() || '2450';
+  const lic = document.getElementById('app-assoc-lic')?.value.trim() || (mode === 'idea' ? 'قيد التأسيس' : '2450');
   const city = document.getElementById('app-assoc-city')?.value || 'المدينة المنورة';
   const repName = document.getElementById('app-rep-name')?.value.trim() || 'ممثل الجمعية';
   const repPhone = document.getElementById('app-rep-phone')?.value.trim() || '0550000000';
   const track = document.getElementById('app-track-select')?.value || 'دعم تأسيسي وتشغيلي شامل';
   const incubationType = document.getElementById('app-type-select')?.value || 'احتضان مكاني ومقر مستقل';
+  const ideaSummary = document.getElementById('app-assoc-idea-summary')?.value.trim() || '';
   const newId = `ATHQ-2025-0${Math.floor(Math.random() * 80) + 20}`;
+
+  const modeTitles = {
+    idea: 'احتضان فكرة ومبادرة جديدة',
+    spatial: 'احتضان مكاني وتشغيلي',
+    accelerator: 'مسرعة أعمال ونمو الأثر'
+  };
+
+  const modeStageTitles = {
+    idea: 'المرحلة الأولى: احتضان الفكرة والتأسيس',
+    spatial: 'المرحلة الثالثة: الاحتضان المكاني والتشغيلي',
+    accelerator: 'المرحلة الرابعة: مسرعة عذق وتسريع النمو'
+  };
 
   const newApp = {
     id: newId,
@@ -18164,27 +18400,34 @@ function submitApplicationForm() {
     repPhone: repPhone,
     track: track,
     incubationType: incubationType,
-    stage: 'المرحلة الأولى: احتضان الفكرة',
-    stageProgress: 25,
+    incubationMode: mode,
+    incubationModeTitle: modeTitles[mode] || 'احتضان مكاني وتشغيلي',
+    ideaSummary: ideaSummary,
+    stage: modeStageTitles[mode] || 'المرحلة الأولى: احتضان الفكرة',
+    stageProgress: mode === 'idea' ? 20 : (mode === 'spatial' ? 40 : 60),
     status: 'تحت المراجعة',
     stateMachineState: 'state1_review',
-    notes: 'تم تقديم الطلب إلكترونياً والمرفقات الثلاثة مكتملة وبانتظار جلسة الفرز وقرار الإدارة.',
+    notes: mode === 'idea' 
+      ? `طلب احتضان فكرة جديدة: "${ideaSummary || name}". بانتظار الفرز ودراسة الاحتياج المجتمعي.`
+      : (mode === 'accelerator' 
+        ? 'طلب انضمام إلى مسرعة عذق لتسريع نمو الأثر والاستدامة المالية.' 
+        : 'طلب احتضان مكاني ومقر مؤثث وتشغيل إداري ومحاسبي كامل.'),
     orientationMeetingDate: '',
     rejectionReason: '',
-    officeWanted: null,
-    fullTimeEmployee: 'قيد التحقق',
+    officeWanted: mode === 'spatial' ? 'مكتب مستقل مجهز' : (mode === 'idea' ? 'مساحة ابتكار مشتركة' : null),
+    fullTimeEmployee: mode === 'idea' ? 'قيد التأسيس' : 'قيد التحقق',
     examScore: 0,
     workHours: 0,
     volunteerHours: 0,
     volunteersCount: 0,
     mandatoryAttachments: {
       doc1: window.uploadedMandatoryDocs.doc1 || { name: 'جواب_الالتحاق.pdf', size: '1.2 MB' },
-      doc2: window.uploadedMandatoryDocs.doc2 || { name: 'شهادة_الترخيص.pdf', size: '1.9 MB' },
+      doc2: window.uploadedMandatoryDocs.doc2 || { name: mode === 'idea' ? 'مسودة_الفكرة_أو_طلب_التأسيس.pdf' : 'شهادة_الترخيص.pdf', size: '1.9 MB' },
       doc3: window.uploadedMandatoryDocs.doc3 || { name: 'نموذج_طلب_الانضمام.pdf', size: '1.5 MB' }
     },
     evidences: [
       { title: "1. جواب الالتحاق بالحاضنة معتمد", date: "اليوم", status: "مستلم وبانتظار الفرز ✓" },
-      { title: "2. شهادة ترخيص المركز الوطني NCNP", date: "اليوم", status: "مستلمة ✓" },
+      { title: mode === 'idea' ? "2. مسودة الفكرة التنموية / طلب التأسيس NCNP" : "2. شهادة ترخيص المركز الوطني NCNP", date: "اليوم", status: "مستلمة ✓" },
       { title: "3. نموذج طلب الانضمام موقع ومختوم", date: "اليوم", status: "مستلم ✓" }
     ]
   };
@@ -18196,11 +18439,11 @@ function submitApplicationForm() {
   if (!APP_STATE.notifications) APP_STATE.notifications = [];
   APP_STATE.notifications.unshift({
     id: `NTF-${Date.now().toString().slice(-4)}`,
-    title: 'طلب احتضان جديد قيد المراجعة',
-    text: `تم استلام طلب انضمام جديد من: ${name} (ترخيص: ${lic}) مع 3 مرفقات إجبارية.`,
+    title: `طلب احتضان جديد (${modeTitles[mode]})`,
+    text: `تم استلام طلب جديد من: ${name} (النوع: ${modeTitles[mode]} • ترخيص: ${lic}).`,
     time: 'الآن',
     unread: true,
-    icon: 'fa-building-ngo'
+    icon: mode === 'idea' ? 'fa-lightbulb' : (mode === 'accelerator' ? 'fa-rocket' : 'fa-building-ngo')
   });
 
   savePlatformState();
@@ -18212,17 +18455,33 @@ function submitApplicationForm() {
   const receiptId = document.getElementById('receipt-app-id');
   const receiptName = document.getElementById('receipt-assoc-name');
   const receiptTrack = document.getElementById('receipt-assoc-track');
+  const receiptMode = document.getElementById('receipt-assoc-mode-badge');
   const footer = document.getElementById('wizard-footer-buttons');
 
   if (receiptId) receiptId.textContent = newId;
   if (receiptName) receiptName.textContent = name;
   if (receiptTrack) receiptTrack.textContent = track;
+  if (receiptMode) {
+    if (mode === 'idea') {
+      receiptMode.style.background = 'rgba(245, 158, 11, 0.15)';
+      receiptMode.style.color = '#B45309';
+      receiptMode.innerHTML = '<i class="fa-solid fa-lightbulb"></i> 💡 احتضان فكرة ومبادرة جديدة';
+    } else if (mode === 'accelerator') {
+      receiptMode.style.background = 'rgba(99, 102, 241, 0.15)';
+      receiptMode.style.color = '#4F46E5';
+      receiptMode.innerHTML = '<i class="fa-solid fa-rocket"></i> 🚀 مسرعة أعمال ونمو الأثر';
+    } else {
+      receiptMode.style.background = 'rgba(13, 110, 70, 0.15)';
+      receiptMode.style.color = 'var(--c-primary)';
+      receiptMode.innerHTML = '<i class="fa-solid fa-building"></i> 🏢 احتضان مكاني وتشغيلي';
+    }
+  }
   if (footer) footer.style.display = 'none';
 
   // Set newly submitted app as active
   currentActiveAssocIndex = 0;
 
-  showToast(`تم إرسال طلب "${name}" بنجاح برقم: ${newId} (الحالة 1: قيد المراجعة)`, 'success');
+  showToast(`تم إرسال طلب "${name}" (${modeTitles[mode]}) بنجاح برقم: ${newId} ✓`, 'success');
 
   renderAdminDashboard();
   renderAssociationDashboard();
@@ -21683,6 +21942,7 @@ function renderAdminApplicationsTable() {
   const apps = APP_STATE.applications || [];
   const query = (document.getElementById('adminAppSearch')?.value || '').trim().toLowerCase();
   const trackFilter = document.getElementById('adminTrackFilter')?.value || 'all';
+  const modeFilter = document.getElementById('adminModeFilter')?.value || 'all';
 
   let filtered = apps.filter(app => {
     // Status Filter
@@ -21692,6 +21952,11 @@ function renderAdminApplicationsTable() {
     // Track Filter
     if (trackFilter !== 'all' && !(app.track || '').includes(trackFilter)) {
       return false;
+    }
+    // Mode Filter (وضع ومسار الجمعية)
+    if (modeFilter !== 'all') {
+      const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+      if (appMode !== modeFilter) return false;
     }
     // Search Query
     if (query) {
@@ -21741,14 +22006,26 @@ function renderAdminApplicationsTable() {
     const examScore = parseInt(app.examScore, 10) || 0;
     const isScoreOk = examScore >= 85;
 
+    // Incubation Mode Badge
+    const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+    let modeBadge = '';
+    if (appMode === 'idea') {
+      modeBadge = `<span class="badge" style="background: #FEF3C7; color: #92400E; font-size: 0.68rem; padding: 1px 6px; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> فكرة ومبادرة</span>`;
+    } else if (appMode === 'accelerator') {
+      modeBadge = `<span class="badge" style="background: #EDE9FE; color: #5B21B6; font-size: 0.68rem; padding: 1px 6px; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال</span>`;
+    } else {
+      modeBadge = `<span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.68rem; padding: 1px 6px; border: 1px solid rgba(13,148,136,0.25);"><i class="fa-solid fa-building"></i> احتضان مكاني</span>`;
+    }
+
     return `
       <tr>
         <td>
-          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 2px;">
+          <div style="font-weight: 800; color: var(--c-primary); font-size: 0.92rem; margin-bottom: 3px;">
             ${app.associationName}
           </div>
           <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-            <span class="badge" style="background: var(--c-primary-subtle); color: var(--c-primary); font-size: 0.7rem; padding: 1px 7px;">
+            ${modeBadge}
+            <span class="badge" style="background: rgba(0,0,0,0.04); color: var(--c-text); font-size: 0.68rem; padding: 1px 6px;">
               ${app.incubationType || 'مكتب مجهز'}
             </span>
             <span style="font-size: 0.72rem; color: var(--c-text-muted);">${app.city || 'المدينة المنورة'}</span>
@@ -22065,6 +22342,26 @@ window.adminViewAppDetails = function(id) {
   const statusBadge = document.getElementById('admin-detail-status-badge');
   if (statusBadge) {
     statusBadge.textContent = app.status;
+  }
+
+  // Incubation Mode Display
+  const modeEl = document.getElementById('admin-detail-mode');
+  const ideaBox = document.getElementById('admin-detail-idea-box');
+  const ideaText = document.getElementById('admin-detail-idea-text');
+  const appMode = app.incubationMode || (app.licenseNumber === 'قيد التأسيس' ? 'idea' : (app.track?.includes('مسرعة') ? 'accelerator' : 'spatial'));
+
+  if (modeEl) {
+    if (appMode === 'idea') {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: #FEF3C7; color: #92400E; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #FCD34D;"><i class="fa-solid fa-lightbulb"></i> احتضان فكرة ومبادرة جديدة (مرحلة التأسيس وما قبله)</span>`;
+      if (ideaBox) ideaBox.style.display = 'block';
+      if (ideaText) ideaText.textContent = app.ideaSummary || app.notes || 'مبادرة نوعية تهدف لتقديم حلول مجتمعية مبتكرة واستكمال التأسيس الرسمي.';
+    } else if (appMode === 'accelerator') {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: #EDE9FE; color: #5B21B6; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #DDD6FE;"><i class="fa-solid fa-rocket"></i> مسرعة أعمال ونمو الأثر (جمعية قائمة مرخصة)</span>`;
+      if (ideaBox) ideaBox.style.display = 'none';
+    } else {
+      modeEl.innerHTML = `<span style="display: inline-flex; align-items: center; gap: 6px; background: var(--c-primary-subtle); color: var(--c-primary); padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid rgba(13,148,136,0.3);"><i class="fa-solid fa-building"></i> احتضان مكاني وتشغيلي (مقر مرخص + عنوان وطني + قاعات)</span>`;
+      if (ideaBox) ideaBox.style.display = 'none';
+    }
   }
 
   document.getElementById('admin-detail-lic').textContent = app.licenseNumber;

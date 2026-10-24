@@ -4204,6 +4204,64 @@ img, svg {
   margin: 0;
 }
 
+/* Incubation Primary Mode Cards (Idea vs Spatial vs Accelerator) */
+.incubation-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .incubation-mode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.incubation-mode-card {
+  background: var(--c-surface);
+  border: 2px solid var(--c-border);
+  border-radius: var(--radius-lg, 14px);
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.incubation-mode-card:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.incubation-mode-card.selected {
+  border-color: var(--c-primary);
+  background: var(--c-primary-subtle);
+  box-shadow: 0 0 0 3px rgba(13, 110, 70, 0.2), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.incubation-mode-card .mode-check {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #FFFFFF;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+.incubation-mode-card.selected .mode-check {
+  display: flex;
+}
+
 /* Incubation Type Cards */
 .incubation-type-grid {
   display: grid;
