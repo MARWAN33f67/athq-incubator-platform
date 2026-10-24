@@ -7971,6 +7971,7 @@ window.openRequestServiceModal = function(serviceTitle = '') {
   const modal = document.getElementById('modalRequestIncubatorService');
   if (!modal) return;
   modal.style.display = 'flex';
+  modal.classList.add('active');
 
   const titleSelect = document.getElementById('req-service-title');
   if (titleSelect && serviceTitle) {
@@ -7992,7 +7993,10 @@ window.openRequestServiceModal = function(serviceTitle = '') {
 
 window.closeRequestServiceModal = function() {
   const modal = document.getElementById('modalRequestIncubatorService');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
 };
 
 window.submitServiceRequest = function(e) {
@@ -8308,6 +8312,7 @@ window.openAdmin100DaysModal = function(appIdx) {
   const modal = document.getElementById('modalAdmin100Days');
   if (!modal) return;
   modal.style.display = 'flex';
+  modal.classList.add('active');
 
   const titleEl = document.getElementById('admin-100d-modal-title');
   const subEl = document.getElementById('admin-100d-modal-sub');
@@ -8344,7 +8349,10 @@ window.openAdmin100DaysModal = function(appIdx) {
 
 window.closeAdmin100DaysModal = function() {
   const modal = document.getElementById('modalAdmin100Days');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
 };
 
 window.adminToggleMilestone = function(pIdx, mIdx) {
@@ -8507,12 +8515,18 @@ window.updateIncomingServiceStatus = function(reqId, newStatus) {
 
 window.openPublishEventModal = function() {
   const modal = document.getElementById('modalPublishEvent');
-  if (modal) modal.style.display = 'flex';
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('active');
+  }
 };
 
 window.closePublishEventModal = function() {
   const modal = document.getElementById('modalPublishEvent');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
 };
 
 window.submitPublishEvent = function(e) {
@@ -8580,13 +8594,19 @@ let contactInboxCurrentFilter = 'all';
 
 window.openContactInquiriesModal = function() {
   const modal = document.getElementById('modalContactInquiries');
-  if (modal) modal.style.display = 'flex';
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('active');
+  }
   renderContactInquiriesList(contactInboxCurrentFilter);
 };
 
 window.closeContactInquiriesModal = function() {
   const modal = document.getElementById('modalContactInquiries');
-  if (modal) modal.style.display = 'none';
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+  }
 };
 
 window.filterInboxMessages = function(filter) {

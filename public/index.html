@@ -5118,7 +5118,7 @@
   </div>
 
   <!-- Modal: نشر وتعميم لقاء أو برنامج تدريبي جديد للجمعيات -->
-  <div class="modal-overlay" id="modalPublishEvent">
+  <div class="modal-overlay" id="modalPublishEvent" onclick="if(event.target === this) closePublishEventModal()">
     <div class="wizard-modal-box" style="max-width: 680px;">
       <div class="wizard-header" style="background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);">
         <button class="modal-close-btn" onclick="closePublishEventModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
@@ -5220,7 +5220,7 @@
   </div>
 
   <!-- Modal: تقديم طلب خدمة أو حزمة تشغيلية للحاضنة -->
-  <div class="modal-overlay" id="modalRequestIncubatorService">
+  <div class="modal-overlay" id="modalRequestIncubatorService" onclick="if(event.target === this) closeRequestServiceModal()">
     <div class="wizard-modal-box" style="max-width: 620px;">
       <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
         <button class="modal-close-btn" onclick="closeRequestServiceModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
@@ -5290,7 +5290,7 @@
   </div>
 
   <!-- Modal: متابعة وتحديث خطة الـ 100 يوم للجمعية (إدارة) -->
-  <div class="modal-overlay" id="modalAdmin100Days">
+  <div class="modal-overlay" id="modalAdmin100Days" onclick="if(event.target === this) closeAdmin100DaysModal()">
     <div class="wizard-modal-box" style="max-width: 760px;">
       <div class="wizard-header" style="background: linear-gradient(135deg, var(--c-primary-dark) 0%, var(--c-primary) 100%);">
         <button class="modal-close-btn" onclick="closeAdmin100DaysModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
@@ -5356,7 +5356,7 @@
   </div>
 
   <!-- Modal: صندوق استفسارات ورسائل التواصل (الأفراد والجمعيات) -->
-  <div class="modal-overlay" id="modalContactInquiries">
+  <div class="modal-overlay" id="modalContactInquiries" onclick="if(event.target === this) closeContactInquiriesModal()">
     <div class="wizard-modal-box" style="max-width: 820px;">
       <div class="wizard-header" style="background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);">
         <button class="modal-close-btn" onclick="closeContactInquiriesModal()" style="color: #FFFFFF; font-size: 1.4rem;">&times;</button>
